@@ -15,6 +15,9 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import java.util.Set;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -70,6 +73,18 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void removeTag(Tag tag) throws PersonNotFoundException, DuplicatePersonException {
+        for (int i = 0; i < addressBook.getPersonList().size(); i++) {
+            ReadOnlyPerson oldPerson = addressBook.getPersonList().get(i);
+            Person newPerson = new Person(oldPerson);
+            Set<Tag> newTags = newPerson.getTags();
+            newTags.remove(tag);
+            newPerson.setTags(newTags);
+            addressBook.updatePerson(oldPerson, newPerson);
+        }
     }
 
     @Override
