@@ -65,6 +65,10 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile group: 'org.facebook4j', name: 'facebook4j-core', version: '2.4.10'
+        compile group: 'com.restfb', name: 'restfb', version: '1.6.9'
+        compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.41.0'
+        compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '2.23.0'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
