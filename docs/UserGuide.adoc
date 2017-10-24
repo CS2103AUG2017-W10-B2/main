@@ -292,7 +292,7 @@ Selects the person identified by the index number used in the last person listin
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* Selects the person and loads the Instagram page of the person at the specified `INDEX` if the person has an Instagram account. If the person does not have an Instagram account, the Facebook page will be loaded instead. If the person has neither Instagram nor Facebook, the Google search page of the person is loaded.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
