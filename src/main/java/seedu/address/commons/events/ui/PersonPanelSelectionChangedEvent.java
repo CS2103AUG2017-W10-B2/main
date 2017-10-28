@@ -10,9 +10,15 @@ public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final PersonCard newSelection;
+    private String socialType = null;
 
     public PersonPanelSelectionChangedEvent(PersonCard newSelection) {
         this.newSelection = newSelection;
+    }
+
+    public PersonPanelSelectionChangedEvent(PersonCard newSelection, String socialType) {
+        this.newSelection = newSelection;
+        this.socialType = socialType;
     }
 
     @Override
@@ -22,5 +28,9 @@ public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
     public PersonCard getNewSelection() {
         return newSelection;
+    }
+
+    public String getSocialType() {
+        return socialType;
     }
 }

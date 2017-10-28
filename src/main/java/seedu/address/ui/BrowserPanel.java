@@ -108,11 +108,21 @@ public class BrowserPanel extends UiPart<Region> {
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         ReadOnlyPerson person = event.getNewSelection().person;
+        String requestedSocialType = event.getSocialType();
         Person p = new Person(person);
         Iterator<SocialInfo> iterator = p.getSocialInfos().iterator();
         if (iterator.hasNext()) {
             SocialInfo social = iterator.next();
-            String url = social.getSocialUrl();
+            String socialType = social.getSocialType();
+            // System.out.println("socialType: " + socialType);
+            String url = "";
+            if (socialType.equals(requestedSocialType)) {
+                url = social.getSocialUrl();
+            } else {
+                social = iterator.next();
+                url = social.getSocialUrl();
+            }
+            // String url = social.getSocialUrl();
             loadPage(url);
         } else {
             loadPersonPage(event.getNewSelection().person);

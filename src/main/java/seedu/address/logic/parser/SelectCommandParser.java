@@ -19,8 +19,18 @@ public class SelectCommandParser implements Parser<SelectCommand> {
      */
     public SelectCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new SelectCommand(index);
+            String trimmedArgs = args.trim();
+            String[] tokens = trimmedArgs.split(" ");
+            String indexStr = tokens[0];
+            String socialType = null;
+            if (tokens.length > 1) {
+                // if there is more than one argument
+                socialType = tokens[1];
+            }
+            Index index = ParserUtil.parseIndex(indexStr);
+            // Index index = ParserUtil.parseIndex(args);
+            // return new SelectCommand(index);
+            return new SelectCommand(index, socialType);
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));

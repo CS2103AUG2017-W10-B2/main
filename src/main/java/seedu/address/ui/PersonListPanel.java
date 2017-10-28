@@ -23,6 +23,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private String socialType = null;
 
     @FXML
     private ListView<PersonCard> personListView;
@@ -44,10 +45,13 @@ public class PersonListPanel extends UiPart<Region> {
     private void setEventHandlerForSelectionChangeEvent() {
         personListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
+                    System.out.println("oldValue: " + oldValue);
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        // raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new PersonPanelSelectionChangedEvent(newValue, socialType));
                     }
+                    // raise(new PersonPanelSelectionChangedEvent(newValue, socialType));
                 });
     }
 
@@ -64,7 +68,15 @@ public class PersonListPanel extends UiPart<Region> {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        this.socialType = event.socialType;
+        System.out.println("socialType: " + this.socialType);
         scrollTo(event.targetIndex);
+        PersonCard currentSelected = personListView.getSelectionModel().getSelectedItem();
+        if (currentSelected != null) {
+            System.out.println(currentSelected.person.getName());
+            raise(new PersonPanelSelectionChangedEvent(currentSelected, socialType));
+        }
+
     }
 
     /**
