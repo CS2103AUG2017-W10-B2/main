@@ -25,11 +25,9 @@ public class SelectCommandParser implements Parser<SelectCommand> {
             String socialType = null;
             if (tokens.length > 1) {
                 // if there is more than one argument
-                socialType = tokens[1];
+                socialType = ParserUtil.parseSelect(tokens[1]).get();
             }
             Index index = ParserUtil.parseIndex(indexStr);
-            // Index index = ParserUtil.parseIndex(args);
-            // return new SelectCommand(index);
             return new SelectCommand(index, socialType);
         } catch (IllegalValueException ive) {
             throw new ParseException(
