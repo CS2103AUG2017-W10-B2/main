@@ -70,12 +70,19 @@ public class PersonListPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.socialType = event.socialType;
         System.out.println("socialType: " + this.socialType);
+        // PersonCard prevSelected = personListView.getSelectionModel().getSelectedItem();
         scrollTo(event.targetIndex);
         PersonCard currentSelected = personListView.getSelectionModel().getSelectedItem();
-        if (currentSelected != null) {
-            System.out.println(currentSelected.person.getName());
-            raise(new PersonPanelSelectionChangedEvent(currentSelected, socialType));
-        }
+        // System.out.println("before: " + prevSelected.person.getName());
+        // System.out.println("after: " + currentSelected.person.getName());
+        // System.out.println("bool: " + currentSelected.equals(prevSelected));
+        // if (currentSelected != null) {
+        raise(new PersonPanelSelectionChangedEvent(currentSelected, socialType));
+
+        // if (currentSelected != null && currentSelected.equals(prevSelected)) {
+            // System.out.println("currentSelected name: " + currentSelected.person.getName());
+            // raise(new PersonPanelSelectionChangedEvent(currentSelected, socialType));
+        // }
 
     }
 
