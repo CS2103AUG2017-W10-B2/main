@@ -112,17 +112,15 @@ public class BrowserPanel extends UiPart<Region> {
         Person p = new Person(person);
         Iterator<SocialInfo> iterator = p.getSocialInfos().iterator();
         if (iterator.hasNext()) {
+            // if there is SocialInfo stored
             SocialInfo social = iterator.next();
             String socialType = social.getSocialType();
-            // System.out.println("socialType: " + socialType);
-            String url = "";
-            if (socialType.equals(requestedSocialType)) {
-                url = social.getSocialUrl();
-            } else {
+            while (!socialType.equals(requestedSocialType) && iterator.hasNext() && requestedSocialType != null) {
+                // if no social type is specified, the default social type shown will be the first one which is Instagram
+                if (iterator.hasNext())
                 social = iterator.next();
-                url = social.getSocialUrl();
             }
-            // String url = social.getSocialUrl();
+            String url = social.getSocialUrl();
             loadPage(url);
         } else {
             loadPersonPage(event.getNewSelection().person);

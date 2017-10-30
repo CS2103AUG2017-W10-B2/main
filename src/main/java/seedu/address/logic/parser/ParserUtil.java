@@ -139,7 +139,7 @@ public class ParserUtil {
      */
     public static Optional<String> parseSelect(String arg) throws IllegalValueException {
         requireNonNull(arg);
-        if (!("facebook".equals(arg) || "instagram".equals(arg) || "fb".equals(arg) || "ig".equals(arg) || "f".equals(arg) || "i".equals(arg))) {
+        if (!("facebook".equals(arg) || "instagram".equals(arg))) {
             throw new IllegalValueException(MESSAGE_INVALID_SOCIAL_TYPE);
         }
 

@@ -48,10 +48,8 @@ public class PersonListPanel extends UiPart<Region> {
                     System.out.println("oldValue: " + oldValue);
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        // raise(new PersonPanelSelectionChangedEvent(newValue));
                         raise(new PersonPanelSelectionChangedEvent(newValue, socialType));
                     }
-                    // raise(new PersonPanelSelectionChangedEvent(newValue, socialType));
                 });
     }
 
@@ -69,21 +67,9 @@ public class PersonListPanel extends UiPart<Region> {
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.socialType = event.socialType;
-        System.out.println("socialType: " + this.socialType);
-        // PersonCard prevSelected = personListView.getSelectionModel().getSelectedItem();
         scrollTo(event.targetIndex);
         PersonCard currentSelected = personListView.getSelectionModel().getSelectedItem();
-        // System.out.println("before: " + prevSelected.person.getName());
-        // System.out.println("after: " + currentSelected.person.getName());
-        // System.out.println("bool: " + currentSelected.equals(prevSelected));
-        // if (currentSelected != null) {
         raise(new PersonPanelSelectionChangedEvent(currentSelected, socialType));
-
-        // if (currentSelected != null && currentSelected.equals(prevSelected)) {
-            // System.out.println("currentSelected name: " + currentSelected.person.getName());
-            // raise(new PersonPanelSelectionChangedEvent(currentSelected, socialType));
-        // }
-
     }
 
     /**
