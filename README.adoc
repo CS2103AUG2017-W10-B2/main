@@ -1,3 +1,5 @@
+image::docs/images/logo.png[width="250" align="center"]
+
 = KayPoh!
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
@@ -6,15 +8,15 @@ https://travis-ci.org/CS2103AUG2017-W10-B2/main[image:https://travis-ci.org/CS21
 https://www.codacy.com/app/marvinchin/KayPoh?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103T-W10-B2/KayPoh&amp;utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/583536a5b9664061ab6a453eb0b5801b[Codacy Badge]]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="800"]
+image::docs/images/Ui.png[width="1000"]
 endif::[]
 
 ifndef::env-github[]
-image::images/Ui.png[width="800"]
+image::images/Ui.png[width="1000"]
 endif::[]
 
 * This is a desktop Address Book application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* This application is targetted at social users, with features that include:
+* This application is targeted at social users, with features that include:
 ** Social media integration
 ** Easy sharing of contacts
 ** Powerful contact management tools

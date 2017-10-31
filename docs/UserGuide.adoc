@@ -481,22 +481,22 @@ Format: `unsync`
 
 === Miscellaneous
 
-==== Changing themes [Coming in v2.0]: `theme`
+==== Changing themes: `theme` [Since v1.4]
 
 Changes the color theme of the application. +
-Format: `theme THEME`
+Format: `theme [OPTION]`
 
-Available Themes:
+Options:
 
-* `light` +
-Changes the theme of the program to a light color scheme.
-* `dark` +
-Changes the theme of the program to a dark color scheme.
+* `day` +
+Changes the application theme to a light color scheme.
+* `night` +
+Changes the application theme to a dark color scheme.
 
 Example:
 
-* `theme light`
-* `theme dark`
+* `theme -day`
+* `theme -night`
 
 ==== Listing entered commands: `history`
 
