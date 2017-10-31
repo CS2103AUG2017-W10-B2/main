@@ -12,10 +12,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class UniqueSocialInfoListTest {
-    private static SocialInfo aliceFacebook = new SocialInfo("FACEBOOK", "alice", "facebook.com/alice");
-    private static SocialInfo aliceTwitter = new SocialInfo("TWITTER", "alice", "instagram.com/alice");
-    private static SocialInfo bobFacebook = new SocialInfo("FACEBOOK", "bob", "facebook.com/bob");
-    private static SocialInfo bobTwitter = new SocialInfo("TWITTER", "bob", "instagram.com/bob");
+    private static SocialInfo aliceFacebook = new SocialInfo("facebook", "alice", "facebook.com/alice");
+    private static SocialInfo aliceTwitter = new SocialInfo("twitter", "alice", "instagram.com/alice");
+    private static SocialInfo bobFacebook = new SocialInfo("facebook", "bob", "facebook.com/bob");
+    private static SocialInfo bobTwitter = new SocialInfo("twitter", "bob", "instagram.com/bob");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

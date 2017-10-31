@@ -30,7 +30,7 @@ public class SampleDataUtil {
                     new Favorite(true),
                     getTagSet("friends"),
                     getSocialInfoSet(
-                            new SocialInfo("FACEBOOK", "alex", "https://facebook.com/alex")));
+                            new SocialInfo("facebook", "alex", "https://facebook.com/alex")));
             Person bernice = new Person(
                     new Name("Bernice Yu"),
                     new Phone("99272758"),
@@ -39,8 +39,8 @@ public class SampleDataUtil {
                     new Favorite(false),
                     getTagSet("colleagues", "friends"),
                     getSocialInfoSet(
-                            new SocialInfo("FACEBOOK", "bernice", "https://facebook.com/bernice"),
-                            new SocialInfo("INSTAGRAM", "bernice", "https://instagram.com/bernice")));
+                            new SocialInfo("facebook", "bernice", "https://facebook.com/bernice"),
+                            new SocialInfo("instagram", "bernice", "https://instagram.com/bernice")));
             Person charlotte = new Person(
                     new Name("Charlotte Oliveiro"),
                     new Phone("93210283"),
