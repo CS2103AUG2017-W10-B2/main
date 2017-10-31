@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class SelectCommandParser implements Parser<SelectCommand> {
 
+    //@@author sarahnzx
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
      * and returns an SelectCommand object for execution.
@@ -19,8 +20,16 @@ public class SelectCommandParser implements Parser<SelectCommand> {
      */
     public SelectCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new SelectCommand(index);
+            String trimmedArgs = args.trim();
+            String[] tokens = trimmedArgs.split(" ");
+            String indexStr = tokens[0];
+            String socialType = null;
+            if (tokens.length > 1) {
+                // if there is more than one argument
+                socialType = ParserUtil.parseSelect(tokens[1]).get();
+            }
+            Index index = ParserUtil.parseIndex(indexStr);
+            return new SelectCommand(index, socialType);
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
