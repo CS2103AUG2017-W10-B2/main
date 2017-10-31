@@ -18,6 +18,7 @@ public class Phone {
             "Phone numbers can only contain numbers, and should be at least 3 digits long";
     public static final String PHONE_VALIDATION_REGEX = "\\d{3,}";
     public final String value;
+    //@@author sarahnzx
     public final List<String> phonelist;
 
     /**
@@ -54,6 +55,7 @@ public class Phone {
         this.phonelist = phones;
         this.value = phoneStr;
     }
+    //@@author
 
     /**
      * Returns true if a given string is a valid person phone number.

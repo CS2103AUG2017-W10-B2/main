@@ -93,11 +93,16 @@ Example:
 ==== Selecting a person: `select`
 
 Selects the person identified by the index number used in the last person listing. +
-Format: `select INDEX` +
+Format: `select INDEX [SOCIAL_TYPE]` +
 Alias: `s`
 
 ****
-* Selects the person and loads the Instagram page  of the person at the specified `INDEX`. If the person does not have an Instagram account, the Facebook account of the person is loaded instead. If the person has neither Instagram nor Facebook, the Google search page of the person is loaded.
+* When a person is selected, one of his associated social media feeds will be displayed in the browser.
+* If a `SOCIAL_TYPE` is specified, that social media feed will be displayed. More information about representing social media types can be found in the <<social-media-integrations, Social Media Integrations>> section.
+* If no `SOCIAL_TYPE` is specified, an associated social media feed will be displayed, in the following order:
+** Instagram (if present)
+** Facebook (if present)
+** Google search of the person's name
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -106,10 +111,10 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd person in the address book, and displays a social media feed in the browser.
 * `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+`select 1 facebook` +
+Selects the 1st person in the results of the `find` command, and displays her Facebook feed in the browser.
 
 [[find-by-tag]]
 ==== Finding persons: `find`
@@ -141,7 +146,7 @@ Shows a list of persons with names `Betsy`, `Tim`, or `John`.
 * `find -tag friends colleagues` +
 Shows a list of persons with tags `friends` or `colleagues`.
 
-==== Sorting the displayed list [Coming in v2.0]: `sort`
+==== Sorting the displayed list [Since v1.4]: `sort`
 
 Sorts the list of persons in the last displayed listing. +
 Format: `sort [OPTION]` +
@@ -149,15 +154,17 @@ Format: `sort [OPTION]` +
 Options: +
 
 * Default (no option specified) +
+Sorts persons first based on their favorite status, then by their name in alphabetical order.
+* `name` +
 Sorts persons by their name in alphabetical order.
-* `recent` +
+* `recent` [Coming in v2.0] +
 Sorts persons by how recently they were last added, edited, or selected.
 
 Examples:
 
 * `list` +
 `sort` +
-lists all person in the address book, sorted by name
+lists all person in the address book, sorted first based on their favorite status, then by their name in alphabetical order.
 * `find bob` +
 `sort -recent` +
 lists all the person that contain the keyword `bob`, sorted based on when they were last accessed.
@@ -323,7 +330,7 @@ Deletes the 2nd and 3rd persons in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-===== Deleting persons by tag [Since v1.3]:
+===== Deleting persons by tag [Since v1.4]:
 
 Deletes person(s) that have a the input tags. +
 Format: `delete -tag TAG [ADDITIONAL_TAGS]...`
@@ -415,6 +422,22 @@ Examples:
 
 * `facebook post hello world!` +
 Posts the status 'hello world!' to your Facebook wall.
+
+===== Posting to Facebook [Since v1.4]: `facebook link`
+
+Posts a link to your Facebook wall. +
+Format: `facebook link LINK_URL`
+
+****
+* Your facebook account must be connected to use this feature.
+* If you have not yet connected your Facebook account, the authorization page will automatically be launched in
+the browser for you to connect to your account.
+****
+
+Examples:
+
+* `facebook post https://www.google.com` +
+Posts the link to `https://www.google.com` to your Facebook wall.
 
 === Managing Contact Data
 

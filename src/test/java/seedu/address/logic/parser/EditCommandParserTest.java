@@ -179,6 +179,7 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    //@@author sarahnzx
     @Test
     public void parse_multipleRepeatedFields_acceptsMultipleUnrepeated() {
         Index targetIndex = INDEX_FIRST_PERSON;
@@ -199,6 +200,7 @@ public class EditCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+    //@@author
 
     @Test
     public void parse_multipleDifferentFavoriteFields_failure() {
@@ -229,6 +231,7 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    //@@author sarahnzx
     @Test
     public void parse_validValueFollowedByInvalidValue_success() {
         // no other valid values specified
@@ -246,6 +249,7 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+    //@@author
 
     @Test
     public void parse_resetTags_success() {

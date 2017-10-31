@@ -31,6 +31,7 @@ public abstract class DeleteCommand extends UndoableCommand {
             + COMMAND_WORD + " -" + DeleteByTagCommand.COMMAND_OPTION + " friends colleagues";
 
 
+    //@@author sarahnzx
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s): %1$s";
 
     private List<Index> targetIndexList = new ArrayList<>();

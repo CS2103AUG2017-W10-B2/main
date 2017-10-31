@@ -33,7 +33,7 @@ image::sarahnzx.jpg[width="150", align="left"]
 {empty}[http://github.com/sarahnzx[github]] [<<sarahnzx#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Deliverables and deadlines, Code quality, In charge of Logic component
+Responsibilities: Deliverables and Deadlines, Code quality, In charge of Logic component
 
 '''
 
