@@ -44,6 +44,15 @@ public class ParserUtil {
             + " should be facebook or instagram.";
 
     /**
+     * Splits {@code args} by whitespace and returns it
+     */
+    public static List<String> parseWhitespaceSeparatedStrings(String args) {
+        requireNonNull(args);
+        String[] splitArgs = args.split("\\s+");
+        return Arrays.asList(splitArgs);
+    }
+
+    /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws IllegalValueException if the specified index is invalid (not non-zero unsigned integer).

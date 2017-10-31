@@ -27,8 +27,8 @@ public class RedoCommandTest {
     private static final Storage NULL_STORAGE = getNullStorage();
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final DeleteCommand deleteCommandOne = new DeleteCommand(Arrays.asList(INDEX_FIRST_PERSON));
-    private final DeleteCommand deleteCommandTwo = new DeleteCommand(Arrays.asList(INDEX_FIRST_PERSON));
+    private final DeleteCommand deleteCommandOne = new DeleteByIndexCommand(Arrays.asList(INDEX_FIRST_PERSON));
+    private final DeleteCommand deleteCommandTwo = new DeleteByIndexCommand(Arrays.asList(INDEX_FIRST_PERSON));
 
     @Before
     public void setUp() {

@@ -26,7 +26,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteCommand}.
  */
-public class DeleteCommandTest {
+public class DeleteByIndexCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -80,14 +80,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(Arrays.asList(INDEX_FIRST_PERSON));
-        DeleteCommand deleteSecondCommand = new DeleteCommand(Arrays.asList(INDEX_SECOND_PERSON));
+        DeleteCommand deleteFirstCommand = new DeleteByIndexCommand(Arrays.asList(INDEX_FIRST_PERSON));
+        DeleteCommand deleteSecondCommand = new DeleteByIndexCommand(Arrays.asList(INDEX_SECOND_PERSON));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(Arrays.asList(INDEX_FIRST_PERSON));
+        DeleteCommand deleteFirstCommandCopy = new DeleteByIndexCommand(Arrays.asList(INDEX_FIRST_PERSON));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -104,7 +104,7 @@ public class DeleteCommandTest {
      * Returns a {@code DeleteCommand} with the parameter {@code index}.
      */
     private DeleteCommand prepareCommand(Index index) {
-        DeleteCommand deleteCommand = new DeleteCommand(Arrays.asList(index));
+        DeleteCommand deleteCommand = new DeleteByIndexCommand(Arrays.asList(index));
         deleteCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
         return deleteCommand;
     }

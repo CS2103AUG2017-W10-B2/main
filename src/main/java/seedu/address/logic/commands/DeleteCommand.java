@@ -1,61 +1,63 @@
 package seedu.address.logic.commands;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * Deletes a person identified using it's last displayed index from the address book.
+ * Represents a command that deletes persons from the addressbook identified by some input parameter
  */
-public class DeleteCommand extends UndoableCommand {
+public abstract class DeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_ALIAS = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the last person listing.\n"
+            + ": Deletes the specified persons from the address book\n"
             + "Alias: " + COMMAND_ALIAS + "\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: [OPTION] IDENTIFIER [MORE_IDENTIFIERS]...\n"
+            + "Options: \n"
+            + "\tdefault - Deletes the persons identified by the index numbers "
+            + "(must be positive integers) used in the last person listing.\n"
+            + "\t" + DeleteByTagCommand.COMMAND_OPTION
+            + " - Deletes the perons in the last person listing with the specified tags.\n"
+            + "Example:\n"
+            + COMMAND_WORD + " 1 2\n"
+            + COMMAND_WORD + " -" + DeleteByTagCommand.COMMAND_OPTION + " friends colleagues";
 
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s): %1$s";
 
     private List<Index> targetIndexList = new ArrayList<>();
 
-    public DeleteCommand(List<Index> targetIndexList) {
-        this.targetIndexList = targetIndexList;
-    }
-
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
+        Collection<ReadOnlyPerson> personsToDelete = getPersonsToDelete();
+        StringBuilder deletedPersons = new StringBuilder();
 
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
-        StringBuilder people = new StringBuilder();
-
-        for (Index i : this.targetIndexList) {
-            if (i.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            ReadOnlyPerson personToDelete = lastShownList.get(i.getZeroBased());
-
+        for (ReadOnlyPerson personToDelete : personsToDelete) {
             try {
                 model.deletePerson(personToDelete);
             } catch (PersonNotFoundException pnfe) {
                 assert false : "The target person cannot be missing";
             }
 
-            people.append("\n");
-            people.append(personToDelete);
+            deletedPersons.append("\n");
+            deletedPersons.append(personToDelete);
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, people));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons));
     }
+
+    /**
+     * Returns the collection of persons to be deleted.
+     * To be implemented by the classes inheriting this class.
+     */
+    public abstract Collection<ReadOnlyPerson> getPersonsToDelete() throws CommandException;
 
     @Override
     public boolean equals(Object other) {
