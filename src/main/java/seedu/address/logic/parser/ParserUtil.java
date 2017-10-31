@@ -135,6 +135,7 @@ public class ParserUtil {
         }
     }
 
+    //@@author sarahnzx
     /**
      * Checks if the specified social type is valid.
      */
@@ -146,6 +147,7 @@ public class ParserUtil {
 
         return Optional.of(arg);
     }
+    //@@author
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.

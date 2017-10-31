@@ -104,6 +104,7 @@ public class BrowserPanel extends UiPart<Region> {
         browser = null;
     }
 
+    //@@author sarahnzx
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

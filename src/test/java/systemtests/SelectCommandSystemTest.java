@@ -82,6 +82,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(SelectCommand.COMMAND_WORD + " 1 abc",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
 
+        //@@author sarahnzx
         /* Case: valid arguments (social type instagram) -> selected */
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " instagram";
         assertCommandSuccess(command, validIndex);
@@ -89,6 +90,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: valid arguments (social type facebook) -> selected */
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " facebook";
         assertCommandSuccess(command, validIndex);
+        //@@author
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);

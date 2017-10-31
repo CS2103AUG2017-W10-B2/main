@@ -62,6 +62,7 @@ public class PersonListPanel extends UiPart<Region> {
         });
     }
 
+    //@@author sarahnzx
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

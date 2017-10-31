@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class SelectCommandParser implements Parser<SelectCommand> {
 
+    //@@author sarahnzx
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
      * and returns an SelectCommand object for execution.
