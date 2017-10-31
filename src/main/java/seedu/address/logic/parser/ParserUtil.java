@@ -38,8 +38,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
-    public static final String MESSAGE_INVALID_SOCIAL_TYPE = "Social type is not valid. Social type" +
-            " should be facebook or instagram.";
+    public static final String MESSAGE_INVALID_SOCIAL_TYPE = "Social type is not valid. Social type"
+            + " should be facebook or instagram.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
