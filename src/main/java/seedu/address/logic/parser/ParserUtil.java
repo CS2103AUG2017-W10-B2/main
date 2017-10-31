@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.SocialInfoMapping.parseSocialInfo;
+import static seedu.address.logic.parser.SocialInfoMapping.FACEBOOK_IDENTIFIER;
+import static seedu.address.logic.parser.SocialInfoMapping.INSTAGRAM_IDENTIFIER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +56,6 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
-    //@@author keithsoc
     /**
      * Parses {@code args} into an {@code List<Index>} and returns it.
      * Used for commands that need to parse multiple indexes
@@ -70,7 +71,6 @@ public class ParserUtil {
         }
         return indexList;
     }
-    //@@author
 
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
@@ -108,14 +108,13 @@ public class ParserUtil {
         return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
     }
 
-    //@@author keithsoc
     /**
      * Checks if favorite and unfavorite prefixes are present in {@code ArgumentMultimap argMultimap}
      * Catered for both AddCommandParser and EditCommandParser usage
      */
     public static Optional<Favorite> parseFavorite(ArgumentMultimap argMultimap,
-                                         Prefix prefixFav,
-                                         Prefix prefixUnFav) throws ParseException {
+                                                   Prefix prefixFav,
+                                                   Prefix prefixUnFav) throws ParseException {
 
         // Disallow both f/ and uf/ to be present in the same instance of user input when editing
         if (argMultimap.isPrefixPresent(prefixFav) && argMultimap.isPrefixPresent(prefixUnFav)) {
@@ -137,7 +136,6 @@ public class ParserUtil {
             return Optional.empty();
         }
     }
-    //@@author
 
     //@@author sarahnzx
     /**
@@ -145,7 +143,7 @@ public class ParserUtil {
      */
     public static Optional<String> parseSelect(String arg) throws IllegalValueException {
         requireNonNull(arg);
-        if (!("facebook".equals(arg) || "instagram".equals(arg))) {
+        if (!(arg.equals(FACEBOOK_IDENTIFIER) || arg.equals(INSTAGRAM_IDENTIFIER))) {
             throw new IllegalValueException(MESSAGE_INVALID_SOCIAL_TYPE);
         }
 
