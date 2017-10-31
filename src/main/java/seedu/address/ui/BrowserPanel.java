@@ -9,7 +9,6 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
@@ -29,10 +28,7 @@ import seedu.address.model.social.SocialInfo;
  */
 public class BrowserPanel extends UiPart<Region> {
 
-    //@@author keithsoc
-    public static final String DEFAULT_PAGE_DAY = "defaultDay.html";
-    public static final String DEFAULT_PAGE_NIGHT = "defaultNight.html";
-    //@@author
+    public static final String DEFAULT_PAGE = "default.html";
     public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com.sg/search?safe=off&q=";
     public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
 
@@ -46,14 +42,13 @@ public class BrowserPanel extends UiPart<Region> {
 
     private Label location;
 
-    public BrowserPanel(Scene scene) {
+    public BrowserPanel() {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
-        loadDefaultPage(scene);
-
+        loadDefaultPage();
         FacebookConnectCommand.setWebEngine(browser.getEngine());
         location = new Label();
         location.textProperty().bind(browser.getEngine().locationProperty());
@@ -78,20 +73,13 @@ public class BrowserPanel extends UiPart<Region> {
         isPost = post;
     }
 
-    //@@author keithsoc
     /**
-     * Loads a default HTML file with a background that matches the current theme.
+     * Loads a default HTML file with a background that matches the general theme.
      */
-    public void loadDefaultPage(Scene scene) {
-        URL defaultPage;
-        if (scene.getStylesheets().get(0).equals(UiTheme.THEME_DAY)) {
-            defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE_DAY);
-        } else {
-            defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE_NIGHT);
-        }
+    private void loadDefaultPage() {
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         loadPage(defaultPage.toExternalForm());
     }
-    //@@author
 
     private void setEventHandlerForBrowserUrlChangeEvent() {
         location.textProperty()
@@ -116,14 +104,23 @@ public class BrowserPanel extends UiPart<Region> {
         browser = null;
     }
 
+    //@@author sarahnzx
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         ReadOnlyPerson person = event.getNewSelection().person;
+        String requestedSocialType = event.getSocialType();
         Person p = new Person(person);
         Iterator<SocialInfo> iterator = p.getSocialInfos().iterator();
         if (iterator.hasNext()) {
+            // if there is SocialInfo stored
             SocialInfo social = iterator.next();
+            String socialType = social.getSocialType();
+            // if no social type is specified and the contact has both facebook and instagram stored,
+            // the default social type shown will be Instagram
+            while (!socialType.equals(requestedSocialType) && iterator.hasNext() && requestedSocialType != null) {
+                social = iterator.next();
+            }
             String url = social.getSocialUrl();
             loadPage(url);
         } else {
@@ -135,19 +132,19 @@ public class BrowserPanel extends UiPart<Region> {
     private void handleBrowserUrlChangeEvent(BrowserUrlChangeEvent event) throws CommandException {
         switch (event.getProcessType()) {
 
-        case FacebookConnectCommand.COMMAND_ALIAS:
-            logger.info(LogsCenter.getEventHandlingLogMessage(event));
-            FacebookConnectCommand.completeAuth(browser.getEngine().getLocation());
-            break;
+            case FacebookConnectCommand.COMMAND_ALIAS:
+                logger.info(LogsCenter.getEventHandlingLogMessage(event));
+                FacebookConnectCommand.completeAuth(browser.getEngine().getLocation());
+                break;
 
-        case FacebookPostCommand.COMMAND_ALIAS:
-            logger.info(LogsCenter.getEventHandlingLogMessage(event));
-            FacebookConnectCommand.completeAuth(browser.getEngine().getLocation());
-            FacebookPostCommand.completePost();
-            break;
+            case FacebookPostCommand.COMMAND_ALIAS:
+                logger.info(LogsCenter.getEventHandlingLogMessage(event));
+                FacebookConnectCommand.completeAuth(browser.getEngine().getLocation());
+                FacebookPostCommand.completePost();
+                break;
 
-        default:
-            throw new CommandException("Url change error.");
+            default:
+                throw new CommandException("Url change error.");
         }
     }
 }

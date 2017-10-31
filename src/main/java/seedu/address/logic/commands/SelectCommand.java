@@ -26,10 +26,18 @@ public class SelectCommand extends Command {
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 
     private final Index targetIndex;
+    private String socialType = null;
 
     public SelectCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
+
+    //@@author sarahnzx
+    public SelectCommand(Index targetIndex, String socialType) {
+        this.targetIndex = targetIndex;
+        this.socialType = socialType;
+    }
+    //@@author
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -40,7 +48,7 @@ public class SelectCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex, socialType));
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
 
     }

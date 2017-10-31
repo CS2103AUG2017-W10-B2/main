@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.SocialInfoMapping.parseSocialInfo;
+import static seedu.address.logic.parser.SocialInfoMapping.FACEBOOK_IDENTIFIER;
+import static seedu.address.logic.parser.SocialInfoMapping.INSTAGRAM_IDENTIFIER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +40,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
+    public static final String MESSAGE_INVALID_SOCIAL_TYPE = "Social type is not valid. Social type"
+            + " should be facebook or instagram.";
 
     /**
      * Splits {@code args} by whitespace and returns it
@@ -61,7 +65,6 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
-    //@@author keithsoc
     /**
      * Parses {@code args} into an {@code List<Index>} and returns it.
      * Used for commands that need to parse multiple indexes
@@ -77,7 +80,6 @@ public class ParserUtil {
         }
         return indexList;
     }
-    //@@author
 
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
@@ -115,14 +117,13 @@ public class ParserUtil {
         return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
     }
 
-    //@@author keithsoc
     /**
      * Checks if favorite and unfavorite prefixes are present in {@code ArgumentMultimap argMultimap}
      * Catered for both AddCommandParser and EditCommandParser usage
      */
     public static Optional<Favorite> parseFavorite(ArgumentMultimap argMultimap,
-                                         Prefix prefixFav,
-                                         Prefix prefixUnFav) throws ParseException {
+                                                   Prefix prefixFav,
+                                                   Prefix prefixUnFav) throws ParseException {
 
         // Disallow both f/ and uf/ to be present in the same instance of user input when editing
         if (argMultimap.isPrefixPresent(prefixFav) && argMultimap.isPrefixPresent(prefixUnFav)) {
@@ -143,6 +144,19 @@ public class ParserUtil {
         } else {
             return Optional.empty();
         }
+    }
+
+    //@@author sarahnzx
+    /**
+     * Checks if the specified social type is valid.
+     */
+    public static Optional<String> parseSelect(String arg) throws IllegalValueException {
+        requireNonNull(arg);
+        if (!(arg.equals(FACEBOOK_IDENTIFIER) || arg.equals(INSTAGRAM_IDENTIFIER))) {
+            throw new IllegalValueException(MESSAGE_INVALID_SOCIAL_TYPE);
+        }
+
+        return Optional.of(arg);
     }
     //@@author
 

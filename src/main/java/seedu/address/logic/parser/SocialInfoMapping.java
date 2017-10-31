@@ -11,16 +11,16 @@ public class SocialInfoMapping {
     private static final int SOCIAL_TYPE_INDEX = 0;
     private static final int SOCIAL_USERNAME_INDEX = 1;
 
-    private static final String FACEBOOK_IDENTIFIER = "facebook";
+    public static final String FACEBOOK_IDENTIFIER = "facebook";
     private static final String FACEBOOK_IDENTIFIER_ALIAS = "fb";
-    private static final String INSTAGRAM_IDENTIFIER = "instagram";
+    public static final String INSTAGRAM_IDENTIFIER = "instagram";
     private static final String INSTAGRAM_IDENTIFIER_ALIAS = "ig";
 
     private static final String INVALID_SYNTAX_EXCEPTION_MESSAGE = "Invalid syntax for social info";
     private static final String UNRECOGNIZED_SOCIAL_TYPE_MESSAGE = "Unrecognized social type.\n"
-        + "Currently supported platforms: "
-        + FACEBOOK_IDENTIFIER + "(aliases: " + FACEBOOK_IDENTIFIER_ALIAS + "), "
-        + INSTAGRAM_IDENTIFIER + "(aliases: " + INSTAGRAM_IDENTIFIER_ALIAS + ")\n";
+            + "Currently supported platforms: "
+            + FACEBOOK_IDENTIFIER + "(aliases: " + FACEBOOK_IDENTIFIER_ALIAS + "), "
+            + INSTAGRAM_IDENTIFIER + "(aliases: " + INSTAGRAM_IDENTIFIER_ALIAS + ")\n";
 
 
     /**
