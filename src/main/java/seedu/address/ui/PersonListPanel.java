@@ -65,7 +65,7 @@ public class PersonListPanel extends UiPart<Region> {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        this.socialType = event.socialType;
+        this.socialType = event.getSocialType();
         scrollTo(event.targetIndex);
         PersonCard currentSelected = personListView.getSelectionModel().getSelectedItem();
         raise(new PersonPanelSelectionChangedEvent(currentSelected, socialType));

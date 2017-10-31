@@ -116,8 +116,7 @@ public class BrowserPanel extends UiPart<Region> {
             SocialInfo social = iterator.next();
             String socialType = social.getSocialType();
             while (!socialType.equals(requestedSocialType) && iterator.hasNext() && requestedSocialType != null) {
-                // if no social type is specified, the default social type shown will be the first one which is Instagram
-                if (iterator.hasNext())
+                // if no social type is specified, the default social type shown will be Instagram
                 social = iterator.next();
             }
             String url = social.getSocialUrl();

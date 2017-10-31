@@ -9,7 +9,7 @@ import seedu.address.commons.events.BaseEvent;
 public class JumpToListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
-    public String socialType = null;
+    private String socialType = null;
 
     public JumpToListRequestEvent(Index targetIndex) {
         this.targetIndex = targetIndex.getZeroBased();
@@ -23,6 +23,10 @@ public class JumpToListRequestEvent extends BaseEvent {
     @Override
     public String toString() {
         return this.getClass().getSimpleName();
+    }
+
+    public String getSocialType() {
+        return this.socialType;
     }
 
 }
