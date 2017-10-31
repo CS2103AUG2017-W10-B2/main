@@ -1,5 +1,5 @@
 # keithsoc-reused
-###### \java\seedu\address\ui\UiResize.java
+###### /main/java/seedu/address/ui/UiResize.java
 ``` java
 /**
  * Manages resizing of UI Window by adding mouse event listeners to each UI component.
