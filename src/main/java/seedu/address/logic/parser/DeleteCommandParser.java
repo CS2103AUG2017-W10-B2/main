@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
+    //@@author marvinchin
     /**
      * Utility function to check that the input arguments is not empty.
      * Throws a parse exception if it is empty.
@@ -54,4 +55,5 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
         }
     }
+    //@@author
 }

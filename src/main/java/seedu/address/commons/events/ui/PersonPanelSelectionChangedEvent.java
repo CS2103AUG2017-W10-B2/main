@@ -10,10 +10,18 @@ public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final PersonCard newSelection;
+    private String socialType = null;
 
     public PersonPanelSelectionChangedEvent(PersonCard newSelection) {
         this.newSelection = newSelection;
     }
+
+    //@@author sarahnzx
+    public PersonPanelSelectionChangedEvent(PersonCard newSelection, String socialType) {
+        this.newSelection = newSelection;
+        this.socialType = socialType;
+    }
+    //@@author
 
     @Override
     public String toString() {
@@ -22,5 +30,10 @@ public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
     public PersonCard getNewSelection() {
         return newSelection;
+    }
+
+    //@@author sarahnzx
+    public String getSocialType() {
+        return socialType;
     }
 }

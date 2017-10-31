@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.SocialInfoMapping.FACEBOOK_IDENTIFIER;
+import static seedu.address.logic.parser.SocialInfoMapping.INSTAGRAM_IDENTIFIER;
 import static seedu.address.logic.parser.SocialInfoMapping.parseSocialInfo;
 
 import java.util.ArrayList;
@@ -38,7 +40,10 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
+    public static final String MESSAGE_INVALID_SOCIAL_TYPE = "Social type is not valid. Social type"
+            + " should be facebook or instagram.";
 
+    //@@author marvinchin
     /**
      * Splits {@code args} by whitespace and returns it
      */
@@ -47,6 +52,7 @@ public class ParserUtil {
         String[] splitArgs = args.split("\\s+");
         return Arrays.asList(splitArgs);
     }
+    //@@author
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -146,6 +152,19 @@ public class ParserUtil {
     }
     //@@author
 
+    //@@author sarahnzx
+    /**
+     * Checks if the specified social type is valid.
+     */
+    public static Optional<String> parseSelect(String arg) throws IllegalValueException {
+        requireNonNull(arg);
+        if (!(arg.equals(FACEBOOK_IDENTIFIER) || arg.equals(INSTAGRAM_IDENTIFIER))) {
+            throw new IllegalValueException(MESSAGE_INVALID_SOCIAL_TYPE);
+        }
+        return Optional.of(arg);
+    }
+    //@@author
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -158,6 +177,7 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //@@author marvinchin
     /**
      * Parses {@code Collection<String> rawSocialInfos} into {@code Set<SocialInfo}.
      * @param rawSocialInfos
@@ -171,4 +191,5 @@ public class ParserUtil {
         }
         return socialInfoSet;
     }
+    //@@author
 }

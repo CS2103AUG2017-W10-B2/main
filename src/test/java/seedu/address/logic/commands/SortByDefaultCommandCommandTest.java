@@ -21,6 +21,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.TagsContainKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
+//@@author marvinchin
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteCommand}.
  */

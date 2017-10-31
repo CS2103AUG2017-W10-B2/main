@@ -25,6 +25,7 @@ public class DeleteCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 
+    //@@author marvinchin
     @Test
     public void parse_emptyTagArgs_throwsParseException() {
         assertParseFailure(parser, "-tag    ",
@@ -38,6 +39,7 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, "-tag colleagues friends", expectedDeleteCommand);
         assertParseSuccess(parser, "-tag   \t friends \t\t\n colleagues", expectedDeleteCommand);
     }
+    //@@author
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

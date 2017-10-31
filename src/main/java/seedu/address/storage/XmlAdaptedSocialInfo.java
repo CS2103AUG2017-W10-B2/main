@@ -5,8 +5,9 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.social.SocialInfo;
 
+//@@author marvinchin
 /**
- * JAXB-friendly adapted version of the Tag.
+ * JAXB-friendly adapted version of the SocialInfo.
  */
 public class XmlAdaptedSocialInfo {
 

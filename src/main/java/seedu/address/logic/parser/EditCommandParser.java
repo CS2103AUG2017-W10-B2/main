@@ -86,6 +86,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(getCollectionToParse(tags)));
     }
 
+    //@@author marvinchin
     /**
      * Parses {@code Collection<String> socialInfos} into a {@code Set<SocialInfo>} if {@code tags} is non-empty.
      * If {@code socialInfos} contain only one element which is an empty string, it will be parsed into a
@@ -109,5 +110,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ? Collections.emptySet()
                 : collection;
     }
+    //@@author
 
 }

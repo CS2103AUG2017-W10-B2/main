@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.storage.Storage;
 
+//@@author marvinchin
 /**
  * Exports existing contacts to external XML file
  */

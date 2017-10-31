@@ -24,6 +24,7 @@ public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    //@@author marvinchin
     @Test
     public void addPersons_noDuplicates_success() throws DuplicatePersonException {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
@@ -57,6 +58,7 @@ public class ModelManagerTest {
         modelManager.addPersons(personsToAdd.asObservableList());
         assertEquals(expectedAddressBook, modelManager.getAddressBook());
     }
+    //@@author
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {

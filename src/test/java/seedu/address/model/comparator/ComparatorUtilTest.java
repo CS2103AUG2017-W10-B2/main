@@ -14,6 +14,7 @@ import org.junit.Test;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.PersonBuilder;
 
+//@@author marvinchin
 public class ComparatorUtilTest {
 
     @Test

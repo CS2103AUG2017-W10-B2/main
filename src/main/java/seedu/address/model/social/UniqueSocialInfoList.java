@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 
+//@@author marvinchin
 /**
  * A list of social media information that enforces no nulls and
  * no duplicate social info types between its elements.

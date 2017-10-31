@@ -8,6 +8,7 @@ import static seedu.address.model.person.PersonComparatorUtil.comparePhone;
 
 import java.util.Comparator;
 
+//@@author marvinchin
 /**
  * Default comparator for persons. Sorts first by favorites, then by name in alphabetical order,
  * then by phone in numeric order, then by address in alphabetical order, then by email in alphabetical order

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.TagsContainKeywordsPredicate;
 
+//@@author marvinchin
 /**
  * Deletes persons from the list identified by their indexes in the last displayed list in the address book.
  */

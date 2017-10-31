@@ -133,14 +133,23 @@ public class BrowserPanel extends UiPart<Region> {
         browser = null;
     }
 
+    //@@author sarahnzx
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         ReadOnlyPerson person = event.getNewSelection().person;
+        String requestedSocialType = event.getSocialType();
         Person p = new Person(person);
         Iterator<SocialInfo> iterator = p.getSocialInfos().iterator();
         if (iterator.hasNext()) {
+            // if there is SocialInfo stored
             SocialInfo social = iterator.next();
+            String socialType = social.getSocialType();
+            while (!socialType.equals(requestedSocialType) && iterator.hasNext() && requestedSocialType != null) {
+                // if no social type is specified, the default social type shown will be Instagram
+                social = iterator.next();
+            }
+
             String url = social.getSocialUrl();
             loadPage(url);
         } else {

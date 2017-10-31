@@ -211,6 +211,7 @@ public class PersonCard extends UiPart<Region> {
         });
     }
 
+    //@@author marvinchin
     /**
      * Creates a social info label for each {@code Person}
      */
@@ -222,6 +223,7 @@ public class PersonCard extends UiPart<Region> {
             socialInfos.getChildren().add(socialLabel);
         });
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

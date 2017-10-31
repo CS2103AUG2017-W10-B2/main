@@ -9,6 +9,7 @@ import seedu.address.logic.commands.SortByNameCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author marvinchin
 /**
  * Parses input arguments and creates a new SortCommand object.
  */

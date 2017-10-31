@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+//@@author marvinchin
 public class UniqueSocialInfoListTest {
     private static SocialInfo aliceFacebook = new SocialInfo("facebook", "alice", "facebook.com/alice");
     private static SocialInfo aliceTwitter = new SocialInfo("twitter", "alice", "instagram.com/alice");

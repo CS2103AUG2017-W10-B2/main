@@ -14,6 +14,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 
+//@@author marvinchin
 /**
  * A default model stub that have all of the methods failing.
  */
@@ -61,7 +62,7 @@ public class ModelStub implements Model {
             throws DuplicatePersonException, PersonNotFoundException {
         fail("This method should not be called.");
     }
-    //@@author
+    //@@author marvinchin
 
     @Override
     public ObservableList<ReadOnlyPerson> getFilteredPersonList() {

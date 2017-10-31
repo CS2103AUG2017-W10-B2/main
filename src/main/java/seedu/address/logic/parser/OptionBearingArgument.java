@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+//@@author marvinchin
 /**
  * The OptionBearingArgument class encapsulates an argument that contains options, and handles the parsing and filtering
  * of these options from the argument.

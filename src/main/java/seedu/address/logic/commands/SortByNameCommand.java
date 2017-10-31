@@ -5,6 +5,7 @@ import java.util.Comparator;
 import seedu.address.model.person.PersonNameComparator;
 import seedu.address.model.person.ReadOnlyPerson;
 
+//@@author marvinchin
 /**
  * Sorts the displayed person list by their names in alphabetical order.
  */

@@ -103,6 +103,7 @@ public class SampleDataUtil {
         return tags;
     }
 
+    //@@author marvinchin
     /**
      * Returns a set containing the list of SocialInfo given
      */
@@ -114,5 +115,6 @@ public class SampleDataUtil {
 
         return socialInfoSet;
     }
+    //@@author
 
 }

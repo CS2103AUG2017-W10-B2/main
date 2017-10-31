@@ -82,6 +82,7 @@ public class PersonBuilder {
         return this;
     }
 
+    //@@author marvinchin
     /**
      * Parses the {@code socialInfos} into a {@code Set<SocialInfo} and set it to the {@code Person}
      * that we are building.
@@ -100,6 +101,7 @@ public class PersonBuilder {
         }
         return this;
     }
+    //@@author
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.

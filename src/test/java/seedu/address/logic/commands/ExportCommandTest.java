@@ -25,6 +25,7 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.XmlAddressBookStorage;
 
+//@@author marvinchin
 public class ExportCommandTest {
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();

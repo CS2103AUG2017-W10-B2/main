@@ -9,6 +9,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
+//@@author marvinchin
 /**
  * A Model stub that always accept the person being added.
  */

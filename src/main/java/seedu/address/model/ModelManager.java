@@ -34,7 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final SortedList<ReadOnlyPerson> sortedPersons;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
 
-
+    //@@author marvinchin
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -50,6 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
         sortedPersons = new SortedList<>(this.addressBook.getPersonList(), new PersonDefaultComparator());
         filteredPersons = new FilteredList<>(sortedPersons);
     }
+    //@@author
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
@@ -84,6 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //@@author marvinchin
     @Override
     public synchronized void addPersons(Collection<ReadOnlyPerson> persons) {
         for (ReadOnlyPerson person : persons) {
@@ -97,6 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
+    //@@author
 
     @Override
     public void removeTag(Tag tag) throws PersonNotFoundException, DuplicatePersonException {
@@ -146,10 +149,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //@@author marvinchin
     @Override
     public void sortPersons(Comparator<ReadOnlyPerson> comparator) {
         sortedPersons.setComparator(comparator);
     }
+    //@@author
 
     @Override
     public boolean equals(Object obj) {

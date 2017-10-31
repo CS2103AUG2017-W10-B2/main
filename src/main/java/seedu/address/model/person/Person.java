@@ -146,6 +146,7 @@ public class Person implements ReadOnlyPerson {
         tags.set(new UniqueTagList(replacement));
     }
 
+    //@@author marvinchin
     @Override
     public ObjectProperty<UniqueSocialInfoList> socialInfoProperty() {
         return socialInfos;
@@ -159,6 +160,7 @@ public class Person implements ReadOnlyPerson {
     public void setSocialInfos(Set<SocialInfo> replacement) {
         socialInfos.set(new UniqueSocialInfoList(replacement));
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

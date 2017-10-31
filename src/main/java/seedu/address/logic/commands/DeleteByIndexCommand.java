@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
 
+//@@author marvinchin
 /**
  * Deletes persons from the list identified by their indexes in the last displayed list in the address book.
  */

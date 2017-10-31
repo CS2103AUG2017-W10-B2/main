@@ -18,6 +18,7 @@ public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
+    //@@author marvinchin
     @Test
     public void parse_emptyTagArgs_throwsParseException() {
         assertParseFailure(parser, "-tag     ",
@@ -34,6 +35,7 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "-tag   \n colleagues \t friends \n", expectedFindCommand);
     }
+    //@@author
 
     @Test
     public void parse_emptyArg_throwsParseException() {

@@ -27,6 +27,7 @@ import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.testutil.modelstubs.ModelStub;
 import seedu.address.testutil.modelstubs.ModelStubAcceptingPersonAdded;
 
+//@@author marvinchin
 public class ImportCommandTest {
     private static final String TEST_DATA_FOLDER = Paths.get("src/test/data/ImportCommandTest")
             .toAbsolutePath().toString() + File.separator;

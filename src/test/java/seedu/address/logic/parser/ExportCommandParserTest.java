@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ExportCommand;
 
+//@@author marvinchin
 public class ExportCommandParserTest {
 
     private ExportCommandParser parser = new ExportCommandParser();

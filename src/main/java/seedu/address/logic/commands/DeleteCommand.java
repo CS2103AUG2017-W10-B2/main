@@ -53,11 +53,13 @@ public abstract class DeleteCommand extends UndoableCommand {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons));
     }
 
+    //@@author marvinchin
     /**
      * Returns the collection of persons to be deleted.
      * To be implemented by the classes inheriting this class.
      */
     public abstract Collection<ReadOnlyPerson> getPersonsToDelete() throws CommandException;
+    //@@author
 
     @Override
     public boolean equals(Object other) {

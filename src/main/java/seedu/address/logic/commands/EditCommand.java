@@ -212,6 +212,7 @@ public class EditCommand extends UndoableCommand {
             this.tags = tags;
         }
 
+        //@@author marvinchin
         public Optional<Set<SocialInfo>> getSocialInfos() {
             return Optional.ofNullable(socialInfos);
         }
@@ -219,6 +220,7 @@ public class EditCommand extends UndoableCommand {
         public void setSocialInfos(Set<SocialInfo> socialInfos) {
             this.socialInfos = socialInfos;
         }
+        //@@author
 
         public Optional<Set<Tag>> getTags() {
             return Optional.ofNullable(tags);

@@ -3,18 +3,19 @@ package seedu.address.logic.parser;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.social.SocialInfo;
 
+//@@author marvinchin
 /**
  * Handles mappings of social related identifiers when parsing SocialInfo
  */
 public class SocialInfoMapping {
 
+    public static final String FACEBOOK_IDENTIFIER = "facebook";
+    public static final String INSTAGRAM_IDENTIFIER = "instagram";
+    private static final String FACEBOOK_IDENTIFIER_ALIAS = "fb";
+    private static final String INSTAGRAM_IDENTIFIER_ALIAS = "ig";
+
     private static final int SOCIAL_TYPE_INDEX = 0;
     private static final int SOCIAL_USERNAME_INDEX = 1;
-
-    private static final String FACEBOOK_IDENTIFIER = "facebook";
-    private static final String FACEBOOK_IDENTIFIER_ALIAS = "fb";
-    private static final String INSTAGRAM_IDENTIFIER = "instagram";
-    private static final String INSTAGRAM_IDENTIFIER_ALIAS = "ig";
 
     private static final String INVALID_SYNTAX_EXCEPTION_MESSAGE = "Invalid syntax for social info";
     private static final String UNRECOGNIZED_SOCIAL_TYPE_MESSAGE = "Unrecognized social type.\n"

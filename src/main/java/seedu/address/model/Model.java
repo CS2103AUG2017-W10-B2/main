@@ -37,10 +37,12 @@ public interface Model {
     /** Adds all persons in the given collection */
     void addPersons(Collection<ReadOnlyPerson> persons);
 
-    //@@author keithsoc
+
+    //@@author marvinchin
     /** Sorts the persons in the address book based on the input {@code comparator} */
     void sortPersons(Comparator<ReadOnlyPerson> comparator);
 
+    //@@author keithsoc
     /** Favorites or unfavorites the given person */
     void toggleFavoritePerson(ReadOnlyPerson target, String type)
             throws DuplicatePersonException, PersonNotFoundException;

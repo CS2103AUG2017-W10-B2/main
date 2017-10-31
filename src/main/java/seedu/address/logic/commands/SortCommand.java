@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import seedu.address.model.person.ReadOnlyPerson;
 
+//@@author marvinchin
 /**
  * Sorts the displayed person list.
  */

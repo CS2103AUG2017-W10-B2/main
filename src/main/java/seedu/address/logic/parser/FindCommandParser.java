@@ -16,6 +16,7 @@ import seedu.address.model.person.TagsContainKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+    //@@author marvinchin
     /**
      * Utility function to check that the input arguments is not empty.
      * Throws a parse exception if it is empty.
@@ -51,5 +52,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindByNameCommand(predicate);
         }
     }
+    //@@author
 
 }
