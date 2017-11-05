@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddFacebookContactCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -146,6 +147,9 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
         case RedoCommand.COMMAND_ALIAS:
             return new RedoCommand();
+
+        case "fbme":
+            return new FacebookConnectCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
