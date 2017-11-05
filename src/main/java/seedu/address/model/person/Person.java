@@ -26,6 +26,7 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Address> address;
     //@@author keithsoc
     private ObjectProperty<Favorite> favorite;
+    private ObjectProperty<ProfilePhoto> profilePhoto;
     //@@author
     private ObjectProperty<UniqueTagList> tags;
     private ObjectProperty<UniqueSocialInfoList> socialInfos;
@@ -33,7 +34,7 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Favorite favorite,
+    public Person(Name name, Phone phone, Email email, Address address, Favorite favorite, ProfilePhoto profilePhoto,
                   Set<Tag> tags, Set<SocialInfo> socialInfos) {
         requireAllNonNull(name, phone, email, address, tags, socialInfos);
         this.name = new SimpleObjectProperty<>(name);
@@ -41,6 +42,7 @@ public class Person implements ReadOnlyPerson {
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
         this.favorite = new SimpleObjectProperty<>(favorite);
+        this.profilePhoto = new SimpleObjectProperty<>(profilePhoto);
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
         this.socialInfos = new SimpleObjectProperty<>(new UniqueSocialInfoList(socialInfos));
@@ -51,7 +53,7 @@ public class Person implements ReadOnlyPerson {
      */
     public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getFavorite(),
-                source.getTags(), source.getSocialInfos());
+                source.getProfilePhoto(), source.getTags(), source.getSocialInfos());
     }
 
     public void setName(Name name) {
@@ -123,6 +125,20 @@ public class Person implements ReadOnlyPerson {
     @Override
     public Favorite getFavorite() {
         return favorite.get();
+    }
+
+    public void setProfilePhoto(ProfilePhoto profilePhoto) {
+        this.profilePhoto.set(requireNonNull(profilePhoto));
+    }
+
+    @Override
+    public ObjectProperty<ProfilePhoto> profilePhotoProperty() {
+        return profilePhoto;
+    }
+
+    @Override
+    public ProfilePhoto getProfilePhoto() {
+        return profilePhoto.get();
     }
     //@@author
 

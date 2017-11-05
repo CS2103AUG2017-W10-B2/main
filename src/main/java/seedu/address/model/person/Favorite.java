@@ -2,7 +2,8 @@ package seedu.address.model.person;
 
 //@@author keithsoc
 /**
- * Represents a Favorite status in the address book.
+ * Represents a Person's favorite status in the address book.
+ * Guarantees: immutable.
  */
 public class Favorite {
 

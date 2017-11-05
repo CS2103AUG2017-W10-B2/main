@@ -25,6 +25,8 @@ public interface ReadOnlyPerson {
     //@@author keithsoc
     ObjectProperty<Favorite> favoriteProperty();
     Favorite getFavorite();
+    ObjectProperty<ProfilePhoto> profilePhotoProperty();
+    ProfilePhoto getProfilePhoto();
     //@@author
     ObjectProperty<UniqueTagList> tagProperty();
     Set<Tag> getTags();
@@ -57,6 +59,8 @@ public interface ReadOnlyPerson {
                 .append(getAddress())
                 .append(" Favorite: ")
                 .append(getFavorite())
+                .append(" Profile Photo ")
+                .append(getProfilePhoto())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Social Infos: ");
