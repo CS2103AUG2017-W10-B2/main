@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 //@@author marvinchin
+
 /**
  * Utility class with useful methods for writing person comparators
  */
@@ -56,5 +57,16 @@ public class PersonComparatorUtil {
         String thisPersonEmail = thisPerson.getEmail().toString();
         String otherPersonEmail = otherPerson.getEmail().toString();
         return thisPersonEmail.compareToIgnoreCase(otherPersonEmail);
+    }
+
+    /**
+     * Compares two persons based on their last access date, with the most recently accessed person coming first
+     */
+    public static int compareLastAccessDate(ReadOnlyPerson thisPerson, ReadOnlyPerson otherPerson) {
+        LastAccessDate thisPersonLastAccessDate = thisPerson.getLastAccessDate();
+        LastAccessDate otherPersonLastAccessDate = otherPerson.getLastAccessDate();
+        int dateCompare = thisPersonLastAccessDate.compareTo(otherPersonLastAccessDate);
+        // Date comparison puts earlier dates first, so we need to reverse it
+        return -dateCompare;
     }
 }

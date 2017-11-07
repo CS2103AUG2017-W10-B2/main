@@ -90,6 +90,14 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: valid arguments (social type facebook) -> selected */
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " facebook";
         assertCommandSuccess(command, validIndex);
+
+        /* Case: valid arguments (social type ig) -> selected */
+        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " ig";
+        assertCommandSuccess(command, validIndex);
+
+        /* Case: valid arguments (social type fb) -> selected */
+        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " fb";
+        assertCommandSuccess(command, validIndex);
         //@@author
 
         /* Case: mixed case command word -> rejected */
@@ -130,7 +138,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         }
 
         assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchanged();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
     /**

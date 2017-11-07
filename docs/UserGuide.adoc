@@ -20,47 +20,65 @@ By: `Team W10-B2`      Since: `Aug 2017`      Licence: `MIT`
 === About
 
 This user guide will provide you with instructions on how to use the KayPoh! application.
-You should not need any prior technical knowledge to make use of this guide.
+You should not need any prior technical knowledge to make use of this guide. However,
+some knowledge about a command line interface would be helpful.
 
 === Product Overview
 
-KayPoh! is a desktop contact management application for desktop computers for social users.
+Have you ever gotten curious about what your friends, family, or maybe even
+that old classmate you haven’t spoke to in years have been up to? But perhaps you don’t really
+want to talk to them right now. So, what do you do? You stalk their social media accounts!
+
+KayPoh! is a desktop contact management application designed specifically for social users.
 You can use KayPoh! to store contact and social information information about people,
 and use it to view your contacts' social media feeds at any time.
 
 == Getting Started
 
-.  Ensure you have Java version `1.8.0_60` or later installed in your computer.
+=== Set Up
+.  Ensure that you have Java version `1.8.0_60` or later installed in your computer.
+Verify your java version link:https://www.java.com/en/download/installed.jsp[here].
 +
 [NOTE]
 Having any Java 8 version is not enough. +
-This app will not work with earlier versions of Java 8.
+This appplication will not work with earlier versions of Java 8. +
+Download the latest Java version link:https://www.java.com/en/download/manual.jsp[here].
 +
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Store the `addressbook.jar` file into a folder of your choice. This will be the `home` folder for the application.
+.  Double-click the file to start the application.
+
+=== First Usage
+
+.  Figure 1 below displays the application's starting display.
+
 +
 .User Interface of KayPoh!
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+
+.  Figure 2 below introduces the key panels of the application.
++
+.User Interface of KayPoh!
+image::Ui_with_markings.png[width="790"]
++
+.  Try it yourself! Type some of these commands in the command input box and press kbd:[Enter] to execute it:
 
 * *`list`* : lists all contacts
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to the link:#features[Features] section below for details of each command.
+.  Refer to the link:#features[Features] section below for the details of each command.
 
 == Using Commands
 
 To perform actions in KayPoh!, you will need to type a command into the command input box, followed by the kbd:[enter] key. +
 
-.User interface with command box highlighted in blue
+.Command box
 image::command-box.png[width="790"]
 
+// tag::command-syntax[]
 === Breaking down the command syntax
 Commands have the following format: `[red]#COMMAND_WORD# [blue]#-OPTION# [green]#PARAMETERS#` +
 
@@ -78,9 +96,11 @@ Example:
 
 * `[red]#find# [blue]#-tag# [green]#friends#` can be understood as "[red]#find contacts# [blue]#with the tag# [green]#friends#"
 
+// end::command-syntax[]
+
 === Representing a person as a parameter
 
-When using commands that involves managing contact information, you may be required to enter information about a person as a `[blue]#PARAMETER#`.
+When using commands that involve managing contact information, you may be required to enter information about a person as a `[blue]#PARAMETER#`.
 
 Each person stored in the address book has the following attributes:
 
@@ -111,16 +131,28 @@ Each person stored in the address book has the following attributes:
 ** More information on the supported social media types can be found in the <<social-media-integrations, Social Media Integrations>> section.
 ** A person can have multiple social media accounts, but can only have one for each social media platform
 
+* *Favorite* (optional)
+** Denote that a person is a favorite contact
+** Represented by the presence of the prefix `f/`
+** If the prefix is not present, then the person is assumed not to be a favorite contact
+
+* *Display Picture* (optional)
+** Represented with the prefix `dp/` followed by the path to the image to be used as the person's display picture
+** The specified image must be less than 1MB in size
+** If no image is specified, the default image will be used instead
+
 Example:
 
-* The parameter `n/John Doe p/81234567 a/123 Clementi Road, Blk 32, #01-01 e/johndoe@example.com t/friends t/school s/facebook john.doe10 s/instagram jdoe`
-represents a person with:
+* The parameter `n/John Doe p/81234567 a/123 Clementi Road, Blk 32, #01-01 e/johndoe@example.com t/friends t/school s/facebook john.doe10 s/instagram jdoe f/ dp//images/display.png`
+represents a person who has:
 ** The name `John Doe`,
 ** phone number `81234567`,
 ** address `123 Clementi Road, Blk 32, #01-01`,
 ** email address `johndoe@example.com`,
 ** tags `friends` and `school`,
-** a `facebook` account with the name `john.doe10` and an `instagram` account with the username `jdoe`.
+** a `facebook` account with the name `john.doe10` and an `instagram` account with the username `jdoe`,
+** been marked as a `favorite` contact,
+** the image at `/images/display.png` used as a display picture.
 
 == Features
 
@@ -152,7 +184,7 @@ Example:
 ==== Adding a person: `add`
 
 Adds a person to the address book. +
-Format: `add n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]... e/EMAIL a/ADDRESS [f/] [t/TAG]... [s/SOCIAL_PLATFORM USERNAME]...` +
+Format: `add n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]... e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]... [s/SOCIAL_PLATFORM USERNAME]...` +
 Alias: `a`
 
 ****
@@ -160,6 +192,7 @@ Alias: `a`
 Invalid phone numbers will not be added to the contact,
 and there must be at least one valid phone number entered. +
 * A person can be favorited by including the parameter `f/` +
+* A person can have a display photo imported from the location specified by `DISPLAY_PHOTO_FILE_PATH` [Since v1.5rc]
 * A person can have any number of tags (including zero) +
 * A person can have any number of social media accounts (including zero). [Since v1.2] +
 More information about representing social media accounts can be found in the <<social-media-integrations, Social Media Integrations>> section.
@@ -170,16 +203,17 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` +
 Adds a contact with the name `John Doe`, phone number `98765432`, email address `johnd@example.com`,
 address `John street, block 123, #01-01`.
-* `add n/Rob Cross p/92456877 p/64123456 e/rob@example.com a/Kent Ridge Drive 23 t/husband f/ s/facebook r.cross10` +
+* `add n/Rob Cross p/92456877 p/64123456 e/rob@example.com a/Kent Ridge Drive 23 t/husband f/ s/facebook r.cross10 dp/C:/Users/Seedu/Pictures/batman.png` +
 Adds a `favorite` contact with the name `Rob Cross`, phone numbers `92456877` and `64123456`, email address `rob@example.com`,
-address `Kent Ridge Drive 23`, tag `husband`, and a `Facebook` account with the username `r.cross10`.
+
+address `Kent Ridge Drive 23`, tag `husband`, a `Facebook` account with the username `r.cross10`, and adds a `display photo` imported from the location `C:/Users/Seedu/Pictures/batman.png`.
 // end::addperson[]
 
 // tag::editperson[]
 ==== Editing a person: `edit`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE]... [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [t/TAG]... [s/SOCIAL_PLATFORM USERNAME]...` +
+Format: `edit INDEX [n/NAME] [p/PHONE]... [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]... [s/SOCIAL_PLATFORM USERNAME]...` +
 Alias: `e`
 
 ****
@@ -187,6 +221,7 @@ Alias: `e`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * You can favorite a person by including the parameter `f/`, or unfavorite by including the parameter `uf/`. [Since v1.2] +
+* You can remove a person's display photo by including the parameter `dp/` without specifying any file path after it. [Since v1.5rc]
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by including the parameter `t/` without specifying any tags after it.
 * When editing social media accounts, the existing social media accounts will be removed i.e. adding social media accounts is not cumulative. [Since v1.2]
@@ -198,12 +233,12 @@ Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 s/instagram janedoe123 s/facebook jane.doe f/` +
-Makes the 2nd person a `favorite` contact, and edits the social media accounts to be
+* `edit 2 f/ dp/C:/Users/Seedu/Pictures/superman.png s/instagram janedoe123 s/facebook jane.doe` +
+Marks the 2nd person a `favorite` contact, changes the existing display photo to the new file specified by `C:/Users/Seedu/Pictures/superman.png` and edits the social media accounts to be
 a `Facebook` account with the username `jane.doe`,
 and an Instagram account with the username `janedoe123`.
-* `edit 3 n/Betsy Crower t/` +
-Edits the name of the 3rd person to be `Betsy Crower` and clears all existing tags.
+* `edit 3 n/Betsy Crower dp/ t/` +
+Edits the name of the 3rd person to be `Betsy Crower`, removes existing display photo and clears all existing tags.
 // end::editperson[]
 
 ==== Adding contact photos [Coming in v2.0]: `photo`
@@ -274,7 +309,6 @@ Unfavorites the 2nd and 4th person in the most recently displayed list.
 `unfav 1` +
 Unfavorites the first person in the list of contacts with the name `Betsy`.
 
-
 ==== Deleting a person: `delete`
 
 Deletes the specified person(s) from the address book. +
@@ -339,107 +373,152 @@ Format: `clear`
 
 ==== Listing persons: `list`
 
-Shows a specific list of persons based on user's specified option. +
-Format: `list [OPTION]` +
-Alias: `l`
+To have all your contacts displayed in the person list, use the `list` command.
 
-Options: +
+====
 
-* Default (no option specified) +
-Shows a list of all persons in the address book. +
-* `fav` [Since v1.3] +
-Shows a list of all favorite persons in the address book.
+Command format: `[red]#list#` +
 
-Example:
+* Listing all persons:
+`[red]#list#`
+* Listing all favorite persons [Since v1.2]:
+`[red]#list# [blue]#-fav#`
 
-* `list`
-* `list -fav` [Since v1.3] +
+Alias: `[red]#l#`
+====
+
+You should see the person list populated with all of your contacts after executing the command.
+
+.Person list populated with all contacts
+image::list-command-result.png[width="790"]
 
 // tag::select[]
 ==== Selecting a person: `select`
 
-Selects the person identified by the index number used in the last person listing. +
-Format: `select INDEX [SOCIAL_TYPE]` +
-Alias: `s`
+To view the social media feed of a contact, use the `select` command.
+====
+Command format: `[red]#select# [green]#INDEX [SOCIAL_MEDIA_PLATFORM]#` +
+Alias: `[red]#s#`
+====
 
-****
-* When a person is selected, one of his associated social media feeds will be displayed in the browser.
-* If a `SOCIAL_TYPE` is specified, that social media feed will be displayed. More information about representing social media types can be found in the <<social-media-integrations, Social Media Integrations>> section.
-* If no `SOCIAL_TYPE` is specified, an associated social media feed will be displayed, in the following order:
-** Instagram (if present)
-** Facebook (if present)
-** Google search of the person's name
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+* The [green]`INDEX` refers to the index number of the person to be stalked in the person list.
+* The [green]`SOCIAL_MEDIA_PLATFORM` identifies which social media account belonging to the person you wish to view.
+* If no [green]`SOCIAL_MEDIA_PLATFORM` is specified, the feed of a random social media account associated
+with the person will be displayed in the browser window. If there is no social media account associated with
+the person, a Google search of the person's name will be displayed instead.
 
-Examples:
+You should see the person's social media feed displayed in the browser window.
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book, and displays a social media feed in the browser.
-* `find Betsy` +
-`select 1 facebook` +
-Selects the 1st person in the results of the `find` command, and displays her Facebook feed in the browser.
+.Social media feed displayed in browser window
+image::stalk-command-result.png[width="790"]
+
+Example:
+
+* `[red]#select# [green]#1 facebook#` +
+Displays the Facebook account of the first person in the current person list
+
+.Common Mistakes
+|===
+|Incorrect |Correct
+
+|Input an `INDEX` that is invalid. +
+e.g. `-1`, `0.1`, `abc`
+|Ensure that the specified `INDEX` is a *positive integer* that is *smaller or equal to the total number of contacts in the person list*.
+
+|Input a `SOCIAL_MEDIA_PLATFORM` that the user does not have an associated account for. +
+e.g. If the first user in the person list does not have an instagram account, and the command `stalk 1 instagram` is entered.
+|Ensure that the selected user has an associated account for the `SOCIAL_MEDIA_PLATFORM` specified. The social media accounts associated with
+a user can be found in the person list.
+
+image:stalk-command-social-info.png[width="300"]
+|===
 // end::select[]
 
+// tag::find-by-tag[]
 [[find-by-tag]]
 ==== Finding persons: `find`
+To find contacts by some criteria, use the `find` command.
 
-Finds and displays a list of persons based on user's specified option. +
-Format `find [OPTION] KEYWORD [MORE_KEYWORDS]...` +
-Alias: `f`
+====
+Command format:
 
-Options: +
+* Finding by `name`:
+`[red]#find# [green]#KEYWORD [ADDITIONAL_KEYWORDS]...#`
+* Finding by `tag`:
+`[red]#find# [blue]#-tag# [green]#KEYWORD [ADDITIONAL_KEYWORDS]...#`
+* Finding `favorite` contacts [Coming in v2.0]:
+`[red]#find# [blue]#-fav#`
 
-* Default (no option specified) +
-Finds persons whose name contain any of the given keywords. +
-* `tag` [Since v1.3] +
-Finds persons who are associated with any of the given tags. +
+Alias: `[red]#f#` +
+====
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
+* Contacts that match *any* of the provided [green]`KEYWORDS` will be displayed in the person list.
+* The search is case insensitive. e.g `john` will match `John`.
+* The order of the [green]`KEYWORDS` does not matter. e.g. `John Doe` will match `Doe John`.
+* Only full words will be matched e.g. `Jo` will not match `John`.
+
+You should see the persons that meet the provided criteria displayed in the person list after executing the command.
+
+.Person list after finding contacts with the tag `friends`
+image::find-command-result.png[width="300"]
 
 Examples:
 
-* `find John` +
-Shows a list of persons with the names `john` and `John Doe`.
-* `find Betsy Tim John` +
-Shows a list of persons with names `Betsy`, `Tim`, or `John`.
-* `find -tag friends colleagues` +
-Shows a list of persons with tags `friends` or `colleagues`.
+* `[red]#find# [green]#John#` +
+Displays persons with the names `john` and `John Doe` in the person list.
+* `[red]#find# [green]#Betsy Tim John#` +
+Displays persons with names `Betsy`, `Tim`, or `John` in the person list.
+* `[red]#find# [blue]#-tag# [green]#friends colleagues#` +
+Displays persons with tags `friends` or `colleagues` in the person list.
+* `[red]#find# [blue]#-fav#` +
+Displays `favorite` contacts in the person list.
+// end::find-by-tag[]
 
+
+// tag::sort[]
 ==== Sorting the displayed list [Since v1.4]: `sort`
 
-Sorts the list of persons in the last displayed listing. +
-Format: `sort [OPTION]` +
+To sort the person list, use the `sort` command.
 
-Options: +
+====
+Command format:
 
-* Default (no option specified) +
-Sorts persons first based on their favorite status, then by their name in alphabetical order.
-* `name` +
-Sorts persons by their name in alphabetical order.
-* `recent` [Coming in v2.0] +
-Sorts persons by how recently they were last added, edited, or selected.
+* Default sort:
+`[red]#sort#`
+* Sorting by `name`:
+`[red]#sort# [blue]#-name#`
+* Sorting by `recency` [Coming in v2.0]:
+`[red]#sort# [blue]#-recent#`
+
+Alias: `[red]#sr#` +
+====
+
+* The default sort orders contacts first by their `favorite` status, then by their `name` in lexicographic order.
+* Sorting with the [blue]`name` option orders contacts by their `name` in lexicographic order.
+* Sorting with the [blue]`recent` option orders contacts by when they were last added, updated, or stalked.
+
+The person list should be sorted based on the specified option after executing the command.
+
+.Person list after executing a default sort
+image::sort-command-default-result.png[width="300"]
+
+.Person list after executing a sort by `name`
+image::sort-command-name-result.png[width="300"]
 
 Examples:
 
-* `list` +
-`sort` +
-lists all person in the address book, sorted first based on their favorite status, then by their name in alphabetical order.
-* `find bob` +
-`sort -recent` +
-lists all the person that contain the keyword `bob`, sorted based on when they were last accessed.
-
+* `[red]#list#` +
+`[red]#sort#` +
+Lists all person in the address book, sorted first based on their `favorite` status, then by their `name` in lexicographic order.
+* `[red]#find# [green]#john#` +
+`[red]#sort# [blue]#-recent#` +
+Lists all persons whose `names` contain the keyword `john`, sorted based on when they were last added, updated, or stalked.
+// end::sort[]
 
 [[social-media-integrations]]
 === Social Media Integrations [Since v1.2]
 
+// tag::representing-social-media-accounts[]
 ==== Representing Social Media Accounts
 
 Social media accounts are represented in the format `SOCIAL_TYPE USERNAME`.
@@ -455,75 +534,96 @@ Example:
 Represents the Facebook account with the username `johnd10`.
 * `ig damyth` +
 represents the Instagram account with the username `damyth`.
+// end::representing-social-media-accounts[]
 
+[[facebook-features]]
 ==== Facebook Integrations
 
-===== Connecting to Facebook [Since v1.2]: `facebook connect`
+// tag::facebookconnect[]
+===== Connecting to Facebook [Since v1.2]: `facebookconnect`
 
 Connects to your Facebook account. +
-Format: `facebook connect`
+Command Format: `[red]#facebookconnect#`
 
 ****
+* First ensure that you are added as a test user for the Facebook Application. Add yourself as a test user link:https://developers.facebook.com/apps/131555220900267/roles/[here].
 * Launches a Facebook authorization page in the browser
 * Key in your credentials to connect to your Facebook account
-* Once your Facebook account has been connected, you can <<facebook-import-contact, import contacts from facebook>> and
-<<facebook-make-post, post to your Facebook wall>>.
+* Once your Facebook account has been connected, you can use all the other Facebook features.
 ****
+// end::facebookconnect[]
 
-[[facebook-import-contact]]
-===== Importing a contact from Facebook [Coming in v2.0]:
-
-Imports a Facebook friend as a contact. +
-Format `facebook import USERNAME`
-
-****
-* Your facebook account must be connected to use this feature.
-* If you have not yet connected your Facebook account, the authorization page will automatically be launched in
-the browser for you to connect to your account.
-****
-
-===== Importing all Facebook friends [Coming in v2.0]:
-Imports all your Facebook friends as contacts. +
-Format `facebook importall`
-
-****
-* Your facebook account must be connected to use this feature.
-* If you have not yet connected your Facebook account, the authorization page will automatically be launched in
-the browser for you to connect to your account.
-****
-
-[[facebook-make-post]]
-===== Posting to Facebook [Since v1.2]: `facebook post`
+// tag::facebookpost[]
+[[facebookpost]]
+=====  Posting a status to Facebook [Since v1.3]: `facebookpost`
 
 Posts a status to your Facebook wall. +
-Format: `facebook post STATUS`
+Command Format `[red]#facebookpost# [green]#STATUS#`
 
 ****
-* Your facebook account must be connected to use this feature.
-* If you have not yet connected your Facebook account, the authorization page will automatically be launched in
-the browser for you to connect to your account.
+* Your facebook account must be connected to use this feature. If not, the authorization page will automatically be launched in
+the browser.
+* Your status will then be posted to Facebook.
 ****
 
 Examples:
 
-* `facebook post hello world!` +
+* `facebookpost hello world!` +
 Posts the status 'hello world!' to your Facebook wall.
+// end::facebookpost[]
 
-===== Posting to Facebook [Since v1.4]: `facebook link`
+// tag::facebooklink[]
+[[facebooklink]]
+=====  Sharing a Link to Facebook [Since v1.4]: `facebooklink`
 
-Posts a link to your Facebook wall. +
-Format: `facebook link LINK_URL`
+Shares a link to your Facebook wall. +
+Command Format `[red]#facebooklink# [green]#URL#`
 
 ****
-* Your facebook account must be connected to use this feature.
-* If you have not yet connected your Facebook account, the authorization page will automatically be launched in
-the browser for you to connect to your account.
+* Your facebook account must be connected to use this feature. If not, the authorization page will automatically be launched in
+the browser.
+* Your URL will then be shared to Facebook.
 ****
 
 Examples:
 
 * `facebook post https://www.google.com` +
 Posts the link to `https://www.google.com` to your Facebook wall.
+// end::facebooklink[]
+
+// tag::facebookadd[]
+[[facebookadd]]
+=====  Adding a contact from Facebook [Since v1.5]: `facebookadd`
+
+Imports a Facebook user as a contact. +
+Command Format `[red]#facebookadd# [green]#USERNAME#`
+
+****
+* Your facebook account must be connected to use this feature. If not, the authorization page will automatically be launched in
+the browser.
+* The Facebook user will then be added as a contact.
+****
+
+
+Examples:
+
+* `facebookadd barack obama` +
+Imports the facebook user 'Barack Obama' to your contacts.
+// end::facebookadd[]
+
+// tag::facebookaddallfriends[]
+[[facebookaddallfriends]]
+===== Adding all your Facebook friends [Since v1.5]: `facebookaddallfriends`
+
+Imports all your Facebook friends as contacts. (Current maximum is set at 30 friends) +
+Command Format `[red]#facebookaddallfriends#`
+
+****
+* Your facebook account must be connected to use this feature. If not, the authorization page will automatically be launched in
+the browser.
+* All your valid facebook friends will then be added as a contact.
+****
+// end::facebookaddallfriends[]
 
 === Managing Contact Data
 

@@ -2,11 +2,12 @@ package seedu.address.model.person;
 
 //@@author keithsoc
 /**
- * Represents a Favorite status in the address book.
+ * Represents a Person's favorite status in the address book.
+ * Guarantees: immutable.
  */
 public class Favorite {
 
-    public static final String MESSAGE_FAVORITE_CONSTRAINTS = "Only prefix is required.";
+    public static final String MESSAGE_FAVORITE_CONSTRAINTS = "Only prefix is required for favorite status.";
     private boolean value;
 
     /**

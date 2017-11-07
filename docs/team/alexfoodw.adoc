@@ -1,0 +1,91 @@
+= Alex Foo - Project Portfolio
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Project: KayPoh!
+KayPoh! is a desktop address book application used for __. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.
+
+*Code contributed*: [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/alexfoodw.md[Functional code]] [https://github.com[Test code]] {give links to collated code files}
+
+=== Enhancement Added: `facebookconnect`
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=facebookconnect]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: `facebookpost`
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=facebookpost]
+
+#End of Extract#
+
+---
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=facebook]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: `facebooklink`
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=facebooklink]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: `facebookadd`
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=facebookadd]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: `facebookaddallfriends`
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=facebookaddallfriends]
+
+#End of Extract#
+
+---
+
+=== Enhancement Proposed: Add command `twitterpost`
+* Allows the user to directly post to twitter from within Kaypoh!
+
+=== Enhancement Proposed: Add command `twitteradd`
+* Allows the user to add followers and following to Kaypoh!

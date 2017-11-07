@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,8 +10,10 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DisplayPhoto;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favorite;
+import seedu.address.model.person.LastAccessDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -31,15 +34,16 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
-
-    //@@author keithsoc
     @XmlElement
     private boolean favorite;
-    //@@author
+    @XmlElement
+    private String displayPhoto;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
     @XmlElement
     private List<XmlAdaptedSocialInfo> addedSocialInfos = new ArrayList<>();
+    @XmlElement(required = true)
+    private long lastAccessDateEpoch;
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -59,6 +63,7 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         favorite = source.getFavorite().isFavorite();
+        displayPhoto = source.getDisplayPhoto().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -67,6 +72,8 @@ public class XmlAdaptedPerson {
         for (SocialInfo socialInfo : source.getSocialInfos()) {
             addedSocialInfos.add(new XmlAdaptedSocialInfo(socialInfo));
         }
+        LastAccessDate lastAccessDate = source.getLastAccessDate();
+        lastAccessDateEpoch = lastAccessDate.getDate().getTime();
     }
 
     /**
@@ -88,8 +95,10 @@ public class XmlAdaptedPerson {
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final Favorite favorite = new Favorite(this.favorite);
+        final DisplayPhoto displayPhoto = new DisplayPhoto(this.displayPhoto);
         final Set<Tag> tags = new HashSet<>(personTags);
         final Set<SocialInfo> socialInfos = new HashSet<>(personSocialInfos);
-        return new Person(name, phone, email, address, favorite, tags, socialInfos);
+        final LastAccessDate lastAccessDate = new LastAccessDate(new Date(lastAccessDateEpoch));
+        return new Person(name, phone, email, address, favorite, displayPhoto, tags, socialInfos, lastAccessDate);
     }
 }

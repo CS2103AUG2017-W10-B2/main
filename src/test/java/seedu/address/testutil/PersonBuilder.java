@@ -3,12 +3,15 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.SocialInfoMapping.parseSocialInfo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DisplayPhoto;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favorite;
+import seedu.address.model.person.LastAccessDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -27,6 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final boolean DEFAULT_FAVORITE = true;
+    public static final String DEFAULT_DISPLAY_PHOTO = null;
     public static final String DEFAULT_TAGS = "friends";
     public static final SocialInfo DEFAULT_SOCIAL =
             new SocialInfo("facebook", "default", "https://facebook.com/default");
@@ -40,10 +44,11 @@ public class PersonBuilder {
             Email defaultEmail = new Email(DEFAULT_EMAIL);
             Address defaultAddress = new Address(DEFAULT_ADDRESS);
             Favorite defaultFavoriteStatus = new Favorite(DEFAULT_FAVORITE);
+            DisplayPhoto defaultDisplayPhoto = new DisplayPhoto(DEFAULT_DISPLAY_PHOTO);
             Set<Tag> defaultTags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
             Set<SocialInfo> defaultSocialInfos = SampleDataUtil.getSocialInfoSet(DEFAULT_SOCIAL);
             this.person = new Person(defaultName, defaultPhone, defaultEmail, defaultAddress,
-                    defaultFavoriteStatus, defaultTags, defaultSocialInfos);
+                    defaultFavoriteStatus, defaultDisplayPhoto, defaultTags, defaultSocialInfos);
         } catch (IllegalValueException ive) {
             throw new AssertionError("Default person's values are invalid.");
         }
@@ -101,6 +106,17 @@ public class PersonBuilder {
         }
         return this;
     }
+
+    /**
+     * Sets the {@code LastAccessDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastAccessDate(Date date) {
+        LastAccessDate lastAccessDate = new LastAccessDate(date);
+        this.person.setLastAccessDate(lastAccessDate);
+
+        return this;
+
+    }
     //@@author
 
     /**
@@ -145,6 +161,18 @@ public class PersonBuilder {
      */
     public PersonBuilder withFavorite(boolean favorite) {
         this.person.setFavorite(new Favorite(favorite));
+        return this;
+    }
+
+    /**
+     * Sets the {@code DisplayPhoto} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDisplayPhoto(String displayPhoto) {
+        try {
+            this.person.setDisplayPhoto(new DisplayPhoto(displayPhoto));
+        } catch (IllegalValueException ive) {
+            throw new IllegalArgumentException("display photo file does not exist or it exceeded maximum size of 1MB");
+        }
         return this;
     }
     //@@author

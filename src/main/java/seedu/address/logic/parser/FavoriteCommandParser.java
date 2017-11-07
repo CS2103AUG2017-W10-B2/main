@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -22,6 +23,8 @@ public class FavoriteCommandParser implements Parser<FavoriteCommand> {
     public FavoriteCommand parse(String args) throws ParseException {
         try {
             List<Index> indexList = ParserUtil.parseMultipleIndexes(args);
+            // Sorts indexes in ascending order
+            Collections.sort(indexList);
             return new FavoriteCommand(indexList);
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));

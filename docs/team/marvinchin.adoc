@@ -1,0 +1,146 @@
+= Marvin Chin - Project Portfolio
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Project: KayPoh!
+KayPoh! is a desktop address book application with social media integrations.
+The user interacts with the application using a command line interface, and it has a GUI created with JavaFX.
+It is written in Java and has about 14k LoC.
+
+*Code contributed*: [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/marvinchin.md[Functional code]] [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/marvinchin.md[Test code]]
+
+=== Enhancement Added: Sort Command
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=sort]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Sorting keeps the displayed person list in a predictable order, allowing the user to easily
+find his contacts.
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=sort]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: Introducing Options to Command Syntax
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=command-syntax]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Updated command syntax allows multiple similar commands to share a single `COMMAND_WORD` while providing
+a consistent and intuitive way for the user to specify which functionality of the `COMMAND` is to be executed.
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=command-syntax]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: Adding Social Media Info to Person Model
+
+==== External behavior
+
+Users can add social media accounts to their contacts using the `add` and `edit` commands. These social media accounts
+are then displayed in the browser when the contact is selected with the `select` command.
+
+When passed as a parameter to the `add` or `edit` commands, social media accounts are represented in the following manner:
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=representing-social-media-accounts]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Updated command syntax allows multiple similar commands to share a single `COMMAND_WORD` while providing
+a consistent and intuitive way for the user to specify which functionality of the `COMMAND` is to be executed.
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=social-media-accounts]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: Finding by Tags
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=find-by-tag]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Allowing the user to search for contacts by tag allows the user to easily find related contacts.
+
+
+=== Enhancement Added: Deleting by Tags
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=delete-by-tag]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Deleting by tags make it easy for the user to delete contacts that were added for a temporary purpose.
+
+---
+
+=== Other contributions
+
+* Set up Travis and Codacy for the project
+* Reported bugs in other group's projects [https://github.com/CS2103AUG2017-W09-B1/main/issues?utf8=✓&q=is%3Aissue%20involves%3Amarvinchin[Issues reported in W09-B1's UniFy]]
+* Helped resolve issues faced by other classmates [https://github.com/nus-cs2103-AY1718S1/forum/issues?utf8=✓&q=is%3Aissue%20involves%3Amarvinchin[Contributions to forum]][https://nus-cs2103.slack.com/archives/C6JMW6SSZ/p1508508497000291?thread_ts=1508476015.000144&cid=C6JMW6SSZ[Contributions to queries on Slack]]

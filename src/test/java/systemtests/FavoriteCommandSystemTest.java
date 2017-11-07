@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_KUNZ;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,13 +44,14 @@ public class FavoriteCommandSystemTest extends AddressBookSystemTest {
         Model expectedModel = getModel();
         String command = "     " + FavoriteCommand.COMMAND_WORD + "      " + INDEX_THIRD_PERSON.getOneBased()
                 + "       " + INDEX_FOURTH_PERSON.getOneBased() + "        " + INDEX_FIFTH_PERSON.getOneBased();
+
         List<Index> indexList = Arrays.asList(INDEX_THIRD_PERSON, INDEX_FOURTH_PERSON, INDEX_FIFTH_PERSON);
         StringBuilder names = new StringBuilder();
         for (Index index : indexList) {
             ReadOnlyPerson favoritedPerson = favoritePerson(expectedModel, index);
-            names.append("\n★ ").append(favoritedPerson.getName().toString());
+            names.append("\n\t★ ").append(favoritedPerson.getName().toString());
         }
-        String expectedResultMessage = String.format(MESSAGE_FAVORITE_PERSON_SUCCESS, names);
+        String expectedResultMessage = MESSAGE_FAVORITE_PERSON_SUCCESS + names;
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: undo favoriting the 3rd, 4th & 5th person in the list -> 3rd, 4th & 5th person unfavorited */
@@ -66,31 +67,30 @@ public class FavoriteCommandSystemTest extends AddressBookSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
-        /* --------------- Performing favorite operation while a filtered list is being shown ------------------- */
+        /* ---------------- Performing favorite operation while a filtered list is being shown ------------------- */
 
         /* Case: filtered person list, favorite index within bounds of address book and person list -> favorited */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showPersonsWithName(KEYWORD_MATCHING_KUNZ);
         expectedModel = getModel();
         Index index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         command = FavoriteCommand.COMMAND_WORD + " " + index.getOneBased();
         ReadOnlyPerson favoritedPerson = favoritePerson(expectedModel, index);
-        expectedResultMessage = String.format(
-                MESSAGE_FAVORITE_PERSON_SUCCESS, "\n★ " + favoritedPerson.getName().toString());
+        expectedResultMessage = MESSAGE_FAVORITE_PERSON_SUCCESS + "\n\t★ " + favoritedPerson.getName().toString();
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /*
          * Case: filtered person list, favorite index within bounds of address book but out of bounds of person list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showPersonsWithName(KEYWORD_MATCHING_KUNZ);
         int invalidIndex = getModel().getAddressBook().getPersonList().size();
         command = FavoriteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* ------------------ Performing favorite operation while a person card is selected --------------------- */
+        /* ------------------- Performing favorite operation while a person card is selected ---------------------- */
 
-        /* Case: favorite the selected person -> person list panel selects the person before the favorited person */
+        /* Case: favorite the selected person -> person list panel selects the person before the favoriting */
         showAllPersons();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
@@ -98,11 +98,10 @@ public class FavoriteCommandSystemTest extends AddressBookSystemTest {
         selectPerson(selectedIndex);
         command = FavoriteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         favoritedPerson = favoritePerson(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(
-                MESSAGE_FAVORITE_PERSON_SUCCESS, "\n★ " + favoritedPerson.getName().toString());
+        expectedResultMessage = MESSAGE_FAVORITE_PERSON_SUCCESS + "\n\t★ " + favoritedPerson.getName().toString();
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
-        /* ------------------------------ Performing invalid favorite operation --------------------------------- */
+        /* ------------------------------- Performing invalid favorite operation ---------------------------------- */
 
         /* Case: multiple invalid indexes (0 0 0) -> rejected */
         command = FavoriteCommand.COMMAND_WORD + " 0 0 0";

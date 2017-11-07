@@ -2,7 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.SocialInfoMapping.FACEBOOK_IDENTIFIER;
+import static seedu.address.logic.parser.SocialInfoMapping.FACEBOOK_IDENTIFIER_ALIAS;
 import static seedu.address.logic.parser.SocialInfoMapping.INSTAGRAM_IDENTIFIER;
+import static seedu.address.logic.parser.SocialInfoMapping.INSTAGRAM_IDENTIFIER_ALIAS;
+import static seedu.address.logic.parser.SocialInfoMapping.getSocialType;
 import static seedu.address.logic.parser.SocialInfoMapping.parseSocialInfo;
 
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DisplayPhoto;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favorite;
 import seedu.address.model.person.Name;
@@ -150,6 +154,16 @@ public class ParserUtil {
             return Optional.empty();
         }
     }
+
+    /**
+     * Parses a {@code Optional<String> displayPhoto} into an {@code Optional<DisplayPhoto>}
+     * if {@code displayPhoto} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<DisplayPhoto> parseDisplayPhoto(Optional<String> displayPhoto) throws IllegalValueException {
+        return displayPhoto.isPresent()
+                ? Optional.of(new DisplayPhoto(displayPhoto.get())) : Optional.empty();
+    }
     //@@author
 
     //@@author sarahnzx
@@ -158,10 +172,11 @@ public class ParserUtil {
      */
     public static Optional<String> parseSelect(String arg) throws IllegalValueException {
         requireNonNull(arg);
-        if (!(arg.equals(FACEBOOK_IDENTIFIER) || arg.equals(INSTAGRAM_IDENTIFIER))) {
+        if (!(arg.equals(FACEBOOK_IDENTIFIER) || arg.equals(INSTAGRAM_IDENTIFIER)
+                || arg.equals(FACEBOOK_IDENTIFIER_ALIAS) || arg.equals(INSTAGRAM_IDENTIFIER_ALIAS))) {
             throw new IllegalValueException(MESSAGE_INVALID_SOCIAL_TYPE);
         }
-        return Optional.of(arg);
+        return Optional.of(getSocialType(arg));
     }
     //@@author
 

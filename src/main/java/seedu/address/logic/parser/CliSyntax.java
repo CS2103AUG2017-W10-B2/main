@@ -13,6 +13,7 @@ public class CliSyntax {
     //@@author keithsoc
     public static final Prefix PREFIX_FAV = new Prefix("f/");
     public static final Prefix PREFIX_UNFAV = new Prefix("uf/");
+    public static final Prefix PREFIX_DISPLAY_PHOTO = new Prefix("dp/");
     //@@author
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_SOCIAL = new Prefix("s/");

@@ -248,7 +248,7 @@ public class AddressBookParserTest {
                 UnFavoriteCommand.COMMAND_WORD + " "
                         + INDEX_FIRST_PERSON.getOneBased() + " "
                         + INDEX_SECOND_PERSON.getOneBased());
-        assertEquals(new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON)), command);
+        assertEquals(new UnFavoriteCommand(Arrays.asList(INDEX_SECOND_PERSON, INDEX_FIRST_PERSON)), command);
     }
     //@@author
 

@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPLAY_PHOTO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAV;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -16,6 +17,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DisplayPhoto;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favorite;
 import seedu.address.model.person.Name;
@@ -37,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_FAV, PREFIX_TAG, PREFIX_SOCIAL);
+                PREFIX_ADDRESS, PREFIX_FAV, PREFIX_DISPLAY_PHOTO, PREFIX_TAG, PREFIX_SOCIAL);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -52,10 +54,15 @@ public class AddCommandParser implements Parser<AddCommand> {
             if (ParserUtil.parseFavorite(argMultimap, PREFIX_FAV, null).isPresent()) {
                 favorite = new Favorite(true);
             }
+            DisplayPhoto displayPhoto = new DisplayPhoto(null);
+            if (argMultimap.isPrefixPresent(PREFIX_DISPLAY_PHOTO)) {
+                displayPhoto = ParserUtil.parseDisplayPhoto(argMultimap.getValue(PREFIX_DISPLAY_PHOTO)).get();
+            }
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             Set<SocialInfo> socialInfoList = ParserUtil.parseSocialInfos(argMultimap.getAllValues(PREFIX_SOCIAL));
 
-            ReadOnlyPerson person = new Person(name, phone, email, address, favorite, tagList, socialInfoList);
+            ReadOnlyPerson person = new Person(
+                    name, phone, email, address, favorite, displayPhoto, tagList, socialInfoList);
             return new AddCommand(person);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);

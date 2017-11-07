@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPLAY_PHOTO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAV;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_FAV, PREFIX_UNFAV, PREFIX_TAG, PREFIX_SOCIAL);
+                PREFIX_ADDRESS, PREFIX_FAV, PREFIX_DISPLAY_PHOTO, PREFIX_UNFAV, PREFIX_TAG, PREFIX_SOCIAL);
 
         Index index;
 
@@ -57,6 +58,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             ParserUtil.parseFavorite(argMultimap,
                     PREFIX_FAV,
                     PREFIX_UNFAV).ifPresent(editPersonDescriptor::setFavorite);
+            ParserUtil.parseDisplayPhoto(
+                    argMultimap.getValue(PREFIX_DISPLAY_PHOTO)).ifPresent(editPersonDescriptor::setDisplayPhoto);
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
             parseSocialInfosForEdit(argMultimap.getAllValues(PREFIX_SOCIAL))
                     .ifPresent(editPersonDescriptor::setSocialInfos);

@@ -11,8 +11,8 @@ public class SocialInfoMapping {
 
     public static final String FACEBOOK_IDENTIFIER = "facebook";
     public static final String INSTAGRAM_IDENTIFIER = "instagram";
-    private static final String FACEBOOK_IDENTIFIER_ALIAS = "fb";
-    private static final String INSTAGRAM_IDENTIFIER_ALIAS = "ig";
+    public static final String FACEBOOK_IDENTIFIER_ALIAS = "fb";
+    public static final String INSTAGRAM_IDENTIFIER_ALIAS = "ig";
 
     private static final int SOCIAL_TYPE_INDEX = 0;
     private static final int SOCIAL_USERNAME_INDEX = 1;
@@ -45,6 +45,18 @@ public class SocialInfoMapping {
 
     }
 
+    //@@author sarahnzx
+    public static String getSocialType(String socialType) throws IllegalValueException {
+        if (socialType.equals(FACEBOOK_IDENTIFIER) || socialType.equals(FACEBOOK_IDENTIFIER_ALIAS)) {
+            return FACEBOOK_IDENTIFIER;
+        } else if (socialType.equals(INSTAGRAM_IDENTIFIER) || socialType.equals(INSTAGRAM_IDENTIFIER_ALIAS)) {
+            return INSTAGRAM_IDENTIFIER;
+        } else {
+            throw new IllegalValueException(UNRECOGNIZED_SOCIAL_TYPE_MESSAGE);
+        }
+    }
+
+    //@@author marvinchin
     private static boolean isFacebookInfo(String[] splitRawSocialInfo) {
         String trimmedSocialType = splitRawSocialInfo[SOCIAL_TYPE_INDEX].trim();
         return trimmedSocialType.equals(FACEBOOK_IDENTIFIER) || trimmedSocialType.equals(FACEBOOK_IDENTIFIER_ALIAS);

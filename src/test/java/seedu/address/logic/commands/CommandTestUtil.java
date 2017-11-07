@@ -19,9 +19,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.TagsContainKeywordsPredicate;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -64,6 +68,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_FAV_DESC = " " + PREFIX_FAV + "123abc"; // string after prefix not allowed in fav
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String TEST_TAG = "testtagshouldbeunused1234567890";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
@@ -134,6 +140,28 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assert model.getFilteredPersonList().size() == 1;
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the first n persons in the {@code model}'s address book.
+     */
+    public static void showSomePersonsOnly(Model model, int numPersons) {
+        for (int i = 0; i < numPersons; i++) {
+            ReadOnlyPerson person = model.getAddressBook().getPersonList().get(i);
+            Person personWithTag = new PersonBuilder(person).withTags(TEST_TAG).build();
+            try {
+                model.updatePerson(person, personWithTag);
+            } catch (DuplicatePersonException dpe) {
+                assert false : "There should not be duplicate persons";
+            } catch (PersonNotFoundException pnfe) {
+                assert false : "Person should not be missing";
+            }
+
+        }
+
+        model.updateFilteredPersonList(new TagsContainKeywordsPredicate(Arrays.asList(TEST_TAG)));
+        assert model.getFilteredPersonList().size() == numPersons
+                : "Filtered persons list should have the same number of persons as defined in the input";
     }
 
     /**

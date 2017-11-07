@@ -7,6 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DisplayPhoto;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favorite;
 import seedu.address.model.person.Name;
@@ -28,6 +29,7 @@ public class SampleDataUtil {
                     new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
                     new Favorite(true),
+                    new DisplayPhoto(DisplayPhoto.SAMPLE_PHOTO_ALEX),
                     getTagSet("friends"),
                     getSocialInfoSet(
                             new SocialInfo("facebook", "alex", "https://facebook.com/alex")));
@@ -37,6 +39,7 @@ public class SampleDataUtil {
                     new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new Favorite(false),
+                    new DisplayPhoto(null),
                     getTagSet("colleagues", "friends"),
                     getSocialInfoSet(
                             new SocialInfo("facebook", "bernice", "https://facebook.com/bernice"),
@@ -47,6 +50,7 @@ public class SampleDataUtil {
                     new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new Favorite(false),
+                    new DisplayPhoto(null),
                     getTagSet("neighbours"),
                     getSocialInfoSet());
             Person david = new Person(
@@ -55,6 +59,7 @@ public class SampleDataUtil {
                     new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     new Favorite(true),
+                    new DisplayPhoto(null),
                     getTagSet("family"),
                     getSocialInfoSet());
             Person irfan = new Person(
@@ -63,6 +68,7 @@ public class SampleDataUtil {
                     new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"),
                     new Favorite(false),
+                    new DisplayPhoto(null),
                     getTagSet("classmates"),
                     getSocialInfoSet());
             Person roy = new Person(
@@ -71,6 +77,7 @@ public class SampleDataUtil {
                     new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
                     new Favorite(false),
+                    new DisplayPhoto(null),
                     getTagSet("colleagues"),
                     getSocialInfoSet());
 
