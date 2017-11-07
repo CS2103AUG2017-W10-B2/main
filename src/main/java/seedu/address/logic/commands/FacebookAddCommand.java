@@ -45,7 +45,8 @@ public class FacebookAddCommand extends UndoableCommand {
     public static final String MESSAGE_FACEBOOK_ADD_ERROR = "Error with Facebook API call.";
     public static final String MESSAGE_FACEBOOK_ADD_PERSON_ERROR = "Error with creating Person Object";
 
-    private static String userName = "";
+    private static String userName;
+    private String name;
     private String toAddName;
     private Person toAdd;
 
@@ -54,7 +55,7 @@ public class FacebookAddCommand extends UndoableCommand {
      * @param trimmedArgs
      */
     public FacebookAddCommand(String trimmedArgs) {
-        userName = trimmedArgs;
+        name = trimmedArgs;
     }
 
     /**
@@ -113,6 +114,7 @@ public class FacebookAddCommand extends UndoableCommand {
 
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
+        userName = name;
         if (!FacebookConnectCommand.isAuthenticated()) {
             BrowserPanel.setProcessType(COMMAND_ALIAS);
             BrowserPanel.setTrimmedArgs(userName);
