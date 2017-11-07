@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Sarah Ng Zhao Xian - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Sarah Ng Zhao Xian - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-addressbook-level-4"><a class="link" href="#project-addressbook-level-4">Project: AddressBook - Level 4</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>KayPoh! is a desktop address book application with social media integrations. The user interacts with the application using a command line interface, and it has a GUI created with JavaFX. It is written in Java and has about 14k LoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/sarahnzx.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/sarahnzx.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-delete-multiple-contacts"><a class="link" href="#enhancement-added-delete-multiple-contacts">Enhancement Added: Delete multiple contacts</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="sect4">
+<h5 id="deleting-persons-by-index-default"><a class="link" href="#deleting-persons-by-index-default">Deleting persons by index (default):</a></h5>
+<div class="paragraph">
+<p>Deletes person(s) specified by their indexes in the last displayed list.
+Format: <code>delete INDEX [ADDITIONAL_INDEXES]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>More than one person can be deleted in the same command by specifying additional indexes. [Since v1.2]</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete 2 3</code><br>
+Deletes the 2nd and 3rd persons in the address book.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>delete 1</code><br>
+Deletes the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>The current design only allows users to delete one contact at a time. The user may want to delete many contacts and running the delete command multiple times can be a hassle. Thus there is a need to make the delete  command more efficient so as to allow users to delete multiple contacts with just one command.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p>A <code>DeleteCommand</code> is changed to store an <code>ArrayList</code> of <code>Index</code> instead of just one <code>Index</code>. The multiple <code>Index</code> objects can be used to delete multiple contacts, and also extract the deleted contacts in String form.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-allow-multiple-phone-number-fields"><a class="link" href="#enhancement-added-allow-multiple-phone-number-fields">Enhancement Added: Allow multiple phone number fields</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a person: <code>add</code></a></h4>
+<div class="paragraph">
+<p>Adds a person to the address book.<br>
+Format: <code>add n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]&#8230;&#8203; e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</code><br>
+Alias: <code>a</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>A person can have more than one phone number (at least one). [Since v1.2]<br>
+Invalid phone numbers will not be added to the contact,
+and there must be at least one valid phone number entered.<br></p>
+</li>
+<li>
+<p>A person can be favorited by including the parameter <code>f/</code><br></p>
+</li>
+<li>
+<p>A person can have a display photo imported from the location specified by <code>DISPLAY_PHOTO_FILE_PATH</code> [Since v1.5rc]</p>
+</li>
+<li>
+<p>A person can have any number of tags (including zero)<br></p>
+</li>
+<li>
+<p>A person can have any number of social media accounts (including zero). [Since v1.2]<br>
+More information about representing social media accounts can be found in the <a href="#social-media-integrations">Social Media Integrations</a> section.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code><br>
+Adds a contact with the name <code>John Doe</code>, phone number <code>98765432</code>, email address <code>johnd@example.com</code>,
+address <code>John street, block 123, #01-01</code>.</p>
+</li>
+<li>
+<p><code>add n/Rob Cross p/92456877 p/64123456 e/rob@example.com a/Kent Ridge Drive 23 t/husband f/ s/facebook r.cross10 dp/C:/Users/Seedu/Pictures/batman.png</code><br>
+Adds a <code>favorite</code> contact with the name <code>Rob Cross</code>, phone numbers <code>92456877</code> and <code>64123456</code>, email address <code>rob@example.com</code>,
+address <code>Kent Ridge Drive 23</code>, tag <code>husband</code>, a <code>Facebook</code> account with the username <code>r.cross10</code>, and adds a <code>display photo</code> imported from the location <code>C:/Users/Seedu/Pictures/batman.png</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">Editing a person: <code>edit</code></a></h4>
+<div class="paragraph">
+<p>Edits an existing person in the address book.<br>
+Format: <code>edit INDEX [n/NAME] [p/PHONE]&#8230;&#8203; [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</code><br>
+Alias: <code>e</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>You can favorite a person by including the parameter <code>f/</code>, or unfavorite by including the parameter <code>uf/</code>. [Since v1.2]<br></p>
+</li>
+<li>
+<p>You can remove a person&#8217;s display photo by including the parameter <code>dp/</code> without specifying any file path after it. [Since v1.5rc]</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can remove all the person&#8217;s tags by including the parameter <code>t/</code> without specifying any tags after it.</p>
+</li>
+<li>
+<p>When editing social media accounts, the existing social media accounts will be removed i.e. adding social media accounts is not cumulative. [Since v1.2]</p>
+</li>
+<li>
+<p>You can remove all the person&#8217;s social media accounts by including the parameter <code>s/</code> without specifying any social media accounts after it.</p>
+</li>
+<li>
+<p>More information about representing social media accounts can be found in the <a href="#social-media-integrations">Social Media Integrations</a> section.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
+Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>edit 2 f/ dp/C:/Users/Seedu/Pictures/superman.png s/instagram janedoe123 s/facebook jane.doe</code><br>
+Marks the 2nd person a <code>favorite</code> contact, changes the existing display photo to the new file specified by <code>C:/Users/Seedu/Pictures/superman.png</code> and edits the social media accounts to be
+a <code>Facebook</code> account with the username <code>jane.doe</code>,
+and an Instagram account with the username <code>janedoe123</code>.</p>
+</li>
+<li>
+<p><code>edit 3 n/Betsy Crower dp/ t/</code><br>
+Edits the name of the 3rd person to be <code>Betsy Crower</code>, removes existing display photo and clears all existing tags.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>The current design only allows users to store one phone number for a contact. However, most people have more than one phone number, for example, handphone numbers, home phone numbers and office numbers. Thus users may need to store more than one phone number for a contact.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="multiple-fields"><a class="link" href="#multiple-fields">Multiple Fields</a></h3>
+<div class="paragraph">
+<p>When an <code>AddCommandParser</code> or <code>EditCommandParser</code> is used to parse a command, an <code>ArgumentMultimap</code> object is created which contains a hashmap mapping the prefixes to a list of their respective arguments.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ArgumentMultimap</code> class has a <code>getValue</code> method and a <code>getMultipleValues</code> method. If there are multiple strings passed as arguments to the prefix, the <code>getValue</code> method returns only the last string in the list, while the <code>getMultipleValues</code> returns a concatenation of all the strings in the list.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ParserUtil</code> class has various parsing methods, such as <code>parseName</code> and <code>parsePhone</code>. The method <code>parseName</code> returns a <code>Name</code> object wrapped in the <code>Optional</code> class and the method returns a <code>Phone</code> object wrapped in the <code>Optional</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>parsePhone</code> method in the <code>ParserUtil</code> class calls the <code>getMultipleValues</code> method of the <code>ArgumentMultimap</code> class instead of the <code>getValue</code> method called by the other parsers. This allows multiple phone numbers to be stored in a <code>Phone</code> object.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Display of the multiple phone numbers<br>
+<strong>Alternative 1 (current choice):</strong> Insert a newline character ("\n") between different phone numbers.<br>
+<strong>Pros:</strong> Easier to see the different phone numbers.<br>
+<strong>Cons:</strong> Less flexibility in adding multiple phone numbers (cannot type <code>p/12345 56789</code>).<br>
+<strong>Alternative 2:</strong> Insert a space character (" ") between different phone numbers.<br>
+<strong>Pros:</strong> More flexibility in adding multiple phone numbers. Can type type <code>p/12345 56789</code> to add the two phone numbers with only one "p/" prefix.<br>
+<strong>Cons:</strong> Harder to see the different phone numbers, makes the display more cluttered.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Initialising of <code>Phone</code> object<br>
+<strong>Alternative 1 (current choice):</strong> Constructor of <code>Phone</code> takes in a String as parameter, modify current constructor.<br>
+<strong>Pros:</strong> No need to create a new method.<br>
+<strong>Cons:</strong> Not so easy to manipulate the string and split the multiple phone numbers.<br>
+<strong>Alternative 2:</strong> Create a new constructor for <code>Phone</code> that takes in a List&lt;String&gt; as parameter.<br>
+<strong>Pros:</strong> Easier to manipulate the multiple phone numbers in the list.<br>
+<strong>Cons:</strong> Can cause problems during testing as there are two constructors.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Allowing duplicate phone numbers for a contact<br>
+<strong>Alternative 1 (current choice):</strong> Do not allow duplicate phone numbers.<br>
+<strong>Pros:</strong> Makes the address book more usable.<br>
+<strong>Cons:</strong> Need to implement checking of the arguments.<br>
+<strong>Alternative 2:</strong> Allow duplicate phone numbers.<br>
+<strong>Pros:</strong> No need to check whether the arguments have been entered already.<br>
+<strong>Cons:</strong> May cause the address book to be messy if adding duplicate phone numbers was not the user&#8217;s intention.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Dealing with invalid values as well as valid values<br>
+<strong>Alternative 1 (current choice):</strong> Accept valid values and ignore invalid values.<br>
+<strong>Pros:</strong> Makes it easier for the user as the invalid value may have been an accident and the valid value may actually be correct.<br>
+<strong>Cons:</strong> Both values may have been incorrect and an incorrect phone number would have been added.<br>
+<strong>Alternative 2:</strong> Ignore all values as long as there is one invalid value.<br>
+<strong>Pros:</strong> No need to continue checking the rest of the arguments once there is one invalid value.<br>
+<strong>Cons:</strong> The incorrect value may have been an accident and the user may want the valid value to be added as a phone number to the contact.<br></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-enhanced-select-command"><a class="link" href="#enhancement-added-enhanced-select-command">Enhancement Added: Enhanced select command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">Selecting a person: <code>select</code></a></h4>
+<div class="paragraph">
+<p>To view the social media feed of a contact, use the <code>select</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Command format: <code><span class="red">select</span> <span class="green">INDEX [SOCIAL_MEDIA_PLATFORM]</span></code><br>
+Alias: <code><span class="red">s</span></code></p>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code class="green">INDEX</code> refers to the index number of the person to be stalked in the person list.</p>
+</li>
+<li>
+<p>The <code class="green">SOCIAL_MEDIA_PLATFORM</code> identifies which social media account belonging to the person you wish to view.</p>
+</li>
+<li>
+<p>If no <code class="green">SOCIAL_MEDIA_PLATFORM</code> is specified, the feed of a random social media account associated
+with the person will be displayed in the browser window. If there is no social media account associated with
+the person, a Google search of the person&#8217;s name will be displayed instead.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You should see the person&#8217;s social media feed displayed in the browser window.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/stalk-command-result.png" alt="stalk command result" width="790">
+</div>
+<div class="title">Figure 1. Social media feed displayed in browser window</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">select</span> <span class="green">1 facebook</span></code><br>
+Displays the Facebook account of the first person in the current person list</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the person list</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input a <code>SOCIAL_MEDIA_PLATFORM</code> that the user does not have an associated account for.<br>
+e.g. If the first user in the person list does not have an instagram account, and the command <code>stalk 1 instagram</code> is entered.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the selected user has an associated account for the <code>SOCIAL_MEDIA_PLATFORM</code> specified. The social media accounts associated with
+a user can be found in the person list.
+</p><p class="tableblock"><span class="image"><img src="../images/stalk-command-social-info.png" alt="stalk command social info" width="300"></span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>The current design is such that when a contact is selected using the <code>SelectCommand</code>, a google search page searching the contact&#8217;s name is displayed in the browser. However, the target users being more inclined towards social media will want to view more interesting information about their  contacts, such as their social media feeds. Thus, it will be useful to allow users to view the social media accounts of their contacts.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p>When the user selects a contact, a <code>JumpToListRequestEvent</code> storing the index of the contact and the social media type is raised. When the <code>JumpToListRequestEvent</code> is handled, a <code>PersonPanelSelectionChangedEvent</code> is raised and the index and social media type is passed to the <code>PersonPanelSelectionChangedEvent</code>. When a <code>PersonPanelSelectionChangedEvent</code> is raised, the <code>PersonCard</code> is extracted from the event using the index and from the <code>PersonCard</code>, the <code>ReadOnlyPerson</code> can be obtained. The <code>SocialInfo</code> of the contact can be obtained from the <code>ReadOnlyPerson</code> and the URL String of the social media accounts of the contact can be retrieved. The <code>WebEngine</code> then loads the URL of the requested social media type.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-improve-code-find-code-command"><a class="link" href="#enhancement-proposed-improve-code-find-code-command">Enhancement Proposed: Improve <code>find</code> command</a></h3>
+<div class="paragraph">
+<p>Allow users to search for contacts that have a certain keyword as part of the name, so that the keyword does not have to match the name exactly.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-add-command-code-whois-code"><a class="link" href="#enhancement-proposed-add-command-code-whois-code">Enhancement Proposed: Add command <code>whois</code></a></h3>
+<div class="paragraph">
+<p>Allow users to input a phone number and find out who the phone number belongs to.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-07 19:43:39 +00:00
+</div>
+</div>
+</body>
+</html>
