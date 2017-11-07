@@ -180,6 +180,7 @@ Example:
 
 === Managing Contacts
 
+// tag::addperson[]
 ==== Adding a person: `add`
 
 Adds a person to the address book. +
@@ -205,7 +206,9 @@ address `John street, block 123, #01-01`.
 * `add n/Rob Cross p/92456877 p/64123456 e/rob@example.com a/Kent Ridge Drive 23 t/husband f/ s/facebook r.cross10 dp/C:/Users/Seedu/Pictures/batman.png` +
 Adds a `favorite` contact with the name `Rob Cross`, phone numbers `92456877` and `64123456`, email address `rob@example.com`,
 address `Kent Ridge Drive 23`, tag `husband`, a `Facebook` account with the username `r.cross10`, and adds a `display photo` imported from the location `C:/Users/Seedu/Pictures/batman.png`.
+// end::addperson[]
 
+// tag::editperson[]
 ==== Editing a person: `edit`
 
 Edits an existing person in the address book. +
@@ -235,6 +238,7 @@ a `Facebook` account with the username `jane.doe`,
 and an Instagram account with the username `janedoe123`.
 * `edit 3 n/Betsy Crower dp/ t/` +
 Edits the name of the 3rd person to be `Betsy Crower`, removes existing display photo and clears all existing tags.
+// end::editperson[]
 
 ==== Favoriting a person [Since v1.2]: `fav`
 
@@ -274,7 +278,6 @@ Unfavorites the 2nd and 4th person in the most recently displayed list.
 `unfav 1` +
 Unfavorites the first person in the list of contacts with the name `Betsy`.
 
-
 ==== Deleting a person: `delete`
 
 Deletes the specified person(s) from the address book. +
@@ -291,6 +294,7 @@ Deletes persons based on their indexes in the last displayed list.
 * `tag` +
 Deletes persons that have the input tags.
 
+// tag::deletebyindex[]
 ===== Deleting persons by index (default):
 Deletes person(s) specified by their indexes in the last displayed list.
 Format: `delete INDEX [ADDITIONAL_INDEXES]...`
@@ -310,6 +314,7 @@ Deletes the 2nd and 3rd persons in the address book.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
+// end::deletebyindex[]
 
 ===== Deleting persons by tag [Since v1.4]:
 
@@ -356,6 +361,7 @@ You should see the person list populated with all of your contacts after executi
 .Person list populated with all contacts
 image::list-command-result.png[width="790"]
 
+// tag::select[]
 ==== Selecting a person: `select`
 
 To view the social media feed of a contact, use the `select` command.
@@ -395,6 +401,7 @@ a user can be found in the person list.
 
 image:stalk-command-social-info.png[width="300"]
 |===
+// end::select[]
 
 // tag::find-by-tag[]
 [[find-by-tag]]
