@@ -12,7 +12,6 @@ import facebook4j.User;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SocialInfoMapping;
 import seedu.address.model.person.Address;
