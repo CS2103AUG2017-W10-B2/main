@@ -241,36 +241,6 @@ and an Instagram account with the username `janedoe123`.
 Edits the name of the 3rd person to be `Betsy Crower`, removes existing display photo and clears all existing tags.
 // end::editperson[]
 
-==== Adding contact photos [Coming in v2.0]: `photo`
-
-Adds a display photo for a person. +
-Format: `photo INDEX [FILE_PATH]`
-
-****
-* Adds a display photo for the person at the specified `INDEX`, using the file at the location specified by `FILE_PATH`.
-* You can remove a person's display photo by leaving the `FILE_PATH` parameter blank.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* 1, 2, 3, ...
-* The input `FILE_PATH`, if present, must be an absolute file path, e.g.
-** `/Users/seedu/Pictures/photo.jpg` for macOS and Linux
-** `c:\Users\seedu\Pictures\photo.jpg` for Windows
-****
-
-[NOTE]
-====
-* If the specified person already has a display photo, it will be updated to be the image located at `FILE_PATH`.
-* If no `FILE_PATH` is specified, then the contact's existing display photo will be removed.
-====
-
-Examples:
-
-* `list` +
-`photo 2 /Users/seedu/Pictures/photo.jpg` +
-Adds the specified display photo for the 2nd person in the address book.
-* `find Betsy` +
-`photo 1 /Users/seedu/Pictures/betsy.jpg` +
-Adds the specified display photo for the 1st person in the results of the `find` command.
-
 ==== Favoriting a person [Since v1.2]: `fav`
 
 Labels the specified person(s) as a favorite contact. +
