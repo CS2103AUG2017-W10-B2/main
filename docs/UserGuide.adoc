@@ -205,7 +205,6 @@ Adds a contact with the name `John Doe`, phone number `98765432`, email address 
 address `John street, block 123, #01-01`.
 * `add n/Rob Cross p/92456877 p/64123456 e/rob@example.com a/Kent Ridge Drive 23 t/husband f/ s/facebook r.cross10 dp/C:/Users/Seedu/Pictures/batman.png` +
 Adds a `favorite` contact with the name `Rob Cross`, phone numbers `92456877` and `64123456`, email address `rob@example.com`,
-
 address `Kent Ridge Drive 23`, tag `husband`, a `Facebook` account with the username `r.cross10`, and adds a `display photo` imported from the location `C:/Users/Seedu/Pictures/batman.png`.
 // end::addperson[]
 
