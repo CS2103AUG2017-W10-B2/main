@@ -7,11 +7,15 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFirstPersonOnly;
 import static seedu.address.testutil.StorageUtil.getNullStorage;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -19,6 +23,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -33,14 +38,40 @@ public class FavoriteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
-        ReadOnlyPerson personToFavorite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON));
+        ReadOnlyPerson personToFavorite = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_THIRD_PERSON));
 
-        String expectedMessage = String.format(
-                FavoriteCommand.MESSAGE_FAVORITE_PERSON_SUCCESS, "\n★ " + personToFavorite.getName().toString());
+        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_SUCCESS
+                + "\n\t★ " + personToFavorite.getName().toString();
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.toggleFavoritePerson(personToFavorite, FavoriteCommand.COMMAND_WORD);
+
+        assertCommandSuccess(favoriteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validMultiIndexesUnfilteredList_success() throws Exception {
+        ReadOnlyPerson personAlice = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ReadOnlyPerson personDaniel = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+
+        Set<ReadOnlyPerson> targetPersonList = new LinkedHashSet<>();
+        targetPersonList.add(personAlice);
+        targetPersonList.add(personDaniel);
+
+        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON, INDEX_FOURTH_PERSON));
+
+        // In TypicalPersons, Alice is already a favorite contact while Daniel is not
+        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_SUCCESS
+                + "\n\t★ " + personDaniel.getName().toString()
+                + "\n" + FavoriteCommand.MESSAGE_FAVORITE_PERSON_FAILURE
+                + "\n\t- " + personAlice.getName().toString();
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        for (ReadOnlyPerson personToFavorite : targetPersonList) {
+            expectedModel.toggleFavoritePerson(personToFavorite, FavoriteCommand.COMMAND_WORD);
+        }
 
         assertCommandSuccess(favoriteCommand, model, expectedMessage, expectedModel);
     }
@@ -60,14 +91,13 @@ public class FavoriteCommandTest {
         ReadOnlyPerson personToFavorite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON));
 
-        String expectedMessage = String.format(
-                FavoriteCommand.MESSAGE_FAVORITE_PERSON_SUCCESS, "\n★ " + personToFavorite.getName().toString());
+        // In TypicalPersons, first person (Alice) is already a favorite.
+        // Assert command success as this is not a command failure,
+        // it's because we disallow favoriting of an already favorited person.
+        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_FAILURE
+                + "\n\t- " + personToFavorite.getName().toString();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.toggleFavoritePerson(personToFavorite, FavoriteCommand.COMMAND_WORD);
-        model.updateFilteredPersonList(p -> true);
-
-        assertCommandSuccess(favoriteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(favoriteCommand, model, expectedMessage, model);
     }
 
     @Test

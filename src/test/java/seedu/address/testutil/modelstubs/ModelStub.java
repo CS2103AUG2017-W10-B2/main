@@ -56,6 +56,11 @@ public class ModelStub implements Model {
         fail("This method should not be called.");
     }
 
+    @Override
+    public void selectPerson(ReadOnlyPerson target) throws PersonNotFoundException {
+        fail("This method should not be called.");
+    }
+
     //@@author keithsoc
     @Override
     public void toggleFavoritePerson(ReadOnlyPerson target, String type)
@@ -78,5 +83,11 @@ public class ModelStub implements Model {
     @Override
     public void removeTag(Tag tag) throws PersonNotFoundException, DuplicatePersonException {
         fail("This method should not be called.");
+    }
+
+    @Override
+    public Model makeCopy() {
+        fail("This method should not be called.");
+        return null;
     }
 }

@@ -24,7 +24,7 @@ public class UiFont {
     }
 
     /**
-     * @return instance of UiTheme
+     * @return instance of UiFont
      */
     public static UiFont getInstance() {
         if (instance == null) {

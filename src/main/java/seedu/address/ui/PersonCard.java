@@ -7,6 +7,7 @@ import java.util.Random;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -25,7 +26,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
     //@@author keithsoc
-    private static HashMap<ReadOnlyPerson, String> personColors = new HashMap<>();
+    private static HashMap<String, String> personColors = new HashMap<>();
     private static HashMap<String, String> tagColors = new HashMap<>();
     private static Random random = new Random();
     private static final String defaultThemeTagColor = "#fc4465";
@@ -46,9 +47,9 @@ public class PersonCard extends UiPart<Region> {
     private HBox cardPane;
     //@@author keithsoc
     @FXML
-    private StackPane profilePhotoStackPane;
+    private StackPane displayPhotoStackPane;
     @FXML
-    private ImageView profilePhotoImageView;
+    private ImageView displayPhotoImageView;
     //@@author
     @FXML
     private Label name;
@@ -71,6 +72,8 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        initDisplayPhoto(person);
+        initFavorite(person);
         initTags(person);
         initSocialInfos(person);
         bindListeners(person);
@@ -78,7 +81,7 @@ public class PersonCard extends UiPart<Region> {
 
     //@@author keithsoc
     /**
-     * Generates a random pastel color for profile photos.
+     * Generates a random pastel color for display photos.
      * @return String containing hex value of the color.
      */
     private String generateRandomPastelColor() {
@@ -109,13 +112,13 @@ public class PersonCard extends UiPart<Region> {
     }
 
     /**
-     * Binds a profile photo background with a random pastel color and store it into personColors HashMap.
+     * Binds a display photo background with a random pastel color and store it into personColors HashMap.
      */
-    private String getColorForPerson(ReadOnlyPerson person) {
-        if (!personColors.containsKey(person)) {
-            personColors.put(person, generateRandomPastelColor());
+    private String getColorForPerson(String name) {
+        if (!personColors.containsKey(name)) {
+            personColors.put(name, generateRandomPastelColor());
         }
-        return personColors.get(person);
+        return personColors.get(name);
     }
 
 
@@ -139,12 +142,14 @@ public class PersonCard extends UiPart<Region> {
      * so that they will be notified of any changes.
      */
     private void bindListeners(ReadOnlyPerson person) {
-        initProfilePhoto(person);
         name.textProperty().bind(Bindings.convert(person.nameProperty()));
         phone.textProperty().bind(Bindings.convert(person.phoneProperty()));
         address.textProperty().bind(Bindings.convert(person.addressProperty()));
         email.textProperty().bind(Bindings.convert(person.emailProperty()));
-        initFavorite(person);
+        person.favoriteProperty().addListener((observable, oldValue, newValue) -> {
+            favoriteImageView.setId("favoriteImageView");
+            initFavorite(person);
+        });
         person.tagProperty().addListener((observable, oldValue, newValue) -> {
             tags.getChildren().clear();
             initTags(person);
@@ -157,32 +162,38 @@ public class PersonCard extends UiPart<Region> {
 
     //@@author keithsoc
     /**
-     * Adds a profile photo for each {@code person}.
-     * TODO: This method will be modified for upcoming addPhoto command
+     * Adds a display photo for each {@code person}.
+     * If {@code person} has a non-null display photo field, set ImageView to an image of user's choice.
+     * If {@code person} has a null display photo field, set ImageView to a colored thumbnail with name initials.
      */
-    private void initProfilePhoto (ReadOnlyPerson person) {
-        // Round profile photo
-        double value = profilePhotoImageView.getFitWidth() / 2;
+    private void initDisplayPhoto(ReadOnlyPerson person) {
+        // Round display photo
+        double value = displayPhotoImageView.getFitWidth() / 2;
         Circle clip = new Circle(value, value, value);
-        profilePhotoImageView.setClip(clip);
+        displayPhotoImageView.setClip(clip);
 
-        // Add background circle with a random pastel color
-        Circle backgroundCircle = new Circle(value);
-        backgroundCircle.setFill(Paint.valueOf(getColorForPerson(person)));
+        if (person.getDisplayPhoto().value != null) {
+            // Set image to user's choice
+            displayPhotoImageView.setImage(new Image(person.getDisplayPhoto().getAbsoluteFilePath()));
+        } else {
+            // Add background circle with a random pastel color
+            String nameOfPerson = person.getName().toString().trim();
+            Circle backgroundCircle = new Circle(value);
+            backgroundCircle.setFill(Paint.valueOf(getColorForPerson(nameOfPerson)));
 
-        // Add text
-        Text personInitialsText = new Text(extractInitials(person));
-        personInitialsText.setFill(Paint.valueOf("white"));
-        profilePhotoStackPane.getChildren().addAll(backgroundCircle, personInitialsText);
+            // Add text
+            Text personInitialsText = new Text(extractInitials(nameOfPerson));
+            personInitialsText.setFill(Paint.valueOf("white"));
+            displayPhotoStackPane.getChildren().addAll(backgroundCircle, personInitialsText);
+        }
     }
 
     /**
-     * Extracts the initials from the name of the given {@code person}.
+     * Extracts the initials from the name of the given {@code name}.
      * Extract only one initial if the name contains a single word;
      * Extract two initials if the name contains more than one word.
      */
-    private String extractInitials (ReadOnlyPerson person) {
-        String name = person.getName().toString().trim();
+    private String extractInitials (String name) {
         int noOfInitials = 1;
         if (name.split("\\s+").length > 1) {
             noOfInitials = 2;

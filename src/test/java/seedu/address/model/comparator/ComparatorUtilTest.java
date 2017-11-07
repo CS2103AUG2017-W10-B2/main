@@ -4,10 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.model.person.PersonComparatorUtil.compareAddress;
 import static seedu.address.model.person.PersonComparatorUtil.compareEmail;
 import static seedu.address.model.person.PersonComparatorUtil.compareFavorite;
+import static seedu.address.model.person.PersonComparatorUtil.compareLastAccessDate;
 import static seedu.address.model.person.PersonComparatorUtil.compareName;
 import static seedu.address.model.person.PersonComparatorUtil.comparePhone;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -97,5 +100,21 @@ public class ComparatorUtilTest {
         ReadOnlyPerson personTwo = new PersonBuilder(BOB).withEmail("bob@example.com").build();
         assertEquals(-1, compareEmail(personOne, personTwo));
         assertEquals(1, compareEmail(personTwo, personOne));
+    }
+
+    @Test
+    public void compareLastAccessDate_sameLastAccessDate_returnZero() {
+        ReadOnlyPerson personOne = new PersonBuilder(AMY).withLastAccessDate(new Date(1000)).build();
+        ReadOnlyPerson personTwo = new PersonBuilder(BOB).withLastAccessDate(new Date(1000)).build();
+        assertEquals(0, compareLastAccessDate(personOne, personTwo));
+    }
+
+    @Test
+    public void compareLastAccessDate_differentLastAccessDate_returnCorrectOrder() {
+        ReadOnlyPerson personOne = new PersonBuilder(AMY).withLastAccessDate(new Date(2000)).build();
+        ReadOnlyPerson personTwo = new PersonBuilder(BOB).withLastAccessDate(new Date(1000)).build();
+        // expect the person with later last access date to come first in the ordering
+        assertEquals(-1, compareLastAccessDate(personOne, personTwo));
+        assertEquals(1, compareLastAccessDate(personTwo, personOne));
     }
 }

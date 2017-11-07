@@ -15,8 +15,8 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <!-- @@author keithsoc -->
     <VBox alignment="CENTER" minHeight="105" prefHeight="105" prefWidth="120">
-        <StackPane fx:id="profilePhotoStackPane" styleClass="profile-photo-pane">
-            <ImageView fx:id="profilePhotoImageView" fitHeight="85" fitWidth="85"
+        <StackPane fx:id="displayPhotoStackPane" styleClass="display-photo-pane">
+            <ImageView fx:id="displayPhotoImageView" fitHeight="85" fitWidth="85"
                        preserveRatio="true" styleClass="profile-photo" />
         </StackPane>
     </VBox>

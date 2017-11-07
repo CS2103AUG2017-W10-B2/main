@@ -105,9 +105,9 @@
     -fx-background-color: #272822;
 }
 
-/* Profile Photo */
+/* Display Photo */
 
-.profile-photo-pane {
+.display-photo-pane {
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 31px;
 }

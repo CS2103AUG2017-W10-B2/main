@@ -489,7 +489,8 @@ image::facebook_post_sequence_diagram.png[width="800"]
 ---
 // end::facebook[]
 
-=== Social Info
+// tag::social-media-accounts[]
+=== Social Media Accounts
 
 Information about contact's social media accounts are encapsulated by the `SocialInfo` class. The list of `SocialInfo` associated
 with a `Person` is handled by the `UniqueSocialInfoList`, which guarantees that at most one of each type of social media type is
@@ -500,7 +501,7 @@ The following class diagram represents the relationship between the `Person`, `U
 .Class diagram representing relationships between Person, UniqueSocialInfoList and SocialInfo classes
 image::SocialInfoClassDiagram.png[width="800"]
 
-==== Parsing
+==== Parsing inputs representing social media accounts
 
 The form `SOCIAL_TYPE_IDENTIFIER USERNAME` is used to represent a `SocialInfo` as a CLI parametr for a command,
 A Collection of these raw social info parameters can then be passed to the `parseSocialInfo` method in the `SocialInfoMapping` class for parsing.
@@ -516,7 +517,7 @@ The url structures for social media platforms are an external dependency that we
 inevitable that some issues will inevitably arise due to changes in these external dependencies.
 It is hence essential to isolate the logic pertaining to the generation of these urls so that any issues can easily be identified and resolved.
 
-==== Adding new social platforms
+==== Adding support for new social media platforms
 
 Handling for parsing inputs for new social platforms should be done by adding the following methods to the `SocialInfoMapping` class.
 
@@ -524,18 +525,13 @@ Handling for parsing inputs for new social platforms should be done by adding th
 ----
 // The input parameter has been split into two parts - the socialType and the username
 
-// Method to identify if the parameter is for this social platofrm
 private static boolean isPlatformInfo(String[] splitRawSocialInfo) {
-        String trimmedSocialType = splitRawSocialInfo[SOCIAL_TYPE_INDEX].trim();
-        return trimmedSocialType.equals(PLATFORM_IDENTIFIER)
-            || trimmedSocialType.equals(PLATFORM_IDENTIFIER_ALIAS);
+       // ... Check if the platform is identified by the input social info
     }
 
-// Method to instantiate the SocialInfo representing this socialPlatform
 private static SocialInfo buildPlatformInfo(String[] splitRawSocialInfo) {
-    String trimmedSocialUsername = splitRawSocialInfo[SOCIAL_USERNAME_INDEX].trim();
-    String socialUrl = PLATFORM_URL_PREFIX + trimmedSocialUsername;
-    return new SocialInfo(PLATFORM_PREFIX, trimmedSocialUsername, socialUrl);
+    // ... Parse the url representing the social media feed using the platform and username
+    // ... Instantiate the SocialInfo represented by the platform, username, and url
 }
 ----
 
@@ -544,23 +540,23 @@ and then adding the following logic to the `parseSocialInfos` method:
 [source,java]
 ----
 public static SocialInfo parseSocialInfo(String rawSocialInfo) throws IllegalValueException {
-    String[] splitRawSocialInfo = rawSocialInfo.split(" ");
-    if (splitRawSocialInfo.length != 2) {
-        throw new IllegalValueException(INVALID_SYNTAX_EXCEPTION_MESSAGE);
-    }
+    // ... initialization logic here
 
     if (isFacebookInfo(splitRawSocialInfo)) {
         return buildFacebookInfo(splitRawSocialInfo);
     }
+
     // ... other social platforms here
+
     } else if (isPlatformInfo(splitRawSocialInfo)) {
         return buildPlatformInfo(splitRawSocialInfo);
     }
+
     // ... other social platforms here
+
     } else {
         throw new IllegalValueException(UNRECOGNIZED_SOCIAL_TYPE_MESSAGE);
     }
-
 }
 ----
 
@@ -595,6 +591,55 @@ Additional space required to support storing the HashSets in memory. +
 **Additional Info:** Number of social platforms is expected to be a reasonable amount, and thus should not cause much noticable delay.
 In comparison, the startup delay may be more significant when a large number of contacts are present in the address book. Thus the first
 alternative was selected to provide a more pleasant user experience.
+// end::social-media-accounts[]
+
+// tag::command-syntax[]
+=== Command Options
+
+As some functionalities have similar behaviours, we group them under a single `COMMAND_WORD` and allow the user to include
+`OPTIONS` when using the command to specify which functionality is to be executed.
+
+The following command syntax is thus adopted: `COMMAND_WORD [-OPTIONS]... [PARAMETERS]...`, where:
+
+* The `COMMAND_WORD` specifies the *action to be performed*,
+* `OPTIONS` are prefixed with a dash (e.g. `-tag`) and specifies *how the action is to be performed*, and
+* `PARAMETERS` provide *information for the action to be executed with*.
+
+==== Handling Options
+
+Arguments that may include options should be wrapped with the `OptionBearingArgument` class, which abstracts the parsing
+of options and parameters. The following code snippet shows how the `OptionBearingArgument` may be used to parse user inputs:
+
+[source,java]
+----
+// assume that args is a string containing user input with both arguments and parameters
+OptionBearingArgument opArg = new OptionBearingArgument(args);
+// options are returned in the form of a set which contains options that are present in the argument
+Set<String> options = opArg.getOptions();
+// the options are stripped from the argument to give us the parameters
+String parameters = opArg.getFilteredArgs();
+----
+
+==== Design Considerations
+**Aspect:** How commands with similar behaviour should be handled +
+**Alternative 1 (current choice):** Group these commands under a single `COMMAND_WORD` and introduce a new `OPTIONS` syntax
+to allow the user to specify the desired functionality to be executed. +
+**Pros:** Clear distinction between arguments that specify how a command should be executed, and arguments that provide information
+for the command to be executed with. +
+**Cons:** Potentially more initial confusion for the user as there is an additional syntax to learn. To mitigate this a
+section explaining the updated command syntax has been added to the user guide. +
+**Alternative 2:** Group these commands under a single `COMMAND_WORD`, and use the existing `PREFIX/` syntax to identify
+how a command should be executed. +
+**Pros:** User does not need to learn additional syntax. +
+**Cons:** The meaning of the `PREFIX/` syntax becomes unintuitive. This syntax is currently used to denote a property
+in an object (i.e. `p/` denotes a phone number in a person). To extend this syntax to command modifiers makes it confusing
+for the user as the meaning of the syntax becomes diluted. An informal survey conducted with our target users confirms
+that this approach was less intuitive to them compared to the approach described in Alternative 1. +
+**Alternative 3:** Have separate `COMMAND_WORDS` for each command. +
+**Pros:** Simple syntax, with no confusion over what behaviour will be executed. +
+**Cons:** Does not scale well as users have to remember many different commands as the number of features grow.
+
+// end::command-syntax[]
 
 === Favorite Contacts
 
@@ -688,6 +733,34 @@ After getting the copy of the person e.g. `personToFavorite`, it is easy to call
 **Alternative 2:** Just rely on `fav` and `unfav` commands +
 **Pros:** Easier implementation +
 **Cons:** User would have to remember more commands and their usages
+
+// tag::sort[]
+=== Sorting Contacts
+To make it easier for users to find contacts, the displayed person list is kept sorted. Users can specify how contacts
+are to be ordered in the list using the `sort` command.
+
+The sorting logic makes use of the Observer pattern. Instead of keeping the `personList` itself sorted, a `SortedList`
+backed by the `personList` is constructed. The `SortedList` keeps a list of persons equivalent to that of the `personList`
+in sorted order, and ensures that it remains sorted even as changes are made to the underlying `personList`.
+
+This `SortedList` is in turn observed by the `FilteredList` to ensure that the list remains in sorted order even as filters are applied.
+
+The above relationship is represented by the following class diagram:
+
+.Class diagram representing the Observer pattern used to keep contacts in sorted order
+image::SortObserverClassDiagram.png[width="800"]
+
+==== Design Considerations
+**Aspect:** Where sorting should be handled +
+**Alternative 1 (current choice):** Handle sorts at the `ModelManager` level using the Observer pattern +
+**Pros:** Sorting does not require IO operations, which are computationally more expensive compared to in-memory operations. +
+**Cons:** Slightly longer startup time might be observed as the data file is not sorted and hence has to be sorted upon every startup. +
+**Alternative 2:** Handle sorts at the `AddressBook` level by sorting the `personList` directly +
+**Pros:** Startup might be faster as the data file should have already been sorted. Also reduces complexity of the `Model`
+as there is no need to maintain any additional data structures. +
+**Cons:** Every sort operation will require writing to the data file, which requires IO operations that are slower compared
+to in-memory operations.
+// end::sort[]
 
 === Logging
 

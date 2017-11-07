@@ -114,6 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
         persons.setPerson(target, editedPerson);
+        indicatePersonAccessed(editedPerson);
     }
 
     /**
@@ -177,11 +178,27 @@ public class AddressBook implements ReadOnlyAddressBook {
                 personToFav.setFavorite(new Favorite(false)); // UnFavorite
             }
             persons.setPerson(target, personToFav);
+            indicatePersonAccessed(personToFav);
         } else {
             throw new PersonNotFoundException();
         }
     }
     //@@author
+
+    //@@author marvinchin
+
+    /**
+     * Indicates that a person in the address book has been accessed
+     */
+    public void indicatePersonAccessed(ReadOnlyPerson target) throws PersonNotFoundException {
+        Person updatedPerson = new Person(target);
+        updatedPerson.setLastAccessDateToNow();
+        try {
+            persons.setPerson(target, updatedPerson);
+        } catch (DuplicatePersonException dpe) {
+            assert false : "Person should be unique";
+        }
+    }
 
     //// tag-level operations
 

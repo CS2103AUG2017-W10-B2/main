@@ -4,16 +4,163 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: KayPoh!
-KayPoh! is a desktop address book application used for __. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.
+KayPoh! is a desktop address book application with social media integrations. The user interacts with the application using a command line interface, and it has a GUI created with JavaFX. It is written in Java and has about 14k LoC.
 
-=== Enhancement Added: Undo/Redo
+*Code Contributed*: [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/keithsoc.md[Functional code]] [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/keithsoc.md[Test code]]
+
+=== Enhancement Added: Favorite Status in the Person Model
 
 ==== External behavior
 
+---
+#Start of extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=favoriting-a-person-since-v1-2-code-fav-code]
+
+#End of Extract#
+
+---
+
 ==== Justification
+
+Allow users to mark or unmark contacts whom they are closer with as their favorites. Favorites contact have a "star" badge attached to them so that users can find and identify these people more easily. This enhancement allows toggling of such favorite status via `add` and `edit` commands. This would also later come to be integrated with the `Favorite` and `Unfavorite` commands as well as `Sort` command (done by my teammate Marvin) which allows displaying of favorite contacts at the top of the contacts list by default.
 
 ==== Implementation
 
-=== Enhancement Proposed
+Pull Request (with a detailed summary of changes): https://github.com/CS2103AUG2017-W10-B2/main/pull/33[#33]
 
-=== Other contributions
+---
+#Start of extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=toggle-favorites-using-add-andor-edit-command]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: Favorite and Unfavorite Command
+
+==== External behavior
+
+---
+#Start of extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=favoriting-a-person-since-v1-2-code-fav-code]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Provides convenience to perform batch adding or removing of contacts as favorites via the respective commands. Users can specify any number of indexes (up to the size of address book), and mass favorite or unfavorite the contacts mapped to the indexes.
+
+==== Implementation
+
+Pull Request (with a detailed summary of changes): https://github.com/CS2103AUG2017-W10-B2/main/pull/38[#38]
+
+---
+#Start of extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=toggle-favorites-using-fav-andor-unfav-command]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: List All Favorite Contacts
+
+==== External behavior
+
+---
+#Start of extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=listing-persons-code-list-code]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Allows user who might potentially have a large number of contacts to isolate out their favorite contacts to view or perform operations such as `edit` on them.
+
+==== Implementation
+
+Pull Request: https://github.com/CS2103AUG2017-W10-B2/main/pull/65[#65]
+
+---
+#Start of extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=toggle-favorites-using-fav-andor-unfav-command]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: User Interface Overhaul and Theme Command
+
+==== External behavior
+
+---
+#Start of extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=changing-themes-code-theme-code-since-v1-4]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Redesigned the application to provide a cleaner, sleeker and fresher look that would drive a better visual appeal. Also added two polished themes - day and night - which are simplistic with a hint of mordenity to allow user to personalise their application to suit their liking. Day theme presents a light-colored theme suitable for users who prefer brighter design with less contrast while night theme presents a dark-colored theme suitable for users who prefer a dimmer design with higher contrast. Both themes uses subtle shades of colors that enhance visual controls such as command and result box and places more emphasis on each contact card.
+
+Custom fonts such as Open Sans and Segoe UI font family were embedded into the application to achieve consistent typography across different platforms such as Windows and macOS.
+
+Implemented random bright color generator using golden ratio to achieve even distribution for coloring of tag labels and display photo thumbnails.
+
+Theme command allows user to switch between the two aforementioned themes easily especially using command alias e.g. `t -night`.
+
+==== Implementation
+
+Pull Request (with a detailed summary of changes): https://github.com/CS2103AUG2017-W10-B2/main/pull/92[#92]
+
+---
+#Start of extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=toggle-favorites-using-fav-andor-unfav-command]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: Contact Display Photos
+
+==== External behavior
+
+---
+#Start of extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=adding-a-person-code-add-code]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Allow users to more easily identify their contacts based on photos instead of names. This will greatly benefit users who are visual learners.
+
+==== Implementation
+
+Pull Request: https://github.com/CS2103AUG2017-W10-B2/main/pull/153[#153]
+
+---
+#Start of extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=toggle-favorites-using-fav-andor-unfav-command]
+
+#End of Extract#
+
+---
+

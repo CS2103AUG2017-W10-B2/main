@@ -11,7 +11,8 @@ import java.util.Comparator;
 //@@author marvinchin
 /**
  * Default comparator for persons. Sorts first by favorites, then by name in alphabetical order,
- * then by phone in numeric order, then by address in alphabetical order, then by email in alphabetical order
+ * then by phone in numeric order, then by address in alphabetical order, then by email in alphabetical order,
+ * then by last access date
  */
 public class PersonDefaultComparator implements Comparator<ReadOnlyPerson> {
     @Override
