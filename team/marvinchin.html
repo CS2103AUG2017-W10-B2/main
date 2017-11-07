@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Marvin Chin - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Marvin Chin - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-kaypoh"><a class="link" href="#project-kaypoh">Project: KayPoh!</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>KayPoh! is a desktop address book application with social media integrations.
+The user interacts with the application using a command line interface, and it has a GUI created with JavaFX.
+It is written in Java and has about 14k LoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/marvinchin.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/marvinchin.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-sort-command"><a class="link" href="#enhancement-added-sort-command">Enhancement Added: Sort Command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sorting-the-displayed-list-since-v1-4-code-sort-code"><a class="link" href="#sorting-the-displayed-list-since-v1-4-code-sort-code">Sorting the displayed list [Since v1.4]: <code>sort</code></a></h4>
+<div class="paragraph">
+<p>To sort the person list, use the <code>sort</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Command format:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Default sort:
+<code><span class="red">sort</span></code></p>
+</li>
+<li>
+<p>Sorting by <code>name</code>:
+<code><span class="red">sort</span> <span class="blue">-name</span></code></p>
+</li>
+<li>
+<p>Sorting by <code>recency</code> [Coming in v2.0]:
+<code><span class="red">sort</span> <span class="blue">-recent</span></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Alias: <code><span class="red">sr</span></code><br></p>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The default sort orders contacts first by their <code>favorite</code> status, then by their <code>name</code> in lexicographic order.</p>
+</li>
+<li>
+<p>Sorting with the <code class="blue">name</code> option orders contacts by their <code>name</code> in lexicographic order.</p>
+</li>
+<li>
+<p>Sorting with the <code class="blue">recent</code> option orders contacts by when they were last added, updated, or stalked.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The person list should be sorted based on the specified option after executing the command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/sort-command-default-result.png" alt="sort command default result" width="300">
+</div>
+<div class="title">Figure 1. Person list after executing a default sort</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/sort-command-name-result.png" alt="sort command name result" width="300">
+</div>
+<div class="title">Figure 2. Person list after executing a sort by <code>name</code></div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">list</span></code><br>
+<code><span class="red">sort</span></code><br>
+Lists all person in the address book, sorted first based on their <code>favorite</code> status, then by their <code>name</code> in lexicographic order.</p>
+</li>
+<li>
+<p><code><span class="red">find</span> <span class="green">john</span></code><br>
+<code><span class="red">sort</span> <span class="blue">-recent</span></code><br>
+Lists all persons whose <code>names</code> contain the keyword <code>john</code>, sorted based on when they were last added, updated, or stalked.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>Sorting keeps the displayed person list in a predictable order, allowing the user to easily
+find his contacts.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-contacts"><a class="link" href="#sorting-contacts">Sorting Contacts</a></h3>
+<div class="paragraph">
+<p>To make it easier for users to find contacts, the displayed person list is kept sorted. Users can specify how contacts
+are to be ordered in the list using the <code>sort</code> command.</p>
+</div>
+<div class="paragraph">
+<p>The sorting logic makes use of the Observer pattern. Instead of keeping the <code>personList</code> itself sorted, a <code>SortedList</code>
+backed by the <code>personList</code> is constructed. The <code>SortedList</code> keeps a list of persons equivalent to that of the <code>personList</code>
+in sorted order, and ensures that it remains sorted even as changes are made to the underlying <code>personList</code>.</p>
+</div>
+<div class="paragraph">
+<p>This <code>SortedList</code> is in turn observed by the <code>FilteredList</code> to ensure that the list remains in sorted order even as filters are applied.</p>
+</div>
+<div class="paragraph">
+<p>The above relationship is represented by the following class diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SortObserverClassDiagram.png" alt="SortObserverClassDiagram" width="800">
+</div>
+<div class="title">Figure 3. Class diagram representing the Observer pattern used to keep contacts in sorted order</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Where sorting should be handled<br>
+<strong>Alternative 1 (current choice):</strong> Handle sorts at the <code>ModelManager</code> level using the Observer pattern<br>
+<strong>Pros:</strong> Sorting does not require IO operations, which are computationally more expensive compared to in-memory operations.<br>
+<strong>Cons:</strong> Slightly longer startup time might be observed as the data file is not sorted and hence has to be sorted upon every startup.<br>
+<strong>Alternative 2:</strong> Handle sorts at the <code>AddressBook</code> level by sorting the <code>personList</code> directly<br>
+<strong>Pros:</strong> Startup might be faster as the data file should have already been sorted. Also reduces complexity of the <code>Model</code>
+as there is no need to maintain any additional data structures.<br>
+<strong>Cons:</strong> Every sort operation will require writing to the data file, which requires IO operations that are slower compared
+to in-memory operations.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-introducing-options-to-command-syntax"><a class="link" href="#enhancement-added-introducing-options-to-command-syntax">Enhancement Added: Introducing Options to Command Syntax</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="breaking-down-the-command-syntax"><a class="link" href="#breaking-down-the-command-syntax">Breaking down the command syntax</a></h3>
+<div class="paragraph">
+<p>Commands have the following format: <code><span class="red">COMMAND_WORD</span> <span class="blue">-OPTION</span> <span class="green">PARAMETERS</span></code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code class="red">COMMAND_WORD</code> is the first word in the command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>It specifies <strong>what you want to do</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code class="blue">OPTIONS</code> come after the <code class="red">COMMAND_WORD</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>They are prefixed with a dash (e.g. <code>-tag</code>)</p>
+</li>
+<li>
+<p>Provides more information on <strong>how the action is to be performed</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code class="green">PARAMETERS</code> are the last segment of the command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>They provide the <strong>information required to execute the action</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="blue">-tag</span> <span class="green">friends</span></code> can be understood as "<span class="red">find contacts</span> <span class="blue">with the tag</span> <span class="green">friends</span>"</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>Updated command syntax allows multiple similar commands to share a single <code>COMMAND_WORD</code> while providing
+a consistent and intuitive way for the user to specify which functionality of the <code>COMMAND</code> is to be executed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-options"><a class="link" href="#command-options">Command Options</a></h3>
+<div class="paragraph">
+<p>As some functionalities have similar behaviours, we group them under a single <code>COMMAND_WORD</code> and allow the user to include
+<code>OPTIONS</code> when using the command to specify which functionality is to be executed.</p>
+</div>
+<div class="paragraph">
+<p>The following command syntax is thus adopted: <code>COMMAND_WORD [-OPTIONS]&#8230;&#8203; [PARAMETERS]&#8230;&#8203;</code>, where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>COMMAND_WORD</code> specifies the <strong>action to be performed</strong>,</p>
+</li>
+<li>
+<p><code>OPTIONS</code> are prefixed with a dash (e.g. <code>-tag</code>) and specifies <strong>how the action is to be performed</strong>, and</p>
+</li>
+<li>
+<p><code>PARAMETERS</code> provide <strong>information for the action to be executed with</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="handling-options"><a class="link" href="#handling-options">Handling Options</a></h4>
+<div class="paragraph">
+<p>Arguments that may include options should be wrapped with the <code>OptionBearingArgument</code> class, which abstracts the parsing
+of options and parameters. The following code snippet shows how the <code>OptionBearingArgument</code> may be used to parse user inputs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// assume that args is a string containing user input with both arguments and parameters</span>
+OptionBearingArgument opArg = <span class="keyword">new</span> OptionBearingArgument(args);
+<span class="comment">// options are returned in the form of a set which contains options that are present in the argument</span>
+<span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; options = opArg.getOptions();
+<span class="comment">// the options are stripped from the argument to give us the parameters</span>
+<span class="predefined-type">String</span> parameters = opArg.getFilteredArgs();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How commands with similar behaviour should be handled<br>
+<strong>Alternative 1 (current choice):</strong> Group these commands under a single <code>COMMAND_WORD</code> and introduce a new <code>OPTIONS</code> syntax
+to allow the user to specify the desired functionality to be executed.<br>
+<strong>Pros:</strong> Clear distinction between arguments that specify how a command should be executed, and arguments that provide information
+for the command to be executed with.<br>
+<strong>Cons:</strong> Potentially more initial confusion for the user as there is an additional syntax to learn. To mitigate this a
+section explaining the updated command syntax has been added to the user guide.<br>
+<strong>Alternative 2:</strong> Group these commands under a single <code>COMMAND_WORD</code>, and use the existing <code>PREFIX/</code> syntax to identify
+how a command should be executed.<br>
+<strong>Pros:</strong> User does not need to learn additional syntax.<br>
+<strong>Cons:</strong> The meaning of the <code>PREFIX/</code> syntax becomes unintuitive. This syntax is currently used to denote a property
+in an object (i.e. <code>p/</code> denotes a phone number in a person). To extend this syntax to command modifiers makes it confusing
+for the user as the meaning of the syntax becomes diluted. An informal survey conducted with our target users confirms
+that this approach was less intuitive to them compared to the approach described in Alternative 1.<br>
+<strong>Alternative 3:</strong> Have separate <code>COMMAND_WORDS</code> for each command.<br>
+<strong>Pros:</strong> Simple syntax, with no confusion over what behaviour will be executed.<br>
+<strong>Cons:</strong> Does not scale well as users have to remember many different commands as the number of features grow.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-adding-social-media-info-to-person-model"><a class="link" href="#enhancement-added-adding-social-media-info-to-person-model">Enhancement Added: Adding Social Media Info to Person Model</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<div class="paragraph">
+<p>Users can add social media accounts to their contacts using the <code>add</code> and <code>edit</code> commands. These social media accounts
+are then displayed in the browser when the contact is selected with the <code>select</code> command.</p>
+</div>
+<div class="paragraph">
+<p>When passed as a parameter to the <code>add</code> or <code>edit</code> commands, social media accounts are represented in the following manner:</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="representing-social-media-accounts"><a class="link" href="#representing-social-media-accounts">Representing Social Media Accounts</a></h4>
+<div class="paragraph">
+<p>Social media accounts are represented in the format <code>SOCIAL_TYPE USERNAME</code>.</p>
+</div>
+<div class="paragraph">
+<p>The social types presently supported are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>facebook</code> (aliases: <code>fb</code>)</p>
+</li>
+<li>
+<p><code>instagram</code> (aliases: <code>ig</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>facebook johnd10</code><br>
+Represents the Facebook account with the username <code>johnd10</code>.</p>
+</li>
+<li>
+<p><code>ig damyth</code><br>
+represents the Instagram account with the username <code>damyth</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>Updated command syntax allows multiple similar commands to share a single <code>COMMAND_WORD</code> while providing
+a consistent and intuitive way for the user to specify which functionality of the <code>COMMAND</code> is to be executed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="social-media-accounts"><a class="link" href="#social-media-accounts">Social Media Accounts</a></h3>
+<div class="paragraph">
+<p>Information about contact&#8217;s social media accounts are encapsulated by the <code>SocialInfo</code> class. The list of <code>SocialInfo</code> associated
+with a <code>Person</code> is handled by the <code>UniqueSocialInfoList</code>, which guarantees that at most one of each type of social media type is
+associated with the contact.</p>
+</div>
+<div class="paragraph">
+<p>The following class diagram represents the relationship between the <code>Person</code>, <code>UniqueSocialInfoList</code> and <code>SocialInfo</code> classes:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SocialInfoClassDiagram.png" alt="SocialInfoClassDiagram" width="800">
+</div>
+<div class="title">Figure 4. Class diagram representing relationships between Person, UniqueSocialInfoList and SocialInfo classes</div>
+</div>
+<div class="sect3">
+<h4 id="parsing-inputs-representing-social-media-accounts"><a class="link" href="#parsing-inputs-representing-social-media-accounts">Parsing inputs representing social media accounts</a></h4>
+<div class="paragraph">
+<p>The form <code>SOCIAL_TYPE_IDENTIFIER USERNAME</code> is used to represent a <code>SocialInfo</code> as a CLI parametr for a command,
+A Collection of these raw social info parameters can then be passed to the <code>parseSocialInfo</code> method in the <code>SocialInfoMapping</code> class for parsing.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>parseSocialInfo</code> method handles the parsing of the raw social info parameters:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ParseSocialInfoSequenceDiagram.png" alt="ParseSocialInfoSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 5. Sequence diagram detailing how inputs are parsed to form SocialInfos</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As far as possible instantiation of new <code>SocialInfo</code> classes should be handled by the <code>SocialInfoMapping</code> class.
+The url structures for social media platforms are an external dependency that we do not have control over, thus it is
+inevitable that some issues will inevitably arise due to changes in these external dependencies.
+It is hence essential to isolate the logic pertaining to the generation of these urls so that any issues can easily be identified and resolved.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-support-for-new-social-media-platforms"><a class="link" href="#adding-support-for-new-social-media-platforms">Adding support for new social media platforms</a></h4>
+<div class="paragraph">
+<p>Handling for parsing inputs for new social platforms should be done by adding the following methods to the <code>SocialInfoMapping</code> class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// The input parameter has been split into two parts - the socialType and the username</span>
+
+<span class="directive">private</span> <span class="directive">static</span> <span class="type">boolean</span> isPlatformInfo(<span class="predefined-type">String</span><span class="type">[]</span> splitRawSocialInfo) {
+       <span class="comment">// ... Check if the platform is identified by the input social info</span>
+    }
+
+<span class="directive">private</span> <span class="directive">static</span> SocialInfo buildPlatformInfo(<span class="predefined-type">String</span><span class="type">[]</span> splitRawSocialInfo) {
+    <span class="comment">// ... Parse the url representing the social media feed using the platform and username</span>
+    <span class="comment">// ... Instantiate the SocialInfo represented by the platform, username, and url</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and then adding the following logic to the <code>parseSocialInfos</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> SocialInfo parseSocialInfo(<span class="predefined-type">String</span> rawSocialInfo) <span class="directive">throws</span> IllegalValueException {
+    <span class="comment">// ... initialization logic here</span>
+
+    <span class="keyword">if</span> (isFacebookInfo(splitRawSocialInfo)) {
+        <span class="keyword">return</span> buildFacebookInfo(splitRawSocialInfo);
+    }
+
+    <span class="comment">// ... other social platforms here</span>
+
+    } <span class="keyword">else</span> <span class="keyword">if</span> (isPlatformInfo(splitRawSocialInfo)) {
+        <span class="keyword">return</span> buildPlatformInfo(splitRawSocialInfo);
+    }
+
+    <span class="comment">// ... other social platforms here</span>
+
+    } <span class="keyword">else</span> {
+        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalValueException(UNRECOGNIZED_SOCIAL_TYPE_MESSAGE);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>SocialInfo</code> class<br>
+<strong>Alternative 1 (current choice):</strong>  Have a class that handles information for all social media platforms.<br>
+<strong>Pros:</strong> Simple schema that is easily marshalled/unmarshalled by the JAXB library used by the storage component.<br>
+<strong>Cons:</strong> Assumes that all social media platforms can be represented by the username and the url to the user&#8217;s page.
+Can be difficult to extend to contain more attributes for social platforms that may need them.<br>
+<strong>Alternative 2:</strong> Have an abstract class that handles must-have information for all social media platforms,
+which classes designed for each social platform will extend.<br>
+<strong>Pros:</strong> More flexibility in extending the class to suit the needs of social media types.<br>
+<strong>Cons:</strong> Difficult to handle marshalling/unmarshalling to XML format using the JAXB library.
+Adds significant complexity to the codebase when number of supported platforms grow.<br>
+<strong>Additional Info:</strong> An assessment of the major social media platforms shows that the username is sufficient to identify
+users on all the major platforms at present.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Detection of duplicate social types in <code>UniqueSocialInfoList</code><br>
+<strong>Alternative 1 (current choice):</strong>  Upon every addition of a <code>SocialInfo</code> to the list, iterate through each element in the
+existing list to ensure that there are no duplicates.<br>
+<strong>Pros:</strong> No delay on startup. Computation is performed only on demand.<br>
+<strong>Cons:</strong> Slight delay may occur upon every operation that involves addition of a <code>SocialInfo</code> to a <code>UniqueSocialInfoList</code>
+if the number of social platforms supported is high.<br>
+<strong>Alternative 2:</strong> Precompute the HashSet for every <code>UniqueSocialInfoList</code> which contains the social types of each <code>SocialInfo</code> in the list
+upon loading from data file.<br>
+<strong>Pros:</strong> No delay on addition of a <code>SocialInfo</code> to a <code>UniqueSocialInfoList</code>.<br>
+<strong>Cons:</strong> Possible delay when starting up the application if number of contacts or number of social platforms supported is high.
+Additional space required to support storing the HashSets in memory.<br>
+<strong>Additional Info:</strong> Number of social platforms is expected to be a reasonable amount, and thus should not cause much noticable delay.
+In comparison, the startup delay may be more significant when a large number of contacts are present in the address book. Thus the first
+alternative was selected to provide a more pleasant user experience.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-finding-by-tags"><a class="link" href="#enhancement-added-finding-by-tags">Enhancement Added: Finding by Tags</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="find-by-tag"><a class="link" href="#find-by-tag">Finding persons: <code>find</code></a></h4>
+<div class="paragraph">
+<p>To find contacts by some criteria, use the <code>find</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Command format:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Finding by <code>name</code>:
+<code><span class="red">find</span> <span class="green">KEYWORD [ADDITIONAL_KEYWORDS]&#8230;&#8203;</span></code></p>
+</li>
+<li>
+<p>Finding by <code>tag</code>:
+<code><span class="red">find</span> <span class="blue">-tag</span> <span class="green">KEYWORD [ADDITIONAL_KEYWORDS]&#8230;&#8203;</span></code></p>
+</li>
+<li>
+<p>Finding <code>favorite</code> contacts [Coming in v2.0]:
+<code><span class="red">find</span> <span class="blue">-fav</span></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Alias: <code><span class="red">f</span></code><br></p>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Contacts that match <strong>any</strong> of the provided <code class="green">KEYWORDS</code> will be displayed in the person list.</p>
+</li>
+<li>
+<p>The search is case insensitive. e.g <code>john</code> will match <code>John</code>.</p>
+</li>
+<li>
+<p>The order of the <code class="green">KEYWORDS</code> does not matter. e.g. <code>John Doe</code> will match <code>Doe John</code>.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Jo</code> will not match <code>John</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You should see the persons that meet the provided criteria displayed in the person list after executing the command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/find-command-result.png" alt="find command result" width="300">
+</div>
+<div class="title">Figure 6. Person list after finding contacts with the tag <code>friends</code></div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">John</span></code><br>
+Displays persons with the names <code>john</code> and <code>John Doe</code> in the person list.</p>
+</li>
+<li>
+<p><code><span class="red">find</span> <span class="green">Betsy Tim John</span></code><br>
+Displays persons with names <code>Betsy</code>, <code>Tim</code>, or <code>John</code> in the person list.</p>
+</li>
+<li>
+<p><code><span class="red">find</span> <span class="blue">-tag</span> <span class="green">friends colleagues</span></code><br>
+Displays persons with tags <code>friends</code> or <code>colleagues</code> in the person list.</p>
+</li>
+<li>
+<p><code><span class="red">find</span> <span class="blue">-fav</span></code><br>
+Displays <code>favorite</code> contacts in the person list.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>Allowing the user to search for contacts by tag allows the user to easily find related contacts.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-deleting-by-tags"><a class="link" href="#enhancement-added-deleting-by-tags">Enhancement Added: Deleting by Tags</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-5"><a class="link" href="#external-behavior-5">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-5"><a class="link" href="#justification-5">Justification</a></h4>
+<div class="paragraph">
+<p>Deleting by tags make it easy for the user to delete contacts that were added for a temporary purpose.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Set up Travis and Codacy for the project</p>
+</li>
+<li>
+<p>Reported bugs in other group&#8217;s projects [<a href="https://github.com/CS2103AUG2017-W09-B1/main/issues?utf8=✓&amp;q=is%3Aissue%20involves%3Amarvinchin">Issues reported in W09-B1&#8217;s UniFy</a>]</p>
+</li>
+<li>
+<p>Helped resolve issues faced by other classmates [<a href="https://github.com/nus-cs2103-AY1718S1/forum/issues?utf8=✓&amp;q=is%3Aissue%20involves%3Amarvinchin">Contributions to forum</a>][<a href="https://nus-cs2103.slack.com/archives/C6JMW6SSZ/p1508508497000291?thread_ts=1508476015.000144&amp;cid=C6JMW6SSZ">Contributions to queries on Slack</a>]</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-07 18:51:15 +00:00
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Alex Foo - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Alex Foo - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-kaypoh"><a class="link" href="#project-kaypoh">Project: KayPoh!</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>KayPoh! is a desktop address book application used for __. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/alexfoodw.md">Functional code</a>] [<a href="https://github.com">Test code</a>] {give links to collated code files}</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-facebookconnect-code"><a class="link" href="#enhancement-added-code-facebookconnect-code">Enhancement Added: <code>facebookconnect</code></a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="sect4">
+<h5 id="connecting-to-facebook-since-v1-2-code-facebookconnect-code"><a class="link" href="#connecting-to-facebook-since-v1-2-code-facebookconnect-code">Connecting to Facebook [Since v1.2]: <code>facebookconnect</code></a></h5>
+<div class="paragraph">
+<p>Connects to your Facebook account.<br>
+Command Format: <code><span class="red">facebookconnect</span></code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>First ensure that you are added as a test user for the Facebook Application. Add yourself as a test user <a href="https://developers.facebook.com/apps/131555220900267/roles/">here</a>.</p>
+</li>
+<li>
+<p>Launches a Facebook authorization page in the browser</p>
+</li>
+<li>
+<p>Key in your credentials to connect to your Facebook account</p>
+</li>
+<li>
+<p>Once your Facebook account has been connected, you can use all the other Facebook features.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-facebookpost-code"><a class="link" href="#enhancement-added-code-facebookpost-code">Enhancement Added: <code>facebookpost</code></a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="sect4">
+<h5 id="facebookpost"><a class="link" href="#facebookpost">Posting a status to Facebook [Since v1.3]: <code>facebookpost</code></a></h5>
+<div class="paragraph">
+<p>Posts a status to your Facebook wall.<br>
+Command Format <code><span class="red">facebookpost</span> <span class="green">STATUS</span></code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Your facebook account must be connected to use this feature. If not, the authorization page will automatically be launched in
+the browser.</p>
+</li>
+<li>
+<p>Your status will then be posted to Facebook.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>facebookpost hello world!</code><br>
+Posts the status 'hello world!' to your Facebook wall.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="facebook-post-mechanism"><a class="link" href="#facebook-post-mechanism">Facebook Post mechanism</a></h3>
+<div class="paragraph">
+<p>The Facebook Post mechanism is facilitated by the Facebook Graph API and utilised through the Facebook4j unofficial public API.
+Facebook4j supports all facebook related features such as <code>facebook connect</code> and <code>facebook post</code>.</p>
+</div>
+<div class="paragraph">
+<p>The Facebook Graph API first required us to set up a Facebook Application on the Facebook for developers website. We did so following this <a href="https://developers.facebook.com/docs/apps/register/#create-app"><code>guide</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>Completing the creation led to a page as shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/facebook_developers_app.png" alt="facebook developers app" width="800">
+</div>
+<div class="title">Figure 1. Facebook Application setup page</div>
+</div>
+<div class="paragraph">
+<p>Since our AddressBook application is, for now, hosted on a private environment and not a website, we need to authenticate <code>Testers</code> on the developers platform as follows:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/facebook_dashboard_testers.png" alt="facebook dashboard testers" width="800">
+</div>
+<div class="title">Figure 2. Facebook Application testers configuration page</div>
+</div>
+<div class="paragraph">
+<p>The Facebook4j API requires us to build a Gradle dependency in the <code>gradle.properties</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>compile group: 'org.facebook4j', name: 'facebook4j-core', version: '2.4.10'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the above have been set up, we need to attain a user access key from Facebook through a Facebook Login. This is done through a browser.</p>
+</div>
+<div class="paragraph">
+<p>Once the access key has been attained, we then set the application credentials in the <code>facebook4j.properties</code> and <code>FacebookConnectCommand.java</code> files respectively as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>debug=true
+oauth.appId=*************
+oauth.appSecret=***********************</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>facebookInstance = new FacebookFactory().getInstance();
+facebookInstance.setOAuthPermissions(commaSeparetedPermissions);
+facebookInstance.setOAuthAccessToken(new AccessToken(accessToken, null));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, we simply post the status to Facebook through the authenticated <code>facebookInstance</code> using the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Facebook facebookInstance = FacebookConnectCommand.getFacebookInstance();
+facebookInstance.postStatusMessage(toPost);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following diagram displays a summary of the entire process:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/facebook_post_sequence_diagram.png" alt="facebook post sequence diagram" width="800">
+</div>
+<div class="title">Figure 3. Sequence diagram detailing execution of a <code>facebook post</code> command</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Choice of Facebook API Wrapper (Java)<br>
+<strong>Alternative 1 (current choice):</strong> Use <code>Facebook4j</code> wrapper<br>
+<strong>Pros:</strong> User friendly API, well documented.<br>
+<strong>Cons:</strong> Less available online support.<br>
+<strong>Alternative 2:</strong>  Use <code>Restfb</code> wrapper<br>
+<strong>Pros:</strong> Easily available online support.<br>
+<strong>Cons:</strong> API is well documented, however less user friendly and functionalities compared to Facebook4j.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How User is authenticated<br>
+<strong>Alternative 1 (current choice):</strong> Manually login to Facebook using a browser<br>
+<strong>Pros:</strong> Easier to implement given the intended environment of the application (private host rather than website)<br>
+<strong>Cons:</strong> May not be authenticated to use a few Facebook API functions<br>
+<strong>Alternative 2:</strong> Host the entire application on a website and attain Facebook approval.<br>
+<strong>Pros:</strong> Have full access to most features and functions of Graph API<br>
+<strong>Cons:</strong> As Facebook has a very strict criteria for all their applications, preparing the application for approval requires a lot of work that includes proper hosting, implementing SSH protection, having a privacy and terms document, etc.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of Facebook commands<br>
+<strong>Alternative 1 (current choice):</strong> Each Facebook [COMMAND] is task oriented, e.g. Facebook connect, Facebook post, etc.<br>
+<strong>Pros:</strong> Modular, all commands are separate and taken as blackbox although there are dependencies.<br>
+<strong>Cons:</strong> Increase in possible dependencies in the software, like how most will depend on <code>Facebook connect</code>.<br>
+<strong>Alternative 2:</strong> Ensure each command is stand-alone and fully independent<br>
+<strong>Pros:</strong> Will have less dependencies.<br>
+<strong>Cons:</strong> May incur more code overhead and make the software less 'lean'.<br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-facebooklink-code"><a class="link" href="#enhancement-added-code-facebooklink-code">Enhancement Added: <code>facebooklink</code></a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="sect4">
+<h5 id="facebooklink"><a class="link" href="#facebooklink">Sharing a Link to Facebook [Since v1.4]: <code>facebooklink</code></a></h5>
+<div class="paragraph">
+<p>Shares a link to your Facebook wall.<br>
+Command Format <code><span class="red">facebooklink</span> <span class="green">URL</span></code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Your facebook account must be connected to use this feature. If not, the authorization page will automatically be launched in
+the browser.</p>
+</li>
+<li>
+<p>Your URL will then be shared to Facebook.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>facebook post <a href="https://www.google.com" class="bare">https://www.google.com</a></code><br>
+Posts the link to <code><a href="https://www.google.com" class="bare">https://www.google.com</a></code> to your Facebook wall.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-facebookadd-code"><a class="link" href="#enhancement-added-code-facebookadd-code">Enhancement Added: <code>facebookadd</code></a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="sect4">
+<h5 id="facebookadd"><a class="link" href="#facebookadd">Adding a contact from Facebook [Since v1.5]: <code>facebookadd</code></a></h5>
+<div class="paragraph">
+<p>Imports a Facebook user as a contact.<br>
+Command Format <code><span class="red">facebookadd</span> <span class="green">USERNAME</span></code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Your facebook account must be connected to use this feature. If not, the authorization page will automatically be launched in
+the browser.</p>
+</li>
+<li>
+<p>The Facebook user will then be added as a contact.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>facebookadd barack obama</code><br>
+Imports the facebook user 'Barack Obama' to your contacts.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-facebookaddallfriends-code"><a class="link" href="#enhancement-added-code-facebookaddallfriends-code">Enhancement Added: <code>facebookaddallfriends</code></a></h3>
+<div class="sect3">
+<h4 id="external-behavior-5"><a class="link" href="#external-behavior-5">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="sect4">
+<h5 id="facebookaddallfriends"><a class="link" href="#facebookaddallfriends">Adding all your Facebook friends [Since v1.5]: <code>facebookaddallfriends</code></a></h5>
+<div class="paragraph">
+<p>Imports all your Facebook friends as contacts. (Current maximum is set at 30 friends)<br>
+Command Format <code><span class="red">facebookaddallfriends</span></code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Your facebook account must be connected to use this feature. If not, the authorization page will automatically be launched in
+the browser.</p>
+</li>
+<li>
+<p>All your valid facebook friends will then be added as a contact.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-add-command-code-twitterpost-code"><a class="link" href="#enhancement-proposed-add-command-code-twitterpost-code">Enhancement Proposed: Add command <code>twitterpost</code></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Allows the user to directly post to twitter from within Kaypoh!</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-add-command-code-twitteradd-code"><a class="link" href="#enhancement-proposed-add-command-code-twitteradd-code">Enhancement Proposed: Add command <code>twitteradd</code></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Allows the user to add followers and following to Kaypoh!</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-07 18:51:15 +00:00
+</div>
+</div>
+</body>
+</html>

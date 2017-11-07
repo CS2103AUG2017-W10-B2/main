@@ -33,12 +33,12 @@
 <p><mark>Start of Extract [from: User Guide]</mark></p>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<div class="sect3">
+<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command: <code>undo</code></a></h4>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+Format: <code>undo</code><br>
+Alias: <code>u</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -79,11 +79,12 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="sect3">
+<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command: <code>redo</code></a></h4>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
+Format: <code>redo</code><br>
+Alias: <code>r</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -114,6 +115,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+</div>
 <div class="sect3">
 <h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
 <div class="paragraph">
@@ -140,6 +142,9 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="content">
 <img src="../images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.1.1: Structure of Commands in the Logic Component</em></p>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -242,6 +247,9 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 3.1.2: Interactions inside Logic Component for the <code>undo</code> Command</em></p>
+</div>
+<div class="paragraph">
 <p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the address book to the state after the command is executed).</p>
 </div>
 <div class="admonitionblock note">
@@ -279,6 +287,9 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="200">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.1.3: Flow of activities inside `UndoRedoStack`</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
@@ -360,7 +371,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-21 15:57:58 +00:00
+Last updated 2017-11-07 18:51:15 +00:00
 </div>
 </div>
 </body>

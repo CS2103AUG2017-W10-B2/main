@@ -5,70 +5,77 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>AddressBook Level 4 - Developer Guide</title>
+<title>KayPoh! - Developer Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - Developer Guide</h1>
+<h1>KayPoh! - Developer Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>Team W10-B2</code>      Since: <code>Aug 2017</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#setting-up">1. Setting up</a>
+<li><a href="#about">1. About</a></li>
+<li><a href="#setting-up">2. Setting up</a>
 <ul class="sectlevel2">
-<li><a href="#prerequisites">1.1. Prerequisites</a></li>
-<li><a href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></li>
-<li><a href="#verifying-the-setup">1.3. Verifying the setup</a></li>
-<li><a href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></li>
+<li><a href="#prerequisites">2.1. Prerequisites</a></li>
+<li><a href="#setting-up-the-project-in-your-computer">2.2. Setting up the project in your computer</a></li>
+<li><a href="#verifying-the-setup">2.3. Verifying the setup</a></li>
+<li><a href="#configurations-to-do-before-writing-code">2.4. Configurations to do before writing code</a></li>
 </ul>
 </li>
-<li><a href="#design">2. Design</a>
+<li><a href="#design">3. Design</a>
 <ul class="sectlevel2">
-<li><a href="#architecture">2.1. Architecture</a></li>
-<li><a href="#ui-component">2.2. UI component</a></li>
-<li><a href="#logic-component">2.3. Logic component</a></li>
-<li><a href="#model-component">2.4. Model component</a></li>
-<li><a href="#storage-component">2.5. Storage component</a></li>
-<li><a href="#common-classes">2.6. Common classes</a></li>
+<li><a href="#architecture">3.1. Architecture</a></li>
+<li><a href="#ui-component">3.2. UI component</a></li>
+<li><a href="#logic-component">3.3. Logic component</a></li>
+<li><a href="#model-component">3.4. Model component</a></li>
+<li><a href="#storage-component">3.5. Storage component</a></li>
+<li><a href="#common-classes">3.6. Common classes</a></li>
 </ul>
 </li>
-<li><a href="#implementation">3. Implementation</a>
+<li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
-<li><a href="#logging">3.2. Logging</a></li>
-<li><a href="#configuration">3.3. Configuration</a></li>
+<li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
+<li><a href="#multiple-fields">4.2. Multiple Fields</a></li>
+<li><a href="#facebook-post-mechanism">4.3. Facebook Post mechanism</a></li>
+<li><a href="#social-media-accounts">4.4. Social Media Accounts</a></li>
+<li><a href="#command-options">4.5. Command Options</a></li>
+<li><a href="#favorite-contacts">4.6. Favorite Contacts</a></li>
+<li><a href="#sorting-contacts">4.7. Sorting Contacts</a></li>
+<li><a href="#logging">4.8. Logging</a></li>
+<li><a href="#configuration">4.9. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#documentation">4. Documentation</a>
+<li><a href="#documentation">5. Documentation</a>
 <ul class="sectlevel2">
-<li><a href="#editing-documentation">4.1. Editing Documentation</a></li>
-<li><a href="#publishing-documentation">4.2. Publishing Documentation</a></li>
-<li><a href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></li>
+<li><a href="#editing-documentation">5.1. Editing Documentation</a></li>
+<li><a href="#publishing-documentation">5.2. Publishing Documentation</a></li>
+<li><a href="#converting-documentation-to-pdf-format">5.3. Converting Documentation to PDF format</a></li>
 </ul>
 </li>
-<li><a href="#testing">5. Testing</a>
+<li><a href="#testing">6. Testing</a>
 <ul class="sectlevel2">
-<li><a href="#running-tests">5.1. Running Tests</a></li>
-<li><a href="#types-of-tests">5.2. Types of tests</a></li>
-<li><a href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></li>
+<li><a href="#running-tests">6.1. Running Tests</a></li>
+<li><a href="#types-of-tests">6.2. Types of tests</a></li>
+<li><a href="#troubleshooting-testing">6.3. Troubleshooting Testing</a></li>
 </ul>
 </li>
-<li><a href="#dev-ops">6. Dev Ops</a>
+<li><a href="#dev-ops">7. Dev Ops</a>
 <ul class="sectlevel2">
-<li><a href="#build-automation">6.1. Build Automation</a></li>
-<li><a href="#continuous-integration">6.2. Continuous Integration</a></li>
-<li><a href="#making-a-release">6.3. Making a Release</a></li>
-<li><a href="#managing-dependencies">6.4. Managing Dependencies</a></li>
+<li><a href="#build-automation">7.1. Build Automation</a></li>
+<li><a href="#continuous-integration">7.2. Continuous Integration</a></li>
+<li><a href="#making-a-release">7.3. Making a Release</a></li>
+<li><a href="#managing-dependencies">7.4. Managing Dependencies</a></li>
 </ul>
 </li>
 <li><a href="#suggested-programming-tasks-to-get-started">Appendix A: Suggested Programming Tasks to Get Started</a>
@@ -79,17 +86,27 @@
 </li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
 <li><a href="#use-cases">Appendix C: Use Cases</a></li>
-<li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
+<li><a href="#non-functional-requirements">Appendix D: Non-Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
 <li><a href="#product-survey">Appendix F: Product Survey</a></li>
 </ul>
 </div>
 </div>
 <div class="sect1">
-<h2 id="setting-up"><a class="link" href="#setting-up">1. Setting up</a></h2>
+<h2 id="about"><a class="link" href="#about">1. About</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This developer guide provides developers working on the KayPoh! application an in-depth explanation
+of how the application works. A working knowledge of UML diagram notation and familiarity with the Java programming
+language will be helpful in understanding the implementation details discussed in this guide.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting-up"><a class="link" href="#setting-up">2. Setting up</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="prerequisites"><a class="link" href="#prerequisites">1.1. Prerequisites</a></h3>
+<h3 id="prerequisites"><a class="link" href="#prerequisites">2.1. Prerequisites</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -128,7 +145,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></h3>
+<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">2.2. Setting up the project in your computer</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -170,7 +187,7 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">1.3. Verifying the setup</a></h3>
+<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">2.3. Verifying the setup</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -183,9 +200,9 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></h3>
+<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">2.4. Configurations to do before writing code</a></h3>
 <div class="sect3">
-<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">1.4.1. Configuring the coding style</a></h4>
+<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">2.4.1. Configuring the coding style</a></h4>
 <div class="paragraph">
 <p>This project follows <a href="https://github.com/oss-generic/process/blob/master/docs/CodingStandards.md">oss-generic coding standards</a>. IntelliJ&#8217;s default style is mostly compliant with ours but it uses a different import order from ours. To rectify,</p>
 </div>
@@ -217,13 +234,13 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">1.4.2. Updating documentation to match your fork</a></h4>
+<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">2.4.2. Updating documentation to match your fork</a></h4>
 <div class="paragraph">
 <p>After forking the repo, links in the documentation will still point to the <code>se-edu/addressbook-level4</code> repo. If you plan to develop this as a separate product (i.e. instead of contributing to the <code>se-edu/addressbook-level4</code>) , you should replace the URL in the variable <code>repoURL</code> in <code>DeveloperGuide.adoc</code> and <code>UserGuide.adoc</code> with the URL of your fork.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">1.4.3. Setting up CI</a></h4>
+<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">2.4.3. Setting up CI</a></h4>
 <div class="paragraph">
 <p>Set up Travis to perform Continuous Integration (CI) for your fork. See <a href="UsingTravis.html">UsingTravis.adoc</a> to learn how to set it up.</p>
 </div>
@@ -244,7 +261,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="sect3">
-<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">1.4.4. Getting started with coding</a></h4>
+<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">2.4.4. Getting started with coding</a></h4>
 <div class="paragraph">
 <p>When you are ready to start coding,</p>
 </div>
@@ -263,17 +280,17 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="sect1">
-<h2 id="design"><a class="link" href="#design">2. Design</a></h2>
+<h2 id="design"><a class="link" href="#design">3. Design</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="architecture"><a class="link" href="#architecture">2.1. Architecture</a></h3>
+<h3 id="architecture"><a class="link" href="#architecture">3.1. Architecture</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.1 : Architecture Diagram</em></p>
+<p><em>Figure 2.1.1: Architecture Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
@@ -309,10 +326,10 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p><code>EventsCenter</code> : This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design)</p>
+<p><code>EventsCenter</code>: This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design)</p>
 </li>
 <li>
-<p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
+<p><code>LogsCenter</code>: Used by many classes to write log messages to the App&#8217;s log file.</p>
 </li>
 </ul>
 </div>
@@ -322,16 +339,16 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#ui-component"><strong><code>UI</code></strong></a> : The UI of the App.</p>
+<p><a href="#ui-component"><strong><code>UI</code></strong></a>: The UI of the App.</p>
 </li>
 <li>
-<p><a href="#logic-component"><strong><code>Logic</code></strong></a> : The command executor.</p>
+<p><a href="#logic-component"><strong><code>Logic</code></strong></a>: The command executor.</p>
 </li>
 <li>
-<p><a href="#model-component"><strong><code>Model</code></strong></a> : Holds the data of the App in-memory.</p>
+<p><a href="#model-component"><strong><code>Model</code></strong></a>: Holds the data of the App in-memory.</p>
 </li>
 <li>
-<p><a href="#storage-component"><strong><code>Storage</code></strong></a> : Reads data from, and writes data to, the hard disk.</p>
+<p><a href="#storage-component"><strong><code>Storage</code></strong></a>: Reads data from, and writes data to, the hard disk.</p>
 </li>
 </ul>
 </div>
@@ -357,7 +374,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.2 : Class Diagram of the Logic Component</em></p>
+<p><em>Figure 2.1.2: Class Diagram of the Logic Component</em></p>
 </div>
 <h4 id="events-driven-nature-of-the-design" class="discrete">Events-Driven nature of the design</h4>
 <div class="paragraph">
@@ -369,7 +386,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.3a : Component interactions for <code>delete 1</code> command (part 1)</em></p>
+<p><em>Figure 2.1.3a: Component interactions for <code>delete 1</code> command (part 1)</em></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -392,7 +409,7 @@ Note how the <code>Model</code> simply raises a <code>AddressBookChangedEvent</c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.3b : Component interactions for <code>delete 1</code> command (part 2)</em></p>
+<p><em>Figure 2.1.3b: Component interactions for <code>delete 1</code> command (part 2)</em></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -411,17 +428,17 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="ui-component"><a class="link" href="#ui-component">2.2. UI component</a></h3>
+<h3 id="ui-component"><a class="link" href="#ui-component">3.2. UI component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.2.1 : Structure of the UI Component</em></p>
+<p><em>Figure 2.2.1: Structure of the UI Component</em></p>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
+<p><strong>API</strong>: <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
@@ -447,14 +464,14 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="logic-component"><a class="link" href="#logic-component">2.3. Logic component</a></h3>
+<h3 id="logic-component"><a class="link" href="#logic-component">3.3. Logic component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.3.1 : Structure of the Logic Component</em></p>
+<p><em>Figure 2.3.1: Structure of the Logic Component</em></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -462,10 +479,10 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.3.2 : Structure of Commands in the Logic Component. This diagram shows finer details concerning <code>XYZCommand</code> and <code>Command</code> in Figure 2.3.1</em></p>
+<p><em>Figure 2.3.2: Structure of Commands in the Logic Component. This diagram shows finer details concerning <code>XYZCommand</code> and <code>Command</code> in Figure 2.3.1</em></p>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> :
+<p><strong>API</strong>:
 <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
 </div>
 <div class="olist arabic">
@@ -493,21 +510,21 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.3.1 : Interactions Inside the Logic Component for the <code>delete 1</code> Command</em></p>
+<p><em>Figure 2.3.1: Interactions Inside the Logic Component for the <code>delete 1</code> Command</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="model-component"><a class="link" href="#model-component">2.4. Model component</a></h3>
+<h3 id="model-component"><a class="link" href="#model-component">3.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.4.1 : Structure of the Model Component</em></p>
+<p><em>Figure 2.4.1: Structure of the Model Component</em></p>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+<p><strong>API</strong>: <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Model</code>,</p>
@@ -530,17 +547,17 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="storage-component"><a class="link" href="#storage-component">2.5. Storage component</a></h3>
+<h3 id="storage-component"><a class="link" href="#storage-component">3.5. Storage component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.5.1 : Structure of the Storage Component</em></p>
+<p><em>Figure 2.5.1: Structure of the Storage Component</em></p>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
+<p><strong>API</strong>: <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Storage</code> component,</p>
@@ -557,7 +574,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="common-classes"><a class="link" href="#common-classes">2.6. Common classes</a></h3>
+<h3 id="common-classes"><a class="link" href="#common-classes">3.6. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
 </div>
@@ -565,13 +582,13 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">3. Implementation</a></h2>
+<h2 id="implementation"><a class="link" href="#implementation">4. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></h3>
+<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></h3>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -582,6 +599,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.1.1: Structure of Commands in the Logic Component</em></p>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -684,6 +704,9 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 3.1.2: Interactions inside Logic Component for the <code>undo</code> Command</em></p>
+</div>
+<div class="paragraph">
 <p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the address book to the state after the command is executed).</p>
 </div>
 <div class="admonitionblock note">
@@ -722,8 +745,11 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="200">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 3.1.3: Flow of activities inside `UndoRedoStack`</em></p>
+</div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
@@ -767,7 +793,515 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.2. Logging</a></h3>
+<h3 id="multiple-fields"><a class="link" href="#multiple-fields">4.2. Multiple Fields</a></h3>
+<div class="paragraph">
+<p>When an <code>AddCommandParser</code> or <code>EditCommandParser</code> is used to parse a command, an <code>ArgumentMultimap</code> object is created which contains a hashmap mapping the prefixes to a list of their respective arguments.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ArgumentMultimap</code> class has a <code>getValue</code> method and a <code>getMultipleValues</code> method. If there are multiple strings passed as arguments to the prefix, the <code>getValue</code> method returns only the last string in the list, while the <code>getMultipleValues</code> returns a concatenation of all the strings in the list.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ParserUtil</code> class has various parsing methods, such as <code>parseName</code> and <code>parsePhone</code>. The method <code>parseName</code> returns a <code>Name</code> object wrapped in the <code>Optional</code> class and the method returns a <code>Phone</code> object wrapped in the <code>Optional</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>parsePhone</code> method in the <code>ParserUtil</code> class calls the <code>getMultipleValues</code> method of the <code>ArgumentMultimap</code> class instead of the <code>getValue</code> method called by the other parsers. This allows multiple phone numbers to be stored in a <code>Phone</code> object.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Display of the multiple phone numbers<br>
+<strong>Alternative 1 (current choice):</strong> Insert a newline character ("\n") between different phone numbers.<br>
+<strong>Pros:</strong> Easier to see the different phone numbers.<br>
+<strong>Cons:</strong> Less flexibility in adding multiple phone numbers (cannot type <code>p/12345 56789</code>).<br>
+<strong>Alternative 2:</strong> Insert a space character (" ") between different phone numbers.<br>
+<strong>Pros:</strong> More flexibility in adding multiple phone numbers. Can type type <code>p/12345 56789</code> to add the two phone numbers with only one "p/" prefix.<br>
+<strong>Cons:</strong> Harder to see the different phone numbers, makes the display more cluttered.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Initialising of <code>Phone</code> object<br>
+<strong>Alternative 1 (current choice):</strong> Constructor of <code>Phone</code> takes in a String as parameter, modify current constructor.<br>
+<strong>Pros:</strong> No need to create a new method.<br>
+<strong>Cons:</strong> Not so easy to manipulate the string and split the multiple phone numbers.<br>
+<strong>Alternative 2:</strong> Create a new constructor for <code>Phone</code> that takes in a List&lt;String&gt; as parameter.<br>
+<strong>Pros:</strong> Easier to manipulate the multiple phone numbers in the list.<br>
+<strong>Cons:</strong> Can cause problems during testing as there are two constructors.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Allowing duplicate phone numbers for a contact<br>
+<strong>Alternative 1 (current choice):</strong> Do not allow duplicate phone numbers.<br>
+<strong>Pros:</strong> Makes the address book more usable.<br>
+<strong>Cons:</strong> Need to implement checking of the arguments.<br>
+<strong>Alternative 2:</strong> Allow duplicate phone numbers.<br>
+<strong>Pros:</strong> No need to check whether the arguments have been entered already.<br>
+<strong>Cons:</strong> May cause the address book to be messy if adding duplicate phone numbers was not the user&#8217;s intention.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Dealing with invalid values as well as valid values<br>
+<strong>Alternative 1 (current choice):</strong> Accept valid values and ignore invalid values.<br>
+<strong>Pros:</strong> Makes it easier for the user as the invalid value may have been an accident and the valid value may actually be correct.<br>
+<strong>Cons:</strong> Both values may have been incorrect and an incorrect phone number would have been added.<br>
+<strong>Alternative 2:</strong> Ignore all values as long as there is one invalid value.<br>
+<strong>Pros:</strong> No need to continue checking the rest of the arguments once there is one invalid value.<br>
+<strong>Cons:</strong> The incorrect value may have been an accident and the user may want the valid value to be added as a phone number to the contact.<br></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="facebook-post-mechanism"><a class="link" href="#facebook-post-mechanism">4.3. Facebook Post mechanism</a></h3>
+<div class="paragraph">
+<p>The Facebook Post mechanism is facilitated by the Facebook Graph API and utilised through the Facebook4j unofficial public API.
+Facebook4j supports all facebook related features such as <code>facebook connect</code> and <code>facebook post</code>.</p>
+</div>
+<div class="paragraph">
+<p>The Facebook Graph API first required us to set up a Facebook Application on the Facebook for developers website. We did so following this <a href="https://developers.facebook.com/docs/apps/register/#create-app"><code>guide</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>Completing the creation led to a page as shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/facebook_developers_app.png" alt="facebook developers app" width="800">
+</div>
+<div class="title">Figure 1. Facebook Application setup page</div>
+</div>
+<div class="paragraph">
+<p>Since our AddressBook application is, for now, hosted on a private environment and not a website, we need to authenticate <code>Testers</code> on the developers platform as follows:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/facebook_dashboard_testers.png" alt="facebook dashboard testers" width="800">
+</div>
+<div class="title">Figure 2. Facebook Application testers configuration page</div>
+</div>
+<div class="paragraph">
+<p>The Facebook4j API requires us to build a Gradle dependency in the <code>gradle.properties</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>compile group: 'org.facebook4j', name: 'facebook4j-core', version: '2.4.10'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the above have been set up, we need to attain a user access key from Facebook through a Facebook Login. This is done through a browser.</p>
+</div>
+<div class="paragraph">
+<p>Once the access key has been attained, we then set the application credentials in the <code>facebook4j.properties</code> and <code>FacebookConnectCommand.java</code> files respectively as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>debug=true
+oauth.appId=*************
+oauth.appSecret=***********************</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>facebookInstance = new FacebookFactory().getInstance();
+facebookInstance.setOAuthPermissions(commaSeparetedPermissions);
+facebookInstance.setOAuthAccessToken(new AccessToken(accessToken, null));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, we simply post the status to Facebook through the authenticated <code>facebookInstance</code> using the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Facebook facebookInstance = FacebookConnectCommand.getFacebookInstance();
+facebookInstance.postStatusMessage(toPost);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following diagram displays a summary of the entire process:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/facebook_post_sequence_diagram.png" alt="facebook post sequence diagram" width="800">
+</div>
+<div class="title">Figure 3. Sequence diagram detailing execution of a <code>facebook post</code> command</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Choice of Facebook API Wrapper (Java)<br>
+<strong>Alternative 1 (current choice):</strong> Use <code>Facebook4j</code> wrapper<br>
+<strong>Pros:</strong> User friendly API, well documented.<br>
+<strong>Cons:</strong> Less available online support.<br>
+<strong>Alternative 2:</strong>  Use <code>Restfb</code> wrapper<br>
+<strong>Pros:</strong> Easily available online support.<br>
+<strong>Cons:</strong> API is well documented, however less user friendly and functionalities compared to Facebook4j.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How User is authenticated<br>
+<strong>Alternative 1 (current choice):</strong> Manually login to Facebook using a browser<br>
+<strong>Pros:</strong> Easier to implement given the intended environment of the application (private host rather than website)<br>
+<strong>Cons:</strong> May not be authenticated to use a few Facebook API functions<br>
+<strong>Alternative 2:</strong> Host the entire application on a website and attain Facebook approval.<br>
+<strong>Pros:</strong> Have full access to most features and functions of Graph API<br>
+<strong>Cons:</strong> As Facebook has a very strict criteria for all their applications, preparing the application for approval requires a lot of work that includes proper hosting, implementing SSH protection, having a privacy and terms document, etc.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of Facebook commands<br>
+<strong>Alternative 1 (current choice):</strong> Each Facebook [COMMAND] is task oriented, e.g. Facebook connect, Facebook post, etc.<br>
+<strong>Pros:</strong> Modular, all commands are separate and taken as blackbox although there are dependencies.<br>
+<strong>Cons:</strong> Increase in possible dependencies in the software, like how most will depend on <code>Facebook connect</code>.<br>
+<strong>Alternative 2:</strong> Ensure each command is stand-alone and fully independent<br>
+<strong>Pros:</strong> Will have less dependencies.<br>
+<strong>Cons:</strong> May incur more code overhead and make the software less 'lean'.<br></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="social-media-accounts"><a class="link" href="#social-media-accounts">4.4. Social Media Accounts</a></h3>
+<div class="paragraph">
+<p>Information about contact&#8217;s social media accounts are encapsulated by the <code>SocialInfo</code> class. The list of <code>SocialInfo</code> associated
+with a <code>Person</code> is handled by the <code>UniqueSocialInfoList</code>, which guarantees that at most one of each type of social media type is
+associated with the contact.</p>
+</div>
+<div class="paragraph">
+<p>The following class diagram represents the relationship between the <code>Person</code>, <code>UniqueSocialInfoList</code> and <code>SocialInfo</code> classes:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SocialInfoClassDiagram.png" alt="SocialInfoClassDiagram" width="800">
+</div>
+<div class="title">Figure 4. Class diagram representing relationships between Person, UniqueSocialInfoList and SocialInfo classes</div>
+</div>
+<div class="sect3">
+<h4 id="parsing-inputs-representing-social-media-accounts"><a class="link" href="#parsing-inputs-representing-social-media-accounts">4.4.1. Parsing inputs representing social media accounts</a></h4>
+<div class="paragraph">
+<p>The form <code>SOCIAL_TYPE_IDENTIFIER USERNAME</code> is used to represent a <code>SocialInfo</code> as a CLI parametr for a command,
+A Collection of these raw social info parameters can then be passed to the <code>parseSocialInfo</code> method in the <code>SocialInfoMapping</code> class for parsing.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>parseSocialInfo</code> method handles the parsing of the raw social info parameters:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParseSocialInfoSequenceDiagram.png" alt="ParseSocialInfoSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 5. Sequence diagram detailing how inputs are parsed to form SocialInfos</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As far as possible instantiation of new <code>SocialInfo</code> classes should be handled by the <code>SocialInfoMapping</code> class.
+The url structures for social media platforms are an external dependency that we do not have control over, thus it is
+inevitable that some issues will inevitably arise due to changes in these external dependencies.
+It is hence essential to isolate the logic pertaining to the generation of these urls so that any issues can easily be identified and resolved.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-support-for-new-social-media-platforms"><a class="link" href="#adding-support-for-new-social-media-platforms">4.4.2. Adding support for new social media platforms</a></h4>
+<div class="paragraph">
+<p>Handling for parsing inputs for new social platforms should be done by adding the following methods to the <code>SocialInfoMapping</code> class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// The input parameter has been split into two parts - the socialType and the username</span>
+
+<span class="directive">private</span> <span class="directive">static</span> <span class="type">boolean</span> isPlatformInfo(<span class="predefined-type">String</span><span class="type">[]</span> splitRawSocialInfo) {
+       <span class="comment">// ... Check if the platform is identified by the input social info</span>
+    }
+
+<span class="directive">private</span> <span class="directive">static</span> SocialInfo buildPlatformInfo(<span class="predefined-type">String</span><span class="type">[]</span> splitRawSocialInfo) {
+    <span class="comment">// ... Parse the url representing the social media feed using the platform and username</span>
+    <span class="comment">// ... Instantiate the SocialInfo represented by the platform, username, and url</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and then adding the following logic to the <code>parseSocialInfos</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> SocialInfo parseSocialInfo(<span class="predefined-type">String</span> rawSocialInfo) <span class="directive">throws</span> IllegalValueException {
+    <span class="comment">// ... initialization logic here</span>
+
+    <span class="keyword">if</span> (isFacebookInfo(splitRawSocialInfo)) {
+        <span class="keyword">return</span> buildFacebookInfo(splitRawSocialInfo);
+    }
+
+    <span class="comment">// ... other social platforms here</span>
+
+    } <span class="keyword">else</span> <span class="keyword">if</span> (isPlatformInfo(splitRawSocialInfo)) {
+        <span class="keyword">return</span> buildPlatformInfo(splitRawSocialInfo);
+    }
+
+    <span class="comment">// ... other social platforms here</span>
+
+    } <span class="keyword">else</span> {
+        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalValueException(UNRECOGNIZED_SOCIAL_TYPE_MESSAGE);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.3. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>SocialInfo</code> class<br>
+<strong>Alternative 1 (current choice):</strong>  Have a class that handles information for all social media platforms.<br>
+<strong>Pros:</strong> Simple schema that is easily marshalled/unmarshalled by the JAXB library used by the storage component.<br>
+<strong>Cons:</strong> Assumes that all social media platforms can be represented by the username and the url to the user&#8217;s page.
+Can be difficult to extend to contain more attributes for social platforms that may need them.<br>
+<strong>Alternative 2:</strong> Have an abstract class that handles must-have information for all social media platforms,
+which classes designed for each social platform will extend.<br>
+<strong>Pros:</strong> More flexibility in extending the class to suit the needs of social media types.<br>
+<strong>Cons:</strong> Difficult to handle marshalling/unmarshalling to XML format using the JAXB library.
+Adds significant complexity to the codebase when number of supported platforms grow.<br>
+<strong>Additional Info:</strong> An assessment of the major social media platforms shows that the username is sufficient to identify
+users on all the major platforms at present.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Detection of duplicate social types in <code>UniqueSocialInfoList</code><br>
+<strong>Alternative 1 (current choice):</strong>  Upon every addition of a <code>SocialInfo</code> to the list, iterate through each element in the
+existing list to ensure that there are no duplicates.<br>
+<strong>Pros:</strong> No delay on startup. Computation is performed only on demand.<br>
+<strong>Cons:</strong> Slight delay may occur upon every operation that involves addition of a <code>SocialInfo</code> to a <code>UniqueSocialInfoList</code>
+if the number of social platforms supported is high.<br>
+<strong>Alternative 2:</strong> Precompute the HashSet for every <code>UniqueSocialInfoList</code> which contains the social types of each <code>SocialInfo</code> in the list
+upon loading from data file.<br>
+<strong>Pros:</strong> No delay on addition of a <code>SocialInfo</code> to a <code>UniqueSocialInfoList</code>.<br>
+<strong>Cons:</strong> Possible delay when starting up the application if number of contacts or number of social platforms supported is high.
+Additional space required to support storing the HashSets in memory.<br>
+<strong>Additional Info:</strong> Number of social platforms is expected to be a reasonable amount, and thus should not cause much noticable delay.
+In comparison, the startup delay may be more significant when a large number of contacts are present in the address book. Thus the first
+alternative was selected to provide a more pleasant user experience.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-options"><a class="link" href="#command-options">4.5. Command Options</a></h3>
+<div class="paragraph">
+<p>As some functionalities have similar behaviours, we group them under a single <code>COMMAND_WORD</code> and allow the user to include
+<code>OPTIONS</code> when using the command to specify which functionality is to be executed.</p>
+</div>
+<div class="paragraph">
+<p>The following command syntax is thus adopted: <code>COMMAND_WORD [-OPTIONS]&#8230;&#8203; [PARAMETERS]&#8230;&#8203;</code>, where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>COMMAND_WORD</code> specifies the <strong>action to be performed</strong>,</p>
+</li>
+<li>
+<p><code>OPTIONS</code> are prefixed with a dash (e.g. <code>-tag</code>) and specifies <strong>how the action is to be performed</strong>, and</p>
+</li>
+<li>
+<p><code>PARAMETERS</code> provide <strong>information for the action to be executed with</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="handling-options"><a class="link" href="#handling-options">4.5.1. Handling Options</a></h4>
+<div class="paragraph">
+<p>Arguments that may include options should be wrapped with the <code>OptionBearingArgument</code> class, which abstracts the parsing
+of options and parameters. The following code snippet shows how the <code>OptionBearingArgument</code> may be used to parse user inputs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// assume that args is a string containing user input with both arguments and parameters</span>
+OptionBearingArgument opArg = <span class="keyword">new</span> OptionBearingArgument(args);
+<span class="comment">// options are returned in the form of a set which contains options that are present in the argument</span>
+<span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; options = opArg.getOptions();
+<span class="comment">// the options are stripped from the argument to give us the parameters</span>
+<span class="predefined-type">String</span> parameters = opArg.getFilteredArgs();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How commands with similar behaviour should be handled<br>
+<strong>Alternative 1 (current choice):</strong> Group these commands under a single <code>COMMAND_WORD</code> and introduce a new <code>OPTIONS</code> syntax
+to allow the user to specify the desired functionality to be executed.<br>
+<strong>Pros:</strong> Clear distinction between arguments that specify how a command should be executed, and arguments that provide information
+for the command to be executed with.<br>
+<strong>Cons:</strong> Potentially more initial confusion for the user as there is an additional syntax to learn. To mitigate this a
+section explaining the updated command syntax has been added to the user guide.<br>
+<strong>Alternative 2:</strong> Group these commands under a single <code>COMMAND_WORD</code>, and use the existing <code>PREFIX/</code> syntax to identify
+how a command should be executed.<br>
+<strong>Pros:</strong> User does not need to learn additional syntax.<br>
+<strong>Cons:</strong> The meaning of the <code>PREFIX/</code> syntax becomes unintuitive. This syntax is currently used to denote a property
+in an object (i.e. <code>p/</code> denotes a phone number in a person). To extend this syntax to command modifiers makes it confusing
+for the user as the meaning of the syntax becomes diluted. An informal survey conducted with our target users confirms
+that this approach was less intuitive to them compared to the approach described in Alternative 1.<br>
+<strong>Alternative 3:</strong> Have separate <code>COMMAND_WORDS</code> for each command.<br>
+<strong>Pros:</strong> Simple syntax, with no confusion over what behaviour will be executed.<br>
+<strong>Cons:</strong> Does not scale well as users have to remember many different commands as the number of features grow.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="favorite-contacts"><a class="link" href="#favorite-contacts">4.6. Favorite Contacts</a></h3>
+<div class="paragraph">
+<p>The favorite status of each contact is stored as a <code>boolean</code>, encapsulated within the <code>Favorite</code> class.<br>
+There are several ways to toggle this <code>boolean</code> to change the favorite status of a contact.</p>
+</div>
+<div class="sect3">
+<h4 id="toggle-favorites-using-code-add-code-and-or-code-edit-code-command-br"><a class="link" href="#toggle-favorites-using-code-add-code-and-or-code-edit-code-command-br">4.6.1. Toggle favorites using <code>add</code> and/or <code>edit</code> command<br></a></h4>
+<div class="paragraph">
+<p>For user&#8217;s convenience, we are allowing just the input of prefixes i.e. <code>f/</code> in <code>add</code> command and either <code>f/</code> or <code>uf/</code> in <code>edit</code> command to make a change to a contact&#8217;s favorite status.</p>
+</div>
+<div class="paragraph">
+<p>As such, at <code>Parser</code> level in both <code>AddCommandParser</code> and <code>EditCommandParser</code>, we simply need to know whether the prefixes are present in the user input. Prefixes in user input can be found in <code>ArgumentMultimap argMultimap</code>. Hence, we can utilise the following helper-method by passing in <code>PREFIX_FAV</code> or <code>PREFIX_UNFAV</code> to return true if the prefix is contained within the user input, false otherwise:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public boolean isPrefixPresent(Prefix prefix) {
+    return argMultimap.containsKey(prefix);
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The helper-method above is called within a common method <code>parseFavorite</code> (shown below), used by both <code>AddCommandParser</code> and <code>EditCommandParser</code> classes. The difference in utilisation of the following method by both classes is in the parameters that are passed in. As <code>AddCommandParser</code> only needs to check whether <code>PREFIX_FAV</code> exists, it will pass in <code>parseFavorite(argMultimap, PREFIX_FAV, null)</code> while <code>EditCommandParser</code> will pass in <code>parseFavorite(argMultimap, PREFIX_FAV, PREFIX_UNFAV)</code> to check for both prefixes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public static Optional&lt;Favorite&gt; parseFavorite(ArgumentMultimap argMultimap,
+                                     Prefix prefixFav,
+                                     Prefix prefixUnFav) throws ParseException {
+    // ... parser logic ...
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For editing person, after obtaining the presence of prefix in user input, we need to perform some input validation by disallowing both <code>f/</code> and <code>uf/</code> prefixes to be present at the same time. We can check this by using the he:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    // Disallow both f/ and uf/ to be present in the same instance of user input when editing
+    if (argMultimap.isPrefixPresent(prefixFav) &amp;&amp; argMultimap.isPrefixPresent(prefixUnFav)) {
+        throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            EditCommand.MESSAGE_USAGE));
+    }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For both adding and editing person, there is a similar validation for disallowing text after prefix e.g. <code>f/this is a text</code>. This is achieved by checking whether the any additional <code>String</code> exists after prefix.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    if (argMultimap.isPrefixPresent(prefixFav)) {
+        if (!argMultimap.getValue(prefixFav).get().isEmpty()) { // Disallow text after prefix
+            throw new ParseException(Favorite.MESSAGE_FAVORITE_CONSTRAINTS);
+        } else {
+            return Optional.of(new Favorite(true));
+        }
+    }</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="toggle-favorites-using-code-fav-code-and-or-code-unfav-code-command"><a class="link" href="#toggle-favorites-using-code-fav-code-and-or-code-unfav-code-command">4.6.2. Toggle favorites using <code>fav</code> and/or <code>unfav</code> command</a></h4>
+<div class="paragraph">
+<p>To enhance contact management, we implemented these commands to perform batch favoriting or unfavoriting of multiple contacts. They are also capable of performing the operations on a single contact. The implementation involves two major steps.</p>
+</div>
+<div class="paragraph">
+<p>The first step to doing so is to allow parsing of multiple indexes so that a user could specify which contacts they would like to favorite or unfavorite i.e. <code>fav 1 2 3</code>. In this case, we use <code>List</code> to parse and store every index.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public static List&lt;Index&gt; parseMultipleIndexes(String args) throws IllegalValueException {
+    List&lt;String&gt; argsList = Arrays.asList(args.trim().split("\\s+"));
+    List&lt;Index&gt; indexList = new ArrayList&lt;&gt;();
+    for (String index : argsList) {
+        indexList.add(parseIndex(index));
+    }
+    return indexList;
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that trimming <code>args.trim()</code> is required since the args passed will usually contain a leading whitespace. The regex <code>args.trim().split("\\s+")</code> is used as a form of validation to ignore multiple trailing whitespaces and still allowing such user input to be parsed, preventing an <code>exception</code>.</p>
+</div>
+<div class="paragraph">
+<p>The last step is to create a copy of the person we are favoriting or unfavoriting and change its favorite status via the aforementioned <code>boolean</code>. Since the <code>Person</code> class takes two constructors, the following constructor allows creating a copy of a given <code>ReadOnlyPerson</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public Person(ReadOnlyPerson source) {
+    // ... create copy of all fields ...
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After getting the copy of the person e.g. <code>personToFavorite</code>, it is easy to call <code>personToFavorite.setFavorite(new Favorite(true))</code> and that sets the person as a favorite. Batch operation of favoriting or unfavoriting multiple contacts simply loops this last step for the amount of indexes specified by the user.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.6.3. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storing of favorite status<br>
+<strong>Alternative 1 (current choice):</strong> Store it as a <code>boolean</code><br>
+<strong>Pros:</strong> Saves memory, more efficient to call <code>isFavorite()</code> to check whether a person is a favorite contact<br>
+<strong>Cons:</strong> Unable to check for <code>null</code> or use any other values apart from <code>true</code> or <code>false</code><br>
+<strong>Alternative 2:</strong> Store it as a <code>String</code><br>
+<strong>Pros:</strong> Easier for printing its values<br>
+<strong>Cons:</strong> Requires input validation for <code>String</code>, less efficient in checking whether a person is a favorite contact (<code>O(N)</code> in the worse case scenario)</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Ways to change the favorite status of a person<br>
+<strong>Alternative 1 (current choice):</strong> Allowing favoriting and unfavoriting of contacts through adding and editing persons as well as through <code>fav</code> and <code>unfav</code> commands<br>
+<strong>Pros:</strong> Creates a more consistent workflow for our user that ties in with other fields, a more straight-foward approach to indicate which are the favorite contacts upon adding a person<br>
+<strong>Cons:</strong> More tedious implementation<br>
+<strong>Alternative 2:</strong> Just rely on <code>fav</code> and <code>unfav</code> commands<br>
+<strong>Pros:</strong> Easier implementation<br>
+<strong>Cons:</strong> User would have to remember more commands and their usages</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-contacts"><a class="link" href="#sorting-contacts">4.7. Sorting Contacts</a></h3>
+<div class="paragraph">
+<p>To make it easier for users to find contacts, the displayed person list is kept sorted. Users can specify how contacts
+are to be ordered in the list using the <code>sort</code> command.</p>
+</div>
+<div class="paragraph">
+<p>The sorting logic makes use of the Observer pattern. Instead of keeping the <code>personList</code> itself sorted, a <code>SortedList</code>
+backed by the <code>personList</code> is constructed. The <code>SortedList</code> keeps a list of persons equivalent to that of the <code>personList</code>
+in sorted order, and ensures that it remains sorted even as changes are made to the underlying <code>personList</code>.</p>
+</div>
+<div class="paragraph">
+<p>This <code>SortedList</code> is in turn observed by the <code>FilteredList</code> to ensure that the list remains in sorted order even as filters are applied.</p>
+</div>
+<div class="paragraph">
+<p>The above relationship is represented by the following class diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortObserverClassDiagram.png" alt="SortObserverClassDiagram" width="800">
+</div>
+<div class="title">Figure 6. Class diagram representing the Observer pattern used to keep contacts in sorted order</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Where sorting should be handled<br>
+<strong>Alternative 1 (current choice):</strong> Handle sorts at the <code>ModelManager</code> level using the Observer pattern<br>
+<strong>Pros:</strong> Sorting does not require IO operations, which are computationally more expensive compared to in-memory operations.<br>
+<strong>Cons:</strong> Slightly longer startup time might be observed as the data file is not sorted and hence has to be sorted upon every startup.<br>
+<strong>Alternative 2:</strong> Handle sorts at the <code>AddressBook</code> level by sorting the <code>personList</code> directly<br>
+<strong>Pros:</strong> Startup might be faster as the data file should have already been sorted. Also reduces complexity of the <code>Model</code>
+as there is no need to maintain any additional data structures.<br>
+<strong>Cons:</strong> Every sort operation will require writing to the data file, which requires IO operations that are slower compared
+to in-memory operations.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">4.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -790,22 +1324,22 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
-<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</p>
+<p><code>SEVERE</code>: Critical problem detected which may possibly cause the termination of the application</p>
 </li>
 <li>
-<p><code>WARNING</code> : Can continue, but with caution</p>
+<p><code>WARNING</code>: Can continue, but with caution</p>
 </li>
 <li>
-<p><code>INFO</code> : Information showing the noteworthy actions by the App</p>
+<p><code>INFO</code>: Information showing the noteworthy actions by the App</p>
 </li>
 <li>
-<p><code>FINE</code> : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</p>
+<p><code>FINE</code>: Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.3. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">4.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -813,7 +1347,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">4. Documentation</a></h2>
+<h2 id="documentation"><a class="link" href="#documentation">5. Documentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We use asciidoc for writing documentation.</p>
@@ -831,20 +1365,20 @@ We chose asciidoc over Markdown because asciidoc, although a bit more complex th
 </table>
 </div>
 <div class="sect2">
-<h3 id="editing-documentation"><a class="link" href="#editing-documentation">4.1. Editing Documentation</a></h3>
+<h3 id="editing-documentation"><a class="link" href="#editing-documentation">5.1. Editing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
 Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">4.2. Publishing Documentation</a></h3>
+<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">5.2. Publishing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></h3>
+<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">5.3. Converting Documentation to PDF format</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
 </div>
@@ -873,16 +1407,16 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 5.6.1 : Saving documentation as PDF files in Chrome</em></p>
+<p><em>Figure 5.6.1: Saving documentation as PDF files in Chrome</em></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="testing"><a class="link" href="#testing">5. Testing</a></h2>
+<h2 id="testing"><a class="link" href="#testing">6. Testing</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running Tests</a></h3>
+<h3 id="running-tests"><a class="link" href="#running-tests">6.1. Running Tests</a></h3>
 <div class="paragraph">
 <p>There are three ways to run tests.</p>
 </div>
@@ -944,7 +1478,7 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 </div>
 </div>
 <div class="sect2">
-<h3 id="types-of-tests"><a class="link" href="#types-of-tests">5.2. Types of tests</a></h3>
+<h3 id="types-of-tests"><a class="link" href="#types-of-tests">6.2. Types of tests</a></h3>
 <div class="paragraph">
 <p>We have two types of tests:</p>
 </div>
@@ -986,7 +1520,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></h3>
+<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">6.3. Troubleshooting Testing</a></h3>
 <div class="paragraph">
 <p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
 </div>
@@ -1004,22 +1538,22 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
+<h2 id="dev-ops"><a class="link" href="#dev-ops">7. Dev Ops</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build Automation</a></h3>
+<h3 id="build-automation"><a class="link" href="#build-automation">7.1. Build Automation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="continuous-integration"><a class="link" href="#continuous-integration">6.2. Continuous Integration</a></h3>
+<h3 id="continuous-integration"><a class="link" href="#continuous-integration">7.2. Continuous Integration</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="making-a-release"><a class="link" href="#making-a-release">6.3. Making a Release</a></h3>
+<h3 id="making-a-release"><a class="link" href="#making-a-release">7.3. Making a Release</a></h3>
 <div class="paragraph">
 <p>Here are the steps to create a new release.</p>
 </div>
@@ -1041,7 +1575,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.4. Managing Dependencies</a></h3>
+<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">7.4. Managing Dependencies</a></h3>
 <div class="paragraph">
 <p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
@@ -1731,10 +2265,166 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate details of persons without having to go through the entire list</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a contact picture for my contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">identify them more easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">categorise my contacts into groups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view my contacts by relevant groups</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">export and send my own contact information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">share my own contact information with my friends more easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add birthdays to my contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remember them easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filter my contacts by tags/groups etc.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find relevant contacts more easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who adds contacts temporarily (for events etc.)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete all contacts with a given tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove contacts associated to a category that is no longer relevant to me</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort my contacts alphabetically</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find them more easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">favourite a contact</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contact the person easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">export/import contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">share them with other users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort my contacts according to most recently contacted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reach the people that I want to recontact easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a confirmation message before clearing/deleting contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prevent accidentally removing contacts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit/delete multiple contacts at once</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manage my contacts more efficiently</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add nicknames for my contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search for/recognise them using their nickname</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add multiple fields for my contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">store multiple pieces of contact information for each person</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add social media accounts for my contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remember them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integrate my contacts with social media such as Facebook</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see their latest updates alongside the contact information.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">hide <a href="#private-contact-detail">private contact details</a> by default</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">non-technical user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use the address book without having to use the command line</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">learn how to use easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort my contacts according to the frequency contacted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find my more important contacts easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who is more of a visual learner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">change the look of my Address Book between a list view and a thumbnail view</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see larger contact photos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who dislikes people</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">blacklist or block contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">not be contacted by them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">synchronise my contacts to the cloud</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have the same set of contacts on multiple devices</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">synchronise my contacts to the cloud</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have the same set of contacts on multiple devices</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">salesperson</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scan a namecard and have the contact automatically be added</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add contacts more easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with sensitive data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">protect my contacts with a password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prevent other people from snooping into my contacts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">organisation admin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">restrict access rights of users/user groups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manage their permissions easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">professional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">share a group of contacts to a new team member</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">let the new team member can have all the team member&#8217;s contacts easily</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -1804,13 +2494,295 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<h3 id="use-case-sort-alphabetically" class="discrete">Use case: Sort alphabetically</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters 'sort' command</p>
+</li>
+<li>
+<p>AddressBook prompts for sort type</p>
+</li>
+<li>
+<p>User enters 'name'</p>
+</li>
+<li>
+<p>AddressBook sorts addresses in alphabetical order</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The addressbook is empty</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As a user, I want to have a confirmation message before clearing/deleting contacts, so that I do not accidentally remove contacts.</p>
+</div>
+<h3 id="use-case-clear-addressbook" class="discrete">Use case: Clear AddressBook</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters 'clear' command</p>
+</li>
+<li>
+<p>AddressBook prompts 'Are you sure you want to clear AddressBook? yes/no'</p>
+</li>
+<li>
+<p>User enters 'yes'</p>
+</li>
+<li>
+<p>AddressBook clears all persons</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>As a user, I want to be able to edit/delete multiple contacts at once, so that I can manage my contacts more efficiently</p>
+</div>
+<h3 id="use-case-delete-multiple-persons" class="discrete">Use case: Delete multiple persons</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters 'delete many' command</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User requests to delete a set of people</p>
+</li>
+<li>
+<p>AddressBook deletes the persons</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As a user, I want to be able to categorise my contacts into groups so that I can view my contacts by relevant groups</p>
+</div>
+<h3 id="use-case-add-person-to-group" class="discrete">Use case: Add person to group</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters 'add to group' command</p>
+</li>
+<li>
+<p>AddressBook shows a list of groups</p>
+</li>
+<li>
+<p>User selects a group</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User selects a specific person in the list</p>
+</li>
+<li>
+<p>AddressBook adds that person to the group</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2 or 4.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-delete-persons-of-a-given-tag" class="discrete">Use case: Delete persons of a given tag</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters 'delete tagged' command</p>
+</li>
+<li>
+<p>AddressBook shows a list of tags</p>
+</li>
+<li>
+<p>User selects a specific tag in the list</p>
+</li>
+<li>
+<p>AddressBook prompts 'Are you sure you want to delete contacts tagged "temp"? yes/no'</p>
+</li>
+<li>
+<p>User enters 'yes'</p>
+</li>
+<li>
+<p>AddressBook deletes contacts with the tag 'temp'</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As a user, I want to be able to add multiple fields for my contacts, so that I can store multiple pieces of contact information for each person</p>
+</div>
+<h3 id="use-case-add-field-to-person" class="discrete">Use case: Add field to person</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters 'add field' command</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User selects a specific person</p>
+</li>
+<li>
+<p>AddressBook prompts for field to add</p>
+</li>
+<li>
+<p>User enters 'p/12345678'</p>
+</li>
+<li>
+<p>AddressBook adds another phone number "12345678" to the contact alan</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>{More to be added}</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non-Functional Requirements</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -1823,22 +2795,45 @@ for <code>RemarkCommandParser</code>.</p>
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
 </li>
+<li>
+<p>A user should be able to accomplish all tasks using the GUI, without using the command line.</p>
+</li>
+<li>
+<p>Startup time should be under 3 seconds.</p>
+</li>
+<li>
+<p>A user without technical experience should be able to perform most functions using the GUI without much assistance or having to
+read the user guide.</p>
+</li>
 </ol>
-</div>
-<div class="paragraph">
-<p>{More to be added}</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
 <div class="sectionbody">
+<div id="command-line-interface" class="paragraph">
+<p>Command Line Interface (CLI)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>User interacts with the address book by issuing commands on a specified line, receives a response and issues another command, and so forth.</pre>
+</div>
+</div>
+<div id="graphical-user-interface" class="paragraph">
+<p>Graphical User Interface (GUI)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>User interacts with the address book through graphical icons and visual indicators.</pre>
+</div>
+</div>
 <div id="mainstream-os" class="paragraph">
 <p>Mainstream OS</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>Windows, Linux, Unix, OS-X</pre>
+<pre>Windows, Linux, Unix, macOS</pre>
 </div>
 </div>
 <div id="private-contact-detail" class="paragraph">
@@ -1849,16 +2844,32 @@ for <code>RemarkCommandParser</code>.</p>
 <pre>A contact detail that is not meant to be shared with others</pre>
 </div>
 </div>
+<div id="storage" class="paragraph">
+<p>Storage</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Saving of all contacts into a single file i.e. addressbook.xml into /data directory.</pre>
+</div>
+</div>
+<div id="tags" class="paragraph">
+<p>Tags</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>A label attached to each contact for the purpose of identification and categorization. Tagging will allow users to search for all address book contacts with the specified tag.</pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Product Name</strong></p>
+<p><strong>Contacts</strong></p>
 </div>
 <div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
+<p>Author: Apple</p>
 </div>
 <div class="paragraph">
 <p>Pros:</p>
@@ -1866,10 +2877,13 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>&#8230;&#8203;</p>
+<p>Intuitive user interface, that makes it easy to add, find and modify contacts.</p>
 </li>
 <li>
-<p>&#8230;&#8203;</p>
+<p>Extensive number of relevant fields for contacts.</p>
+</li>
+<li>
+<p>Cloud integration allows contacts to be shared across multiple devices.</p>
 </li>
 </ul>
 </div>
@@ -1879,10 +2893,47 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>&#8230;&#8203;</p>
+<p>Limited additional functionality besides storing/finding contact information. Use case
+is thus limited.</p>
 </li>
 <li>
-<p>&#8230;&#8203;</p>
+<p>No way to sort or filter contacts, other than alphabetically.</p>
+</li>
+<li>
+<p>Does not work with all <a href="#mainstream-os">mainstream-os</a>. Only works with iOS and OS-X.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Google Contacts</strong></p>
+</div>
+<div class="paragraph">
+<p>Author: Google</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Intuitive user interface, that makes it easy to add, find and modify contacts.</p>
+</li>
+<li>
+<p>Labels allow contacts relevant to a specific tag to be found easily.</p>
+</li>
+<li>
+<p>Cloud integration allows contacts to be shared across multiple devices.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Limited additional functionality besides storing/finding contact information. Use case
+is thus limited.</p>
 </li>
 </ul>
 </div>
@@ -1891,7 +2942,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-21 15:57:58 +00:00
+Last updated 2017-11-07 18:51:14 +00:00
 </div>
 </div>
 </body>
