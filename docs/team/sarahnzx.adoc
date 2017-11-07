@@ -1,0 +1,98 @@
+= Sarah Ng Zhao Xian - Project Portfolio
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Project: AddressBook - Level 4
+KayPoh! is a desktop address book application used for _ _. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.
+
+*Code contributed*: [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/sarahnzx.md[Functional code]] [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/sarahnzx.md[Test code]]
+
+=== Enhancement Added: Delete multiple contacts
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=deletebyindex]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+The current design only allows users to delete one contact at a time. The user may want to delete many contacts and running the delete command multiple times can be a hassle. Thus there is a need to make the delete  command more efficient so as to allow users to delete multiple contacts with just one command.
+
+==== Implementation
+
+---
+A `DeleteCommand` is changed to store an `ArrayList` of `Index` instead of just one `Index`. The multiple `Index` objects can be used to delete multiple contacts, and also extract the deleted contacts in String form.
+
+---
+
+
+=== Enhancement Added: Allow multiple phone numnber fields
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=addperson]
+
+include::../UserGuide.adoc[tag=editperson]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+The current design only allows users to store one phone number for a contact. However, most people have more than one phone number, for example, handphone numbers, home phone numbers and office numbers. Thus users may need to store more than one phone number for a contact.
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=multiplephonenumbers]
+
+#End of Extract#
+
+---
+
+
+=== Enhancement Added: Enhanced select command
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=select]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+The current design is such that when a contact is selected using the `SelectCommand`, a google search page searching the contact's name is displayed in the browser. However, the target users being more inclined towards social media will want to view more interesting information about their  contacts, such as their social media feeds. Thus, it will be useful to allow users to view the social media accounts of their contacts.
+
+==== Implementation
+
+---
+When the user selects a contact, a `JumpToListRequestEvent` storing the index of the contact and the social media type is raised. When the `JumpToListRequestEvent` is handled, a `PersonPanelSelectionChangedEvent` is raised and the index and social media type is passed to the `PersonPanelSelectionChangedEvent`. When a `PersonPanelSelectionChangedEvent` is raised, the `PersonCard` is extracted from the event using the index and from the `PersonCard`, the `ReadOnlyPerson` can be obtained. The `SocialInfo` of the contact can be obtained from the `ReadOnlyPerson` and the URL String of the social media accounts of the contact can be retrieved. The `WebEngine` then loads the URL of the requested social media type.
+
+---
+
+
+=== Enhancement Proposed: Improve `find` command
+
+Allow users to search for contacts that have a certain keyword as part of the name, so that the keyword does not have to match the name exactly.
+
+=== Enhancement Proposed: Add command `whois`
+
+Allow users to input a phone number and find out who the phone number belongs to.
