@@ -17,12 +17,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * Connects the addressbook to a personal Facebook account.
  */
 public class FacebookConnectCommand extends Command {
-    public static final String COMMAND_WORD = "facebook connect";
+    public static final String COMMAND_WORD = "facebookconnect";
     public static final String COMMAND_ALIAS = "fbconnect";
     public static final String MESSAGE_SUCCESS = "Connected to your Facebook Account!";
     public static final String MESSAGE_STARTED_PROCESS = "Authentication has been initiated. "
             + "Please log into your Facebook account.";
-
 
     private static final String FACEBOOK_DOMAIN = "https://www.facebook.com/";
     private static final String FACEBOOK_APP_ID = "131555220900267";
@@ -39,9 +38,8 @@ public class FacebookConnectCommand extends Command {
     private static final String FACEBOOK_AUTH_URL =
             "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + FACEBOOK_APP_ID
                     + "&redirect_uri=" + FACEBOOK_DOMAIN + "&scope=" + FACEBOOK_PERMISSIONS;
-
     private static boolean authenticated = false;
-    private static String welcomeUser;
+    private static String authenticatedUsername;
     private static Facebook facebookInstance;
     private static WebEngine webEngine;
     private static String accessToken;
@@ -68,11 +66,10 @@ public class FacebookConnectCommand extends Command {
     }
 
     /**
-     * Sets the authenticated Facebook instance
+     * Returns name of the authenticated user
      */
-    public static void setFacebookInstance(Facebook facebookInstance) {
-        FacebookConnectCommand.facebookInstance = facebookInstance;
-    }
+    public static String getAuthenticatedUsername() { return authenticatedUsername; }
+
 
     /**
      * Checks if there is an authenticated Facebook instance
@@ -80,6 +77,7 @@ public class FacebookConnectCommand extends Command {
     public static boolean isAuthenticated() {
         return authenticated;
     }
+
 
     /**
      * Completes the authentication process
@@ -95,7 +93,7 @@ public class FacebookConnectCommand extends Command {
         facebookInstance.setOAuthPermissions(FACEBOOK_PERMISSIONS);
         facebookInstance.setOAuthAccessToken(new AccessToken(accessToken, null));
         try {
-            welcomeUser = facebookInstance.getName();
+            authenticatedUsername = facebookInstance.getName();
         } catch (FacebookException e) {
             throw new CommandException("Error in Facebook Authorisation");
         }
@@ -103,7 +101,7 @@ public class FacebookConnectCommand extends Command {
         if (accessToken != null) {
             authenticated = true;
             EventsCenter.getInstance().post(new NewResultAvailableEvent(
-                    MESSAGE_SUCCESS + " User name: " + welcomeUser, false));
+                    MESSAGE_SUCCESS + " User name: " + authenticatedUsername, false));
         } else {
             throw new CommandException("Error in Facebook Authorisation");
         }

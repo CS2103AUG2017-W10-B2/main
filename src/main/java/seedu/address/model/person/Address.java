@@ -21,6 +21,15 @@ public class Address {
 
     public final String value;
 
+    //@@author alexfoodw
+    /**
+     * Constructs a blank address field
+     */
+    public Address() {
+        this.value = " ";
+    }
+    //@@author
+
     /**
      * Validates given address.
      *
@@ -38,6 +47,12 @@ public class Address {
      * Returns true if a given string is a valid person email.
      */
     public static boolean isValidAddress(String test) {
+        //@@author alexfoodw
+        // allow blank address
+        if ((" ").equals(test)) {
+            return true;
+        }
+        //@@author
         return test.matches(ADDRESS_VALIDATION_REGEX);
     }
 

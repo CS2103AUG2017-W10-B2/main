@@ -12,8 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class FacebookPostCommandParser implements Parser<FacebookPostCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddFacebookContactCommand
-     * and returns an AddFacebookContactCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FacebookAddCommand
+     * and returns an FacebookAddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override

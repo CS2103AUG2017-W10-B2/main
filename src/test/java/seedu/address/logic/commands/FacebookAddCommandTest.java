@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AddFacebookContactCommandTest {
+public class FacebookAddCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {

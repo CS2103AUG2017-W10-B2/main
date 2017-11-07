@@ -60,14 +60,13 @@ public class FacebookLinkCommand extends Command {
 
         EventsCenter.getInstance().post(new NewResultAvailableEvent(
                 MESSAGE_FACEBOOK_LINK_SUCCESS + " (to " + user + "'s page.)", false));
-        BrowserPanel.setLink(false);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         if (!FacebookConnectCommand.isAuthenticated()) {
+            BrowserPanel.setProcessType(COMMAND_ALIAS);
             FacebookConnectCommand newFacebookConnect = new FacebookConnectCommand();
-            BrowserPanel.setLink(true);
             newFacebookConnect.execute();
             return new CommandResult(MESSAGE_FACEBOOK_LINK_INITIATED);
         } else {

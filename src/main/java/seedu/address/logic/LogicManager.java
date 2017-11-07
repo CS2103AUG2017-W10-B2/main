@@ -7,6 +7,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.FacebookAddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -33,6 +34,18 @@ public class LogicManager extends ComponentManager implements Logic {
         this.addressBookParser = new AddressBookParser();
         this.undoRedoStack = new UndoRedoStack();
     }
+
+    //@@author alexfoodw
+    /**
+     * Completes the final step of FacebookAddCommand
+     */
+    public void completeFacebookAddCommand(FacebookAddCommand command, String commandText) throws CommandException {
+        command.setData(model, storage, history, undoRedoStack);
+        command.completeAdd();
+        undoRedoStack.push(command);
+        history.add(commandText);
+    }
+    //@@author
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {

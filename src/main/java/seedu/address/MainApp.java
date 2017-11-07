@@ -46,6 +46,7 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
+
     protected Logic logic;
     protected Storage storage;
     protected Model model;
@@ -75,6 +76,16 @@ public class MainApp extends Application {
 
         initEventsCenter();
     }
+
+    //@@author alexfoodw
+    /**
+     * Returns the current logic Manager
+     * @return logic
+     */
+    public Logic getLogic() {
+        return logic;
+    }
+    //@@author
 
     private String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();

@@ -17,6 +17,8 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.BrowserUrlChangeEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.logic.Logic;
+import seedu.address.logic.commands.FacebookAddCommand;
 import seedu.address.logic.commands.FacebookConnectCommand;
 import seedu.address.logic.commands.FacebookLinkCommand;
 import seedu.address.logic.commands.FacebookPostCommand;
@@ -38,15 +40,21 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
 
     private static final String FXML = "BrowserPanel.fxml";
-    private static boolean isPost = false;
-    private static boolean isLink = false;
+
+    //@@author alexfoodw
+    private static String processType;
+    private static String trimmedArgs;
+    //@@author
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     @FXML
     private WebView browser;
 
+    //@@author alexfoodw
+    private Logic logic;
     private Label location;
+    //@@author
 
     public BrowserPanel(Scene scene) {
         super(FXML);
@@ -74,19 +82,27 @@ public class BrowserPanel extends UiPart<Region> {
 
     //@@author alexfoodw
     /**
-     * Identifies if in the midst of posting process
-     * @param bool
+     * Sets the current logic manager
+     * @param logic
      */
-    public static void setPost(boolean bool) {
-        isPost = bool;
+    public void setLogic(Logic logic) {
+        this.logic = logic;
     }
 
     /**
-     * Identifies if in the midst of linking process
-     * @param bool
+     * Identifies which facebook command process is being executed
+     * @param type
      */
-    public static void setLink(boolean bool) {
-        isLink = bool;
+    public static void setProcessType(String type) {
+        processType = type;
+    }
+
+    /**
+     * Set arguments for the required facebook command
+     * @param trimmedArgs
+     */
+    public static void setTrimmedArgs(String trimmedArgs) {
+        BrowserPanel.trimmedArgs = trimmedArgs;
     }
     //@@author
 
@@ -110,19 +126,39 @@ public class BrowserPanel extends UiPart<Region> {
         location.textProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue.contains("access_token")) {
-                        if (isPost) {
-                            logger.fine("browser url changed to : '" + newValue + "'");
-                            raise(new BrowserUrlChangeEvent(FacebookPostCommand.COMMAND_ALIAS));
-                        } else if (isLink) {
-                            logger.fine("browser url changed to : '" + newValue + "'");
-                            raise(new BrowserUrlChangeEvent(FacebookLinkCommand.COMMAND_ALIAS));
-                        } else {
+                        switch (processType) {
+
+                        case FacebookConnectCommand.COMMAND_WORD:
+                        case FacebookConnectCommand.COMMAND_ALIAS:
                             logger.fine("browser url changed to : '" + newValue + "'");
                             raise(new BrowserUrlChangeEvent(FacebookConnectCommand.COMMAND_ALIAS));
+                            break;
+
+                        case FacebookPostCommand.COMMAND_WORD:
+                        case FacebookPostCommand.COMMAND_ALIAS:
+                            logger.fine("browser url changed to : '" + newValue + "'");
+                            raise(new BrowserUrlChangeEvent(FacebookPostCommand.COMMAND_ALIAS));
+                            break;
+
+                        case FacebookLinkCommand.COMMAND_WORD:
+                        case FacebookLinkCommand.COMMAND_ALIAS:
+                            logger.fine("browser url changed to : '" + newValue + "'");
+                            raise(new BrowserUrlChangeEvent(FacebookLinkCommand.COMMAND_ALIAS));
+                            break;
+
+                        case FacebookAddCommand.COMMAND_WORD:
+                        case FacebookAddCommand.COMMAND_ALIAS:
+                            logger.fine("browser url changed to : '" + newValue + "'");
+                            raise(new BrowserUrlChangeEvent(FacebookAddCommand.COMMAND_ALIAS));
+                            break;
+
+                        default:
+                            break;
                         }
                     }
                 });
-        isPost = false;
+        // reset after execution
+        processType = null;
     }
     //@@author
 
@@ -162,25 +198,36 @@ public class BrowserPanel extends UiPart<Region> {
     private void handleBrowserUrlChangeEvent(BrowserUrlChangeEvent event) throws CommandException {
         switch (event.getProcessType()) {
 
+        case FacebookConnectCommand.COMMAND_WORD:
         case FacebookConnectCommand.COMMAND_ALIAS:
             logger.info(LogsCenter.getEventHandlingLogMessage(event));
             FacebookConnectCommand.completeAuth(browser.getEngine().getLocation());
             break;
 
+        case FacebookPostCommand.COMMAND_WORD:
         case FacebookPostCommand.COMMAND_ALIAS:
             logger.info(LogsCenter.getEventHandlingLogMessage(event));
             FacebookConnectCommand.completeAuth(browser.getEngine().getLocation());
             FacebookPostCommand.completePost();
             break;
 
+        case FacebookLinkCommand.COMMAND_WORD:
         case FacebookLinkCommand.COMMAND_ALIAS:
             logger.info(LogsCenter.getEventHandlingLogMessage(event));
             FacebookConnectCommand.completeAuth(browser.getEngine().getLocation());
             FacebookLinkCommand.completeLink();
             break;
 
+        case FacebookAddCommand.COMMAND_WORD:
+        case FacebookAddCommand.COMMAND_ALIAS:
+            logger.info(LogsCenter.getEventHandlingLogMessage(event));
+            FacebookConnectCommand.completeAuth(browser.getEngine().getLocation());
+            FacebookAddCommand facebookAddCommand = new FacebookAddCommand(trimmedArgs);
+            logic.completeFacebookAddCommand(facebookAddCommand, processType);
+            break;
+
         default:
-            throw new CommandException("Url change error.");
+            throw new CommandException("URL change error.");
         }
     }
     //@@author

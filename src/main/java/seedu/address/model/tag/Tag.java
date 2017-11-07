@@ -15,6 +15,15 @@ public class Tag {
 
     public final String tagName;
 
+    //@@author alexfoodw
+    /**
+     * Constructs a null tag field
+     */
+    public Tag() {
+        this.tagName = null;
+    }
+    //@@author
+
     /**
      * Validates given tag name.
      *

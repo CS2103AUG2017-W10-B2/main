@@ -13,7 +13,7 @@ import seedu.address.ui.BrowserPanel;
  * Posts a message to a personal Facebook account.
  */
 public class FacebookPostCommand extends Command {
-    public static final String COMMAND_WORD = "facebook post";
+    public static final String COMMAND_WORD = "facebookpost";
     public static final String COMMAND_ALIAS = "fbpost";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -26,7 +26,6 @@ public class FacebookPostCommand extends Command {
     public static final String MESSAGE_FACEBOOK_POST_INITIATED = "User not authenticated, log in to proceed.";
     public static final String MESSAGE_FACEBOOK_POST_ERROR = "Error posting to Facebook";
 
-    private static String user;
     private static String toPost;
 
     /**
@@ -42,9 +41,7 @@ public class FacebookPostCommand extends Command {
      */
     public static void completePost() throws CommandException {
         Facebook facebookInstance = FacebookConnectCommand.getFacebookInstance();
-        user = null;
         try {
-            user = facebookInstance.getName();
             facebookInstance.postStatusMessage(toPost);
         } catch (FacebookException e) {
             // exception not handled because Facebook API still throws an exception even if success,
@@ -52,21 +49,21 @@ public class FacebookPostCommand extends Command {
             e.printStackTrace();
         }
 
-        EventsCenter.getInstance().post(new NewResultAvailableEvent(
-                MESSAGE_FACEBOOK_POST_SUCCESS + " (to " + user + "'s page.)", false));
-        BrowserPanel.setPost(false);
+        EventsCenter.getInstance().post(new NewResultAvailableEvent(MESSAGE_FACEBOOK_POST_SUCCESS
+                + " (to " + FacebookConnectCommand.getAuthenticatedUsername() + "'s page.)", false));
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         if (!FacebookConnectCommand.isAuthenticated()) {
+            BrowserPanel.setProcessType(COMMAND_ALIAS);
             FacebookConnectCommand newFacebookConnect = new FacebookConnectCommand();
-            BrowserPanel.setPost(true);
             newFacebookConnect.execute();
             return new CommandResult(MESSAGE_FACEBOOK_POST_INITIATED);
         } else {
             completePost();
-            return new CommandResult(MESSAGE_FACEBOOK_POST_SUCCESS + " (to " + user + "'s page.)");
+            return new CommandResult(MESSAGE_FACEBOOK_POST_SUCCESS + " (to "
+                    + FacebookConnectCommand.getAuthenticatedUsername() + "'s page.)");
         }
     }
 }

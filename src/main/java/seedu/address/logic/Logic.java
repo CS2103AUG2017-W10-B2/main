@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.FacebookAddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -18,6 +19,13 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
+
+    /**
+     * Completes the final step of FacebookAddCommand
+     * @param command The instance of the FacebookAddCommand
+     * @param commandText The command as entered by the user.
+     */
+    void completeFacebookAddCommand(FacebookAddCommand command, String commandText) throws CommandException;
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
