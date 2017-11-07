@@ -46,10 +46,9 @@ public class FacebookAddCommand extends UndoableCommand {
     public static final String MESSAGE_FACEBOOK_ADD_ERROR = "Error with Facebook API call.";
     public static final String MESSAGE_FACEBOOK_ADD_PERSON_ERROR = "Error with creating Person Object";
 
-    private static String userName;
+    private static String userName = "";
     private String toAddName;
     private Person toAdd;
-    private LogicManager logic;
 
     /**
      * Creates an FacebookAddCommand to add the specified Facebook contact

@@ -49,7 +49,7 @@ public class Address {
     public static boolean isValidAddress(String test) {
         //@@author alexfoodw
         // allow blank address
-        if (test.equals(" ")) {
+        if ((" ").equals(test)) {
             return true;
         }
         //@@author
