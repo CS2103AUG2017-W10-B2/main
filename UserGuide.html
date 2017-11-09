@@ -1296,20 +1296,17 @@ There is no need to save manually.</p>
 <h5 id="export-command"><a class="link" href="#export-command">Exporting contact data: <code>export</code></a></h5>
 <div class="paragraph">
 <p>Exports all contact data to an external file.<br>
-Format: <code>export FILE_PATH</code></p>
+Command format: <code><span class="red">export</span> <span class="green">FILE_PATH</span></code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Exports contact data to the location specified by <code>FILE_PATH</code>.</p>
+<p><code><span class="green">FILE_PATH</span></code> is the location where the contact data is to be exported to.</p>
 </li>
 <li>
-<p>You must have <strong>write access</strong> to the specified file path.</p>
-</li>
-<li>
-<p>The input <code>FILE_PATH</code> must be an absolute file path.</p>
+<p>The input <code><span class="green">FILE_PATH</span></code> must be an absolute file path.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1321,9 +1318,21 @@ Format: <code>export FILE_PATH</code></p>
 </ul>
 </div>
 </li>
+<li>
+<p>You must have <strong>write access</strong> to the specified <code><span class="green">FILE_PATH</span></code>.</p>
+</li>
 </ul>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>You should see the confirmation message in the result display.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/export-contacts.png" alt="export contacts" width="790">
+</div>
+<div class="title">Figure 9. Confirmation message after exporting contacts</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1331,7 +1340,7 @@ Format: <code>export FILE_PATH</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>export /Users/seedu/Documents/exportData.xml</code><br>
+<p><code><span class="red">export</span> <span class="green">/Users/seedu/Documents/exportData.xml</span></code><br>
 Exports contact data to the location <code>/Users/seedu/Documents/exportData.xml</code></p>
 </li>
 </ul>
@@ -1341,20 +1350,17 @@ Exports contact data to the location <code>/Users/seedu/Documents/exportData.xml
 <h5 id="import-command"><a class="link" href="#import-command">Importing contact data: <code>import</code></a></h5>
 <div class="paragraph">
 <p>Imports contact data from an external file.<br>
-Format: <code>import FILE_PATH</code></p>
+Command format: <code><span class="red">import</span> <span class="green">FILE_PATH</span></code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Imports contact data from data file at the location specified by <code>FILE_PATH</code>.</p>
+<p><code><span class="green">FILE_PATH</span></code> is the location of the data file from which contact data is to be imported.</p>
 </li>
 <li>
-<p>You must have <strong>read access</strong> to the specified file path.</p>
-</li>
-<li>
-<p>The input <code>FILE_PATH</code> must be an absolute file path, e.g.</p>
+<p>The input <code><span class="green">FILE_PATH</span></code> must be an absolute file path, e.g.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1366,9 +1372,21 @@ Format: <code>import FILE_PATH</code></p>
 </ul>
 </div>
 </li>
+<li>
+<p>You must have <strong>read access</strong> to the specified <code><span class="green">FILE_PATH</span></code>.</p>
+</li>
 </ul>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>You should see the confirmation message in the result display.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/import-contacts.png" alt="import contacts" width="790">
+</div>
+<div class="title">Figure 10. Confirmation message after importing contacts</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1376,7 +1394,7 @@ Format: <code>import FILE_PATH</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>import /Users/seedu/Documents/exportData.xml</code><br>
+<p><code><span class="red">import</span> <span class="green">/Users/seedu/Documents/exportData.xml</span></code><br>
 Imports contact data to the location <code>/Users/seedu/Documents/exportData.xml</code></p>
 </li>
 </ul>
@@ -1389,7 +1407,7 @@ Imports contact data to the location <code>/Users/seedu/Documents/exportData.xml
 <h5 id="configuring-your-cloud-account-code-sync-code"><a class="link" href="#configuring-your-cloud-account-code-sync-code">Configuring your cloud account: <code>sync</code></a></h5>
 <div class="paragraph">
 <p>Configures the addressbook to synchronize with the cloud using the given user credentials.<br>
-Format: <code>sync u/USERNAME p/PASSWORD</code></p>
+Command format: <code><span class="red">sync</span> <span class="green">u/USERNAME p/PASSWORD</span></code></p>
 </div>
 </div>
 <div class="sect4">
@@ -1403,7 +1421,7 @@ There is no need to synchronize manually.</p>
 <h5 id="removing-your-cloud-account-code-unsync-code"><a class="link" href="#removing-your-cloud-account-code-unsync-code">Removing your cloud account: <code>unsync</code></a></h5>
 <div class="paragraph">
 <p>Stops synchronizing of contact information with any previously configured cloud accounts.<br>
-Format: <code>unsync</code></p>
+Command format: <code><span class="red">unsync</span></code></p>
 </div>
 </div>
 </div>
@@ -1644,7 +1662,7 @@ e.g. <code>facebook post hello world!</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 20:44:26 +00:00
+Last updated 2017-11-09 14:08:58 +00:00
 </div>
 </div>
 </body>
