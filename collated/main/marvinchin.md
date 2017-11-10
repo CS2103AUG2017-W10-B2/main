@@ -179,14 +179,20 @@ public class SocialInfoMapping {
 ```
 ###### /java/seedu/address/logic/parser/DeleteCommandParser.java
 ``` java
+/**
+ * Parses input arguments and creates a new DeleteCommand object
+ */
+public class DeleteCommandParser implements Parser<DeleteCommand> {
+    public static final String INVALID_DELETE_COMMAND_FORMAT_MESSAGE =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+
     /**
      * Utility function to check that the input arguments is not empty.
      * Throws a parse exception if it is empty.
      */
     private void checkArgsNotEmpty(String args) throws ParseException {
         if (args == null || args.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            throw new ParseDeleteCommandException();
         }
     }
     /**
@@ -202,31 +208,53 @@ public class SocialInfoMapping {
         // check that the filtered args are not empty
         checkArgsNotEmpty(filteredArgs);
 
+        // args should only have at most 1 option
+        if (opArgs.getOptions().size() > 1) {
+            throw new ParseDeleteCommandException();
+        }
+
         if (opArgs.getOptions().contains(DeleteByTagCommand.COMMAND_OPTION)) {
             List<String> tags = parseWhitespaceSeparatedStrings(filteredArgs);
             HashSet<String> tagSet = new HashSet<>(tags);
             return new DeleteByTagCommand(tagSet);
-        } else {
+        } else if (opArgs.getOptions().isEmpty()) {
             try {
                 List<Index> indexes = ParserUtil.parseMultipleIndexes(filteredArgs);
                 return new DeleteByIndexCommand(indexes);
             } catch (IllegalValueException ive) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                throw new ParseDeleteCommandException();
             }
+        } else {
+            // option is not a valid option
+            throw new ParseDeleteCommandException();
         }
     }
+
+    /**
+     * Represents a {@code ParseException} encountered when parsing arguments for a {@code DeleteCommand}
+     */
+    private class ParseDeleteCommandException extends ParseException {
+        public ParseDeleteCommandException() {
+            super(INVALID_DELETE_COMMAND_FORMAT_MESSAGE);
+        }
+    }
+}
 ```
 ###### /java/seedu/address/logic/parser/FindCommandParser.java
 ``` java
+/**
+ * Parses input arguments and creates a new FindCommand object
+ */
+public class FindCommandParser implements Parser<FindCommand> {
+    public static final String INVALID_FIND_COMMAND_FORMAT_MESSAGE =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
     /**
      * Utility function to check that the input arguments is not empty.
      * Throws a parse exception if it is empty.
      */
     private void checkArgsNotEmpty(String args) throws ParseException {
         if (args == null || args.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseFindCommandException();
         }
     }
 
@@ -243,17 +271,35 @@ public class SocialInfoMapping {
         // check that the filtered args are not empty
         checkArgsNotEmpty(filteredArgs);
 
+        // args should have at most 1 option
+        if (opArgs.getOptions().size() > 1) {
+            throw new ParseFindCommandException();
+        }
+
         if (opArgs.getOptions().contains(FindByTagsCommand.COMMAND_OPTION)) {
             List<String> tagKeywords = parseWhitespaceSeparatedStrings(filteredArgs);
             TagsContainKeywordsPredicate predicate = new TagsContainKeywordsPredicate(tagKeywords);
             return new FindByTagsCommand(predicate);
-        } else {
+        } else if (opArgs.getOptions().isEmpty()) {
             checkArgsNotEmpty(opArgs.getFilteredArgs());
             List<String> nameKeywords = parseWhitespaceSeparatedStrings(filteredArgs);
             NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(nameKeywords);
             return new FindByNameCommand(predicate);
+        } else {
+            // option is not a valid option
+            throw new ParseFindCommandException();
         }
     }
+
+    /**
+     * Represents a {@code ParseException} encountered when parsing arguments for a {@code FindCommand}
+     */
+    private class ParseFindCommandException extends ParseException {
+        public ParseFindCommandException() {
+            super(INVALID_FIND_COMMAND_FORMAT_MESSAGE);
+        }
+    }
+}
 ```
 ###### /java/seedu/address/logic/parser/ParserUtil.java
 ``` java
@@ -389,7 +435,7 @@ public class DeleteByIndexCommand extends DeleteCommand {
      * Returns the collection of persons to be deleted.
      * To be implemented by the classes inheriting this class.
      */
-    public abstract Collection<ReadOnlyPerson> getPersonsToDelete() throws CommandException;
+    protected abstract Collection<ReadOnlyPerson> getPersonsToDelete() throws CommandException;
 ```
 ###### /java/seedu/address/logic/commands/ExportCommand.java
 ``` java
@@ -417,14 +463,37 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        ReadOnlyAddressBook readOnlyAddressBook = model.getAddressBook();
+        ReadOnlyAddressBook currentAddressBook = model.getAddressBook();
+        ReadOnlyAddressBook exportAddressBook = generateExportAddressBook(currentAddressBook);
         String absoluteExportFilePathString = exportFilePath.toAbsolutePath().toString();
         try {
-            storage.saveAddressBook(readOnlyAddressBook, absoluteExportFilePathString);
+            storage.saveAddressBook(exportAddressBook, absoluteExportFilePathString);
         } catch (IOException ioe) {
             throw new CommandException(String.format(MESSAGE_EXPORT_CONTACTS_FAILURE, absoluteExportFilePathString));
         }
         return new CommandResult(String.format(MESSAGE_EXPORT_CONTACTS_SUCCESS, absoluteExportFilePathString));
+    }
+
+    /**
+     * Generates an address book for exporting that is equivalent to the current address book, but with all display
+     * pictures removed
+     */
+    private ReadOnlyAddressBook generateExportAddressBook(ReadOnlyAddressBook currentAddressBook) {
+        AddressBook exportAddressBook = new AddressBook(currentAddressBook);
+
+        for (ReadOnlyPerson person : exportAddressBook.getPersonList()) {
+            Person personWithoutDisplayPicture = new Person(person);
+            try {
+                personWithoutDisplayPicture.setDisplayPhoto(new DisplayPhoto(null));
+                exportAddressBook.updatePerson(person, personWithoutDisplayPicture);
+            } catch (IllegalValueException ive) {
+                assert false : "Display photo should not be invalid";
+            } catch (PersonNotFoundException pnfe) {
+                assert false : "Person should not be missing";
+            }
+        }
+
+        return exportAddressBook;
     }
 
     @Override
@@ -490,7 +559,7 @@ public abstract class SortCommand extends Command {
     /**
      * Gets the comparator used to order the person list
      */
-    public abstract Comparator<ReadOnlyPerson> getComparator();
+    protected abstract Comparator<ReadOnlyPerson> getComparator();
 }
 ```
 ###### /java/seedu/address/logic/commands/SortByNameCommand.java
@@ -560,8 +629,22 @@ public class DeleteByTagCommand extends DeleteCommand {
 public class FindByTagsCommand extends FindCommand {
     public static final String COMMAND_OPTION = "tag";
 
+    private TagsContainKeywordsPredicate predicate;
+
     public FindByTagsCommand(TagsContainKeywordsPredicate predicate) {
-        super(predicate);
+        this.predicate = predicate;
+    }
+
+    @Override
+    protected Predicate<ReadOnlyPerson> getPredicate() {
+        return predicate;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindByTagsCommand // instanceof handles nulls
+                && this.predicate.equals(((FindByTagsCommand) other).predicate)); // state check
     }
 }
 ```
@@ -574,6 +657,31 @@ public class FindByTagsCommand extends FindCommand {
         public void setSocialInfos(Set<SocialInfo> socialInfos) {
             this.socialInfos = socialInfos;
         }
+```
+###### /java/seedu/address/logic/commands/SelectCommand.java
+``` java
+    @Override
+    public CommandResult execute() throws CommandException {
+
+        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        ReadOnlyPerson selectedPerson = lastShownList.get(targetIndex.getZeroBased());
+        try {
+            model.selectPerson(selectedPerson);
+            // index of person might have shifted because of the select operation
+            // so we need to find the new index
+            Index newIndex = model.getPersonIndex(selectedPerson);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(newIndex, socialType));
+        } catch (PersonNotFoundException e) {
+            assert false : "The selected person should be in the last shown list";
+        }
+
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
+    }
 ```
 ###### /java/seedu/address/logic/commands/SortByRecentCommand.java
 ``` java
@@ -597,6 +705,42 @@ public class SortByRecentCommand extends SortCommand {
     }
 }
 ```
+###### /java/seedu/address/logic/commands/FindCommand.java
+``` java
+/**
+ * Finds and lists all persons in address book who meet the specified criteria.
+ */
+public abstract class FindCommand extends Command {
+
+    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_ALIAS = "f";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons who meet the specified criteria"
+            + "and displays them as a list with index numbers.\n"
+            + "Alias: " + COMMAND_ALIAS + "\n"
+            + "Options: \n"
+            + "\tdefault - Find contacts whose names contain any of the specified keywords (case-sensitive)\n"
+            + "\t" + FindByTagsCommand.COMMAND_OPTION
+            + " - Find contacts whose tags contain any of the specified keywords (case-sensitive)\n"
+            + "Parameters: [OPTION] KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: \n"
+            + COMMAND_WORD + " bob alice\n"
+            + COMMAND_WORD + " -" + FindByTagsCommand.COMMAND_OPTION + " friends colleagues";
+
+    @Override
+    public CommandResult execute() {
+        model.updateFilteredPersonList(getPredicate());
+        return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+    }
+
+
+    /**
+     * Returns the collection of persons to be deleted.
+     * To be implemented by the classes inheriting this class.
+     */
+    protected abstract Predicate<ReadOnlyPerson> getPredicate();
+}
+```
 ###### /java/seedu/address/logic/commands/ImportCommand.java
 ``` java
 /**
@@ -618,8 +762,6 @@ public class ImportCommand extends Command {
     private final Path importFilePath;
 
     public ImportCommand(String filePath) {
-        // we store it as a Path rather than a String so that we can get the absolute file path
-        // this makes it clearer to the user where the file is imported from
         importFilePath = Paths.get(filePath);
     }
 
@@ -672,9 +814,22 @@ public class ImportCommand extends Command {
  * Keyword matching is case sensitive.
  */
 public class FindByNameCommand extends FindCommand {
+    private NameContainsKeywordsPredicate predicate;
 
     public FindByNameCommand(NameContainsKeywordsPredicate predicate) {
-        super(predicate);
+        this.predicate = predicate;
+    }
+
+    @Override
+    protected Predicate<ReadOnlyPerson> getPredicate() {
+        return predicate;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindByNameCommand // instanceof handles nulls
+                && this.predicate.equals(((FindByNameCommand) other).predicate)); // state check
     }
 }
 ```
@@ -1153,6 +1308,7 @@ public class UniqueSocialInfoList implements Iterable<SocialInfo> {
 ``` java
 /**
  * Represents information about a social media account in the address book.
+ * Guarantees immutability.
  */
 public class SocialInfo {
 
@@ -1304,6 +1460,7 @@ public class SocialInfo {
                 continue;
             }
         }
+
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
@@ -1312,9 +1469,24 @@ public class SocialInfo {
 ###### /java/seedu/address/model/ModelManager.java
 ``` java
     @Override
+    public Index getPersonIndex(ReadOnlyPerson target) throws PersonNotFoundException {
+        int zeroBasedIndex = filteredPersons.indexOf(target);
+        if (zeroBasedIndex == -1) {
+            throw new PersonNotFoundException();
+        }
+        return Index.fromZeroBased(zeroBasedIndex);
+    }
+
+    @Override
+    public void sortPersons(Comparator<ReadOnlyPerson> comparator) {
+        sortedPersons.setComparator(comparator);
+        lastSortComparator = comparator;
+    }
+
+    @Override
     public void selectPerson(ReadOnlyPerson target) throws PersonNotFoundException {
         indicatePersonAccessed(target);
-        //TODO(Marvin): Since IO operations are expensive, consider if we can defer this operation instead of saving
+        // TODO(Marvin): Since IO operations are expensive, consider if we can defer this operation instead of saving
         // on every access (which includes select)
         indicateAddressBookChanged();
     }
@@ -1322,6 +1494,7 @@ public class SocialInfo {
     private void indicatePersonAccessed(ReadOnlyPerson target) throws PersonNotFoundException {
         addressBook.indicatePersonAccessed(target);
     }
+
 ```
 ###### /java/seedu/address/model/ModelManager.java
 ``` java
@@ -1335,11 +1508,6 @@ public class SocialInfo {
         return copy;
     }
 
-    @Override
-    public void sortPersons(Comparator<ReadOnlyPerson> comparator) {
-        sortedPersons.setComparator(comparator);
-        lastSortComparator = comparator;
-    }
 ```
 ###### /java/seedu/address/model/Model.java
 ``` java
@@ -1350,6 +1518,12 @@ public class SocialInfo {
 ``` java
     /** Selects the given person. Should update the last accessed time of the person. */
     void selectPerson(ReadOnlyPerson target) throws PersonNotFoundException;
+
+    /**
+     * Gets the index of the person {@code target} in the filtered person list.
+     * @throws PersonNotFoundException if {@code target} could not be found in the list.
+     */
+    Index getPersonIndex(ReadOnlyPerson target) throws PersonNotFoundException;
 
 ```
 ###### /java/seedu/address/model/Model.java
