@@ -298,13 +298,25 @@ public class SortCommandParserTest {
 ###### /java/seedu/address/logic/parser/FindCommandParserTest.java
 ``` java
     @Test
-    public void parse_emptyTagArgs_throwsParseException() {
-        assertParseFailure(parser, "-tag     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    public void parse_moreThanOneOption_throwsParseException() {
+        String input = "-tag -fav";
+        assertParseFailure(parser, input, FindCommandParser.INVALID_FIND_COMMAND_FORMAT_MESSAGE);
     }
 
     @Test
-    public void parse_validTagArgs_returnsFindCommand() {
+    public void parse_invalidOption_throwsParseException() {
+        String input = "-someinvalidoption123";
+        assertParseFailure(parser, input, FindCommandParser.INVALID_FIND_COMMAND_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_tagOptionNoArgs_throwsParseException() {
+        String input = "-tag     ";
+        assertParseFailure(parser, input, FindCommandParser.INVALID_FIND_COMMAND_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_tagOptionValidArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindByTagsCommand(new TagsContainKeywordsPredicate(Arrays.asList("colleagues", "friends")));
@@ -336,17 +348,31 @@ public class ExportCommandParserTest {
 ###### /java/seedu/address/logic/parser/DeleteCommandParserTest.java
 ``` java
     @Test
-    public void parse_emptyTagArgs_throwsParseException() {
-        assertParseFailure(parser, "-tag    ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_moreThanOneOption_throwsParseException() {
+        String input = "-tag -hello";
+        assertParseFailure(parser, input, DeleteCommandParser.INVALID_DELETE_COMMAND_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_invalidOption_throwsParseException() {
+        String input = "-someinvalidoption123";
+        assertParseFailure(parser, input, DeleteCommandParser.INVALID_DELETE_COMMAND_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_tagOptionNoArgs_throwsParseException() {
+        String input = "-tag    ";
+        assertParseFailure(parser, input, DeleteCommandParser.INVALID_DELETE_COMMAND_FORMAT_MESSAGE);
     }
 
     @Test
     public void parse_validTagArgs_returnsDeleteCommand() {
         HashSet<String> keys = new HashSet<>(Arrays.asList("friends", "colleagues"));
         DeleteCommand expectedDeleteCommand = new DeleteByTagCommand(keys);
-        assertParseSuccess(parser, "-tag colleagues friends", expectedDeleteCommand);
-        assertParseSuccess(parser, "-tag   \t friends \t\t\n colleagues", expectedDeleteCommand);
+        String input = "-tag colleagues friends";
+        String inputWithWhitespace = "-tag   \t friends \t\t\n colleagues";
+        assertParseSuccess(parser, input, expectedDeleteCommand);
+        assertParseSuccess(parser, inputWithWhitespace, expectedDeleteCommand);
     }
 ```
 ###### /java/seedu/address/logic/parser/OptionBearingArgumentTest.java
@@ -528,11 +554,11 @@ public class SortByNameCommandTest {
     }
 
     /**
-     * Returns a {@code DeleteCommand} with the parameter {@code index}.
+     * Returns a {@code SortByNameCommand}.
      */
     private SortByNameCommand prepareCommand() {
         SortByNameCommand sortCommand = new SortByNameCommand();
-        sortCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
+        sortCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
         return sortCommand;
     }
 }
@@ -540,7 +566,7 @@ public class SortByNameCommandTest {
 ###### /java/seedu/address/logic/commands/DeleteByTagCommandTest.java
 ``` java
 /**
- * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteByTagCommand}.
  */
 public class DeleteByTagCommandTest {
 
@@ -557,9 +583,9 @@ public class DeleteByTagCommandTest {
             deletedPersons.append("\n" + person.toString());
         }
 
-        DeleteCommand deleteCommand = prepareCommand(tagsToDelete);
+        DeleteByTagCommand deleteCommand = prepareCommand(tagsToDelete);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons);
+        String expectedMessage = String.format(DeleteByTagCommand.MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (ReadOnlyPerson person : personsToDelete) {
@@ -585,9 +611,9 @@ public class DeleteByTagCommandTest {
             deletedPersons.append("\n" + person.toString());
         }
 
-        DeleteCommand deleteCommand = prepareCommand(tagsToDelete);
+        DeleteByTagCommand deleteCommand = prepareCommand(tagsToDelete);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons);
+        String expectedMessage = String.format(DeleteByTagCommand.MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (ReadOnlyPerson person : personsToDelete) {
             expectedModel.deletePerson(person);
@@ -600,14 +626,14 @@ public class DeleteByTagCommandTest {
     public void equals() {
         Set<String> firstDeleteTagSet = new HashSet<>(Arrays.asList("friends"));
         Set<String> secondDeleteTagSet = new HashSet<>(Arrays.asList("family"));
-        DeleteCommand deleteFirstCommand = new DeleteByTagCommand(firstDeleteTagSet);
-        DeleteCommand deleteSecondCommand = new DeleteByTagCommand(secondDeleteTagSet);
+        DeleteByTagCommand deleteFirstCommand = new DeleteByTagCommand(firstDeleteTagSet);
+        DeleteByTagCommand deleteSecondCommand = new DeleteByTagCommand(secondDeleteTagSet);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteByTagCommand(firstDeleteTagSet);
+        DeleteByTagCommand deleteFirstCommandCopy = new DeleteByTagCommand(firstDeleteTagSet);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -621,12 +647,12 @@ public class DeleteByTagCommandTest {
     }
 
     /**
-     * Returns a {@code DeleteCommand} with the parameter {@code index}.
+     * Returns a {@code DeleteByTagCommand} with the parameter {@code index}.
      */
-    private DeleteCommand prepareCommand(List<String> tags) {
+    private DeleteByTagCommand prepareCommand(List<String> tags) {
         HashSet<String> tagSet = new HashSet<>(tags);
-        DeleteCommand deleteCommand = new DeleteByTagCommand(tagSet);
-        deleteCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
+        DeleteByTagCommand deleteCommand = new DeleteByTagCommand(tagSet);
+        deleteCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
         return deleteCommand;
     }
 }
@@ -675,16 +701,13 @@ public class SortByRecentCommandTest {
     }
 
     /**
-     * Returns a {@code DeleteCommand} with the parameter {@code index}.
+     * Returns a {@code SortByRecentCommand}.
      */
     private SortByRecentCommand prepareCommand() {
         SortByRecentCommand sortCommand = new SortByRecentCommand();
-        sortCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
+        sortCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
         return sortCommand;
     }
-
-    // TODO(Marvin): Move this to a util file, update to take variable number of persons
-
 }
 ```
 ###### /java/seedu/address/logic/commands/SortByDefaultCommandTest.java
@@ -731,11 +754,11 @@ public class SortByDefaultCommandTest {
     }
 
     /**
-     * Returns a {@code DeleteCommand} with the parameter {@code index}.
+     * Returns a {@code SortByDefaultCommand}.
      */
     private SortByDefaultCommand prepareCommand() {
         SortByDefaultCommand sortCommand = new SortByDefaultCommand();
-        sortCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
+        sortCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
         return sortCommand;
     }
 }
@@ -1158,9 +1181,9 @@ public class UniqueSocialInfoListTest {
 public class StorageUtil {
 
     /**
-     * Returns a null storage for tests where storage does not need to be used
+     * Returns a dummy storage for tests where a real storage does not need to be used
      */
-    public static Storage getNullStorage() {
+    public static Storage getDummyStorage() {
         return new StorageManager(null, null);
     }
 }
@@ -1286,6 +1309,12 @@ public class ModelStub implements Model {
     @Override
     public void selectPerson(ReadOnlyPerson target) throws PersonNotFoundException {
         fail("This method should not be called.");
+    }
+
+    @Override
+    public Index getPersonIndex(ReadOnlyPerson target) throws PersonNotFoundException {
+        fail("This method should not be called.");
+        return null;
     }
 
 ```
