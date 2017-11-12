@@ -175,12 +175,14 @@ to be used instead.</p>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Where sorting should be handled<br>
 <strong>Alternative 1 (current choice):</strong> Handle sorts at the <code>ModelManager</code> level using the Observer pattern<br>
-<strong>Pros:</strong> Sorting does not require IO operations, which are computationally more expensive compared to in-memory operations.<br>
+<strong>Pros:</strong> Sorting is performed on an in-memory list decoupled from the data file, and hence does not require IO operations which are
+computationally more expensive compared to in-memory operations.<br>
 <strong>Cons:</strong> Slightly longer startup time might be observed as the data file is not sorted and hence has to be sorted upon every startup.<br>
 <strong>Alternative 2:</strong> Handle sorts at the <code>AddressBook</code> level by sorting the <code>personList</code> directly<br>
 <strong>Pros:</strong> Startup might be faster as the data file should have already been sorted. Also reduces complexity of the <code>Model</code>
 as there is no need to maintain any additional data structures.<br>
-<strong>Cons:</strong> Every sort operation will require writing to the data file, which requires IO operations that are slower compared
+<strong>Cons:</strong> As the <code>personList</code> is supposed to mirror the data file, every sort operation will involve updating the data file
+in order to keep it in sync with the <code>personList</code>. This requires IO operations that are slower compared
 to in-memory operations.</p>
 </div>
 <hr>
@@ -447,7 +449,7 @@ paves the way for other enhancements which makes use of information about contac
 <div class="sect2">
 <h3 id="social-media-accounts"><a class="link" href="#social-media-accounts">Social Media Accounts</a></h3>
 <div class="paragraph">
-<p>Information about contact&#8217;s social media accounts are encapsulated by the <code>SocialInfo</code> class. The list of <code>SocialInfo</code> associated
+<p>Information about contact&#8217;s social media accounts are encapsulated by the <code>SocialInfo</code> class. The list of <code>SocialInfos</code> associated
 with a <code>Person</code> is handled by the <code>UniqueSocialInfoList</code>, which guarantees that at most one of each type of social media type is
 associated with the contact.</p>
 </div>
@@ -465,7 +467,7 @@ associated with the contact.</p>
 <div class="paragraph">
 <p>The form <code>SOCIAL_TYPE_IDENTIFIER USERNAME</code> is used to represent a <code>SocialInfo</code> as a parameter in a CLI command.
 The <code>SocialInfoMapping</code> class handles the mapping between the input <code>SOCIAL_TYPE_IDENTIFER</code> and the url format of the associated social media platform.
-A <code>Collection</code> of these raw social info parameters can then be passed to the <code>parseSocialInfo</code> method in the <code>SocialInfoMapping</code> class for parsing.</p>
+A <code>Collection</code> of these raw social info parameters can be passed to the <code>parseSocialInfo</code> method in the <code>SocialInfoMapping</code> class for parsing.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how input <code>rawSocialInfos</code> are parsed to obtain the appropriate <code>SocialInfos</code>:</p>
@@ -552,7 +554,8 @@ which classes designed for each social platform will extend.<br>
 <strong>Cons:</strong> Difficult to handle marshalling/unmarshalling to XML format using the JAXB library.
 Adds significant complexity to the codebase when number of supported platforms grow.<br>
 <strong>Additional Info:</strong> An assessment of the major social media platforms shows that the username is sufficient to identify
-users on all the major platforms at present.</p>
+users on all the major platforms at present. The first alternative was thus selected to ensure complexity of the codebase
+remains manageable as support for more social media platforms is added.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -755,7 +758,7 @@ Displays <code>favorite</code> contacts in the person list.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 14:46:34 +00:00
+Last updated 2017-11-12 15:21:02 +00:00
 </div>
 </div>
 </body>
