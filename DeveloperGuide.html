@@ -972,11 +972,12 @@ associated with the contact.</p>
 <div class="sect3">
 <h4 id="parsing-inputs-representing-social-media-accounts"><a class="link" href="#parsing-inputs-representing-social-media-accounts">4.4.1. Parsing inputs representing social media accounts</a></h4>
 <div class="paragraph">
-<p>The form <code>SOCIAL_TYPE_IDENTIFIER USERNAME</code> is used to represent a <code>SocialInfo</code> as a CLI parametr for a command,
-A Collection of these raw social info parameters can then be passed to the <code>parseSocialInfo</code> method in the <code>SocialInfoMapping</code> class for parsing.</p>
+<p>The form <code>SOCIAL_TYPE_IDENTIFIER USERNAME</code> is used to represent a <code>SocialInfo</code> as a parameter in a CLI command.
+The <code>SocialInfoMapping</code> class handles the mapping between the input <code>SOCIAL_TYPE_IDENTIFER</code> and the url format of the associated social media platform.
+A <code>Collection</code> of these raw social info parameters can then be passed to the <code>parseSocialInfo</code> method in the <code>SocialInfoMapping</code> class for parsing.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the <code>parseSocialInfo</code> method handles the parsing of the raw social info parameters:</p>
+<p>The following sequence diagram shows how input <code>rawSocialInfos</code> are parsed to obtain the appropriate <code>SocialInfos</code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1159,9 +1160,9 @@ There are several ways to toggle this <code>boolean</code> to change the favorit
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>public boolean isPrefixPresent(Prefix prefix) {
-    return argMultimap.containsKey(prefix);
-}</pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> isPrefixPresent(Prefix prefix) {
+    <span class="keyword">return</span> argMultimap.containsKey(prefix);
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1169,11 +1170,11 @@ There are several ways to toggle this <code>boolean</code> to change the favorit
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>public static Optional&lt;Favorite&gt; parseFavorite(ArgumentMultimap argMultimap,
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> Optional&lt;Favorite&gt; parseFavorite(ArgumentMultimap argMultimap,
                                      Prefix prefixFav,
-                                     Prefix prefixUnFav) throws ParseException {
-    // ... parser logic ...
-}</pre>
+                                     Prefix prefixUnFav) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="comment">// ... parser logic ...</span>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1181,11 +1182,11 @@ There are several ways to toggle this <code>boolean</code> to change the favorit
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    // Disallow both f/ and uf/ to be present in the same instance of user input when editing
-    if (argMultimap.isPrefixPresent(prefixFav) &amp;&amp; argMultimap.isPrefixPresent(prefixUnFav)) {
-        throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="comment">// Disallow both f/ and uf/ to be present in the same instance of user input when editing</span>
+    <span class="keyword">if</span> (argMultimap.isPrefixPresent(prefixFav) &amp;&amp; argMultimap.isPrefixPresent(prefixUnFav)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                             EditCommand.MESSAGE_USAGE));
-    }</pre>
+    }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1193,13 +1194,13 @@ There are several ways to toggle this <code>boolean</code> to change the favorit
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    if (argMultimap.isPrefixPresent(prefixFav)) {
-        if (!argMultimap.getValue(prefixFav).get().isEmpty()) { // Disallow text after prefix
-            throw new ParseException(Favorite.MESSAGE_FAVORITE_CONSTRAINTS);
-        } else {
-            return Optional.of(new Favorite(true));
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="keyword">if</span> (argMultimap.isPrefixPresent(prefixFav)) {
+        <span class="keyword">if</span> (!argMultimap.getValue(prefixFav).get().isEmpty()) { <span class="comment">// Disallow text after prefix</span>
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(Favorite.MESSAGE_FAVORITE_CONSTRAINTS);
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> Optional.of(<span class="keyword">new</span> Favorite(<span class="predefined-constant">true</span>));
         }
-    }</pre>
+    }</code></pre>
 </div>
 </div>
 </div>
@@ -1213,14 +1214,14 @@ There are several ways to toggle this <code>boolean</code> to change the favorit
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>public static List&lt;Index&gt; parseMultipleIndexes(String args) throws IllegalValueException {
-    List&lt;String&gt; argsList = Arrays.asList(args.trim().split("\\s+"));
-    List&lt;Index&gt; indexList = new ArrayList&lt;&gt;();
-    for (String index : argsList) {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">List</span>&lt;Index&gt; parseMultipleIndexes(<span class="predefined-type">String</span> args) <span class="directive">throws</span> IllegalValueException {
+    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; argsList = <span class="predefined-type">Arrays</span>.asList(args.trim().split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>));
+    <span class="predefined-type">List</span>&lt;Index&gt; indexList = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+    <span class="keyword">for</span> (<span class="predefined-type">String</span> index : argsList) {
         indexList.add(parseIndex(index));
     }
-    return indexList;
-}</pre>
+    <span class="keyword">return</span> indexList;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1231,9 +1232,9 @@ There are several ways to toggle this <code>boolean</code> to change the favorit
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>public Person(ReadOnlyPerson source) {
-    // ... create copy of all fields ...
-}</pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Person(ReadOnlyPerson source) {
+    <span class="comment">// ... create copy of all fields ...</span>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1285,6 +1286,22 @@ in sorted order, and ensures that it remains sorted even as changes are made to 
 </div>
 <div class="title">Figure 6. Class diagram representing the Observer pattern used to keep contacts in sorted order</div>
 </div>
+<div class="paragraph">
+<p>KayPoh! allows the user to sort the person list in several ways. To prevent the user from having to remember a separate
+<code>COMMAND_WORD</code> for each of these sort commands, we allow these sort commands to share a single <code>COMMAND_WORD</code> by having them
+inherit from an abstract <code>SortCommand</code> class, and introducing <a href="#command-options">Command Options</a> to allow the user to specify the sorting order
+to be used instead.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortCommandClassDiagram.png" alt="SortCommandClassDiagram" width="800">
+</div>
+<div class="title">Figure 7. Class diagram representing how the <code>sort</code> commands are implemented</div>
+</div>
+<div class="paragraph">
+<p>Each class that inherits from the <code>SortCommand</code> would then implement the <code>getComparator</code> method, which returns a
+<code>Comparator&lt;ReadOnlyPerson&gt;</code> to be used by the parent <code>SortCommand</code> to define the ordering for the <code>SortedList</code>.</p>
+</div>
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.1. Design Considerations</a></h4>
 <div class="paragraph">
@@ -1297,6 +1314,17 @@ in sorted order, and ensures that it remains sorted even as changes are made to 
 as there is no need to maintain any additional data structures.<br>
 <strong>Cons:</strong> Every sort operation will require writing to the data file, which requires IO operations that are slower compared
 to in-memory operations.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to implement different <code>sort</code> commands<br>
+<strong>Alternative 1 (current choice):</strong> Have an abstract <code>SortCommand</code> class with an abstract <code>getComparator</code> function to
+allow the inheriting classes to define the <code>Comparator&lt;ReadOnlyPerson&gt;</code> to be used to sort the displayed person list.<br>
+<strong>Pros:</strong> Significantly reduces code duplication, and makes introducing new <code>sort</code> commands easy.<br>
+<strong>Cons:</strong> Assumes that all <code>sort</code> commands will have similar behavior, differing only in the <code>Comparator</code> used for sorting.<br>
+<strong>Alternative 2:</strong>  Have separate commands for each <code>sort</code> command.<br>
+<strong>Pros:</strong> More flexibility in how each <code>sort</code> command is implemented should requirements change in the future.<br>
+<strong>Cons:</strong> If <code>sort</code> commands have similar behavior, then there will be significant amounts of code duplication.<br></p>
 </div>
 </div>
 </div>
@@ -2942,7 +2970,7 @@ is thus limited.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 13:57:09 +00:00
+Last updated 2017-11-12 14:46:34 +00:00
 </div>
 </div>
 </body>

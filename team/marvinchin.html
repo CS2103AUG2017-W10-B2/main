@@ -154,6 +154,22 @@ in sorted order, and ensures that it remains sorted even as changes are made to 
 </div>
 <div class="title">Figure 3. Class diagram representing the Observer pattern used to keep contacts in sorted order</div>
 </div>
+<div class="paragraph">
+<p>KayPoh! allows the user to sort the person list in several ways. To prevent the user from having to remember a separate
+<code>COMMAND_WORD</code> for each of these sort commands, we allow these sort commands to share a single <code>COMMAND_WORD</code> by having them
+inherit from an abstract <code>SortCommand</code> class, and introducing <a href="#command-options">Command Options</a> to allow the user to specify the sorting order
+to be used instead.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SortCommandClassDiagram.png" alt="SortCommandClassDiagram" width="800">
+</div>
+<div class="title">Figure 4. Class diagram representing how the <code>sort</code> commands are implemented</div>
+</div>
+<div class="paragraph">
+<p>Each class that inherits from the <code>SortCommand</code> would then implement the <code>getComparator</code> method, which returns a
+<code>Comparator&lt;ReadOnlyPerson&gt;</code> to be used by the parent <code>SortCommand</code> to define the ordering for the <code>SortedList</code>.</p>
+</div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
@@ -167,8 +183,36 @@ as there is no need to maintain any additional data structures.<br>
 <strong>Cons:</strong> Every sort operation will require writing to the data file, which requires IO operations that are slower compared
 to in-memory operations.</p>
 </div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to implement different <code>sort</code> commands<br>
+<strong>Alternative 1 (current choice):</strong> Have an abstract <code>SortCommand</code> class with an abstract <code>getComparator</code> function to
+allow the inheriting classes to define the <code>Comparator&lt;ReadOnlyPerson&gt;</code> to be used to sort the displayed person list.<br>
+<strong>Pros:</strong> Significantly reduces code duplication, and makes introducing new <code>sort</code> commands easy.<br>
+<strong>Cons:</strong> Assumes that all <code>sort</code> commands will have similar behavior, differing only in the <code>Comparator</code> used for sorting.<br>
+<strong>Alternative 2:</strong>  Have separate commands for each <code>sort</code> command.<br>
+<strong>Pros:</strong> More flexibility in how each <code>sort</code> command is implemented should requirements change in the future.<br>
+<strong>Cons:</strong> If <code>sort</code> commands have similar behavior, then there will be significant amounts of code duplication.<br></p>
+</div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="testing"><a class="link" href="#testing">Testing</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>System tests for <code>sort</code> commands</p>
+</li>
+<li>
+<p>Unit and integration tests for <code>SortByDefaultCommand</code>, <code>SortByNameCommand</code>, and <code>SortByRecentCommand</code></p>
+</li>
+<li>
+<p>Unit tests for <code>PersonDefaultComparator</code>, <code>PersonNameComparator</code> and <code>PersonRecentComparator</code></p>
+</li>
+</ul>
 </div>
 <hr>
 </div>
@@ -319,6 +363,17 @@ that this approach was less intuitive to them compared to the approach described
 </div>
 <hr>
 </div>
+<div class="sect3">
+<h4 id="testing-2"><a class="link" href="#testing-2">Testing</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Unit tests for <code>OptionBearingArgument</code></p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-adding-social-media-info-to-person-model"><a class="link" href="#enhancement-added-adding-social-media-info-to-person-model">Enhancement Added: Adding Social Media Info to Person Model</a></h3>
@@ -377,8 +432,8 @@ represents the Instagram account with the username <code>damyth</code>.</p>
 <div class="sect3">
 <h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
 <div class="paragraph">
-<p>Updated command syntax allows multiple similar commands to share a single <code>COMMAND_WORD</code> while providing
-a consistent and intuitive way for the user to specify which functionality of the <code>COMMAND</code> is to be executed.</p>
+<p>Storing information of contacts' social media accounts are core to the stalking functionality of KayPoh!. This enhancement
+paves the way for other enhancements which makes use of information about contacts' social media accounts.</p>
 </div>
 </div>
 <div class="sect3">
@@ -403,22 +458,23 @@ associated with the contact.</p>
 <div class="content">
 <img src="../images/SocialInfoClassDiagram.png" alt="SocialInfoClassDiagram" width="800">
 </div>
-<div class="title">Figure 4. Class diagram representing relationships between Person, UniqueSocialInfoList and SocialInfo classes</div>
+<div class="title">Figure 5. Class diagram representing relationships between Person, UniqueSocialInfoList and SocialInfo classes</div>
 </div>
 <div class="sect3">
 <h4 id="parsing-inputs-representing-social-media-accounts"><a class="link" href="#parsing-inputs-representing-social-media-accounts">Parsing inputs representing social media accounts</a></h4>
 <div class="paragraph">
-<p>The form <code>SOCIAL_TYPE_IDENTIFIER USERNAME</code> is used to represent a <code>SocialInfo</code> as a CLI parametr for a command,
-A Collection of these raw social info parameters can then be passed to the <code>parseSocialInfo</code> method in the <code>SocialInfoMapping</code> class for parsing.</p>
+<p>The form <code>SOCIAL_TYPE_IDENTIFIER USERNAME</code> is used to represent a <code>SocialInfo</code> as a parameter in a CLI command.
+The <code>SocialInfoMapping</code> class handles the mapping between the input <code>SOCIAL_TYPE_IDENTIFER</code> and the url format of the associated social media platform.
+A <code>Collection</code> of these raw social info parameters can then be passed to the <code>parseSocialInfo</code> method in the <code>SocialInfoMapping</code> class for parsing.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the <code>parseSocialInfo</code> method handles the parsing of the raw social info parameters:</p>
+<p>The following sequence diagram shows how input <code>rawSocialInfos</code> are parsed to obtain the appropriate <code>SocialInfos</code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/ParseSocialInfoSequenceDiagram.png" alt="ParseSocialInfoSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 5. Sequence diagram detailing how inputs are parsed to form SocialInfos</div>
+<div class="title">Figure 6. Sequence diagram detailing how inputs are parsed to form SocialInfos</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -520,6 +576,20 @@ alternative was selected to provide a more pleasant user experience.</p>
 </div>
 <hr>
 </div>
+<div class="sect3">
+<h4 id="testing-3"><a class="link" href="#testing-3">Testing</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Unit tests for <code>UniqueSocialInfoList</code></p>
+</li>
+<li>
+<p>Updated existing <code>AddCommandTest</code> and <code>EditCommandTest</code> to handle changes to the <code>Person</code> model.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-finding-by-tags"><a class="link" href="#enhancement-added-finding-by-tags">Enhancement Added: Finding by Tags</a></h3>
@@ -584,7 +654,7 @@ alternative was selected to provide a more pleasant user experience.</p>
 <div class="content">
 <img src="../images/find-command-result.png" alt="find command result" width="300">
 </div>
-<div class="title">Figure 6. Person list after finding contacts with the tag <code>friends</code></div>
+<div class="title">Figure 7. Person list after finding contacts with the tag <code>friends</code></div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -620,6 +690,17 @@ Displays <code>favorite</code> contacts in the person list.</p>
 <p>Allowing the user to search for contacts by tag allows the user to easily find related contacts.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="testing-4"><a class="link" href="#testing-4">Testing</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Unit tests for <code>TagsContainKeywordsPredicate</code></p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-deleting-by-tags"><a class="link" href="#enhancement-added-deleting-by-tags">Enhancement Added: Deleting by Tags</a></h3>
@@ -641,6 +722,17 @@ Displays <code>favorite</code> contacts in the person list.</p>
 </div>
 <hr>
 </div>
+<div class="sect3">
+<h4 id="testing-5"><a class="link" href="#testing-5">Testing</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Unit and integration tests for <code>DeleteByTagCommand</code> and <code>DeleteByIndexCommand</code></p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
@@ -653,7 +745,7 @@ Displays <code>favorite</code> contacts in the person list.</p>
 <p>Reported bugs in other group&#8217;s projects [<a href="https://github.com/CS2103AUG2017-W09-B1/main/issues?utf8=✓&amp;q=is%3Aissue%20involves%3Amarvinchin">Issues reported in W09-B1&#8217;s UniFy</a>]</p>
 </li>
 <li>
-<p>Helped resolve issues faced by other classmates [<a href="https://github.com/nus-cs2103-AY1718S1/forum/issues?utf8=✓&amp;q=is%3Aissue%20involves%3Amarvinchin">Contributions to forum</a>][<a href="https://nus-cs2103.slack.com/archives/C6JMW6SSZ/p1508508497000291?thread_ts=1508476015.000144&amp;cid=C6JMW6SSZ">Contributions to queries on Slack</a>]</p>
+<p>Helped resolve issues faced by other classmates [<a href="https://github.com/nus-cs2103-AY1718S1/forum/issues?utf8=✓&amp;q=is%3Aissue%20involves%3Amarvinchin">Contributions to forum</a>][<a href="https://nus-cs2103.slack.com/archives/C6JMW6SSZ/p1508508497000291?thread_ts=1508476015.000144&amp;cid=C6JMW6SSZ">Contributions on Slack</a>]</p>
 </li>
 </ul>
 </div>
@@ -663,7 +755,7 @@ Displays <code>favorite</code> contacts in the person list.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 13:57:09 +00:00
+Last updated 2017-11-12 14:46:34 +00:00
 </div>
 </div>
 </body>
