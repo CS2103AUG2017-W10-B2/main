@@ -514,7 +514,7 @@ and what <code class="green">PARAMETERS</code> you need to provide the command w
 <h4 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">4.2.1. Adding a person: <code>add</code></a></h4>
 <div class="paragraph">
 <p>Adds a person to the address book.<br>
-Format: <code>add n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]&#8230;&#8203; e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</code><br>
+Command format: <code>add n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]&#8230;&#8203; e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</code><br>
 Alias: <code>a</code></p>
 </div>
 <div class="sidebarblock">
@@ -565,7 +565,7 @@ address <code>Kent Ridge Drive 23</code>, tag <code>husband</code>, a <code>Face
 <h4 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">4.2.2. Editing a person: <code>edit</code></a></h4>
 <div class="paragraph">
 <p>Edits an existing person in the address book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE]&#8230;&#8203; [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</code><br>
+Command format: <code>edit INDEX [n/NAME] [p/PHONE]&#8230;&#8203; [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</code><br>
 Alias: <code>e</code></p>
 </div>
 <div class="sidebarblock">
@@ -632,7 +632,7 @@ Edits the name of the 3rd person to be <code>Betsy Crower</code>, removes existi
 <h4 id="favoriting-a-person-since-v1-2-code-fav-code"><a class="link" href="#favoriting-a-person-since-v1-2-code-fav-code">4.2.3. Favoriting a person [Since v1.2]: <code>fav</code></a></h4>
 <div class="paragraph">
 <p>Labels the specified person(s) as a favorite contact.<br>
-Format: <code>fav INDEX [ADDITIONAL INDEXES]</code></p>
+Command format: <code>fav INDEX [ADDITIONAL INDEXES]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -672,7 +672,7 @@ Favorites the first person in the list of contacts with the name <code>Betsy</co
 <h4 id="unfavoriting-a-person-since-v1-2-code-unfav-code"><a class="link" href="#unfavoriting-a-person-since-v1-2-code-unfav-code">4.2.4. Unfavoriting a person [Since v1.2]: <code>unfav</code></a></h4>
 <div class="paragraph">
 <p>Removes the the <code>favorite</code> label from the specified person(s).<br>
-Format: <code>unfav INDEX [ADDITIONAL INDEXES]</code></p>
+Command format: <code>unfav INDEX [ADDITIONAL INDEXES]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -712,7 +712,7 @@ Unfavorites the first person in the list of contacts with the name <code>Betsy</
 <h4 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">4.2.5. Deleting a person: <code>delete</code></a></h4>
 <div class="paragraph">
 <p>Deletes the specified person(s) from the address book.<br>
-Format: <code>delete [OPTION] KEYWORD [MORE_KEYWORDS]&#8230;&#8203;</code><br>
+Command format: <code>delete [OPTION] KEYWORD [MORE_KEYWORDS]&#8230;&#8203;</code><br>
 Alias: <code>d</code></p>
 </div>
 <div class="admonitionblock note">
@@ -746,7 +746,7 @@ Deletes persons that have the input tags.</p>
 <h5 id="deleting-persons-by-index-default"><a class="link" href="#deleting-persons-by-index-default">Deleting persons by index (default):</a></h5>
 <div class="paragraph">
 <p>Deletes person(s) specified by their indexes in the last displayed list.
-Format: <code>delete INDEX [ADDITIONAL_INDEXES]&#8230;&#8203;</code></p>
+Command format: <code>delete INDEX [ADDITIONAL_INDEXES]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -785,12 +785,18 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/delete-by-index-command-result.png" alt="delete by index command result" width="800">
+</div>
+<div class="title">Figure 4. Deleted person at first index i.e. Alex Yeoh</div>
+</div>
 </div>
 <div class="sect4">
 <h5 id="deleting-persons-by-tag-since-v1-4"><a class="link" href="#deleting-persons-by-tag-since-v1-4">Deleting persons by tag [Since v1.4]:</a></h5>
 <div class="paragraph">
 <p>Deletes person(s) that have a the input tags.<br>
-Format: <code>delete -tag TAG [ADDITIONAL_TAGS]&#8230;&#8203;</code></p>
+Command format: <code>delete -tag TAG [ADDITIONAL_TAGS]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -819,7 +825,13 @@ Deletes all persons with the tags <code>school</code> or <code>work</code></p>
 <h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.2.6. Clearing all entries: <code>clear</code></a></h4>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
-Format: <code>clear</code></p>
+Command format: <code>clear</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/clear-command-result.png" alt="clear command result" width="350">
+</div>
+<div class="title">Figure 5. Cleared all entries</div>
 </div>
 </div>
 </div>
@@ -859,7 +871,7 @@ Format: <code>clear</code></p>
 <div class="content">
 <img src="images/list-command-result.png" alt="list command result" width="790">
 </div>
-<div class="title">Figure 4. Person list populated with all contacts</div>
+<div class="title">Figure 6. Person list populated with all contacts</div>
 </div>
 </div>
 <div class="sect3">
@@ -897,7 +909,7 @@ the person, a Google search of the person&#8217;s name will be displayed instead
 <div class="content">
 <img src="images/stalk-command-result.png" alt="stalk command result" width="790">
 </div>
-<div class="title">Figure 5. Social media feed displayed in browser window</div>
+<div class="title">Figure 7. Social media feed displayed in browser window</div>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -992,7 +1004,7 @@ a user can be found in the person list.
 <div class="content">
 <img src="images/find-command-result.png" alt="find command result" width="300">
 </div>
-<div class="title">Figure 6. Person list after finding contacts with the tag <code>friends</code></div>
+<div class="title">Figure 8. Person list after finding contacts with the tag <code>friends</code></div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1069,13 +1081,13 @@ Displays <code>favorite</code> contacts in the person list.</p>
 <div class="content">
 <img src="images/sort-command-default-result.png" alt="sort command default result" width="300">
 </div>
-<div class="title">Figure 7. Person list after executing a default sort</div>
+<div class="title">Figure 9. Person list after executing a default sort</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/sort-command-name-result.png" alt="sort command name result" width="300">
 </div>
-<div class="title">Figure 8. Person list after executing a sort by <code>name</code></div>
+<div class="title">Figure 10. Person list after executing a sort by <code>name</code></div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1332,7 +1344,7 @@ Command format: <code><span class="red">export</span> <span class="green">FILE_P
 <div class="content">
 <img src="images/export-contacts.png" alt="export contacts" width="790">
 </div>
-<div class="title">Figure 9. Confirmation message after exporting contacts</div>
+<div class="title">Figure 11. Confirmation message after exporting contacts</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1386,7 +1398,7 @@ Command format: <code><span class="red">import</span> <span class="green">FILE_P
 <div class="content">
 <img src="images/import-contacts.png" alt="import contacts" width="790">
 </div>
-<div class="title">Figure 10. Confirmation message after importing contacts</div>
+<div class="title">Figure 12. Confirmation message after importing contacts</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1662,7 +1674,7 @@ e.g. <code>facebook post hello world!</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 13:20:59 +00:00
+Last updated 2017-11-12 13:57:09 +00:00
 </div>
 </div>
 </body>
