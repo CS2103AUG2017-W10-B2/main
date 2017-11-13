@@ -19,7 +19,7 @@ import seedu.address.storage.Storage;
 /**
  * Imports contacts from an external XML file
  */
-public class ImportCommand extends Command {
+public class ImportCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "import";
 
@@ -41,7 +41,7 @@ public class ImportCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         String absoluteImportFilePathString = importFilePath.toAbsolutePath().toString();
 
         Optional<ReadOnlyAddressBook> optionalImportedAddressBook;
