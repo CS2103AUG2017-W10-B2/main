@@ -380,6 +380,7 @@ e.g. `-1`, `0.1`, `abc`
 // end::favorite[]
 
 // tag::deletebyindex[]
+// tag::delete-by-tag[]
 ==== Deleting a Person: `delete`
 Not interested in a contact anymore? Remove him from KayPoh using the `delete` command!
 
@@ -426,6 +427,7 @@ e.g. `-1`, `0.1`, `abc`
 |Ensure that the specified `INDEX` is a *positive integer* that is *smaller or equal to the total number of contacts in the contacts list*.
 |===
 // end::deletebyindex[]
+// end::delete-by-tag[]
 
 ==== Clearing All Persons: `clear`
 To clear all entries from KayPoh, use the `clear` command.
