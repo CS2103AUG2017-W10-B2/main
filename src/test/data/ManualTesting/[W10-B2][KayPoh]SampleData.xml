@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <persons>
+        <name>Selina Riding</name>
+        <phone>82549565</phone>
+        <email>Selina@example.com</email>
+        <address>2 Church Barns, Stocking Pelham</address>
+        <favorite>true</favorite>
+        <tagged>school</tagged>
+        <addedSocialInfos>
+            <username>world</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/world</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>hello</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/hello</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Caren Carmouche</name>
+        <phone>97707696</phone>
+        <email>Caren@example.com</email>
+        <address>34 Baird St</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>caren</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/caren</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>caren</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/caren</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Samira Buzbee</name>
+        <phone>88835282</phone>
+        <email>Samira@example.com</email>
+        <address>44 Braid Cre</address>
+        <favorite>true</favorite>
+        <addedSocialInfos>
+            <username>sam</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/sam</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>samsam</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/samsam</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Dominic Luebbert</name>
+        <phone>93793799</phone>
+        <email>Dominic@example.com</email>
+        <address>3 Alpha Rd</address>
+        <favorite>false</favorite>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>dominicnord</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/dominicnord</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>dominic</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/dominic</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Jonah Mcvay</name>
+        <phone>80009444</phone>
+        <email>Jonah@example.com</email>
+        <address>39 Crudgington Moor Ln</address>
+        <favorite>false</favorite>
+        <tagged>school</tagged>
+        <addedSocialInfos>
+            <username>Jonah</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/Jonah</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>Jonah</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/Jonah</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Tashia Mckean</name>
+        <phone>85747678</phone>
+        <email>Tashia@example.com</email>
+        <address>21 Plassey St</address>
+        <favorite>false</favorite>
+        <tagged>school</tagged>
+        <addedSocialInfos>
+            <username>tashi</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/tashi</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>tashia</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/tashia</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Joane Emert</name>
+        <phone>89534494</phone>
+        <email>Joane@example.com</email>
+        <address>36 Cedar Gardens</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>Joane</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/Joane</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>Joane</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/Joane</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Carolee Yarbro</name>
+        <phone>92095162</phone>
+        <email>Carolee@example.com</email>
+        <address>99-101 A123</address>
+        <favorite>false</favorite>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>carolee</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/carolee</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>carolee</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/carolee</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Roslyn Hovey</name>
+        <phone>95618560</phone>
+        <email>Roslyn@example.com</email>
+        <address>2 Justin Cl</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>ross</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/ross</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>roslyn</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/roslyn</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Rodrigo Pion</name>
+        <phone>81870594</phone>
+        <email>Rodrigo@example.com</email>
+        <address>40A Celina C</address>
+        <favorite>true</favorite>
+        <addedSocialInfos>
+            <username>rodrigo</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/rodrigo</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>rodrigo</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/rodrigo</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Donella Branscum</name>
+        <phone>86516922</phone>
+        <email>Donella@example.com</email>
+        <address>123 Hello Road</address>
+        <favorite>false</favorite>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>donel</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/donel</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>don</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/don</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Kaitlin Brandenburg</name>
+        <phone>95735471</phone>
+        <email>Kaitlin@example.com</email>
+        <address>Unnamed Road</address>
+        <favorite>false</favorite>
+        <tagged>school</tagged>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>kaitlin</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/kaitlin</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>kaitlin</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/kaitlin</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Cristobal Whobrey</name>
+        <phone>93836627</phone>
+        <email>Cristobal@example.com</email>
+        <address>49 Stubbing Ln</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>cirsto</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/cirsto</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>crist</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/crist</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Melva Harper</name>
+        <phone>85619752</phone>
+        <email>Melva@example.com</email>
+        <address>25 Bickland Hill</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>melva</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/melva</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>melva</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/melva</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Shaunda Anding</name>
+        <phone>86066281</phone>
+        <email>Shaunda@example.com</email>
+        <address>1 Cross Rd</address>
+        <favorite>false</favorite>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>shaun</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/shaun</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>shaunda</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/shaunda</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Cruz Mysliwiec</name>
+        <phone>90570892</phone>
+        <email>Cruz@example.com</email>
+        <address>11 Rochford Way</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>cruz</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/cruz</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>cru</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/cru</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Jacklyn Proper</name>
+        <phone>86971386</phone>
+        <email>Jacklyn@example.com</email>
+        <address>9 New St</address>
+        <favorite>false</favorite>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>jack</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/jack</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>jacky</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/jacky</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Jacinta Rymer</name>
+        <phone>96377478</phone>
+        <email>Jacinta@example.com</email>
+        <address>12 Fairfield Rd</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>jacinta</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/jacinta</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>jacinta</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/jacinta</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Brady Stennett</name>
+        <phone>84913511</phone>
+        <email>Brady@example.com</email>
+        <address>The Gree</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>brady</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/brady</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>brady</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/brady</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Abbey Mayhugh</name>
+        <phone>95095044</phone>
+        <email>Abbey@example.com</email>
+        <address>50A Ridge Ave</address>
+        <favorite>false</favorite>
+        <addedSocialInfos>
+            <username>abbey</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/abbey</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>helloworld</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/helloworld</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Alex Foo</name>
+        <phone>81234567</phone>
+        <email>alexfoo@example.com</email>
+        <address>311, Clementi Ave 2, #02-25</address>
+        <favorite>true</favorite>
+        <tagged>dancer</tagged>
+        <tagged>school</tagged>
+        <addedSocialInfos>
+            <username>foodawengz</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/foodawengz</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>alex.foodw</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/alex.foodw</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Aaron Tan</name>
+        <phone>83456789</phone>
+        <email>aaron@example.com</email>
+        <address>5 Cap Rd, #01-01</address>
+        <favorite>false</favorite>
+        <tagged>school</tagged>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>aaron.tan</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/aaron.tan</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>aarontan</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/aarontan</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Colin Tan</name>
+        <phone>84567890</phone>
+        <email>colin@example.com</email>
+        <address>5 Cap Rd, #01-01</address>
+        <favorite>false</favorite>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>colin.tan</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/colin.tan</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>colintan</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/colintan</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Bryan Phee</name>
+        <phone>85678901</phone>
+        <email>bryan@example.com</email>
+        <address>3 College Ave #19-165</address>
+        <favorite>false</favorite>
+        <tagged>army</tagged>
+        <addedSocialInfos>
+            <username>bryanphee</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/bryanphee</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>bryan</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/bryan</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Ernest Yee</name>
+        <phone>90123456</phone>
+        <email>ernie@example.com</email>
+        <address>Somewhere Ave</address>
+        <favorite>false</favorite>
+        <tagged>army</tagged>
+        <addedSocialInfos>
+            <username>ernestlim</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/ernestlim</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>ern</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/ern</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Zachary Tang</name>
+        <phone>91234567</phone>
+        <email>zachary@example.com</email>
+        <address>Some Where</address>
+        <favorite>true</favorite>
+        <tagged>school</tagged>
+        <addedSocialInfos>
+            <username>zachary</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/zachary</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>zaaaachary</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/zaaaachary</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <persons>
+        <name>Neil Brian Labayna</name>
+        <phone>923456789</phone>
+        <email>labayna@example.com</email>
+        <address>123 Orchard Road</address>
+        <favorite>false</favorite>
+        <tagged>school</tagged>
+        <tagged>work</tagged>
+        <addedSocialInfos>
+            <username>neilbrian.nl</username>
+            <socialType>facebook</socialType>
+            <socialUrl>https://facebook.com/neilbrian.nl</socialUrl>
+        </addedSocialInfos>
+        <addedSocialInfos>
+            <username>nbriannl</username>
+            <socialType>instagram</socialType>
+            <socialUrl>https://instagram.com/nbriannl</socialUrl>
+        </addedSocialInfos>
+        <lastAccessDateEpoch>1510578362002</lastAccessDateEpoch>
+    </persons>
+    <tags>dancer</tags>
+    <tags>army</tags>
+    <tags>school</tags>
+    <tags>work</tags>
+</addressbook>
