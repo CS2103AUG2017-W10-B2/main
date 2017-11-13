@@ -1,23 +1,52 @@
 # sarahnzx
-###### /java/systemtests/SelectCommandSystemTest.java
+###### \java\seedu\address\logic\commands\DeleteByIndexCommandTest.java
 ``` java
-        /* Case: valid arguments (social type instagram) -> selected */
-        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " instagram";
-        assertCommandSuccess(command, validIndex);
+    @Test
+    public void execute_multipleValidIndicesUnfilteredList_success() throws Exception {
+        ReadOnlyPerson personToDelete = null;
+        String people = "";
+        List<Index> indexList = new ArrayList<>();
 
-        /* Case: valid arguments (social type facebook) -> selected */
-        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " facebook";
-        assertCommandSuccess(command, validIndex);
 
-        /* Case: valid arguments (social type ig) -> selected */
-        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " ig";
-        assertCommandSuccess(command, validIndex);
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        /* Case: valid arguments (social type fb) -> selected */
-        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " fb";
-        assertCommandSuccess(command, validIndex);
+        for (int i = 0; i < 3; i++) {
+            Index indexToDelete = Index.fromZeroBased(i);
+            personToDelete = model.getFilteredPersonList().get(indexToDelete.getZeroBased());
+            expectedModel.deletePerson(personToDelete);
+            people += "\n" + personToDelete.toString();
+            indexList.add(indexToDelete);
+        }
+
+        DeleteByIndexCommand deleteByIndexCommand = prepareCommand(indexList);
+        String expectedMessage = String.format(deleteByIndexCommand.MESSAGE_DELETE_PERSON_SUCCESS, people);
+        assertCommandSuccess(deleteByIndexCommand, model, expectedMessage, expectedModel);
+    }
 ```
-###### /java/seedu/address/logic/parser/EditCommandParserTest.java
+###### \java\seedu\address\logic\commands\DeleteByIndexCommandTest.java
+``` java
+    @Test
+    public void execute_multipleIndicesWithInvalidIndexUnfilteredList_throwsCommandException() throws Exception {
+        List<Index> indexList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Index index = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+            indexList.add(index);
+        }
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        indexList.add(outOfBoundIndex);
+        DeleteByIndexCommand deleteByIndexCommand = prepareCommand(indexList);
+        assertCommandFailure(deleteByIndexCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+```
+###### \java\seedu\address\logic\commands\DeleteByIndexCommandTest.java
+``` java
+    private DeleteByIndexCommand prepareCommand(Collection<Index> indexes) {
+        DeleteByIndexCommand deleteByIndexCommand = new DeleteByIndexCommand(indexes);
+        deleteByIndexCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
+        return deleteByIndexCommand;
+    }
+```
+###### \java\seedu\address\logic\parser\EditCommandParserTest.java
 ``` java
     @Test
     public void parse_multipleRepeatedFields_acceptsMultipleUnrepeated() {
@@ -40,7 +69,7 @@
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 ```
-###### /java/seedu/address/logic/parser/EditCommandParserTest.java
+###### \java\seedu\address\logic\parser\EditCommandParserTest.java
 ``` java
     @Test
     public void parse_validValueFollowedByInvalidValue_success() {
@@ -59,4 +88,22 @@
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+```
+###### \java\systemtests\SelectCommandSystemTest.java
+``` java
+        /* Case: valid arguments (social type instagram) -> selected */
+        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " instagram";
+        assertCommandFailure(command, MESSAGE_SOCIAL_TYPE_NOT_FOUND);
+
+        /* Case: valid arguments (social type facebook) -> selected */
+        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " facebook";
+        assertCommandSuccess(command, validIndex);
+
+        /* Case: valid arguments (social type ig) -> selected */
+        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " ig";
+        assertCommandFailure(command, MESSAGE_SOCIAL_TYPE_NOT_FOUND);
+
+        /* Case: valid arguments (social type fb) -> selected */
+        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased() + " fb";
+        assertCommandSuccess(command, validIndex);
 ```
