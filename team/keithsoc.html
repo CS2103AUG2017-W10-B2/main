@@ -16,13 +16,13 @@
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="project-kaypoh"><a class="link" href="#project-kaypoh">Project: KayPoh!</a></h2>
+<h2 id="project-kaypoh"><a class="link" href="#project-kaypoh">Project: KayPoh</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>KayPoh! is a desktop address book application with social media integrations. The user interacts with the application using a command line interface, and it has a GUI created with JavaFX. It is written in Java and has about 14k LoC.</p>
+<p>KayPoh is a desktop address book application with social media integrations. The user interacts with the application using a command line interface, and it has a GUI created with JavaFX. It is written in Java and has about 14k LoC.</p>
 </div>
 <div class="paragraph">
-<p><strong>Code Contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/keithsoc.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/keithsoc.md">Test code</a>]</p>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/keithsoc.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/keithsoc.md">Test code</a>]</p>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-favorite-status-in-the-person-model"><a class="link" href="#enhancement-added-favorite-status-in-the-person-model">Enhancement Added: Favorite Status in the Person Model</a></h3>
@@ -32,6 +32,143 @@
 <div class="paragraph">
 <p><mark>Start of extract [from: User Guide]</mark></p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="labelling-favorite-contacts-since-v1-2-code-fav-code"><a class="link" href="#labelling-favorite-contacts-since-v1-2-code-fav-code">Labelling Favorite Contacts [Since v1.2]: <code>fav</code></a></h4>
+<div class="paragraph">
+<p>KayPoh helps you to keep track of the people that matter most to you. Label important people as a favorite contacts using
+the <code>fav</code> command so that you never miss out on a moment in their lives.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">fav</span> <span class="green">INDEX [ADDITIONAL INDEXES]&#8230;&#8203;</span></code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see a star icon displayed beside the persons at the specified <code>INDEX</code> or <code>INDEXES</code> after executing the command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">fav</span> <span class="green">5 6</span></code><br>
+Marks the fifth and sixth persons as favorite contacts in the most recently displayed list.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/favorite-multiple-command-result.png" alt="favorite multiple command result" width="700">
+</div>
+<div class="title">Figure 1. Marked fifth and sixth persons as favorite contacts</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">Bernice</span></code><br>
+<code><span class="red">fav</span> <span class="green">1</span></code><br>
+Marks the first person in the list of contacts with the name <code>Bernice</code> as a favorite contact.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/favorite-after-find-command-result.png" alt="favorite after find command result" width="800">
+</div>
+<div class="title">Figure 2. Marked the first person i.e. Bernice as a favorite contact</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the contacts list</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="removing-favorite-contacts-since-v1-2-code-unfav-code"><a class="link" href="#removing-favorite-contacts-since-v1-2-code-unfav-code">Removing Favorite Contacts [Since v1.2]: <code>unfav</code></a></h4>
+<div class="paragraph">
+<p>To remove someone from your favorite contacts, use the <code>unfav</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">unfav</span> <span class="green">INDEX [ADDITIONAL INDEXES]&#8230;&#8203;</span></code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the star icon removed from the persons at the specified <code>INDEX</code> or <code>INDEXES</code> after executing the command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">unfav</span> <span class="green">1 2</span></code><br>
+Removes the first and second persons from favorite contacts in the most recently displayed list.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/unfavorite-multiple-command-result.png" alt="unfavorite multiple command result" width="700">
+</div>
+<div class="title">Figure 3. Removed the first and second persons from favorite contacts</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">Alex</span></code><br>
+<code><span class="red">unfav</span> <span class="green">1</span></code><br>
+Removes the first person in the list of contacts with the name <code>Alex</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/unfavorite-after-find-command-result.png" alt="unfavorite after find command result" width="800">
+</div>
+<div class="title">Figure 4. Removed person at first index from favorite contacts i.e. Alex</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the contacts list</strong>.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -45,17 +182,84 @@
 </div>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
-<div class="paragraph">
-<p>Pull Request (with a detailed summary of changes): <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/33">#33</a></p>
-</div>
 <hr>
 <div class="paragraph">
 <p><mark>Start of extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="favoriting-contacts"><a class="link" href="#favoriting-contacts">Favoriting Contacts</a></h3>
+<div class="paragraph">
+<p>The favorite status of each contact is stored as a <code>boolean</code>, encapsulated within the <code>Favorite</code> class.<br>
+There are several ways to toggle this <code>boolean</code> to change the favorite status of a contact.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/person-class-diagram-favorite.png" alt="person class diagram favorite" width="800">
+</div>
+<div class="title">Figure 5. Favorite is one of the members in the Person class</div>
+</div>
+<div class="sect3">
+<h4 id="toggle-favorites-using-code-add-code-and-or-code-edit-code-command-br"><a class="link" href="#toggle-favorites-using-code-add-code-and-or-code-edit-code-command-br">Toggle favorites using <code>add</code> and/or <code>edit</code> command<br></a></h4>
+<div class="paragraph">
+<p>For user&#8217;s convenience, we are allowing just the input of prefixes i.e. <code>f/</code> in <code>add</code> command and either <code>f/</code> or <code>uf/</code> in <code>edit</code> command to make a change to a contact&#8217;s favorite status.</p>
+</div>
+<div class="paragraph">
+<p>As such, at <code>Parser</code> level in both <code>AddCommandParser</code> and <code>EditCommandParser</code>, we simply need to know whether the prefixes are present in the user input. Prefixes in user input can be found in <code>ArgumentMultimap argMultimap</code>. Hence, we can utilise the following helper-method by passing in <code>PREFIX_FAV</code> or <code>PREFIX_UNFAV</code> to return true if the prefix is contained within the user input, false otherwise:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> isPrefixPresent(Prefix prefix) {
+    <span class="keyword">return</span> argMultimap.containsKey(prefix);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The helper-method above is called within a common method <code>parseFavorite</code> (shown below), used by both <code>AddCommandParser</code> and <code>EditCommandParser</code> classes. The difference in utilisation of the following method by both classes is in the parameters that are passed in. As <code>AddCommandParser</code> only needs to check whether <code>PREFIX_FAV</code> exists, it will pass in <code>parseFavorite(argMultimap, PREFIX_FAV, null)</code> while <code>EditCommandParser</code> will pass in <code>parseFavorite(argMultimap, PREFIX_FAV, PREFIX_UNFAV)</code> to check for both prefixes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> Optional&lt;Favorite&gt; parseFavorite(ArgumentMultimap argMultimap,
+                                     Prefix prefixFav,
+                                     Prefix prefixUnFav) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="comment">// ... parser logic ...</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For editing person, after obtaining the presence of prefix in user input, we need to perform some input validation by disallowing both <code>f/</code> and <code>uf/</code> prefixes to be present at the same time. We can check this by using the he:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="comment">// Disallow both f/ and uf/ to be present in the same instance of user input when editing</span>
+    <span class="keyword">if</span> (argMultimap.isPrefixPresent(prefixFav) &amp;&amp; argMultimap.isPrefixPresent(prefixUnFav)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            EditCommand.MESSAGE_USAGE));
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For both adding and editing person, there is a similar validation for disallowing text after prefix e.g. <code>f/this is a text</code>. This is achieved by checking whether the any additional <code>String</code> exists after prefix.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="keyword">if</span> (argMultimap.isPrefixPresent(prefixFav)) {
+        <span class="keyword">if</span> (!argMultimap.getValue(prefixFav).get().isEmpty()) { <span class="comment">// Disallow text after prefix</span>
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(Favorite.MESSAGE_FAVORITE_CONSTRAINTS);
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> Optional.of(<span class="keyword">new</span> Favorite(<span class="predefined-constant">true</span>));
+        }
+    }</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+<div class="paragraph">
+<p>See also: Pull Request (with a detailed summary of changes): <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/33">#33</a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -66,6 +270,143 @@
 <div class="paragraph">
 <p><mark>Start of extract [from: User Guide]</mark></p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="labelling-favorite-contacts-since-v1-2-code-fav-code-2"><a class="link" href="#labelling-favorite-contacts-since-v1-2-code-fav-code-2">Labelling Favorite Contacts [Since v1.2]: <code>fav</code></a></h4>
+<div class="paragraph">
+<p>KayPoh helps you to keep track of the people that matter most to you. Label important people as a favorite contacts using
+the <code>fav</code> command so that you never miss out on a moment in their lives.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">fav</span> <span class="green">INDEX [ADDITIONAL INDEXES]&#8230;&#8203;</span></code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see a star icon displayed beside the persons at the specified <code>INDEX</code> or <code>INDEXES</code> after executing the command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">fav</span> <span class="green">5 6</span></code><br>
+Marks the fifth and sixth persons as favorite contacts in the most recently displayed list.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/favorite-multiple-command-result.png" alt="favorite multiple command result" width="700">
+</div>
+<div class="title">Figure 6. Marked fifth and sixth persons as favorite contacts</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">Bernice</span></code><br>
+<code><span class="red">fav</span> <span class="green">1</span></code><br>
+Marks the first person in the list of contacts with the name <code>Bernice</code> as a favorite contact.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/favorite-after-find-command-result.png" alt="favorite after find command result" width="800">
+</div>
+<div class="title">Figure 7. Marked the first person i.e. Bernice as a favorite contact</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the contacts list</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="removing-favorite-contacts-since-v1-2-code-unfav-code-2"><a class="link" href="#removing-favorite-contacts-since-v1-2-code-unfav-code-2">Removing Favorite Contacts [Since v1.2]: <code>unfav</code></a></h4>
+<div class="paragraph">
+<p>To remove someone from your favorite contacts, use the <code>unfav</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">unfav</span> <span class="green">INDEX [ADDITIONAL INDEXES]&#8230;&#8203;</span></code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the star icon removed from the persons at the specified <code>INDEX</code> or <code>INDEXES</code> after executing the command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">unfav</span> <span class="green">1 2</span></code><br>
+Removes the first and second persons from favorite contacts in the most recently displayed list.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/unfavorite-multiple-command-result.png" alt="unfavorite multiple command result" width="700">
+</div>
+<div class="title">Figure 8. Removed the first and second persons from favorite contacts</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">Alex</span></code><br>
+<code><span class="red">unfav</span> <span class="green">1</span></code><br>
+Removes the first person in the list of contacts with the name <code>Alex</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/unfavorite-after-find-command-result.png" alt="unfavorite after find command result" width="800">
+</div>
+<div class="title">Figure 9. Removed person at first index from favorite contacts i.e. Alex</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 4. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the contacts list</strong>.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -79,17 +420,75 @@
 </div>
 <div class="sect3">
 <h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
-<div class="paragraph">
-<p>Pull Request (with a detailed summary of changes): <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/38">#38</a></p>
-</div>
 <hr>
 <div class="paragraph">
 <p><mark>Start of extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="toggle-favorites-using-code-fav-code-and-or-code-unfav-code-command"><a class="link" href="#toggle-favorites-using-code-fav-code-and-or-code-unfav-code-command">Toggle favorites using <code>fav</code> and/or <code>unfav</code> command</a></h4>
+<div class="paragraph">
+<p>To enhance contact management, we implemented these commands to perform batch favoriting or unfavoriting of multiple contacts. They are also capable of performing the operations on a single contact. The implementation involves two major steps.</p>
+</div>
+<div class="paragraph">
+<p>The first step to doing so is to allow parsing of multiple indexes so that a user could specify which contacts they would like to favorite or unfavorite i.e. <code>fav 1 2 3</code>. In this case, we use <code>List</code> to parse and store every index.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">List</span>&lt;Index&gt; parseMultipleIndexes(<span class="predefined-type">String</span> args) <span class="directive">throws</span> IllegalValueException {
+    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; argsList = <span class="predefined-type">Arrays</span>.asList(args.trim().split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>));
+    <span class="predefined-type">List</span>&lt;Index&gt; indexList = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+    <span class="keyword">for</span> (<span class="predefined-type">String</span> index : argsList) {
+        indexList.add(parseIndex(index));
+    }
+    <span class="keyword">return</span> indexList;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that trimming <code>args.trim()</code> is required since the args passed will usually contain a leading whitespace. The regex <code>args.trim().split("\\s+")</code> is used as a form of validation to ignore multiple trailing whitespaces and still allowing such user input to be parsed, preventing an <code>exception</code>.</p>
+</div>
+<div class="paragraph">
+<p>The last step is to create a copy of the person we are favoriting or unfavoriting and change its favorite status via the aforementioned <code>boolean</code>. Since the <code>Person</code> class takes two constructors, the following constructor allows creating a copy of a given <code>ReadOnlyPerson</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Person(ReadOnlyPerson source) {
+    <span class="comment">// ... create copy of all fields ...</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After getting the copy of the person e.g. <code>personToFavorite</code>, it is easy to call <code>personToFavorite.setFavorite(new Favorite(true))</code> and that sets the person as a favorite. Batch operation of favoriting or unfavoriting multiple contacts simply loops this last step for the amount of indexes specified by the user.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storing of favorite status<br>
+<strong>Alternative 1 (current choice):</strong> Store it as a <code>boolean</code><br>
+<strong>Pros:</strong> Saves memory, more efficient to call <code>isFavorite()</code> to check whether a person is a favorite contact<br>
+<strong>Cons:</strong> Unable to check for <code>null</code> or use any other values apart from <code>true</code> or <code>false</code><br>
+<strong>Alternative 2:</strong> Store it as a <code>String</code><br>
+<strong>Pros:</strong> Easier for printing its values<br>
+<strong>Cons:</strong> Requires input validation for <code>String</code>, less efficient in checking whether a person is a favorite contact (<code>O(N)</code> in the worse case scenario)</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Ways to change the favorite status of a person<br>
+<strong>Alternative 1 (current choice):</strong> Allowing favoriting and unfavoriting of contacts through adding and editing persons as well as through <code>fav</code> and <code>unfav</code> commands<br>
+<strong>Pros:</strong> Creates a more consistent workflow for our user that ties in with other fields, a more straight-foward approach to indicate which are the favorite contacts upon adding a person<br>
+<strong>Cons:</strong> More tedious implementation<br>
+<strong>Alternative 2:</strong> Just rely on <code>fav</code> and <code>unfav</code> commands<br>
+<strong>Pros:</strong> Easier implementation<br>
+<strong>Cons:</strong> User would have to remember more commands and their usages</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+<div class="paragraph">
+<p>See also: Pull Request (with a detailed summary of changes): <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/38">#38</a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -99,6 +498,41 @@
 <hr>
 <div class="paragraph">
 <p><mark>Start of extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-persons-code-list-code"><a class="link" href="#listing-persons-code-list-code">Listing Persons: <code>list</code></a></h4>
+<div class="paragraph">
+<p>To have all your contacts displayed in your contacts list, use the <code>list</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">list</span></code><br>
+<strong>Alias</strong>: <code><span class="red">l</span></code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Listing all persons:
+<code><span class="red">list</span></code></p>
+</li>
+<li>
+<p>Listing all favorite persons [Since v1.2]:
+<code><span class="red">list</span> <span class="blue">-fav</span></code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see your contacts list populated with your contacts after executing the command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/list-command-result.png" alt="list command result" width="350">
+</div>
+<div class="title">Figure 10. Contacts list populated with all contacts</div>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -114,16 +548,8 @@
 <div class="sect3">
 <h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
 <div class="paragraph">
-<p>Pull Request: <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/65">#65</a></p>
+<p>See also: Pull Request: <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/65">#65</a></p>
 </div>
-<hr>
-<div class="paragraph">
-<p><mark>Start of extract [from: Developer Guide]</mark></p>
-</div>
-<div class="paragraph">
-<p><mark>End of Extract</mark></p>
-</div>
-<hr>
 </div>
 </div>
 <div class="sect2">
@@ -133,6 +559,49 @@
 <hr>
 <div class="paragraph">
 <p><mark>Start of extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="changing-themes-code-theme-code-since-v1-4"><a class="link" href="#changing-themes-code-theme-code-since-v1-4">Changing Themes: <code>theme</code> [Since v1.4]</a></h4>
+<div class="paragraph">
+<p>Variety is the spice of life! To change the theme of the application, use the <code>theme</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Changing to <code>day</code> theme:
+<code><span class="red">theme</span> <span class="blue">-day</span></code></p>
+</li>
+<li>
+<p>Changing to <code>night</code> theme:
+<code><span class="red">theme</span> <span class="blue">-night</span></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alias</strong>: <code><span class="red">t</span></code><br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the user interface change according to the specified theme.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ui-day.png" alt="Ui day" width="800">
+</div>
+<div class="title">Figure 11. User interface after applying the day theme</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ui-night.png" alt="Ui night" width="800">
+</div>
+<div class="title">Figure 12. User interface after applying the night theme</div>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -156,17 +625,267 @@
 </div>
 <div class="sect3">
 <h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
-<div class="paragraph">
-<p>Pull Request (with a detailed summary of changes): <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/92">#92</a></p>
-</div>
 <hr>
 <div class="paragraph">
 <p><mark>Start of extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancing-user-interface"><a class="link" href="#enhancing-user-interface">Enhancing User Interface</a></h3>
+<div class="sect3">
+<h4 id="removing-window-decorations"><a class="link" href="#removing-window-decorations">Removing Window Decorations</a></h4>
+<div class="paragraph">
+<p>To enhance our user&#8217;s satisfaction with KayPoh, we improved the user interface by redesigning the color scheme and allowed theming for user to switch between two available themes.</p>
+</div>
+<div class="paragraph">
+<p>The first step to adding a better look was to remove the standard platform window decorations. This will shift the application&#8217;s user interface from classic to a fancier look that is self-contained, without wasting extra pixels just for the default window decorations. This is done by the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>primaryStage.initStyle(StageStyle.TRANSPARENT);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Do note that this line of code has to be placed in the <code>start()</code> method of <code>MainApp.java</code> instead of <code>MainWindow.java</code> or <code>UiManager.java</code> so as to specify the removal of window decorations immediately upon the launch of the application. Otherwise, there will be an <code>exception</code> thrown: <code>Cannot set style once stage has been set visible</code>.</p>
+</div>
+<div class="paragraph">
+<p>This immediately removes the window&#8217;s title bar. However, this also removes the default window functionalities such as being able to resize the window, move the window&#8217;s position, minimise, maximise and exit the application proper.</p>
+</div>
+<div class="paragraph">
+<p>Hence, the second step is to rebuild these functionalities. The design considered was to bake these functionalities along with the minimise, maximise and exit button into the existing menu bar. The three aforementioned buttons are added in Scene Builder, using the same height as the menu bar so that it would look coherent.</p>
+</div>
+<div class="paragraph">
+<p>Now that we have added the buttons, we can make use of the buttons' event handlers to trigger the window functionalities.</p>
+</div>
+<div class="paragraph">
+<p>Moving of window is implemented by setting the menu bar to listen on the events such as <code>onMousePressed</code> and <code>onMouseDragged</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private void enableMovableWindow() {
+    menuBar.setOnMousePressed((event) -&gt; {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    });
+
+    menuBar.setOnMouseDragged((event) -&gt; {
+        primaryStage.setX(event.getScreenX() - xOffset);
+        primaryStage.setY(event.getScreenY() - yOffset);
+    });
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, minimising of window is implemented by setting the minimise button to listen on <code>onMouseClicked</code> event and uses the following method that was found from the JavaFX Stage API.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>primaryStage.setIconified(true)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Maximising of window is also implemented in the same way.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>maximiseButton.setOnMouseClicked((event) -&gt; {
+    primaryStage.setMaximized(true);
+    maximiseButton.setId("restoreButton");
+});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, the default behavior of maximising a window is made in a way such that the first time the maximise button is clicked, the window maximises fully (the code above works), but when the second time the button is clicked, it should restore the previous unmaximised state and window size. Hence, we have to utilise <code>onMousePressed</code> this time.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>maximiseButton.setOnMousePressed((event) -&gt; {
+    primaryStage.setMaximized(false);
+    maximiseButton.setId("maximiseButton");
+});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Exiting the window could make use of the existing <code>handleExit</code> method in <code>MainWindow.java</code>, hence we just have to set the event handler for exit button in <code>MainWindow.fxml</code> itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;Button fx:id="closeButton" mnemonicParsing="false" prefHeight="45" prefWidth="60" onAction="#handleExit" /&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last functionality we have to rebuild is resizing of the window. We make use of a helper class called <code>UiResize</code> whose methods were adapted from StackOverflow. It is important to note that the <code>minWidth</code> and <code>minHeight</code> parameters for <code>enableResizableWindow</code> window should be the same as the <code>MIN_WIDTH</code> and <code>MIN_HEIGHT</code> specified in <code>MainWindow.java</code> so that the resizing mechanism does not exceed the allowable minimum widths and heights of the window i.e. we disallow window resizing to the point that there is no more pixels to resize which would otherwise become a bug itself.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rounding-borders"><a class="link" href="#rounding-borders">Rounding Borders</a></h4>
+<div class="paragraph">
+<p>The second step was to create rounded borders for the application. Since the entire window is encapsulated within a JavaFX <code>VBox</code> container, we can simply style it using its <code>fx:id</code> called <code>rootVBox</code> in the Cascading Style Sheet (CSS) as follows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>#rootVBox {
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resizing-components"><a class="link" href="#resizing-components">Resizing Components</a></h4>
+<div class="paragraph">
+<p>The third step was to resize each component to give priority to each of them, especially enlarging the space of contacts list to make it stand out since it is the one of the most important aspects of our application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;padding&gt;
+    &lt;Insets bottom="10" left="20" right="20" top="0" /&gt;
+&lt;/padding&gt;</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-custom-fonts"><a class="link" href="#using-custom-fonts">Using Custom Fonts</a></h4>
+<div class="paragraph">
+<p>The fourth step is to ensure the consistency of fonts displayed across different platforms e.g. Windows, macOS and to allow usage of custom fonts e.g. <code>Open Sans</code>.</p>
+</div>
+<div class="paragraph">
+<p>All custom fonts are stored in <code>/resources/fonts</code> directory and a singleton class <code>UiFont</code> is used to embed and load all the fonts into the application at runtime.</p>
+</div>
+<div class="paragraph">
+<p>The following method in the <code>UiFont</code> class has to be called in the <code>start()</code> method of <code>UiManager</code> class as during that instance, most of the other UI components have not been created.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public void embedFonts() {
+    for (String font : fontList) {
+        Font.loadFont(getClass().getResourceAsStream(FONTS_FILE_FOLDER + font), 10);
+    }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="enhancing-color-scheme"><a class="link" href="#enhancing-color-scheme">Enhancing Color Scheme</a></h4>
+<div class="paragraph">
+<p>The last step to enhancing the user interface would be to use subtle colors that would highlight visual controls that users would often interact with such as command box and contacts list. The key is also to use as little colors as possible for the majority background space so as to create a minimalistic interface as well.</p>
+</div>
+<div class="paragraph">
+<p>The main colors used are full white for the background (<code>#ffffff</code>) and a slightly gray tone for command box and contacts list (<code>#f4f4f4</code>). This light color scheme is used for the "Day" theme.</p>
+</div>
+<div class="paragraph">
+<p>Since we allow the user to switch between two themes, we would have to create two CSS with different color schemes.</p>
+</div>
+<div class="paragraph">
+<p>The main colors used for the "Night" theme dark-greenish black (<code>#272822</code>) and a slightly brighter gray tone that matches the aforementioned black (<code>#4a4b40</code>).</p>
+</div>
+<div class="paragraph">
+<p>To maintain consistency between two themes, static (non-changing) components such as the menu bar, footer, scroll bar, favorite icons maintain the same red (<code>#d13438</code>) and black (<code>#2c2c2c</code>) color combination.</p>
+</div>
+<div class="paragraph">
+<p>Finally, to increase the overall contrast and to provide an easier way to identify contacts via tags, tag labels are brightly colored. A random color generator is implemented to give each tag a different color. To ensure even distribution of colors are generated, we also make use of the golden ratio conjugate <code>0.618033988749895</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private String generateRandomColor() {
+    float randomHue = random.nextFloat();
+    randomHue += GOLDEN_RATIO;
+    randomHue = randomHue % 1;
+
+    Color result = Color.getHSBColor(randomHue, 0.5f, 0.85f);
+    return String.format("#%02x%02x%02x", result.getRed(), result.getGreen(), result.getBlue());
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="setting-focus-on-command-box"><a class="link" href="#setting-focus-on-command-box">Setting Focus on Command Box</a></h4>
+<div class="paragraph">
+<p>To allow user to begin typing immediately upon application launch, we have to set the focus to the command box text field as such.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Platform.runLater(() -&gt; commandTextField.requestFocus());</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="theming-mechanism"><a class="link" href="#theming-mechanism">Theming Mechanism</a></h3>
+<div class="paragraph">
+<p>The theme mechanism is facilitated by a singleton class <code>UiTheme</code> which will be called inside the <code>MainWindow</code> constructor where it passes its <code>scene</code> into the <code>UiTheme</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>scene</code> is necessary for changing the CSS at runtime e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>scene.getStylesheets().setAll("PATH_TO_CSS_FILE");</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a user executes the <code>theme</code> command to change the theme, <code>ThemeCommand</code> class will pass the option <code>String</code> specified by the user into the following method in <code>UiTheme</code> class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public void changeTheme(String option) {
+    scene.getStylesheets().clear();
+
+    if (option.equals(PREFIX_OPTION + ThemeCommand.COMMAND_OPTION_DAY)) {
+        scene.getStylesheets().setAll(THEME_DAY, THEME_DAY_EXTENSIONS);
+        browserPanel.loadDefaultPage(scene);
+    } else {
+        scene.getStylesheets().setAll(THEME_NIGHT, THEME_NIGHT_EXTENSIONS);
+        browserPanel.loadDefaultPage(scene);
+    }
+}</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/changing-theme-sequence-diagram.png" alt="changing theme sequence diagram" width="600">
+</div>
+<div class="title">Figure 13. Sequence Diagram for Changing Theme</div>
+</div>
+<div class="paragraph">
+<p>To ensure that the user does not have to change their preferred theme every time the application starts, we will save their choice as a user preference. The user preference is stored as a variable of class <code>ThemeSettings</code> inside <code>UserPrefs</code> class. Essentially, we will store the CSS file path e.g. <code>view/ThemeDay.css</code> in <code>preferences.json</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, when the application starts, user&#8217;s theme preference will be read in the <code>MainWindow</code> class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private void setDefaultTheme(UserPrefs prefs, Scene scene) {
+    scene.getStylesheets().addAll(prefs.getThemeSettings().getTheme(),
+            prefs.getThemeSettings().getThemeExtensions());
+}</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/saving-theme-preference-seq-diagram.png" alt="saving theme preference seq diagram" width="800">
+</div>
+<div class="title">Figure 14. Sequence Diagram for Saving Theme as User Preference</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Ways to change the application theme<br>
+<strong>Alternative 1 (current choice):</strong> Use of singleton class <code>UiTheme</code> to change the theme<br>
+<strong>Pros:</strong> Declutters the <code>MainWindow</code> class and provide a dedicated class that manages all the changing of themes. This ensures scalability since <code>UiTheme</code> can contain a lot more CSS file paths to more themes for future add-ons. It also dedicates storing of CSS file paths in public <code>String</code> which can be called by other many classes. Last but not least, it is easier for <code>ThemeCommand</code> class to call its instance and use the <code>changeTheme</code> method directly.<br>
+<strong>Cons:</strong> Causes tighter coupling, and violates the single responsibility principle since <code>UiTheme</code> controls its own creation and lifecycle<br>
+<strong>Alternative 2:</strong> Change the themes in <code>MainWindow</code> class directly<br>
+<strong>Pros:</strong> Decreases coupling<br>
+<strong>Cons:</strong> Clutters the <code>MainWindow</code> class and makes it harder for <code>ThemeCommand</code> class to access the methods from <code>MainWindow</code>.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+<div class="paragraph">
+<p>See also: Pull Request (with a detailed summary of changes): <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/92">#92</a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -177,6 +896,127 @@
 <div class="paragraph">
 <p><mark>Start of extract [from: User Guide]</mark></p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a Person: <code>add</code></a></h4>
+<div class="paragraph">
+<p>Met a new friend? Add him to KayPoh using the the <code>add</code> command!</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>:<br>
+<code><span class="red">add</span> <span class="green">n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]&#8230;&#8203; e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</span></code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alias</strong>: <code><span class="red">a</span></code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the person represented by the parameters added to the contacts list after executing the command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The person to be added can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Have mulitple phone numbers, but must have at least one [Since v1.2]</p>
+</li>
+<li>
+<p>Have any number (including zero) of tags</p>
+</li>
+<li>
+<p>Have any number (including zero) of social media accounts [Since v1.2]</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More information about representing social media accounts can be found in the <a href="#social-media-integrations">Social Media Integrations</a> section.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Be marked as a favorite contact by including the parameter <code>f/</code> when executing the command [Since v1.2]</p>
+</li>
+<li>
+<p>Have a display picture added by specifying the <code>DISPLAY_PHOTO_FILE_PATH</code> when executing the command [Since v1.5]</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">add</span> <span class="green">n/Uwuwe Osas p/98765432 e/osas@example.com a/497 Jacob Mare Street, #01-01</span></code><br></p>
+<div class="paragraph">
+<p>Adds a contact with the name <code>Uwuwe Osas</code>, phone number <code>98765432</code>, email address <code>osas@africanhunks.org</code>,
+address <code>a/497 Jacob Mare Street, #01-01</code>.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add-example-1-command-result.png" alt="add example 1 command result" width="700">
+</div>
+<div class="title">Figure 15. Added a contact with name, phone number, email address and address specified</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">add</span> <span class="green">n/Michael Van Gerwen p/92456877 p/64123456 e/mike@example.com a/William Hill Drive 180 t/husband f/ s/facebook mvgofficial dp/C:/Users/KayPoh/Pictures/michael.png[green]</span></code><br></p>
+<div class="paragraph">
+<p>Adds a <code>favorite</code> contact with the name <code>Michael Van Gerwen</code>, phone numbers <code>92456877</code> and <code>64123456</code>, email address <code>mike@example.com</code>,
+address <code>William Hill Drive 180</code>, tag <code>husband</code>, a <code>Facebook</code> account with the username <code>mvgofficial</code>, and adds a <code>display photo</code> imported from the location <code>C:/Users/KayPoh/Pictures/michael.png</code>.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add-example-2-command-result.png" alt="add example 2 command result" width="700">
+</div>
+<div class="title">Figure 16. Added a contact with name, two phone numbers, email address, address, tag, social media account (Facebook) and display photo specified</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 5. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command excludes required parameters.<br>
+e.g. <code>add n/Michael Van Gerwen</code> is missing the required <code>PHONE_NUMBER</code>, <code>ADDRESS</code> and <code>EMAIL</code> parameters.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that all required parameters as specified in the command format have been added.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input invalid parameters in the command.<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that all required parameters are valid as specified in the <a href="#representing-persons">Representing Persons</a> section.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -190,17 +1030,207 @@
 </div>
 <div class="sect3">
 <h4 id="implementation-5"><a class="link" href="#implementation-5">Implementation</a></h4>
-<div class="paragraph">
-<p>Pull Request: <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/153">#153</a></p>
-</div>
 <hr>
 <div class="paragraph">
 <p><mark>Start of extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="display-photo-mechanism"><a class="link" href="#display-photo-mechanism">Display Photo Mechanism</a></h3>
+<div class="paragraph">
+<p>To allow user to find their contacts more easily, we implemented the adding of display photo feature. This would be especially helpful to those users who are visual learners so that they can remember their contacts more easily as well.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/person-class-diagram-displayphoto.png" alt="person class diagram displayphoto" width="800">
+</div>
+<div class="title">Figure 17. DisplayPhoto is one of the members in the Person class</div>
+</div>
+<div class="sect3">
+<h4 id="contacts-without-display-photo"><a class="link" href="#contacts-without-display-photo">Contacts without Display Photo</a></h4>
+<div class="paragraph">
+<p>We took into consideration that there ought to be some contacts that would not have any display photo, hence instead of display a static default display photo, we decided to make it more intuitive since our goal is to enhance the our user&#8217;s collective memory of their contacts.</p>
+</div>
+<div class="paragraph">
+<p>For these contacts, they will have a colored display photo thumbnail with their initials in it.</p>
+</div>
+<div class="paragraph">
+<p>All display photos will be rounded by setting a circle-shaped clip to the <code>displayPhotoImageView</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>double value = displayPhotoImageView.getFitWidth() / 2;
+Circle clip = new Circle(value, value, value);
+displayPhotoImageView.setClip(clip);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After which, we will color the rounded thumbnails with random pastel colors. We use yet another random color generator (another was used for coloring tag labels as previously mentioned) as opposed to having one is because we decided that the display photo should use a lighter color so as not to steal the attention away from the main contact details. Pastel colors in this case blends in well with the UI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private String generateRandomPastelColor() {
+    int red = random.nextInt(256);
+    int green = random.nextInt(256);
+    int blue = random.nextInt(256);
+
+    Color mixer = new Color(235, 235, 235);
+    red = (red + mixer.getRed()) / 2;
+    green = (green + mixer.getGreen()) / 2;
+    blue = (blue + mixer.getBlue()) / 2;
+
+    Color result = new Color(red, green, blue);
+    return String.format("#%02x%02x%02x", result.getRed(), result.getGreen(), result.getBlue());
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will color the rounded thumbnail by using <code>setFill</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Circle backgroundCircle = new Circle(value);
+backgroundCircle.setFill(Paint.valueOf(getColorForPerson(nameOfPerson)));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, to add the contact&#8217;s initials into the rounded thumbnail, we have to extract their name and use regular expression i.e. <code>?&#8656;\\w)\\w+(?=\\s)\\s+</code> to derive only their initials.
+We also limit the number of initials to two.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private String extractInitials (String name) {
+    int noOfInitials = 1;
+    if (name.split("\\s+").length &gt; 1) {
+        noOfInitials = 2;
+    }
+    return name.replaceAll("(?&lt;=\\w)\\w+(?=\\s)\\s+", "").substring(0, noOfInitials);
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The text for contact&#8217;s initials is added programmatically.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Text personInitialsText = new Text(extractInitials(nameOfPerson));
+personInitialsText.setFill(Paint.valueOf("white"));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is to be noted that instead of adding the coloring and text to display photo&#8217;s <code>Image View</code>, we add it directly into its parent i.e. <code>Stack Pane</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>displayPhotoStackPane.getChildren().addAll(backgroundCircle, personInitialsText);</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="contacts-with-display-photo"><a class="link" href="#contacts-with-display-photo">Contacts with Display Photo</a></h4>
+<div class="paragraph">
+<p>For contacts whom users have added a display photo, the mechanism is pretty straight forward in that we simply point the display photo&#8217;s <code>Image View</code> to the path user has specified to import the dislay photo from.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>displayPhotoImageView.setImage(new Image(person.getDisplayPhoto().getAbsoluteFilePath()));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are a few restrictions to the display photo we have set. The display photo specified by the user has to be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Of a legitimate file path</p>
+</li>
+<li>
+<p>Within 1MB of size</p>
+</li>
+<li>
+<p>Of type <code>jpg</code> or <code>jpeg</code> or <code>png</code> only</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Failing which, the display photo will not be added. The above restrictions are checked by the <code>isValidPhoto</code> method in <code>DisplayPhoto</code> class itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private static boolean isValidPhoto(String test) {
+    File file = new File(test);
+    return file.exists()
+            &amp;&amp; file.length() &lt;= MAX_SIZE
+            &amp;&amp; (test.endsWith(ALLOWED_TYPE_JPG)
+            || test.endsWith(ALLOWED_TYPE_JPEG)
+            || test.endsWith(ALLOWED_TYPE_PNG));
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the display photo specified by the user is valid, we will go ahead to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Update the <code>DisplayPhoto</code> field of the contact,</p>
+</li>
+<li>
+<p>Copy the photo into the application&#8217;s <code>data</code> directory,</p>
+</li>
+<li>
+<p>Set the display photo <code>Image View</code> to the file path of the photo in our <code>data</code> directory</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Before copying the photo to the application&#8217;s <code>data</code> directory, it is important to note that in the instance when the user just launched KayPoh for the first time, and tries to add a display photo to a contact, there will be an <code>IOException</code> thrown. This is because <code>data</code> directory is not yet created; it will only be created when a user executes a command that will trigger <code>AddressBookChanged</code> event. Although changing of <code>DisplayPhoto</code> through add or edit commands can trigger the event, the copying of file in <code>DisplayPhoto</code> class precedes the event.</p>
+</div>
+<div class="paragraph">
+<p>Hence, we have to check whether <code>data</code> directory exists first. We can simply use <code>createDirectories</code> from <code>java.nio.Files</code>. This method kills two birds with one stone since it will not re-create the directory and neither will it throw an <code>exception</code> even if the directory already exists.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Files.createDirectories(Paths.get(DEFAULT_SAVE_DIR));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, we copy the display photo file into the <code>data</code> directory using <code>Files.copy</code> also from the same package <code>java.nio.Files</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>// REPLACAE_EXITING: If the target file exists, then the target file is replaced if it is not a non-empty directory.
+Files.copy(from, to, REPLACE_EXISTING);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, the last thing to note would be that for JavaFX&#8217;s <code>ImageView</code> to load an image, it has to be set with a file path that contains <code>file://</code> at the beginning of a file path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>"file://" + Paths.get(value).toAbsolutePath().toUri().getPath();</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Copying of display photo image file into application&#8217;s <code>data</code> directory<br>
+<strong>Alternative 1 (current choice):</strong> Using <code>Files.copy</code> from Java&#8217;s NIO package<br>
+<strong>Pros:</strong> Does not require adding of third party libraries<br>
+<strong>Cons:</strong> Has to add an additional check for the existence of the <code>data</code> directory first before copying to prevent an <code>exception</code><br>
+<strong>Alternative 2:</strong> Using <code>FileUtils.copyFileToDirectory</code> from a third party library - Apache Commons IO<br>
+<strong>Pros:</strong> One-liner implementation that checks for both file and directory&#8217;s existence<br>
+<strong>Cons:</strong> Require importing of third party libraries into Gradle</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+<div class="paragraph">
+<p>See also: Pull Request: <a href="https://github.com/CS2103AUG2017-W10-B2/main/pull/153">#153</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -208,7 +1238,7 @@
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 13:59:03 +00:00
+Last updated 2017-11-13 14:31:59 +00:00
 </div>
 </div>
 </body>

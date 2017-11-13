@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>KayPoh! - Developer Guide</title>
+<title>KayPoh - Developer Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>KayPoh! - Developer Guide</h1>
+<h1>KayPoh - Developer Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -45,15 +45,18 @@
 </li>
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
+<li><a href="#undo-redo-mechanism">4.1. Undo/Redo Mechanism</a></li>
 <li><a href="#multiple-fields">4.2. Multiple Fields</a></li>
-<li><a href="#facebook-mechanism">4.3. Facebook mechanism</a></li>
+<li><a href="#facebook-post-mechanism">4.3. Facebook Post Mechanism</a></li>
 <li><a href="#social-media-accounts">4.4. Social Media Accounts</a></li>
 <li><a href="#command-options">4.5. Command Options</a></li>
-<li><a href="#favorite-contacts">4.6. Favorite Contacts</a></li>
+<li><a href="#favoriting-contacts">4.6. Favoriting Contacts</a></li>
 <li><a href="#sorting-contacts">4.7. Sorting Contacts</a></li>
-<li><a href="#logging">4.8. Logging</a></li>
-<li><a href="#configuration">4.9. Configuration</a></li>
+<li><a href="#enhancing-user-interface">4.8. Enhancing User Interface</a></li>
+<li><a href="#theming-mechanism">4.9. Theming Mechanism</a></li>
+<li><a href="#display-photo-mechanism">4.10. Display Photo Mechanism</a></li>
+<li><a href="#logging">4.11. Logging</a></li>
+<li><a href="#configuration">4.12. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -90,7 +93,7 @@
 <h2 id="about"><a class="link" href="#about">1. About</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This developer guide provides developers working on the KayPoh! application an in-depth explanation
+<p>This developer guide provides developers working on the KayPoh application an in-depth explanation
 of how the application works. A working knowledge of UML diagram notation and familiarity with the Java programming
 language will be helpful in understanding the implementation details discussed in this guide.</p>
 </div>
@@ -582,7 +585,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></h3>
+<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">4.1. Undo/Redo Mechanism</a></h3>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -846,7 +849,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="facebook-mechanism"><a class="link" href="#facebook-mechanism">4.3. Facebook mechanism</a></h3>
+<h3 id="facebook-post-mechanism"><a class="link" href="#facebook-post-mechanism">4.3. Facebook Post Mechanism</a></h3>
 <div class="paragraph">
 <p>The Facebook Commands are facilitated by the Facebook Graph API and utilised through the Facebook4j unofficial public API.
 Facebook4j supports all facebook related features such as <code>facebookconnect</code> and <code>facebookpost</code>.</p>
@@ -1145,10 +1148,16 @@ that this approach was less intuitive to them compared to the approach described
 </div>
 </div>
 <div class="sect2">
-<h3 id="favorite-contacts"><a class="link" href="#favorite-contacts">4.6. Favorite Contacts</a></h3>
+<h3 id="favoriting-contacts"><a class="link" href="#favoriting-contacts">4.6. Favoriting Contacts</a></h3>
 <div class="paragraph">
 <p>The favorite status of each contact is stored as a <code>boolean</code>, encapsulated within the <code>Favorite</code> class.<br>
 There are several ways to toggle this <code>boolean</code> to change the favorite status of a contact.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/person-class-diagram-favorite.png" alt="person class diagram favorite" width="800">
+</div>
+<div class="title">Figure 6. Favorite is one of the members in the Person class</div>
 </div>
 <div class="sect3">
 <h4 id="toggle-favorites-using-code-add-code-and-or-code-edit-code-command-br"><a class="link" href="#toggle-favorites-using-code-add-code-and-or-code-edit-code-command-br">4.6.1. Toggle favorites using <code>add</code> and/or <code>edit</code> command<br></a></h4>
@@ -1284,7 +1293,7 @@ in sorted order, and ensures that it remains sorted even as changes are made to 
 <div class="content">
 <img src="images/SortObserverClassDiagram.png" alt="SortObserverClassDiagram" width="800">
 </div>
-<div class="title">Figure 6. Class diagram representing the Observer pattern used to keep contacts in sorted order</div>
+<div class="title">Figure 7. Class diagram representing the Observer pattern used to keep contacts in sorted order</div>
 </div>
 <div class="paragraph">
 <p>KayPoh! allows the user to sort the person list in several ways. To prevent the user from having to remember a separate
@@ -1296,7 +1305,7 @@ to be used instead.</p>
 <div class="content">
 <img src="images/SortCommandClassDiagram.png" alt="SortCommandClassDiagram" width="800">
 </div>
-<div class="title">Figure 7. Class diagram representing how the <code>sort</code> commands are implemented</div>
+<div class="title">Figure 8. Class diagram representing how the <code>sort</code> commands are implemented</div>
 </div>
 <div class="paragraph">
 <p>Each class that inherits from the <code>SortCommand</code> would then implement the <code>getComparator</code> method, which returns a
@@ -1331,7 +1340,447 @@ allow the inheriting classes to define the <code>Comparator&lt;ReadOnlyPerson&gt
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.8. Logging</a></h3>
+<h3 id="enhancing-user-interface"><a class="link" href="#enhancing-user-interface">4.8. Enhancing User Interface</a></h3>
+<div class="sect3">
+<h4 id="removing-window-decorations"><a class="link" href="#removing-window-decorations">4.8.1. Removing Window Decorations</a></h4>
+<div class="paragraph">
+<p>To enhance our user&#8217;s satisfaction with KayPoh, we improved the user interface by redesigning the color scheme and allowed theming for user to switch between two available themes.</p>
+</div>
+<div class="paragraph">
+<p>The first step to adding a better look was to remove the standard platform window decorations. This will shift the application&#8217;s user interface from classic to a fancier look that is self-contained, without wasting extra pixels just for the default window decorations. This is done by the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>primaryStage.initStyle(StageStyle.TRANSPARENT);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Do note that this line of code has to be placed in the <code>start()</code> method of <code>MainApp.java</code> instead of <code>MainWindow.java</code> or <code>UiManager.java</code> so as to specify the removal of window decorations immediately upon the launch of the application. Otherwise, there will be an <code>exception</code> thrown: <code>Cannot set style once stage has been set visible</code>.</p>
+</div>
+<div class="paragraph">
+<p>This immediately removes the window&#8217;s title bar. However, this also removes the default window functionalities such as being able to resize the window, move the window&#8217;s position, minimise, maximise and exit the application proper.</p>
+</div>
+<div class="paragraph">
+<p>Hence, the second step is to rebuild these functionalities. The design considered was to bake these functionalities along with the minimise, maximise and exit button into the existing menu bar. The three aforementioned buttons are added in Scene Builder, using the same height as the menu bar so that it would look coherent.</p>
+</div>
+<div class="paragraph">
+<p>Now that we have added the buttons, we can make use of the buttons' event handlers to trigger the window functionalities.</p>
+</div>
+<div class="paragraph">
+<p>Moving of window is implemented by setting the menu bar to listen on the events such as <code>onMousePressed</code> and <code>onMouseDragged</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private void enableMovableWindow() {
+    menuBar.setOnMousePressed((event) -&gt; {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    });
+
+    menuBar.setOnMouseDragged((event) -&gt; {
+        primaryStage.setX(event.getScreenX() - xOffset);
+        primaryStage.setY(event.getScreenY() - yOffset);
+    });
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, minimising of window is implemented by setting the minimise button to listen on <code>onMouseClicked</code> event and uses the following method that was found from the JavaFX Stage API.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>primaryStage.setIconified(true)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Maximising of window is also implemented in the same way.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>maximiseButton.setOnMouseClicked((event) -&gt; {
+    primaryStage.setMaximized(true);
+    maximiseButton.setId("restoreButton");
+});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, the default behavior of maximising a window is made in a way such that the first time the maximise button is clicked, the window maximises fully (the code above works), but when the second time the button is clicked, it should restore the previous unmaximised state and window size. Hence, we have to utilise <code>onMousePressed</code> this time.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>maximiseButton.setOnMousePressed((event) -&gt; {
+    primaryStage.setMaximized(false);
+    maximiseButton.setId("maximiseButton");
+});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Exiting the window could make use of the existing <code>handleExit</code> method in <code>MainWindow.java</code>, hence we just have to set the event handler for exit button in <code>MainWindow.fxml</code> itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;Button fx:id="closeButton" mnemonicParsing="false" prefHeight="45" prefWidth="60" onAction="#handleExit" /&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last functionality we have to rebuild is resizing of the window. We make use of a helper class called <code>UiResize</code> whose methods were adapted from StackOverflow. It is important to note that the <code>minWidth</code> and <code>minHeight</code> parameters for <code>enableResizableWindow</code> window should be the same as the <code>MIN_WIDTH</code> and <code>MIN_HEIGHT</code> specified in <code>MainWindow.java</code> so that the resizing mechanism does not exceed the allowable minimum widths and heights of the window i.e. we disallow window resizing to the point that there is no more pixels to resize which would otherwise become a bug itself.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rounding-borders"><a class="link" href="#rounding-borders">4.8.2. Rounding Borders</a></h4>
+<div class="paragraph">
+<p>The second step was to create rounded borders for the application. Since the entire window is encapsulated within a JavaFX <code>VBox</code> container, we can simply style it using its <code>fx:id</code> called <code>rootVBox</code> in the Cascading Style Sheet (CSS) as follows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>#rootVBox {
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resizing-components"><a class="link" href="#resizing-components">4.8.3. Resizing Components</a></h4>
+<div class="paragraph">
+<p>The third step was to resize each component to give priority to each of them, especially enlarging the space of contacts list to make it stand out since it is the one of the most important aspects of our application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;padding&gt;
+    &lt;Insets bottom="10" left="20" right="20" top="0" /&gt;
+&lt;/padding&gt;</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-custom-fonts"><a class="link" href="#using-custom-fonts">4.8.4. Using Custom Fonts</a></h4>
+<div class="paragraph">
+<p>The fourth step is to ensure the consistency of fonts displayed across different platforms e.g. Windows, macOS and to allow usage of custom fonts e.g. <code>Open Sans</code>.</p>
+</div>
+<div class="paragraph">
+<p>All custom fonts are stored in <code>/resources/fonts</code> directory and a singleton class <code>UiFont</code> is used to embed and load all the fonts into the application at runtime.</p>
+</div>
+<div class="paragraph">
+<p>The following method in the <code>UiFont</code> class has to be called in the <code>start()</code> method of <code>UiManager</code> class as during that instance, most of the other UI components have not been created.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public void embedFonts() {
+    for (String font : fontList) {
+        Font.loadFont(getClass().getResourceAsStream(FONTS_FILE_FOLDER + font), 10);
+    }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="enhancing-color-scheme"><a class="link" href="#enhancing-color-scheme">4.8.5. Enhancing Color Scheme</a></h4>
+<div class="paragraph">
+<p>The last step to enhancing the user interface would be to use subtle colors that would highlight visual controls that users would often interact with such as command box and contacts list. The key is also to use as little colors as possible for the majority background space so as to create a minimalistic interface as well.</p>
+</div>
+<div class="paragraph">
+<p>The main colors used are full white for the background (<code>#ffffff</code>) and a slightly gray tone for command box and contacts list (<code>#f4f4f4</code>). This light color scheme is used for the "Day" theme.</p>
+</div>
+<div class="paragraph">
+<p>Since we allow the user to switch between two themes, we would have to create two CSS with different color schemes.</p>
+</div>
+<div class="paragraph">
+<p>The main colors used for the "Night" theme dark-greenish black (<code>#272822</code>) and a slightly brighter gray tone that matches the aforementioned black (<code>#4a4b40</code>).</p>
+</div>
+<div class="paragraph">
+<p>To maintain consistency between two themes, static (non-changing) components such as the menu bar, footer, scroll bar, favorite icons maintain the same red (<code>#d13438</code>) and black (<code>#2c2c2c</code>) color combination.</p>
+</div>
+<div class="paragraph">
+<p>Finally, to increase the overall contrast and to provide an easier way to identify contacts via tags, tag labels are brightly colored. A random color generator is implemented to give each tag a different color. To ensure even distribution of colors are generated, we also make use of the golden ratio conjugate <code>0.618033988749895</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private String generateRandomColor() {
+    float randomHue = random.nextFloat();
+    randomHue += GOLDEN_RATIO;
+    randomHue = randomHue % 1;
+
+    Color result = Color.getHSBColor(randomHue, 0.5f, 0.85f);
+    return String.format("#%02x%02x%02x", result.getRed(), result.getGreen(), result.getBlue());
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="setting-focus-on-command-box"><a class="link" href="#setting-focus-on-command-box">4.8.6. Setting Focus on Command Box</a></h4>
+<div class="paragraph">
+<p>To allow user to begin typing immediately upon application launch, we have to set the focus to the command box text field as such.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Platform.runLater(() -&gt; commandTextField.requestFocus());</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="theming-mechanism"><a class="link" href="#theming-mechanism">4.9. Theming Mechanism</a></h3>
+<div class="paragraph">
+<p>The theme mechanism is facilitated by a singleton class <code>UiTheme</code> which will be called inside the <code>MainWindow</code> constructor where it passes its <code>scene</code> into the <code>UiTheme</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>scene</code> is necessary for changing the CSS at runtime e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>scene.getStylesheets().setAll("PATH_TO_CSS_FILE");</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a user executes the <code>theme</code> command to change the theme, <code>ThemeCommand</code> class will pass the option <code>String</code> specified by the user into the following method in <code>UiTheme</code> class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public void changeTheme(String option) {
+    scene.getStylesheets().clear();
+
+    if (option.equals(PREFIX_OPTION + ThemeCommand.COMMAND_OPTION_DAY)) {
+        scene.getStylesheets().setAll(THEME_DAY, THEME_DAY_EXTENSIONS);
+        browserPanel.loadDefaultPage(scene);
+    } else {
+        scene.getStylesheets().setAll(THEME_NIGHT, THEME_NIGHT_EXTENSIONS);
+        browserPanel.loadDefaultPage(scene);
+    }
+}</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/changing-theme-sequence-diagram.png" alt="changing theme sequence diagram" width="600">
+</div>
+<div class="title">Figure 9. Sequence Diagram for Changing Theme</div>
+</div>
+<div class="paragraph">
+<p>To ensure that the user does not have to change their preferred theme every time the application starts, we will save their choice as a user preference. The user preference is stored as a variable of class <code>ThemeSettings</code> inside <code>UserPrefs</code> class. Essentially, we will store the CSS file path e.g. <code>view/ThemeDay.css</code> in <code>preferences.json</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, when the application starts, user&#8217;s theme preference will be read in the <code>MainWindow</code> class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private void setDefaultTheme(UserPrefs prefs, Scene scene) {
+    scene.getStylesheets().addAll(prefs.getThemeSettings().getTheme(),
+            prefs.getThemeSettings().getThemeExtensions());
+}</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/saving-theme-preference-seq-diagram.png" alt="saving theme preference seq diagram" width="800">
+</div>
+<div class="title">Figure 10. Sequence Diagram for Saving Theme as User Preference</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.9.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Ways to change the application theme<br>
+<strong>Alternative 1 (current choice):</strong> Use of singleton class <code>UiTheme</code> to change the theme<br>
+<strong>Pros:</strong> Declutters the <code>MainWindow</code> class and provide a dedicated class that manages all the changing of themes. This ensures scalability since <code>UiTheme</code> can contain a lot more CSS file paths to more themes for future add-ons. It also dedicates storing of CSS file paths in public <code>String</code> which can be called by other many classes. Last but not least, it is easier for <code>ThemeCommand</code> class to call its instance and use the <code>changeTheme</code> method directly.<br>
+<strong>Cons:</strong> Causes tighter coupling, and violates the single responsibility principle since <code>UiTheme</code> controls its own creation and lifecycle<br>
+<strong>Alternative 2:</strong> Change the themes in <code>MainWindow</code> class directly<br>
+<strong>Pros:</strong> Decreases coupling<br>
+<strong>Cons:</strong> Clutters the <code>MainWindow</code> class and makes it harder for <code>ThemeCommand</code> class to access the methods from <code>MainWindow</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="display-photo-mechanism"><a class="link" href="#display-photo-mechanism">4.10. Display Photo Mechanism</a></h3>
+<div class="paragraph">
+<p>To allow user to find their contacts more easily, we implemented the adding of display photo feature. This would be especially helpful to those users who are visual learners so that they can remember their contacts more easily as well.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/person-class-diagram-displayphoto.png" alt="person class diagram displayphoto" width="800">
+</div>
+<div class="title">Figure 11. DisplayPhoto is one of the members in the Person class</div>
+</div>
+<div class="sect3">
+<h4 id="contacts-without-display-photo"><a class="link" href="#contacts-without-display-photo">4.10.1. Contacts without Display Photo</a></h4>
+<div class="paragraph">
+<p>We took into consideration that there ought to be some contacts that would not have any display photo, hence instead of display a static default display photo, we decided to make it more intuitive since our goal is to enhance the our user&#8217;s collective memory of their contacts.</p>
+</div>
+<div class="paragraph">
+<p>For these contacts, they will have a colored display photo thumbnail with their initials in it.</p>
+</div>
+<div class="paragraph">
+<p>All display photos will be rounded by setting a circle-shaped clip to the <code>displayPhotoImageView</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>double value = displayPhotoImageView.getFitWidth() / 2;
+Circle clip = new Circle(value, value, value);
+displayPhotoImageView.setClip(clip);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After which, we will color the rounded thumbnails with random pastel colors. We use yet another random color generator (another was used for coloring tag labels as previously mentioned) as opposed to having one is because we decided that the display photo should use a lighter color so as not to steal the attention away from the main contact details. Pastel colors in this case blends in well with the UI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private String generateRandomPastelColor() {
+    int red = random.nextInt(256);
+    int green = random.nextInt(256);
+    int blue = random.nextInt(256);
+
+    Color mixer = new Color(235, 235, 235);
+    red = (red + mixer.getRed()) / 2;
+    green = (green + mixer.getGreen()) / 2;
+    blue = (blue + mixer.getBlue()) / 2;
+
+    Color result = new Color(red, green, blue);
+    return String.format("#%02x%02x%02x", result.getRed(), result.getGreen(), result.getBlue());
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will color the rounded thumbnail by using <code>setFill</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Circle backgroundCircle = new Circle(value);
+backgroundCircle.setFill(Paint.valueOf(getColorForPerson(nameOfPerson)));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, to add the contact&#8217;s initials into the rounded thumbnail, we have to extract their name and use regular expression i.e. <code>?&#8656;\\w)\\w+(?=\\s)\\s+</code> to derive only their initials.
+We also limit the number of initials to two.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private String extractInitials (String name) {
+    int noOfInitials = 1;
+    if (name.split("\\s+").length &gt; 1) {
+        noOfInitials = 2;
+    }
+    return name.replaceAll("(?&lt;=\\w)\\w+(?=\\s)\\s+", "").substring(0, noOfInitials);
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The text for contact&#8217;s initials is added programmatically.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Text personInitialsText = new Text(extractInitials(nameOfPerson));
+personInitialsText.setFill(Paint.valueOf("white"));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is to be noted that instead of adding the coloring and text to display photo&#8217;s <code>Image View</code>, we add it directly into its parent i.e. <code>Stack Pane</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>displayPhotoStackPane.getChildren().addAll(backgroundCircle, personInitialsText);</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="contacts-with-display-photo"><a class="link" href="#contacts-with-display-photo">4.10.2. Contacts with Display Photo</a></h4>
+<div class="paragraph">
+<p>For contacts whom users have added a display photo, the mechanism is pretty straight forward in that we simply point the display photo&#8217;s <code>Image View</code> to the path user has specified to import the dislay photo from.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>displayPhotoImageView.setImage(new Image(person.getDisplayPhoto().getAbsoluteFilePath()));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are a few restrictions to the display photo we have set. The display photo specified by the user has to be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Of a legitimate file path</p>
+</li>
+<li>
+<p>Within 1MB of size</p>
+</li>
+<li>
+<p>Of type <code>jpg</code> or <code>jpeg</code> or <code>png</code> only</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Failing which, the display photo will not be added. The above restrictions are checked by the <code>isValidPhoto</code> method in <code>DisplayPhoto</code> class itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>private static boolean isValidPhoto(String test) {
+    File file = new File(test);
+    return file.exists()
+            &amp;&amp; file.length() &lt;= MAX_SIZE
+            &amp;&amp; (test.endsWith(ALLOWED_TYPE_JPG)
+            || test.endsWith(ALLOWED_TYPE_JPEG)
+            || test.endsWith(ALLOWED_TYPE_PNG));
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the display photo specified by the user is valid, we will go ahead to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Update the <code>DisplayPhoto</code> field of the contact,</p>
+</li>
+<li>
+<p>Copy the photo into the application&#8217;s <code>data</code> directory,</p>
+</li>
+<li>
+<p>Set the display photo <code>Image View</code> to the file path of the photo in our <code>data</code> directory</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Before copying the photo to the application&#8217;s <code>data</code> directory, it is important to note that in the instance when the user just launched KayPoh for the first time, and tries to add a display photo to a contact, there will be an <code>IOException</code> thrown. This is because <code>data</code> directory is not yet created; it will only be created when a user executes a command that will trigger <code>AddressBookChanged</code> event. Although changing of <code>DisplayPhoto</code> through add or edit commands can trigger the event, the copying of file in <code>DisplayPhoto</code> class precedes the event.</p>
+</div>
+<div class="paragraph">
+<p>Hence, we have to check whether <code>data</code> directory exists first. We can simply use <code>createDirectories</code> from <code>java.nio.Files</code>. This method kills two birds with one stone since it will not re-create the directory and neither will it throw an <code>exception</code> even if the directory already exists.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Files.createDirectories(Paths.get(DEFAULT_SAVE_DIR));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, we copy the display photo file into the <code>data</code> directory using <code>Files.copy</code> also from the same package <code>java.nio.Files</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>// REPLACAE_EXITING: If the target file exists, then the target file is replaced if it is not a non-empty directory.
+Files.copy(from, to, REPLACE_EXISTING);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, the last thing to note would be that for JavaFX&#8217;s <code>ImageView</code> to load an image, it has to be set with a file path that contains <code>file://</code> at the beginning of a file path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>"file://" + Paths.get(value).toAbsolutePath().toUri().getPath();</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.10.3. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Copying of display photo image file into application&#8217;s <code>data</code> directory<br>
+<strong>Alternative 1 (current choice):</strong> Using <code>Files.copy</code> from Java&#8217;s NIO package<br>
+<strong>Pros:</strong> Does not require adding of third party libraries<br>
+<strong>Cons:</strong> Has to add an additional check for the existence of the <code>data</code> directory first before copying to prevent an <code>exception</code><br>
+<strong>Alternative 2:</strong> Using <code>FileUtils.copyFileToDirectory</code> from a third party library - Apache Commons IO<br>
+<strong>Pros:</strong> One-liner implementation that checks for both file and directory&#8217;s existence<br>
+<strong>Cons:</strong> Require importing of third party libraries into Gradle</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">4.11. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1369,7 +1818,7 @@ allow the inheriting classes to define the <code>Comparator&lt;ReadOnlyPerson&gt
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">4.9. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">4.12. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2314,7 +2763,7 @@ is thus limited.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 13:59:03 +00:00
+Last updated 2017-11-13 14:31:59 +00:00
 </div>
 </div>
 </body>
