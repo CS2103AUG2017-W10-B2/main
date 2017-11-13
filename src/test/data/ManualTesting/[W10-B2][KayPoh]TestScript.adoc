@@ -1,0 +1,248 @@
+== Loading Testing Data
+
+Copy `SampleData.zip` to the same directory that you have downloaded `[W10-B2][KayPoh!].jar` to.
+Extract `SampleData.zip`
+Double-click on `[W10-B2][KayPoh!].jar`
+
+Enter the following commands: +
+`clear` +
+`import SampleData/SampleData.xml`
+
+== Tests
+
+=== `add`
+****
+`add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 f/ t/owesMoney s/fb johnd`
+
+Expected:
+
+Person with the name John Doe, phone number 98765432, email johnd@example.com a/311, Clementi Ave 2, #02-25, tag owesMoney and facebook account with username johnd added to KayPoh as a favorite contact (star beside name).
+****
+
+****
+add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 f/ t/friend s/fb johnd
+
+Expected:
+
+Error message: “This person already exists in the address book.”
+****
+
+****
+add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/owesMoney s/fb johnd
+
+Expected:
+
+Error message: “This person already exists in the address book.”
+****
+
+****
+add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 f/ t/owesMoney s/fb johnd2
+
+Expected:
+
+Error message: “This person already exists in the address book.”
+****
+
+****
+add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friend
+
+Expected:
+
+Error message: “This person already exists in the address book.”
+****
+
+****
+add n/Jane Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friend s/fb janed s/fb hello
+
+Expected:
+
+Error message: “Person cannot have more than one social media account of the same social type.”
+****
+
+****
+a n/Jane Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25
+
+Expected:
+
+Person with the name Jane Doe, phone number 98765432, email johnd@example.com a/311, Clementi Ave 2, #02-25 added to KayPoh
+****
+
+****
+add n/John Doe p/91234567 e/johnd@example.com a/311, Clementi Ave 2, #02-25
+
+Expected:
+
+Person with the name John Doe, phone number 91234567, email johnd@example.com a/311, Clementi Ave 2, #02-25 added to KayPoh
+****
+
+****
+add n/John Doe p/98765432 e/johnd2@example.com a/311, Clementi Ave 2, #02-25
+
+Expected:
+
+Person with the name John Doe, phone number 98765432, email johnd2@example.com a/311, Clementi Ave 2, #02-25 added to KayPoh
+****
+
+****
+add n/John Doe p/98765432 e/johnd@example.com a/312, Clementi Ave 2, #02-25
+
+Expected:
+
+Person with the name John Doe, phone number 98765432, email johnd@example.com a/312, Clementi Ave 2, #02-25 added to KayPoh
+****
+
+****
+add n/Bobby Bob  p/98765432 e/bobby@example.com a/312, Clementi Ave 2, #02-25 dp/nonexistent.jpg
+
+Expected:
+
+Error message: “Display photo: specified file does not exist or it exceeded maximum size of 1MB.”
+****
+
+****
+add n/Bobby Bob  p/98765432 e/bobby@example.com a/312, Clementi Ave 2, #02-25 dp/SampleData/test_dp.jpg
+
+Expected:
+
+Person with the name Bobby Bob added with display picture
+****
+
+=== `edit`
+
+****
+edit 1 n/Aaron Tan p/87654321 e/aaron@example.com a/Aaron Road
+
+Expected:
+
+First person in contact list has name changed to Aaron Tan, phone number changer to 87654321, email changed to e/aaron@example.com, address changed to Aaron Road
+****
+
+****
+edit 1 t/hello t/world
+
+Expected:
+
+First person in contact list has tags changed to hello and world
+****
+
+****
+e 1 s/fb hello s/fb world
+
+Expected:
+
+Error message: Person cannot have more than one social media account of the same social type.
+****
+
+****
+e 1 s/fb hello s/ig world
+
+Expected:
+
+First person in the contact list has social media accounts changed to a facebook account with username hello and an instagram account with the username world
+****
+
+****
+e 1 uf/
+
+Expected:
+
+First person in the contact list is unfavorited
+****
+
+****
+e 1 dp/test_dp.jpg
+
+Expected:
+
+First person in the contact list has his display picture set to test_dp.jpg
+****
+
+****
+e 1 dp/
+
+Expected:
+
+First person in the contact list has his display picture removed
+****
+
+****
+edit 1 n/Aaron Tan p/87654321 e/aaron@example.com a/Aaron Road
+
+Expected:
+
+First person in contact list has name changed to Aaron Tan, phone number changer to 87654321, email changed to e/aaron@example.com, address changed to Aaron Road
+****
+
+****
+edit 1 t/hello t/world
+
+Expected:
+
+First person in contact list has tags changed to hello and world
+****
+
+****
+e 1 s/fb hello s/fb world
+
+Expected:
+
+Error message: Person cannot have more than one social media account of the same social type.
+****
+
+****
+e 1 s/fb hello s/ig world
+
+Expected:
+
+First person in the contact list has social media accounts changed to a facebook account with username hello and an instagram account with the username world
+****
+
+****
+e 1 uf/
+
+Expected:
+
+First person in the contact list is unfavorited
+****
+
+****
+e 1 dp/test_dp.jpg
+
+Expected:
+
+First person in the contact list has his display picture set to test_dp.jpg
+****
+
+****
+e 1 dp/
+
+Expected:
+
+First person in the contact list has his display picture removed
+****
+
+=== `delete`
+
+****
+delete 1 2 3
+
+Expected:
+
+First 3 persons in the contact list is deleted
+****
+
+****
+delete 1 2 -1
+
+Expected:
+Error message: Invalid command format! …
+
+delete -tag army dancer
+
+Expected:
+Contacts with the army and dancer tags deleted
+
+delete -tag nonexistentTag
+
+Expected:
+Command succeeds, but no contacts deleted.
