@@ -1,14 +1,14 @@
-= Alex Foo - Project Portfolio
+= Alex Foo Da Weng - Project Portfolio
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== Project: KayPoh!
-KayPoh! is a desktop address book application with social media integrations.
+== Project: KayPoh
+KayPoh is a desktop address book application with social media integrations.
 The user interacts with the application using a command line interface, and it has a GUI created with JavaFX.
 It is written in Java and has about 14k LoC.
 
-*Code contributed*: [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/alexfoodw.md[Functional code]] [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/alexfoodw.md[Test code]] {give links to collated code files}
+*Code contributed*: [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/alexfoodw.md[Functional code]] [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/alexfoodw.md[Test code]]
 
 === Enhancement Added: Connect Address Book to Facebook Account
 
@@ -108,7 +108,7 @@ include::../UserGuide.adoc[tag=facebookaddallfriends]
 Allowing users to import all their current Facebook friends directly makes the process of setting up their address book simple, efficient and intuitive.
 
 === Enhancement Proposed: Add command `twitterpost`
-* Allows the user to directly post to twitter from within Kaypoh!
+* Allows the user to directly post to twitter from within Kaypoh
 
 === Enhancement Proposed: Add command `twitteradd`
-* Allows the user to add followers and following to Kaypoh!
+* Allows the user to add followers and following to Kaypoh

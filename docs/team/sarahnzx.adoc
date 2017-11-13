@@ -3,8 +3,8 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== Project: AddressBook - Level 4
-KayPoh! is a desktop address book application with social media integrations. The user interacts with the application using a command line interface, and it has a GUI created with JavaFX. It is written in Java and has about 14k LoC.
+== Project: KayPoh
+KayPoh is a desktop address book application with social media integrations. The user interacts with the application using a command line interface, and it has a GUI created with JavaFX. It is written in Java and has about 14k LoC.
 
 *Code contributed*: [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/main/sarahnzx.md[Functional code]] [https://github.com/CS2103AUG2017-W10-B2/main/blob/master/collated/test/sarahnzx.md[Test code]]
 

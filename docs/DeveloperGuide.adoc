@@ -763,7 +763,7 @@ The above relationship is represented by the following class diagram:
 .Class diagram representing the Observer pattern used to keep contacts in sorted order
 image::SortObserverClassDiagram.png[width="800"]
 
-KayPoh! allows the user to sort the person list in several ways. To prevent the user from having to remember a separate
+KayPoh allows the user to sort the person list in several ways. To prevent the user from having to remember a separate
 `COMMAND_WORD` for each of these sort commands, we allow these sort commands to share a single `COMMAND_WORD` by having them
 inherit from an abstract `SortCommand` class, and introducing <<command-options, Command Options>> to allow the user to specify the sorting order
 to be used instead.

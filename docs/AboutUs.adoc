@@ -4,7 +4,7 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: images
 :stylesDir: stylesheets
 
-KayPoh! was developed by team https://github.com/orgs/CS2103AUG2017-W10-B2/teams/developers/members[W10-B2]. +
+KayPoh was developed by team https://github.com/orgs/CS2103AUG2017-W10-B2/teams/developers/members[W10-B2]. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
