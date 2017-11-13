@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>KayPoh! - User Guide</title>
+<title>KayPoh - User Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>KayPoh! - User Guide</h1>
+<h1>KayPoh - User Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -39,7 +39,7 @@
 <li><a href="#using-commands">3. Using Commands</a>
 <ul class="sectlevel2">
 <li><a href="#breaking-down-the-command-syntax">3.1. Breaking down the command syntax</a></li>
-<li><a href="#representing-a-person-as-a-parameter">3.2. Representing a person as a parameter</a></li>
+<li><a href="#representing-persons">3.2. Representing a person as a parameter</a></li>
 </ul>
 </li>
 <li><a href="#features">4. Features</a>
@@ -55,7 +55,7 @@
 <li><a href="#clearing-all-entries-code-clear-code">4.2.6. Clearing all entries: <code>clear</code></a></li>
 </ul>
 </li>
-<li><a href="#navigating-kaypoh">4.3. Navigating KayPoh!</a>
+<li><a href="#navigating-kaypoh">4.3. Navigating KayPoh</a>
 <ul class="sectlevel3">
 <li><a href="#listing-persons-code-list-code">4.3.1. Listing persons: <code>list</code></a></li>
 <li><a href="#selecting-a-person-code-select-code">4.3.2. Selecting a person: <code>select</code></a></li>
@@ -81,7 +81,7 @@
 <li><a href="#listing-entered-commands-code-history-code">4.6.2. Listing entered commands: <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">4.6.3. Undoing previous command: <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">4.6.4. Redoing the previously undone command: <code>redo</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.6.5. Exiting the program: <code>exit</code></a></li>
+<li><a href="#exiting-the-application-code-exit-code">4.6.5. Exiting the application: <code>exit</code></a></li>
 <li><a href="#viewing-help-code-help-code">4.6.6. Viewing help: <code>help</code></a></li>
 </ul>
 </li>
@@ -98,7 +98,7 @@
 <div class="sect2">
 <h3 id="about"><a class="link" href="#about">1.1. About</a></h3>
 <div class="paragraph">
-<p>This user guide will provide you with instructions on how to use the KayPoh! application.
+<p>This user guide will provide you with instructions on how to use the KayPoh application.
 You should not need any prior technical knowledge to make use of this guide. However,
 some knowledge about a command line interface would be helpful.</p>
 </div>
@@ -111,8 +111,8 @@ that old classmate you haven’t spoke to in years have been up to? But perhaps 
 want to talk to them right now. So, what do you do? You stalk their social media accounts!</p>
 </div>
 <div class="paragraph">
-<p>KayPoh! is a desktop contact management application designed specifically for social users.
-You can use KayPoh! to store contact and social information information about people,
+<p>KayPoh is a desktop contact management application designed specifically for social users.
+You can use KayPoh to store contact and social information information about people,
 and use it to view your contacts' social media feeds at any time.</p>
 </div>
 </div>
@@ -163,18 +163,18 @@ Download the latest Java version <a href="https://www.java.com/en/download/manua
 <p>Figure 1 below displays the application&#8217;s starting display.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ui.png" alt="Ui" width="790">
+<img src="images/Ui.png" alt="Ui" width="800">
 </div>
-<div class="title">Figure 1. User Interface of KayPoh!</div>
+<div class="title">Figure 1. User Interface of KayPoh</div>
 </div>
 </li>
 <li>
 <p>Figure 2 below introduces the key panels of the application.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/UiWithMarkings.png" alt="UiWithMarkings" width="790">
+<img src="images/UiWithMarkings.png" alt="UiWithMarkings" width="800">
 </div>
-<div class="title">Figure 2. User Interface of KayPoh!</div>
+<div class="title">Figure 2. User Interface of KayPoh</div>
 </div>
 </li>
 <li>
@@ -185,7 +185,7 @@ Download the latest Java version <a href="https://www.java.com/en/download/manua
 <p><strong><code>list</code></strong> : lists all contacts</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to KayPoh.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
@@ -208,11 +208,11 @@ Download the latest Java version <a href="https://www.java.com/en/download/manua
 <h2 id="using-commands"><a class="link" href="#using-commands">3. Using Commands</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To perform actions in KayPoh!, you will need to type a command into the command input box, followed by the <kbd>enter</kbd> key.<br></p>
+<p>To perform actions in KayPoh, you will need to type a command into the command input box, followed by the <kbd>enter</kbd> key.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/command-box.png" alt="command box" width="790">
+<img src="images/command-box.png" alt="command box" width="800">
 </div>
 <div class="title">Figure 3. Command box</div>
 </div>
@@ -259,7 +259,7 @@ Download the latest Java version <a href="https://www.java.com/en/download/manua
 </ul>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -270,12 +270,12 @@ Download the latest Java version <a href="https://www.java.com/en/download/manua
 </div>
 </div>
 <div class="sect2">
-<h3 id="representing-a-person-as-a-parameter"><a class="link" href="#representing-a-person-as-a-parameter">3.2. Representing a person as a parameter</a></h3>
+<h3 id="representing-persons"><a class="link" href="#representing-persons">3.2. Representing a person as a parameter</a></h3>
 <div class="paragraph">
 <p>When using commands that involve managing contact information, you may be required to enter information about a person as a <code><span class="blue">PARAMETER</span></code>.</p>
 </div>
 <div class="paragraph">
-<p>Each person stored in the address book has the following attributes:</p>
+<p>Each person stored in the KayPoh has the following attributes:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -401,7 +401,7 @@ Download the latest Java version <a href="https://www.java.com/en/download/manua
 </ul>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -482,7 +482,7 @@ and what <code class="green">PARAMETERS</code> you need to provide the command w
 </table>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -513,68 +513,142 @@ and what <code class="green">PARAMETERS</code> you need to provide the command w
 <div class="sect3">
 <h4 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">4.2.1. Adding a person: <code>add</code></a></h4>
 <div class="paragraph">
-<p>Adds a person to the address book.<br>
-Command format: <code>add n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]&#8230;&#8203; e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</code><br>
-Alias: <code>a</code></p>
+<p>To add a person to KayPoh, use the <code>add</code> command.</p>
 </div>
-<div class="sidebarblock">
+<div class="exampleblock">
 <div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>A person can have more than one phone number (at least one). [Since v1.2]<br>
-Invalid phone numbers will not be added to the contact,
-and there must be at least one valid phone number entered.<br></p>
-</li>
-<li>
-<p>A person can be favorited by including the parameter <code>f/</code><br></p>
-</li>
-<li>
-<p>A person can have a display photo imported from the location specified by <code>DISPLAY_PHOTO_FILE_PATH</code> [Since v1.5rc]</p>
-</li>
-<li>
-<p>A person can have any number of tags (including zero)<br></p>
-</li>
-<li>
-<p>A person can have any number of social media accounts (including zero). [Since v1.2]<br>
-More information about representing social media accounts can be found in the <a href="#social-media-integrations">Social Media Integrations</a> section.</p>
-</li>
-</ul>
-</div>
-</div>
+<div class="paragraph">
+<p><strong>Command format</strong>:<br>
+<code><span class="red">add</span> <span class="green">n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]&#8230;&#8203; e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</span></code><br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Alias</strong>: <code><span class="red">a</span></code></p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The person to be added can:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code><br>
-Adds a contact with the name <code>John Doe</code>, phone number <code>98765432</code>, email address <code>johnd@example.com</code>,
-address <code>John street, block 123, #01-01</code>.</p>
+<p>Have at least one phone number, but possibly more phone numbers [Since v1.2]</p>
 </li>
 <li>
-<p><code>add n/Rob Cross p/92456877 p/64123456 e/rob@example.com a/Kent Ridge Drive 23 t/husband f/ s/facebook r.cross10 dp/C:/Users/Seedu/Pictures/batman.png</code><br>
-Adds a <code>favorite</code> contact with the name <code>Rob Cross</code>, phone numbers <code>92456877</code> and <code>64123456</code>, email address <code>rob@example.com</code>,
-address <code>Kent Ridge Drive 23</code>, tag <code>husband</code>, a <code>Facebook</code> account with the username <code>r.cross10</code>, and adds a <code>display photo</code> imported from the location <code>C:/Users/Seedu/Pictures/batman.png</code>.</p>
+<p>Have any number (including zero) of tags</p>
+</li>
+<li>
+<p>Have any number (including zero) of social media accounts [Since v1.2]</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More information about representing social media accounts can be found in the <a href="#social-media-integrations">Social Media Integrations</a> section.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p>Be marked as a favorite contact by including the parameter <code>f/</code> when executing the command [Since v1.2]</p>
+</li>
+<li>
+<p>Have a display picture added by specifying the <code>DISPLAY_PHOTO_FILE_PATH</code> when executing the command [Since v1.5]</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You should see the person represented by the parameters added to the contacts list after executing the command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">add</span> <span class="green">n/Uwuwe Osas p/98765432 e/osas@example.com a/497 Jacob Mare Street, #01-01</span></code><br></p>
+<div class="paragraph">
+<p>Adds a contact with the name <code>Uwuwe Osas</code>, phone number <code>98765432</code>, email address <code>osas@africanhunks.org</code>,
+address <code>a/497 Jacob Mare Street, #01-01</code>.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add-example-1-command-result.png" alt="add example 1 command result" width="700">
+</div>
+<div class="title">Figure 4. Added a contact with name, phone number, email address and address specified</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">add</span> <span class="green">n/Michael Van Gerwen p/92456877 p/64123456 e/mike@example.com a/William Hill Drive 180 t/husband f/ s/facebook mvgofficial dp/C:/Users/KayPoh/Pictures/michael.png[green]</span></code><br></p>
+<div class="paragraph">
+<p>Adds a <code>favorite</code> contact with the name <code>Michael Van Gerwen</code>, phone numbers <code>92456877</code> and <code>64123456</code>, email address <code>mike@example.com</code>,
+address <code>William Hill Drive 180</code>, tag <code>husband</code>, a <code>Facebook</code> account with the username <code>mvgofficial</code>, and adds a <code>display photo</code> imported from the location <code>C:/Users/KayPoh/Pictures/michael.png</code>.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add-example-2-command-result.png" alt="add example 2 command result" width="700">
+</div>
+<div class="title">Figure 5. Added a contact with name, two phone numbers, email address, address, tag, social media account (Facebook) and display photo specified</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exclude required parameters in the command<br>
+e.g. <code>add n/Michael Van Gerwen</code> is missing the required <code>PHONE_NUMBER</code>, <code>ADDRESS</code> and <code>EMAIL</code> parameters.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that all required parameters as specified in the command format have been added.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input invalid parameters in the command<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that all required parameters are valid as specified in the <a href="#representing-persons">Representing Persons</a> section.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">4.2.2. Editing a person: <code>edit</code></a></h4>
 <div class="paragraph">
-<p>Edits an existing person in the address book.<br>
-Command format: <code>edit INDEX [n/NAME] [p/PHONE]&#8230;&#8203; [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</code><br>
-Alias: <code>e</code></p>
+<p>To edit an existing person in KayPoh, use the <code>edit</code> command.</p>
 </div>
-<div class="sidebarblock">
+<div class="exampleblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>:<br>
+<code><span class="red">edit</span> <span class="green">INDEX [n/NAME] [p/PHONE]&#8230;&#8203; [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]&#8230;&#8203; [s/SOCIAL_PLATFORM USERNAME]&#8230;&#8203;</span></code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alias</strong>: <code><span class="red">e</span></code></p>
+</div>
+</div>
+</div>
 <div class="ulist">
 <ul>
-<li>
-<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
 </li>
@@ -585,218 +659,271 @@ Alias: <code>e</code></p>
 <p>You can favorite a person by including the parameter <code>f/</code>, or unfavorite by including the parameter <code>uf/</code>. [Since v1.2]<br></p>
 </li>
 <li>
-<p>You can remove a person&#8217;s display photo by including the parameter <code>dp/</code> without specifying any file path after it. [Since v1.5rc]</p>
+<p>You can remove a person&#8217;s display photo by including the parameter <code>dp/</code> without specifying the <code>DISPLAY_PHOTO_FILE_PATH</code>. [Since v1.5]</p>
 </li>
 <li>
-<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
+<p>When editing tags, the person&#8217;s existing tags will be replaced by the new tags.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>You can remove all the person&#8217;s existing tags by including the parameter <code>t/</code> without specifying any <code>TAGS</code>.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>You can remove all the person&#8217;s tags by including the parameter <code>t/</code> without specifying any tags after it.</p>
-</li>
+<p>When editing social media accounts, the person&#8217;s existing social media accounts will be replaced by the new social media accounts. [Since v1.2]</p>
+<div class="ulist">
+<ul>
 <li>
-<p>When editing social media accounts, the existing social media accounts will be removed i.e. adding social media accounts is not cumulative. [Since v1.2]</p>
-</li>
-<li>
-<p>You can remove all the person&#8217;s social media accounts by including the parameter <code>s/</code> without specifying any social media accounts after it.</p>
+<p>You can remove all the person&#8217;s existing social media accounts by including the parameter <code>s/</code> without specifying any <code>SOCIAL_MEDIA_ACCOUNTS</code>.</p>
 </li>
 <li>
 <p>More information about representing social media accounts can be found in the <a href="#social-media-integrations">Social Media Integrations</a> section.</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
-</li>
-<li>
-<p><code>edit 2 f/ dp/C:/Users/Seedu/Pictures/superman.png s/instagram janedoe123 s/facebook jane.doe</code><br>
-Marks the 2nd person a <code>favorite</code> contact, changes the existing display photo to the new file specified by <code>C:/Users/Seedu/Pictures/superman.png</code> and edits the social media accounts to be
-a <code>Facebook</code> account with the username <code>jane.doe</code>,
-and an Instagram account with the username <code>janedoe123</code>.</p>
-</li>
-<li>
-<p><code>edit 3 n/Betsy Crower dp/ t/</code><br>
-Edits the name of the 3rd person to be <code>Betsy Crower</code>, removes existing display photo and clears all existing tags.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="favoriting-a-person-since-v1-2-code-fav-code"><a class="link" href="#favoriting-a-person-since-v1-2-code-fav-code">4.2.3. Favoriting a person [Since v1.2]: <code>fav</code></a></h4>
 <div class="paragraph">
-<p>Labels the specified person(s) as a favorite contact.<br>
-Command format: <code>fav INDEX [ADDITIONAL INDEXES]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Adds the person(s) as a favorite contact at the specified <code>INDEX</code> or <code>INDEXES</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recently displayed list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>fav 1 3</code><br>
-Favorites the 1st and 3rd person in the most recently displayed list.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>unfav 1</code><br>
-Favorites the first person in the list of contacts with the name <code>Betsy</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="unfavoriting-a-person-since-v1-2-code-unfav-code"><a class="link" href="#unfavoriting-a-person-since-v1-2-code-unfav-code">4.2.4. Unfavoriting a person [Since v1.2]: <code>unfav</code></a></h4>
+<p><code><span class="red">edit</span> <span class="green">1 p/91234567 e/alex_yeoh@example.com</span></code><br></p>
 <div class="paragraph">
-<p>Removes the the <code>favorite</code> label from the specified person(s).<br>
-Command format: <code>unfav INDEX [ADDITIONAL INDEXES]</code></p>
+<p>Edits the phone number and email address of the first person in the contacts list to be <code>91234567</code> and <code>alex_yeoh@example.com</code> respectively.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Removes the person(s) from the list of favorite contacts at the specified <code>INDEX</code> or <code>INDEXES</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recently displayed list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>unfav 2 4</code><br>
-Unfavorites the 2nd and 4th person in the most recently displayed list.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>unfav 1</code><br>
-Unfavorites the first person in the list of contacts with the name <code>Betsy</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">4.2.5. Deleting a person: <code>delete</code></a></h4>
-<div class="paragraph">
-<p>Deletes the specified person(s) from the address book.<br>
-Command format: <code>delete [OPTION] KEYWORD [MORE_KEYWORDS]&#8230;&#8203;</code><br>
-Alias: <code>d</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>KEYWORD</code> for <code>delete</code> command depends on which options are used.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Options:<br></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Default (no option specified)<br>
-Deletes persons based on their indexes in the last displayed list.</p>
-</li>
-<li>
-<p><code>tag</code><br>
-Deletes persons that have the input tags.</p>
-</li>
-</ul>
-</div>
-<div class="sect4">
-<h5 id="deleting-persons-by-index-default"><a class="link" href="#deleting-persons-by-index-default">Deleting persons by index (default):</a></h5>
-<div class="paragraph">
-<p>Deletes person(s) specified by their indexes in the last displayed list.
-Command format: <code>delete INDEX [ADDITIONAL_INDEXES]&#8230;&#8203;</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>More than one person can be deleted in the same command by specifying additional indexes. [Since v1.2]</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>delete 2 3</code><br>
-Deletes the 2nd and 3rd persons in the address book.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/delete-by-index-command-result.png" alt="delete by index command result" width="800">
+<img src="images/edit-example-1-command-result.png" alt="edit example 1 command result" width="700">
 </div>
-<div class="title">Figure 4. Deleted person at first index i.e. Alex Yeoh</div>
+<div class="title">Figure 6. Edited the phone number and email address of the first person in the contacts list</div>
 </div>
-</div>
-<div class="sect4">
-<h5 id="deleting-persons-by-tag-since-v1-4"><a class="link" href="#deleting-persons-by-tag-since-v1-4">Deleting persons by tag [Since v1.4]:</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">edit</span> <span class="green">3 f/ dp/C:/Users/KayPoh/Pictures/superman.jpg s/facebook clark.kent s/instagram clarkent</span></code><br></p>
 <div class="paragraph">
-<p>Deletes person(s) that have a the input tags.<br>
-Command format: <code>delete -tag TAG [ADDITIONAL_TAGS]&#8230;&#8203;</code></p>
+<p>Marks the third person a <code>favorite</code> contact, changes the existing display photo to the new file specified by <code>C:/Users/KayPoh/Pictures/superman.jpg</code> and updates the social media accounts to be
+a <code>Facebook</code> account with the username <code>clark.kent</code>,
+and an Instagram account with the username <code>clarkent</code>.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/edit-example-2-command-result.png" alt="edit example 2 command result" width="700">
+</div>
+<div class="title">Figure 7. Edited the favorite status, display photo, and social media accounts (facebook and instagram) of the third person in the contacts list</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">edit</span> <span class="green">2 n/Clark Kent dp/ t/</span></code><br></p>
+<div class="paragraph">
+<p>Edits the name of the second person in the contacts list to be <code>Clark Kent</code>, removes his existing display photo and clears all his existing tags.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/edit-example-3-command-result.png" alt="edit example 3 command result" width="700">
+</div>
+<div class="title">Figure 8. Edited the name, and removed display photo and tags from the second person in the contacts list</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the person list</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input invalid parameters in the command<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that all required parameters are valid as specified in the <a href="#representing-persons">Representing Persons</a> section.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="favoriting-a-person-since-v1-2-code-fav-code"><a class="link" href="#favoriting-a-person-since-v1-2-code-fav-code">4.2.3. Favoriting a person [Since v1.2]: <code>fav</code></a></h4>
+<div class="paragraph">
+<p>To mark person(s) as a favorite contact, use the <code>fav</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">fav</span> <span class="green">INDEX [ADDITIONAL INDEXES]&#8230;&#8203;</span></code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see a star icon displayed beside the persons at the specified <code>INDEX</code> or <code>INDEXES</code> after executing the command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">fav</span> <span class="green">5 6</span></code><br>
+Marks the fifth and sixth persons as favorite contacts in the most recently displayed list.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/favorite-multiple-command-result.png" alt="favorite multiple command result" width="700">
+</div>
+<div class="title">Figure 9. Marked fifth and sixth persons as favorite contacts</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">Bernice</span></code><br>
+<code><span class="red">fav</span> <span class="green">1</span></code><br>
+Marks the first person in the list of contacts with the name <code>Bernice</code> as a favorite contact.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/favorite-after-find-command-result.png" alt="favorite after find command result" width="800">
+</div>
+<div class="title">Figure 10. Marked the first person i.e. Bernice as a favorite contact</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the person list</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="unfavoriting-a-person-since-v1-2-code-unfav-code"><a class="link" href="#unfavoriting-a-person-since-v1-2-code-unfav-code">4.2.4. Unfavoriting a person [Since v1.2]: <code>unfav</code></a></h4>
+<div class="paragraph">
+<p>To remove person(s) from the list of favorite contacts, use the <code>unfav</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">unfav</span> <span class="green">INDEX [ADDITIONAL INDEXES]&#8230;&#8203;</span></code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the star icon removed from the persons at the specified <code>INDEX</code> or <code>INDEXES</code> after executing the command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">unfav</span> <span class="green">1 2</span></code><br>
+Removes the first and second persons from favorite contacts in the most recently displayed list.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/unfavorite-multiple-command-result.png" alt="unfavorite multiple command result" width="700">
+</div>
+<div class="title">Figure 11. Removed the first and second persons from favorite contacts</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">Alex</span></code><br>
+<code><span class="red">unfav</span> <span class="green">1</span></code><br>
+Removes the first person in the list of contacts with the name <code>Alex</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/unfavorite-after-find-command-result.png" alt="unfavorite after find command result" width="800">
+</div>
+<div class="title">Figure 12. Removed person at first index from favorite contacts i.e. Alex</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 4. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the person list</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">4.2.5. Deleting a person: <code>delete</code></a></h4>
+<div class="paragraph">
+<p>To delete person(s) from KayPoh, use the <code>delete</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deleting persons by <code><span class="green">INDEX</span></code> (default): <code><span class="red">delete</span> <span class="green">INDEX [ADDITIONAL_INDEXES]&#8230;&#8203;</span></code></p>
+</li>
+<li>
+<p>Deleting persons by <code><span class="blue">tag</span></code> [Since v1.4]: <code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">TAG [ADDITIONAL_TAGS]&#8230;&#8203;</span></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alias</strong>: <code>d</code></p>
+</div>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -813,39 +940,119 @@ You can use the <a href="#find-by-tag">find command</a> to view all contacts tha
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:
-* <code>delete -tag temp</code>
-Deletes all persons with the tag <code>temp</code>
-* <code>delete -tag school work</code>
-Deletes all persons with the tags <code>school</code> or <code>work</code></p>
+<p><strong>Examples</strong>:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">list</span></code><br>
+<code><span class="red">delete</span> <span class="green">3 4</span></code><br>
+Deletes the third and fourth persons in KayPoh.</p>
+</li>
+</ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/delete-multiple-command-result.png" alt="delete multiple command result" width="1000">
+</div>
+<div class="title">Figure 13. Deleted persons at third and fourth index</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">Bernice</span></code><br>
+<code><span class="red">delete</span> <span class="green">1</span></code><br>
+Deletes the 1st person in the list of contacts with the name <code>Bernice</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/delete-after-find-command-result.png" alt="delete after find command result" width="1000">
+</div>
+<div class="title">Figure 14. Deleted person at first index i.e. Bernice Yu</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">friends</span></code><br>
+Deletes all persons with the tag <code>friends</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/delete-by-tag-command-result.png" alt="delete by tag command result" width="700">
+</div>
+<div class="title">Figure 15. Deleted all persons with the "friends" tag</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">colleagues neighbours</span></code><br>
+Deletes all persons with the tags <code>colleagues</code> or <code>neighbours</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/delete-by-multiple-tags-command-result.png" alt="delete by multiple tags command result" width="700">
+</div>
+<div class="title">Figure 16. Deleted all persons with the "colleagues" and "neighbours" tags</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 5. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the person list</strong>.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.2.6. Clearing all entries: <code>clear</code></a></h4>
 <div class="paragraph">
-<p>Clears all entries from the address book.<br>
-Command format: <code>clear</code></p>
+<p>To clear all entries from KayPoh, use the <code>clear</code> comand.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">clear</span></code></p>
+</div>
+</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/clear-command-result.png" alt="clear command result" width="350">
 </div>
-<div class="title">Figure 5. Cleared all entries</div>
+<div class="title">Figure 17. Cleared all entries in KayPoh</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-kaypoh"><a class="link" href="#navigating-kaypoh">4.3. Navigating KayPoh!</a></h3>
+<h3 id="navigating-kaypoh"><a class="link" href="#navigating-kaypoh">4.3. Navigating KayPoh</a></h3>
 <div class="sect3">
 <h4 id="listing-persons-code-list-code"><a class="link" href="#listing-persons-code-list-code">4.3.1. Listing persons: <code>list</code></a></h4>
 <div class="paragraph">
-<p>To have all your contacts displayed in the person list, use the <code>list</code> command.</p>
+<p>To have all your contacts displayed in KayPoh, use the <code>list</code> command.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p>Command format: <code><span class="red">list</span></code><br></p>
+<p><strong>Command format</strong>: <code><span class="red">list</span></code><br>
+<strong>Alias</strong>: <code><span class="red">l</span></code></p>
 </div>
 <div class="ulist">
 <ul>
@@ -859,9 +1066,6 @@ Command format: <code>clear</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Alias: <code><span class="red">l</span></code></p>
-</div>
 </div>
 </div>
 <div class="paragraph">
@@ -869,9 +1073,9 @@ Command format: <code>clear</code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/list-command-result.png" alt="list command result" width="790">
+<img src="images/list-command-result.png" alt="list command result" width="350">
 </div>
-<div class="title">Figure 6. Person list populated with all contacts</div>
+<div class="title">Figure 18. Person list populated with all contacts</div>
 </div>
 </div>
 <div class="sect3">
@@ -882,8 +1086,8 @@ Command format: <code>clear</code></p>
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p>Command format: <code><span class="red">select</span> <span class="green">INDEX [SOCIAL_MEDIA_PLATFORM]</span></code><br>
-Alias: <code><span class="red">s</span></code></p>
+<p><strong>Command format</strong>: <code><span class="red">select</span> <span class="green">INDEX [SOCIAL_MEDIA_PLATFORM]</span></code><br>
+<strong>Alias</strong>: <code><span class="red">s</span></code></p>
 </div>
 </div>
 </div>
@@ -907,12 +1111,12 @@ the person, a Google search of the person&#8217;s name will be displayed instead
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/stalk-command-result.png" alt="stalk command result" width="790">
+<img src="images/stalk-command-result.png" alt="stalk command result" width="800">
 </div>
-<div class="title">Figure 7. Social media feed displayed in browser window</div>
+<div class="title">Figure 19. Social media feed displayed in browser window</div>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -923,7 +1127,7 @@ Displays the Facebook account of the first person in the current person list</p>
 </ul>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Common Mistakes</caption>
+<caption class="title">Table 6. Common Mistakes</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -945,7 +1149,7 @@ e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
 e.g. If the first user in the person list does not have an instagram account, and the command <code>stalk 1 instagram</code> is entered.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the selected user has an associated account for the <code>SOCIAL_MEDIA_PLATFORM</code> specified. The social media accounts associated with
 a user can be found in the person list.
-</p><p class="tableblock"><span class="image"><img src="images/stalk-command-social-info.png" alt="stalk command social info" width="300"></span></p></td>
+</p><p class="tableblock"><span class="image"><img src="images/stalk-command-social-info.png" alt="stalk command social info" width="350"></span></p></td>
 </tr>
 </tbody>
 </table>
@@ -958,7 +1162,7 @@ a user can be found in the person list.
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p>Command format:</p>
+<p><strong>Command format</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -970,14 +1174,10 @@ a user can be found in the person list.
 <p>Finding by <code>tag</code> [Since v1.3]:
 <code><span class="red">find</span> <span class="blue">-tag</span> <span class="green">KEYWORD [ADDITIONAL_KEYWORDS]&#8230;&#8203;</span></code></p>
 </li>
-<li>
-<p>Finding <code>favorite</code> contacts [Coming in v2.0]:
-<code><span class="red">find</span> <span class="blue">-fav</span></code></p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Alias: <code><span class="red">f</span></code><br></p>
+<p><strong>Alias</strong>: <code><span class="red">f</span></code><br></p>
 </div>
 </div>
 </div>
@@ -1004,10 +1204,10 @@ a user can be found in the person list.
 <div class="content">
 <img src="images/find-command-result.png" alt="find command result" width="300">
 </div>
-<div class="title">Figure 8. Person list after finding contacts with the tag <code>friends</code></div>
+<div class="title">Figure 20. Person list after finding contacts with the tag <code>friends</code></div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1023,10 +1223,6 @@ Displays persons with names <code>Betsy</code>, <code>Tim</code>, or <code>John<
 <p><code><span class="red">find</span> <span class="blue">-tag</span> <span class="green">friends colleagues</span></code><br>
 Displays persons with tags <code>friends</code> or <code>colleagues</code> in the person list.</p>
 </li>
-<li>
-<p><code><span class="red">find</span> <span class="blue">-fav</span></code><br>
-Displays <code>favorite</code> contacts in the person list.</p>
-</li>
 </ul>
 </div>
 </div>
@@ -1038,7 +1234,7 @@ Displays <code>favorite</code> contacts in the person list.</p>
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p>Command format:</p>
+<p><strong>Command format</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1057,7 +1253,7 @@ Displays <code>favorite</code> contacts in the person list.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Alias: <code><span class="red">sr</span></code><br></p>
+<p><strong>Alias</strong>: <code><span class="red">sr</span></code><br></p>
 </div>
 </div>
 </div>
@@ -1081,23 +1277,23 @@ Displays <code>favorite</code> contacts in the person list.</p>
 <div class="content">
 <img src="images/sort-command-default-result.png" alt="sort command default result" width="300">
 </div>
-<div class="title">Figure 9. Person list after executing a default sort</div>
+<div class="title">Figure 21. Person list after executing a default sort</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/sort-command-name-result.png" alt="sort command name result" width="300">
 </div>
-<div class="title">Figure 10. Person list after executing a sort by <code>name</code></div>
+<div class="title">Figure 22. Person list after executing a sort by <code>name</code></div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code><span class="red">list</span></code><br>
 <code><span class="red">sort</span></code><br>
-Lists all person in the address book, sorted first based on their <code>favorite</code> status, then by their <code>name</code> in lexicographic order.</p>
+Lists all persons in KayPoh, sorted first based on their <code>favorite</code> status, then by their <code>name</code> in lexicographic order.</p>
 </li>
 <li>
 <p><code><span class="red">find</span> <span class="green">john</span></code><br>
@@ -1152,8 +1348,6 @@ represents the Instagram account with the username <code>damyth</code>.</p>
 <p>Connects to your Facebook account.<br>
 Command Format: <code><span class="red">facebookconnect</span></code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -1171,16 +1365,12 @@ Command Format: <code><span class="red">facebookconnect</span></code></p>
 </ul>
 </div>
 </div>
-</div>
-</div>
 <div class="sect4">
 <h5 id="facebookpost"><a class="link" href="#facebookpost">Posting a status to Facebook [Since v1.3]: <code>facebookpost</code></a></h5>
 <div class="paragraph">
 <p>Posts a status to your Facebook wall.<br>
 Command Format <code><span class="red">facebookpost</span> <span class="green">STATUS</span></code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -1191,8 +1381,6 @@ the browser.</p>
 <p>Your status will then be posted to Facebook.</p>
 </li>
 </ul>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1212,8 +1400,6 @@ Posts the status 'hello world!' to your Facebook wall.</p>
 <p>Shares a link to your Facebook wall.<br>
 Command Format <code><span class="red">facebooklink</span> <span class="green">URL</span></code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -1224,8 +1410,6 @@ the browser.</p>
 <p>Your URL will then be shared to Facebook.</p>
 </li>
 </ul>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1245,8 +1429,6 @@ Posts the link to <code><a href="https://www.google.com" class="bare">https://ww
 <p>Imports a Facebook user as a contact.<br>
 Command Format <code><span class="red">facebookadd</span> <span class="green">USERNAME</span></code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -1257,8 +1439,6 @@ the browser.</p>
 <p>The Facebook user will then be added as a contact.</p>
 </li>
 </ul>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1278,8 +1458,6 @@ Imports the facebook user 'Barack Obama' to your contacts.</p>
 <p>Imports all your Facebook friends as contacts. (Current maximum is set at 30 friends)<br>
 Command Format <code><span class="red">facebookaddallfriends</span></code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -1294,12 +1472,10 @@ the browser.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
 <div class="sect2">
 <h3 id="managing-contact-data"><a class="link" href="#managing-contact-data">4.5. Managing Contact Data</a></h3>
 <div class="paragraph">
-<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+<p>KayPoh contacts data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 <div class="sect3">
@@ -1310,8 +1486,6 @@ There is no need to save manually.</p>
 <p>Exports all contact data to an external file.<br>
 Command format: <code><span class="red">export</span> <span class="green">FILE_PATH</span></code><br></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -1335,16 +1509,14 @@ Command format: <code><span class="red">export</span> <span class="green">FILE_P
 </li>
 </ul>
 </div>
-</div>
-</div>
 <div class="paragraph">
 <p>You should see the confirmation message in the result display.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/export-contacts.png" alt="export contacts" width="790">
+<img src="images/export-contacts.png" alt="export contacts" width="800">
 </div>
-<div class="title">Figure 11. Confirmation message after exporting contacts</div>
+<div class="title">Figure 23. Confirmation message after exporting contacts</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1364,8 +1536,6 @@ Exports contact data to the location <code>/Users/seedu/Documents/exportData.xml
 <p>Imports contact data from an external file.<br>
 Command format: <code><span class="red">import</span> <span class="green">FILE_PATH</span></code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -1389,16 +1559,14 @@ Command format: <code><span class="red">import</span> <span class="green">FILE_P
 </li>
 </ul>
 </div>
-</div>
-</div>
 <div class="paragraph">
 <p>You should see the confirmation message in the result display.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/import-contacts.png" alt="import contacts" width="790">
+<img src="images/import-contacts.png" alt="import contacts" width="800">
 </div>
-<div class="title">Figure 12. Confirmation message after importing contacts</div>
+<div class="title">Figure 24. Confirmation message after importing contacts</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1425,7 +1593,7 @@ Command format: <code><span class="red">sync</span> <span class="green">u/USERNA
 <div class="sect4">
 <h5 id="synchronizing-with-the-cloud"><a class="link" href="#synchronizing-with-the-cloud">Synchronizing with the cloud</a></h5>
 <div class="paragraph">
-<p>Address book data is automatically synchronized with cloud when an internet connection is available.<br>
+<p>KayPoh contacts data is automatically synchronized with cloud when an internet connection is available.<br>
 There is no need to synchronize manually.</p>
 </div>
 </div>
@@ -1443,43 +1611,70 @@ Command format: <code><span class="red">unsync</span></code></p>
 <div class="sect3">
 <h4 id="changing-themes-code-theme-code-since-v1-4"><a class="link" href="#changing-themes-code-theme-code-since-v1-4">4.6.1. Changing themes: <code>theme</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>Changes the color theme of the application.<br>
-Format: <code>theme [OPTION]</code></p>
+<p>To change the theme of the application, use the <code>theme</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">theme</span> <span class="blue">[OPTION]</span></code><br>
+<strong>Alias</strong>: <code>t</code></p>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>Options:</p>
+<p><strong>Options</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>day</code><br>
+<p><code><span class="blue">-day</span></code><br>
 Changes the application theme to a light color scheme.</p>
 </li>
 <li>
-<p><code>night</code><br>
+<p><code><span class="blue">-night</span></code><br>
 Changes the application theme to a dark color scheme.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Examples</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>theme -day</code></p>
 </li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui-day.png" alt="Ui day" width="800">
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p><code>theme -night</code></p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui-night.png" alt="Ui night" width="800">
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.6.2. Listing entered commands: <code>history</code></a></h4>
 <div class="paragraph">
-<p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
+<p>To list all the commands that you have entered in reverse chronological order, use the <code>history</code> command.<br></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code><span class="red">history</span></code></p>
+</div>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1499,9 +1694,15 @@ Format: <code>history</code></p>
 <div class="sect3">
 <h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.6.3. Undoing previous command: <code>undo</code></a></h4>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code><br>
-Alias: <code>u</code></p>
+<p>To restore KayPoh to the state before the previous <em>undoable</em> command was executed, use the <code>undo</code> command.<br></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code>undo</code><br>
+<strong>Alias</strong>: <code>u</code></p>
+</div>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1511,33 +1712,34 @@ Alias: <code>u</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify the KayPoh&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p><code><span class="red">delete</span> <span class="green">1</span></code><br>
+<code><span class="red">list</span></code><br>
+<code><span class="red">undo</span></code><br>
+Reverses the <code>delete 1</code> command</p>
 </li>
 <li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
+<p><code><span class="red">select</span> <span class="green">1</span></code><br>
+<code><span class="red">list</span></code><br>
+<code><span class="red">undo</span></code><br>
 The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p><code><span class="red">delete</span> <span class="green">1</span></code><br>
+<code><span class="red">clear</span></code><br>
+<code><span class="red">undo</span></code> (reverses the <code>clear</code> command)<br>
+<code><span class="red">undo</span></code> (reverses the <code>delete 1</code> command)<br></p>
 </li>
 </ul>
 </div>
@@ -1545,48 +1747,67 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 <div class="sect3">
 <h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.6.4. Redoing the previously undone command: <code>redo</code></a></h4>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code><br>
-Alias: <code>r</code></p>
+<p>To reverse the most recent <code>undo</code> command, use the <code>redo</code> command.<br></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code>redo</code><br>
+<strong>Alias</strong>: <code>r</code></p>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code><span class="red">delete</span> <span class="green">1</span></code><br>
+<code><span class="red">undo</span></code> (reverses the <code>delete 1</code> command)<br>
+<code><span class="red">redo</span></code> (reapplies the <code>delete 1</code> command)<br></p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
+<p><code><span class="red">delete</span> <span class="green">1</span></code><br>
+<code><span class="red">redo</span></code><br>
 The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code><span class="red">delete</span> <span class="green">1</span></code><br>
+<code><span class="red">clear</span></code><br>
+<code><span class="red">undo</span></code> (reverses the <code>clear</code> command)<br>
+<code><span class="red">undo</span></code> (reverses the <code>delete 1</code> command)<br>
+<code><span class="red">redo</span></code> (reapplies the <code>delete 1</code> command)<br>
+<code><span class="red">redo</span></code> (reapplies the <code>clear</code> command)<br></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.6.5. Exiting the program: <code>exit</code></a></h4>
+<h4 id="exiting-the-application-code-exit-code"><a class="link" href="#exiting-the-application-code-exit-code">4.6.5. Exiting the application: <code>exit</code></a></h4>
 <div class="paragraph">
-<p>Exits the program.<br>
-Format: <code>exit</code><br>
-Alias: <code>x</code></p>
+<p>To exit the application, use the <code>exit</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code>exit</code><br>
+<strong>Alias</strong>: <code>x</code></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.6.6. Viewing help: <code>help</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p>To open the help window, use the <code>help</code> command.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>: <code>help</code></p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1674,7 +1895,7 @@ e.g. <code>facebook post hello world!</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 10:08:56 +00:00
+Last updated 2017-11-13 10:52:33 +00:00
 </div>
 </div>
 </body>
