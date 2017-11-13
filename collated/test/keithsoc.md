@@ -1,5 +1,468 @@
 # keithsoc
-###### /java/systemtests/FavoriteCommandSystemTest.java
+###### \java\seedu\address\logic\commands\FavoriteCommandTest.java
+``` java
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code FavoriteCommand}.
+ */
+public class FavoriteCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_validIndexUnfilteredList_success() throws Exception {
+        ReadOnlyPerson personToFavorite = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_THIRD_PERSON));
+
+        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_SUCCESS
+                + "\n\t★ " + personToFavorite.getName().toString();
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.toggleFavoritePerson(personToFavorite, FavoriteCommand.COMMAND_WORD);
+
+        assertCommandSuccess(favoriteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validMultiIndexesUnfilteredList_success() throws Exception {
+        ReadOnlyPerson personAlice = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ReadOnlyPerson personDaniel = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+
+        Set<ReadOnlyPerson> targetPersonList = new LinkedHashSet<>();
+        targetPersonList.add(personAlice);
+        targetPersonList.add(personDaniel);
+
+        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON, INDEX_FOURTH_PERSON));
+
+        // In TypicalPersons, Alice is already a favorite contact while Daniel is not
+        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_SUCCESS
+                + "\n\t★ " + personDaniel.getName().toString()
+                + "\n" + FavoriteCommand.MESSAGE_FAVORITE_PERSON_FAILURE
+                + "\n\t- " + personAlice.getName().toString();
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        for (ReadOnlyPerson personToFavorite : targetPersonList) {
+            expectedModel.toggleFavoritePerson(personToFavorite, FavoriteCommand.COMMAND_WORD);
+        }
+
+        assertCommandSuccess(favoriteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(outOfBoundIndex));
+
+        assertCommandFailure(favoriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_success() throws Exception {
+        showFirstPersonOnly(model);
+
+        ReadOnlyPerson personToFavorite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON));
+
+        // In TypicalPersons, first person (Alice) is already a favorite.
+        // Assert command success as this is not a command failure,
+        // it's because we disallow favoriting of an already favorited person.
+        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_FAILURE
+                + "\n\t- " + personToFavorite.getName().toString();
+
+        assertCommandSuccess(favoriteCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showFirstPersonOnly(model);
+
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(outOfBoundIndex));
+
+        assertCommandFailure(favoriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        FavoriteCommand favoriteFirstCommand = new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON));
+        FavoriteCommand favoriteSecondCommand = new FavoriteCommand(Arrays.asList(INDEX_SECOND_PERSON));
+
+        // same object -> returns true
+        assertTrue(favoriteFirstCommand.equals(favoriteFirstCommand));
+
+        // same values -> returns true
+        FavoriteCommand favoriteFirstCommandCopy = new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON));
+        assertTrue(favoriteFirstCommand.equals(favoriteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(favoriteFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(favoriteFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(favoriteFirstCommand.equals(favoriteSecondCommand));
+    }
+
+    /**
+     * Returns a {@code FavoriteCommand} with the parameter {@code index}.
+     */
+    private FavoriteCommand prepareCommand(List<Index> indexList) {
+        FavoriteCommand favoriteCommand = new FavoriteCommand(indexList);
+        favoriteCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
+        return favoriteCommand;
+    }
+}
+```
+###### \java\seedu\address\logic\commands\ListCommandTest.java
+``` java
+    @Test
+    public void execute_noOptionUnfilteredList_showsSameList() {
+        assertCommandSuccess(prepareCommand(""), model, ListCommand.MESSAGE_SUCCESS_LIST_ALL, expectedModel);
+    }
+
+    @Test
+    public void execute_noOptionFilteredList_showsAllPersons() {
+        showFirstPersonOnly(model);
+        assertCommandSuccess(prepareCommand(""), model, ListCommand.MESSAGE_SUCCESS_LIST_ALL, expectedModel);
+    }
+
+    @Test
+    public void execute_noOptionExtraArgumentsUnfilteredList_showsSameList() {
+        assertCommandSuccess(prepareCommand("abc"),
+                model, ListCommand.MESSAGE_SUCCESS_LIST_ALL, expectedModel);
+
+        assertCommandSuccess(prepareCommand("FaV"),
+                model, ListCommand.MESSAGE_SUCCESS_LIST_ALL, expectedModel);
+    }
+
+    @Test
+    public void execute_favOptionUnfilteredList_showsAllFavoritePersons() {
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_FAV_PERSONS);
+        assertCommandSuccess(prepareCommand(ListCommand.COMMAND_OPTION_FAV),
+                model, ListCommand.MESSAGE_SUCCESS_LIST_FAV, expectedModel);
+    }
+
+    @Test
+    public void execute_favOptionFilteredList_showsAllFavoritePersons() {
+        showFirstPersonOnly(model);
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_FAV_PERSONS);
+        assertCommandSuccess(prepareCommand(ListCommand.COMMAND_OPTION_FAV),
+                model, ListCommand.MESSAGE_SUCCESS_LIST_FAV, expectedModel);
+    }
+
+    /**
+     * Returns a {@code ListCommand} with the parameter {@code argument}.
+     */
+    private ListCommand prepareCommand(String argument) {
+        ListCommand listCommand = new ListCommand(argument);
+        listCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
+        return listCommand;
+    }
+```
+###### \java\seedu\address\logic\commands\UnFavoriteCommandTest.java
+``` java
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code UnFavoriteCommand}.
+ */
+public class UnFavoriteCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_validIndexUnfilteredList_success() throws Exception {
+        ReadOnlyPerson personToUnFavorite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON));
+
+        String expectedMessage = UnFavoriteCommand.MESSAGE_UNFAVORITE_PERSON_SUCCESS
+                + "\n\t- " + personToUnFavorite.getName().toString();
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.toggleFavoritePerson(personToUnFavorite, UnFavoriteCommand.COMMAND_WORD);
+
+        assertCommandSuccess(unFavoriteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validMultiIndexesUnfilteredList_success() throws Exception {
+        ReadOnlyPerson personAlice = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ReadOnlyPerson personDaniel = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+
+        Set<ReadOnlyPerson> targetPersonList = new LinkedHashSet<>();
+        targetPersonList.add(personAlice);
+        targetPersonList.add(personDaniel);
+
+        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON, INDEX_FOURTH_PERSON));
+
+        // In TypicalPersons, Alice is already a favorite contact while Daniel is not
+        String expectedMessage = UnFavoriteCommand.MESSAGE_UNFAVORITE_PERSON_SUCCESS
+                + "\n\t- " + personAlice.getName().toString()
+                + "\n" + UnFavoriteCommand.MESSAGE_UNFAVORITE_PERSON_FAILURE
+                + "\n\t- " + personDaniel.getName().toString();
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        for (ReadOnlyPerson personToUnFavorite : targetPersonList) {
+            expectedModel.toggleFavoritePerson(personToUnFavorite, UnFavoriteCommand.COMMAND_WORD);
+        }
+
+        assertCommandSuccess(unFavoriteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(outOfBoundIndex));
+
+        assertCommandFailure(unFavoriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_success() throws Exception {
+        ReadOnlyPerson personToUnFavorite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON));
+
+        String expectedMessage = UnFavoriteCommand.MESSAGE_UNFAVORITE_PERSON_SUCCESS
+                + "\n\t- " + personToUnFavorite.getName().toString();
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.toggleFavoritePerson(personToUnFavorite, UnFavoriteCommand.COMMAND_WORD);
+
+        assertCommandSuccess(unFavoriteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showFirstPersonOnly(model);
+
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(outOfBoundIndex));
+
+        assertCommandFailure(unFavoriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        UnFavoriteCommand unFavoriteFirstCommand = new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON));
+        UnFavoriteCommand favoriteSecondCommand = new UnFavoriteCommand(Arrays.asList(INDEX_SECOND_PERSON));
+
+        // same object -> returns true
+        assertTrue(unFavoriteFirstCommand.equals(unFavoriteFirstCommand));
+
+        // same values -> returns true
+        UnFavoriteCommand unFavoriteFirstCommandCopy = new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON));
+        assertTrue(unFavoriteFirstCommand.equals(unFavoriteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(unFavoriteFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(unFavoriteFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(unFavoriteFirstCommand.equals(favoriteSecondCommand));
+    }
+
+    /**
+     * Returns a {@code UnFavoriteCommand} with the parameter {@code index}.
+     */
+    private UnFavoriteCommand prepareCommand(List<Index> indexList) {
+        UnFavoriteCommand unFavoriteCommand = new UnFavoriteCommand(indexList);
+        unFavoriteCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
+        return unFavoriteCommand;
+    }
+}
+```
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
+``` java
+    @Test
+    public void parseCommand_favorite() throws Exception {
+        FavoriteCommand command = (FavoriteCommand) parser.parseCommand(
+                FavoriteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON)), command);
+    }
+
+    @Test
+    public void parseCommand_favorite_multi() throws Exception {
+        FavoriteCommand command = (FavoriteCommand) parser.parseCommand(
+                FavoriteCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + INDEX_SECOND_PERSON.getOneBased());
+        assertEquals(new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON)), command);
+    }
+```
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
+``` java
+    @Test
+    public void parseCommand_listFav() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD
+                + " " + ListCommand.COMMAND_OPTION_FAV) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD
+                + " " + ListCommand.COMMAND_OPTION_FAV + " 3") instanceof ListCommand);
+    }
+```
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
+``` java
+    @Test
+    public void parseCommand_unFavorite() throws Exception {
+        UnFavoriteCommand command = (UnFavoriteCommand) parser.parseCommand(
+                UnFavoriteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON)), command);
+    }
+
+    @Test
+    public void parseCommand_unFavorite_multi() throws Exception {
+        UnFavoriteCommand command = (UnFavoriteCommand) parser.parseCommand(
+                UnFavoriteCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + INDEX_SECOND_PERSON.getOneBased());
+        assertEquals(new UnFavoriteCommand(Arrays.asList(INDEX_SECOND_PERSON, INDEX_FIRST_PERSON)), command);
+    }
+```
+###### \java\seedu\address\logic\parser\FavoriteCommandParserTest.java
+``` java
+/**
+ * As we are only doing white-box testing, our test cases do not cover path variations
+ * outside of the FavoriteCommand code. For example, inputs "1" and "1 abc" take the
+ * same path through the FavoriteCommand, and therefore we test only one of them.
+ * The path variation for those two cases occur inside the ParserUtil, and
+ * therefore should be covered by the ParserUtilTest.
+ */
+public class FavoriteCommandParserTest {
+
+    private FavoriteCommandParser parser = new FavoriteCommandParser();
+
+    @Test
+    public void parse_validArgs_returnsFavoriteCommand() {
+        assertParseSuccess(parser, "1", new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON)));
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
+    }
+}
+```
+###### \java\seedu\address\logic\parser\ParserUtilTest.java
+``` java
+    @Test
+    public void parseMultiIndex_invalidInput_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parseMultipleIndexes("1 2 3 a"); // Two trailing spaces in front
+    }
+```
+###### \java\seedu\address\logic\parser\ParserUtilTest.java
+``` java
+    @Test
+    public void parseMultiIndex_validInput_success() throws Exception {
+        List<Index> expectedIndexList = Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON);
+
+        // No whitespaces
+        assertEquals(expectedIndexList, ParserUtil.parseMultipleIndexes("1 2 3"));
+
+        // Leading and trailing whitespaces
+        assertEquals(expectedIndexList, ParserUtil.parseMultipleIndexes(" 1  2   3    "));
+    }
+```
+###### \java\seedu\address\logic\parser\ThemeCommandParserTest.java
+``` java
+public class ThemeCommandParserTest {
+
+    private ThemeCommandParser parser = new ThemeCommandParser();
+
+    @Test
+    public void parse_validArgs_returnsThemeCommand() {
+        assertParseSuccess(parser, "-day", new ThemeCommand("-day"));
+        assertParseSuccess(parser, "-night", new ThemeCommand("-night"));
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, " ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "day",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
+    }
+}
+```
+###### \java\seedu\address\logic\parser\UnFavoriteCommandParserTest.java
+``` java
+/**
+ * As we are only doing white-box testing, our test cases do not cover path variations
+ * outside of the UnFavoriteCommand code. For example, inputs "1" and "1 abc" take the
+ * same path through the UnFavoriteCommand, and therefore we test only one of them.
+ * The path variation for those two cases occur inside the ParserUtil, and
+ * therefore should be covered by the ParserUtilTest.
+ */
+public class UnFavoriteCommandParserTest {
+
+    private UnFavoriteCommandParser parser = new UnFavoriteCommandParser();
+
+    @Test
+    public void parse_validArgs_returnsUnFavoriteCommand() {
+        assertParseSuccess(parser, "1", new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON)));
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnFavoriteCommand.MESSAGE_USAGE));
+    }
+}
+```
+###### \java\seedu\address\testutil\EditPersonDescriptorBuilder.java
+``` java
+    /**
+     * Sets the {@code Favorite} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFavorite(boolean favorite) {
+        descriptor.setFavorite(new Favorite(favorite));
+        return this;
+    }
+```
+###### \java\seedu\address\testutil\modelstubs\ModelStub.java
+``` java
+    @Override
+    public void toggleFavoritePerson(ReadOnlyPerson target, String type)
+            throws DuplicatePersonException, PersonNotFoundException {
+        fail("This method should not be called.");
+    }
+```
+###### \java\seedu\address\testutil\PersonBuilder.java
+``` java
+    /**
+     * Sets the {@code Favorite} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFavorite(boolean favorite) {
+        this.person.setFavorite(new Favorite(favorite));
+        return this;
+    }
+
+    /**
+     * Sets the {@code DisplayPhoto} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDisplayPhoto(String displayPhoto) {
+        try {
+            this.person.setDisplayPhoto(new DisplayPhoto(displayPhoto));
+        } catch (IllegalValueException ive) {
+            throw new IllegalArgumentException("display photo file does not exist or it exceeded maximum size of 1MB");
+        }
+        return this;
+    }
+```
+###### \java\seedu\address\testutil\TypicalIndexes.java
+``` java
+    public static final Index INDEX_FOURTH_PERSON = Index.fromOneBased(4);
+    public static final Index INDEX_FIFTH_PERSON = Index.fromOneBased(5);
+```
+###### \java\systemtests\FavoriteCommandSystemTest.java
 ``` java
 public class FavoriteCommandSystemTest extends AddressBookSystemTest {
 
@@ -173,7 +636,7 @@ public class FavoriteCommandSystemTest extends AddressBookSystemTest {
     }
 }
 ```
-###### /java/systemtests/UnFavoriteCommandSystemTest.java
+###### \java\systemtests\UnFavoriteCommandSystemTest.java
 ``` java
 public class UnFavoriteCommandSystemTest extends AddressBookSystemTest {
 
@@ -353,467 +816,4 @@ public class UnFavoriteCommandSystemTest extends AddressBookSystemTest {
         assertStatusBarUnchanged();
     }
 }
-```
-###### /java/seedu/address/logic/parser/UnFavoriteCommandParserTest.java
-``` java
-/**
- * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the UnFavoriteCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the UnFavoriteCommand, and therefore we test only one of them.
- * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
- */
-public class UnFavoriteCommandParserTest {
-
-    private UnFavoriteCommandParser parser = new UnFavoriteCommandParser();
-
-    @Test
-    public void parse_validArgs_returnsUnFavoriteCommand() {
-        assertParseSuccess(parser, "1", new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON)));
-    }
-
-    @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnFavoriteCommand.MESSAGE_USAGE));
-    }
-}
-```
-###### /java/seedu/address/logic/parser/ThemeCommandParserTest.java
-``` java
-public class ThemeCommandParserTest {
-
-    private ThemeCommandParser parser = new ThemeCommandParser();
-
-    @Test
-    public void parse_validArgs_returnsThemeCommand() {
-        assertParseSuccess(parser, "-day", new ThemeCommand("-day"));
-        assertParseSuccess(parser, "-night", new ThemeCommand("-night"));
-    }
-
-    @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, " ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "-",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "day",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
-    }
-}
-```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
-``` java
-    @Test
-    public void parseCommand_favorite() throws Exception {
-        FavoriteCommand command = (FavoriteCommand) parser.parseCommand(
-                FavoriteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON)), command);
-    }
-
-    @Test
-    public void parseCommand_favorite_multi() throws Exception {
-        FavoriteCommand command = (FavoriteCommand) parser.parseCommand(
-                FavoriteCommand.COMMAND_WORD + " "
-                        + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + INDEX_SECOND_PERSON.getOneBased());
-        assertEquals(new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON)), command);
-    }
-```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
-``` java
-    @Test
-    public void parseCommand_listFav() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD
-                + " " + ListCommand.COMMAND_OPTION_FAV) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD
-                + " " + ListCommand.COMMAND_OPTION_FAV + " 3") instanceof ListCommand);
-    }
-```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
-``` java
-    @Test
-    public void parseCommand_unFavorite() throws Exception {
-        UnFavoriteCommand command = (UnFavoriteCommand) parser.parseCommand(
-                UnFavoriteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON)), command);
-    }
-
-    @Test
-    public void parseCommand_unFavorite_multi() throws Exception {
-        UnFavoriteCommand command = (UnFavoriteCommand) parser.parseCommand(
-                UnFavoriteCommand.COMMAND_WORD + " "
-                        + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + INDEX_SECOND_PERSON.getOneBased());
-        assertEquals(new UnFavoriteCommand(Arrays.asList(INDEX_SECOND_PERSON, INDEX_FIRST_PERSON)), command);
-    }
-```
-###### /java/seedu/address/logic/parser/FavoriteCommandParserTest.java
-``` java
-/**
- * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the FavoriteCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the FavoriteCommand, and therefore we test only one of them.
- * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
- */
-public class FavoriteCommandParserTest {
-
-    private FavoriteCommandParser parser = new FavoriteCommandParser();
-
-    @Test
-    public void parse_validArgs_returnsFavoriteCommand() {
-        assertParseSuccess(parser, "1", new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON)));
-    }
-
-    @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
-    }
-}
-```
-###### /java/seedu/address/logic/parser/ParserUtilTest.java
-``` java
-    @Test
-    public void parseMultiIndex_invalidInput_throwsIllegalValueException() throws Exception {
-        thrown.expect(IllegalValueException.class);
-        ParserUtil.parseMultipleIndexes("1 2 3 a"); // Two trailing spaces in front
-    }
-```
-###### /java/seedu/address/logic/parser/ParserUtilTest.java
-``` java
-    @Test
-    public void parseMultiIndex_validInput_success() throws Exception {
-        List<Index> expectedIndexList = Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON);
-
-        // No whitespaces
-        assertEquals(expectedIndexList, ParserUtil.parseMultipleIndexes("1 2 3"));
-
-        // Leading and trailing whitespaces
-        assertEquals(expectedIndexList, ParserUtil.parseMultipleIndexes(" 1  2   3    "));
-    }
-```
-###### /java/seedu/address/logic/commands/UnFavoriteCommandTest.java
-``` java
-/**
- * Contains integration tests (interaction with the Model) and unit tests for {@code UnFavoriteCommand}.
- */
-public class UnFavoriteCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_validIndexUnfilteredList_success() throws Exception {
-        ReadOnlyPerson personToUnFavorite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON));
-
-        String expectedMessage = UnFavoriteCommand.MESSAGE_UNFAVORITE_PERSON_SUCCESS
-                + "\n\t- " + personToUnFavorite.getName().toString();
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.toggleFavoritePerson(personToUnFavorite, UnFavoriteCommand.COMMAND_WORD);
-
-        assertCommandSuccess(unFavoriteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_validMultiIndexesUnfilteredList_success() throws Exception {
-        ReadOnlyPerson personAlice = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ReadOnlyPerson personDaniel = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-
-        Set<ReadOnlyPerson> targetPersonList = new LinkedHashSet<>();
-        targetPersonList.add(personAlice);
-        targetPersonList.add(personDaniel);
-
-        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON, INDEX_FOURTH_PERSON));
-
-        // In TypicalPersons, Alice is already a favorite contact while Daniel is not
-        String expectedMessage = UnFavoriteCommand.MESSAGE_UNFAVORITE_PERSON_SUCCESS
-                + "\n\t- " + personAlice.getName().toString()
-                + "\n" + UnFavoriteCommand.MESSAGE_UNFAVORITE_PERSON_FAILURE
-                + "\n\t- " + personDaniel.getName().toString();
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        for (ReadOnlyPerson personToUnFavorite : targetPersonList) {
-            expectedModel.toggleFavoritePerson(personToUnFavorite, UnFavoriteCommand.COMMAND_WORD);
-        }
-
-        assertCommandSuccess(unFavoriteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(outOfBoundIndex));
-
-        assertCommandFailure(unFavoriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() throws Exception {
-        ReadOnlyPerson personToUnFavorite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON));
-
-        String expectedMessage = UnFavoriteCommand.MESSAGE_UNFAVORITE_PERSON_SUCCESS
-                + "\n\t- " + personToUnFavorite.getName().toString();
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.toggleFavoritePerson(personToUnFavorite, UnFavoriteCommand.COMMAND_WORD);
-
-        assertCommandSuccess(unFavoriteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showFirstPersonOnly(model);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        UnFavoriteCommand unFavoriteCommand = prepareCommand(Arrays.asList(outOfBoundIndex));
-
-        assertCommandFailure(unFavoriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void equals() {
-        UnFavoriteCommand unFavoriteFirstCommand = new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON));
-        UnFavoriteCommand favoriteSecondCommand = new UnFavoriteCommand(Arrays.asList(INDEX_SECOND_PERSON));
-
-        // same object -> returns true
-        assertTrue(unFavoriteFirstCommand.equals(unFavoriteFirstCommand));
-
-        // same values -> returns true
-        UnFavoriteCommand unFavoriteFirstCommandCopy = new UnFavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON));
-        assertTrue(unFavoriteFirstCommand.equals(unFavoriteFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(unFavoriteFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(unFavoriteFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(unFavoriteFirstCommand.equals(favoriteSecondCommand));
-    }
-
-    /**
-     * Returns a {@code UnFavoriteCommand} with the parameter {@code index}.
-     */
-    private UnFavoriteCommand prepareCommand(List<Index> indexList) {
-        UnFavoriteCommand unFavoriteCommand = new UnFavoriteCommand(indexList);
-        unFavoriteCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
-        return unFavoriteCommand;
-    }
-}
-```
-###### /java/seedu/address/logic/commands/ListCommandTest.java
-``` java
-    @Test
-    public void execute_noOptionUnfilteredList_showsSameList() {
-        assertCommandSuccess(prepareCommand(""), model, ListCommand.MESSAGE_SUCCESS_LIST_ALL, expectedModel);
-    }
-
-    @Test
-    public void execute_noOptionFilteredList_showsAllPersons() {
-        showFirstPersonOnly(model);
-        assertCommandSuccess(prepareCommand(""), model, ListCommand.MESSAGE_SUCCESS_LIST_ALL, expectedModel);
-    }
-
-    @Test
-    public void execute_noOptionExtraArgumentsUnfilteredList_showsSameList() {
-        assertCommandSuccess(prepareCommand("abc"),
-                model, ListCommand.MESSAGE_SUCCESS_LIST_ALL, expectedModel);
-
-        assertCommandSuccess(prepareCommand("FaV"),
-                model, ListCommand.MESSAGE_SUCCESS_LIST_ALL, expectedModel);
-    }
-
-    @Test
-    public void execute_favOptionUnfilteredList_showsAllFavoritePersons() {
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_FAV_PERSONS);
-        assertCommandSuccess(prepareCommand(ListCommand.COMMAND_OPTION_FAV),
-                model, ListCommand.MESSAGE_SUCCESS_LIST_FAV, expectedModel);
-    }
-
-    @Test
-    public void execute_favOptionFilteredList_showsAllFavoritePersons() {
-        showFirstPersonOnly(model);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_FAV_PERSONS);
-        assertCommandSuccess(prepareCommand(ListCommand.COMMAND_OPTION_FAV),
-                model, ListCommand.MESSAGE_SUCCESS_LIST_FAV, expectedModel);
-    }
-
-    /**
-     * Returns a {@code ListCommand} with the parameter {@code argument}.
-     */
-    private ListCommand prepareCommand(String argument) {
-        ListCommand listCommand = new ListCommand(argument);
-        listCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
-        return listCommand;
-    }
-```
-###### /java/seedu/address/logic/commands/FavoriteCommandTest.java
-``` java
-/**
- * Contains integration tests (interaction with the Model) and unit tests for {@code FavoriteCommand}.
- */
-public class FavoriteCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_validIndexUnfilteredList_success() throws Exception {
-        ReadOnlyPerson personToFavorite = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
-        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_THIRD_PERSON));
-
-        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_SUCCESS
-                + "\n\t★ " + personToFavorite.getName().toString();
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.toggleFavoritePerson(personToFavorite, FavoriteCommand.COMMAND_WORD);
-
-        assertCommandSuccess(favoriteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_validMultiIndexesUnfilteredList_success() throws Exception {
-        ReadOnlyPerson personAlice = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ReadOnlyPerson personDaniel = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-
-        Set<ReadOnlyPerson> targetPersonList = new LinkedHashSet<>();
-        targetPersonList.add(personAlice);
-        targetPersonList.add(personDaniel);
-
-        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON, INDEX_FOURTH_PERSON));
-
-        // In TypicalPersons, Alice is already a favorite contact while Daniel is not
-        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_SUCCESS
-                + "\n\t★ " + personDaniel.getName().toString()
-                + "\n" + FavoriteCommand.MESSAGE_FAVORITE_PERSON_FAILURE
-                + "\n\t- " + personAlice.getName().toString();
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        for (ReadOnlyPerson personToFavorite : targetPersonList) {
-            expectedModel.toggleFavoritePerson(personToFavorite, FavoriteCommand.COMMAND_WORD);
-        }
-
-        assertCommandSuccess(favoriteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(outOfBoundIndex));
-
-        assertCommandFailure(favoriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() throws Exception {
-        showFirstPersonOnly(model);
-
-        ReadOnlyPerson personToFavorite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(INDEX_FIRST_PERSON));
-
-        // In TypicalPersons, first person (Alice) is already a favorite.
-        // Assert command success as this is not a command failure,
-        // it's because we disallow favoriting of an already favorited person.
-        String expectedMessage = FavoriteCommand.MESSAGE_FAVORITE_PERSON_FAILURE
-                + "\n\t- " + personToFavorite.getName().toString();
-
-        assertCommandSuccess(favoriteCommand, model, expectedMessage, model);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showFirstPersonOnly(model);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        FavoriteCommand favoriteCommand = prepareCommand(Arrays.asList(outOfBoundIndex));
-
-        assertCommandFailure(favoriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void equals() {
-        FavoriteCommand favoriteFirstCommand = new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON));
-        FavoriteCommand favoriteSecondCommand = new FavoriteCommand(Arrays.asList(INDEX_SECOND_PERSON));
-
-        // same object -> returns true
-        assertTrue(favoriteFirstCommand.equals(favoriteFirstCommand));
-
-        // same values -> returns true
-        FavoriteCommand favoriteFirstCommandCopy = new FavoriteCommand(Arrays.asList(INDEX_FIRST_PERSON));
-        assertTrue(favoriteFirstCommand.equals(favoriteFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(favoriteFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(favoriteFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(favoriteFirstCommand.equals(favoriteSecondCommand));
-    }
-
-    /**
-     * Returns a {@code FavoriteCommand} with the parameter {@code index}.
-     */
-    private FavoriteCommand prepareCommand(List<Index> indexList) {
-        FavoriteCommand favoriteCommand = new FavoriteCommand(indexList);
-        favoriteCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
-        return favoriteCommand;
-    }
-}
-```
-###### /java/seedu/address/testutil/EditPersonDescriptorBuilder.java
-``` java
-    /**
-     * Sets the {@code Favorite} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withFavorite(boolean favorite) {
-        descriptor.setFavorite(new Favorite(favorite));
-        return this;
-    }
-```
-###### /java/seedu/address/testutil/TypicalIndexes.java
-``` java
-    public static final Index INDEX_FOURTH_PERSON = Index.fromOneBased(4);
-    public static final Index INDEX_FIFTH_PERSON = Index.fromOneBased(5);
-```
-###### /java/seedu/address/testutil/PersonBuilder.java
-``` java
-    /**
-     * Sets the {@code Favorite} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withFavorite(boolean favorite) {
-        this.person.setFavorite(new Favorite(favorite));
-        return this;
-    }
-
-    /**
-     * Sets the {@code DisplayPhoto} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withDisplayPhoto(String displayPhoto) {
-        try {
-            this.person.setDisplayPhoto(new DisplayPhoto(displayPhoto));
-        } catch (IllegalValueException ive) {
-            throw new IllegalArgumentException("display photo file does not exist or it exceeded maximum size of 1MB");
-        }
-        return this;
-    }
-```
-###### /java/seedu/address/testutil/modelstubs/ModelStub.java
-``` java
-    @Override
-    public void toggleFavoritePerson(ReadOnlyPerson target, String type)
-            throws DuplicatePersonException, PersonNotFoundException {
-        fail("This method should not be called.");
-    }
 ```
