@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_URL;
 
 import seedu.address.logic.commands.FacebookLinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,6 +23,11 @@ public class FacebookLinkCommandParser implements Parser<FacebookLinkCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FacebookLinkCommand.MESSAGE_USAGE));
+        }
+
+        if (!ParserUtil.isValidUrl(trimmedArgs)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_URL, "Example: " + FacebookLinkCommand.EXAMPLE_LINK));
         }
 
         return new FacebookLinkCommand(trimmedArgs);

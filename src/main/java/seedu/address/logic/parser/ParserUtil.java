@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -203,6 +205,17 @@ public class ParserUtil {
             socialInfoSet.add(parseSocialInfo(rawSocialInfo));
         }
         return socialInfoSet;
+    }
+    //@@author
+
+    //@@author alexfoodw
+    /**
+     * Validates if url is valid
+     */
+    public static boolean isValidUrl(String url) {
+        Pattern p = Pattern.compile("(http|https):\\/\\/[A-Za-z\\.]*\\.(com|org|net)[^\\s]*");
+        Matcher m = p.matcher(url);
+        return m.matches();
     }
     //@@author
 }
