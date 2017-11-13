@@ -16,7 +16,7 @@ public class UserPrefs {
     //@@author
     private String addressBookFilePath = "data/addressbook.xml";
     //@@author keithsoc
-    private String addressBookName = "KayPoh!";
+    private String addressBookName = "KayPoh";
     //@@author
 
     //@@author keithsoc
