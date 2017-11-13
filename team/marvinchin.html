@@ -705,6 +705,102 @@ Displays persons with tags <code>friends</code> or <code>colleagues</code> in th
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">Deleting a Person: <code>delete</code></a></h4>
+<div class="paragraph">
+<p>Not interested in a contact anymore? Remove him from KayPoh using the <code>delete</code> command!</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command format</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deleting persons by index: <code><span class="red">delete</span> <span class="green">INDEX [ADDITIONAL_INDEXES]&#8230;&#8203;</span></code></p>
+</li>
+<li>
+<p>Deleting persons by tag [Since v1.4]: <code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">TAG [ADDITIONAL_TAGS]&#8230;&#8203;</span></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alias</strong>: <code><span class="red">d</span></code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Persons in the contacts list identified by the keyword will be deleted from KayPoh.</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">list</span></code><br>
+<code><span class="red">delete</span> <span class="green">3 4</span></code><br>
+Deletes the third and fourth persons in the contacts list containing all contacts in KayPoh.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete-multiple-command-result.png" alt="delete multiple command result" width="1000">
+</div>
+<div class="title">Figure 8. Third and fourth person in the contacts deleted</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">find</span> <span class="green">Bernice</span></code><br>
+<code><span class="red">delete</span> <span class="green">1</span></code><br>
+Deletes the first person in the contacts list containing all contacts with the name <code>Bernice</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete-after-find-command-result.png" alt="delete after find command result" width="1000">
+</div>
+<div class="title">Figure 9. First person with the name Bernice deleted</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">colleagues neighbours</span></code><br>
+Deletes all persons in the contacts list with the tags <code>colleagues</code> or <code>neighbours</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete-by-multiple-tags-command-result.png" alt="delete by multiple tags command result" width="700">
+</div>
+<div class="title">Figure 10. Persons in the contacts list with the "colleagues" and "neighbours" tags</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Common Mistakes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Incorrect</th>
+<th class="tableblock halign-left valign-top">Correct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
+e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the contacts list</strong>.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -750,7 +846,7 @@ Displays persons with tags <code>friends</code> or <code>colleagues</code> in th
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 15:00:22 +00:00
+Last updated 2017-11-13 15:12:06 +00:00
 </div>
 </div>
 </body>
