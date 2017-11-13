@@ -1,8 +1,8 @@
 == Loading Testing Data
 
-Copy `SampleData.zip` to the same directory that you have downloaded `[W10-B2][KayPoh!].jar` to.
+Copy `SampleData.zip` to the same directory that you have downloaded `[W10-B2][KayPoh].jar` to.
 Extract `SampleData.zip`
-Double-click on `[W10-B2][KayPoh!].jar`
+Double-click on `[W10-B2][KayPoh].jar`
 
 Enter the following commands: +
 `clear` +
@@ -150,7 +150,7 @@ First person in the contact list is unfavorited
 ****
 
 ****
-e 1 dp/test_dp.jpg
+e 1 dp/SampleData/test_dp.jpg
 
 Expected:
 
@@ -165,61 +165,6 @@ Expected:
 First person in the contact list has his display picture removed
 ****
 
-****
-edit 1 n/Aaron Tan p/87654321 e/aaron@example.com a/Aaron Road
-
-Expected:
-
-First person in contact list has name changed to Aaron Tan, phone number changer to 87654321, email changed to e/aaron@example.com, address changed to Aaron Road
-****
-
-****
-edit 1 t/hello t/world
-
-Expected:
-
-First person in contact list has tags changed to hello and world
-****
-
-****
-e 1 s/fb hello s/fb world
-
-Expected:
-
-Error message: Person cannot have more than one social media account of the same social type.
-****
-
-****
-e 1 s/fb hello s/ig world
-
-Expected:
-
-First person in the contact list has social media accounts changed to a facebook account with username hello and an instagram account with the username world
-****
-
-****
-e 1 uf/
-
-Expected:
-
-First person in the contact list is unfavorited
-****
-
-****
-e 1 dp/test_dp.jpg
-
-Expected:
-
-First person in the contact list has his display picture set to test_dp.jpg
-****
-
-****
-e 1 dp/
-
-Expected:
-
-First person in the contact list has his display picture removed
-****
 
 === `delete`
 
@@ -235,14 +180,404 @@ First 3 persons in the contact list is deleted
 delete 1 2 -1
 
 Expected:
-Error message: Invalid command format! …
 
+Error message: Invalid command format! …
+****
+
+****
 delete -tag army dancer
 
 Expected:
-Contacts with the army and dancer tags deleted
 
+Contacts with the army and dancer tags deleted
+****
+
+****
 delete -tag nonexistentTag
 
 Expected:
+
 Command succeeds, but no contacts deleted.
+****
+
+=== `fav`
+****
+`fav abc`
+
+Expected:
+
+Error message: Invalid command format
+****
+
+****
+`fav 10`
+
+Expected:
+
+Tenth person will be shifted towards the top and a star icon will be added to that person’s card.
+****
+
+****
+`fav 11 12`
+
+Expected:
+
+Eleventh and twelfth persons will be shifted towards the top and a star icon will be added to their cards.
+****
+
+****
+`fav 1 2 13`
+
+Expected:
+
+First and second persons will remain marked as favorite while the thirteenth person will be shifted towards the top and a star icon will be added to that person’s card. The following message will be displayed:
+
+Added as favorite contact(s): +
+	★ ... +
+These contact(s) has already been added as favorites: +
+	- ... +
+	- ... +
+****
+
+=== `unfav`
+****
+`unfav 1`
+
+Expected:
+
+First person will be shifted downwards and the star icon will be removed from their card.
+****
+
+****
+`unfav 2 3`
+
+Expected:
+
+Second and third persons will be shifted downwards and the star icon will be removed from their card.
+****
+
+****
+`unfav 1 4`
+
+Expected:
+
+First person will remain unmarked as favorite contact while the fourth person will be shifted downwards and the star icon will be removed from that person’s card. The following message will be displayed:
+
+Removed from favorite contact(s): +
+	- ... +
+These contact(s) has not been added as favorites for this operation: +
+	- ... +
+****
+
+=== `list`
+
+****
+`list`
+
+Expected:
+
+All contacts in address book will be listed in the contacts list panel.
+****
+
+****
+`list -fav`
+
+Expected:
+
+All favorited contacts in the address book will be listed in the contacts list panel.
+****
+
+=== `select`
+
+****
+select 2 +
+edit 1 s/ig roslyn s/fb roslyn +
+select 1 +
+
+Expected:
+
+First person is selected. The Instagram feed belonging to the first person is displayed in the browser.
+****
+
+****
+select 2 +
+edit 1 s/ig roslyn +
+select 1 +
+
+Expected:
+
+First person is selected. The Instagram feed belonging to the first person is displayed in the browser.
+****
+
+****
+select 2 +
+edit 1 s/fb roslyn +
+select 1 +
+
+Expected:
+
+First person is selected. The Facebook feed belonging to the first person is displayed in the browser.
+****
+
+****
+select 2 +
+edit 1 s/ +
+select 1 +
+
+Expected: +
+
+First person is selected. A Google page searching the name of the first person is displayed in the browser.
+****
+
+****
+select 2 +
+edit 1 s/fb roslyn +
+select 1 ig +
+
+Expected: +
+
+Error message: “Requested social media type not found for person.”
+****
+
+****
+select 2 +
+edit 1 s/ +
+select 1 ig +
+
+Expected: +
+
+Error message: “Requested social media type not found for person.”
+****
+
+=== `find`
+****
+find zachary
+
+Expected:
+
+All contacts that contain ‘zachary’ in the name field will be listed in contacts list
+****
+
+****
+find -tag school
+
+Expected:
+
+All contacts that contain ‘school’ in the tag field will be listed in contacts list
+****
+
+=== `sort`
+****
+sort -name
+
+Expected:
+
+Contacts sorted by name in alphabetical order
+****
+
+****
+e 10 n/Amos Yee
+
+Expected:
+
+Contacts should remain sorted
+****
+
+****
+sort
+
+Expected:
+
+Contacts sorted first by favorite status, then by name in alphabetical order
+****
+
+****
+sort -recent
+
+Expected:
+
+Contacts sorted based on how recently they have been added, edited, or selected
+****
+
+****
+select 10
+
+Expected:
+
+10th person moved up to first, contacts should remain sorted.
+****
+
+****
+sort -name -recent
+
+Expected:
+
+Error message: Invalid command format! …
+****
+
+****
+sort -someinvalidoption
+
+Expected:
+
+Error message: Invalid command format! …
+****
+
+=== `facebookconnect`
+
+****
+facebookconnect
+
+Expected:
+
+Step 1: +
+Facebook log in page will be launched in the browser
+
+Step 2: +
+As application is in beta, you will need to use an approved account to connect to facebook. You may use the account below:
+
+email: kaypohcs2103@gmail.com +
+password: cs2103kp
+
+Step 3: +
+After log in, user feed will be displayed in the browser.
+“Connected to your Facebook Account! User name: __”
+****
+
+=== `facebookpost`
+
+****
+facebookpost Hello World!
+
+Expected:
+
+User’s wall will be displayed in the browser with the new post.
+****
+
+=== `facebooklink`
+
+****
+facebooklink https://www.google.com
+
+Expected:
+
+User’s wall will be displayed in the browser with the new shared link.
+****
+
+****
+facebooklink http://www.google.com
+
+Expected:
+
+User’s wall will be displayed in the browser with the new shared link.
+****
+
+****
+facebooklink dwa.com
+
+Expected:
+
+Error message: “Invalid URL!”
+****
+
+=== `facebookadd`
+
+****
+facebookadd barack obama
+
+Expected:
+
+The new user will be added into the address book and shown in the contacts list.
+****
+
+=== `facebookaddall`
+
+****
+
+facebookaddall
+
+Expected:
+
+Each user will be gradually added into the address book and shown in the contacts list. +
+“_ valid friends added from Facebook! (From ___'s account)”
+
+****
+
+
+=== `export`
+
+****
+export data.xml +
+
+Expected: +
+The contacts list will be exported to the file “data.xml”.
+****
+
+=== `import`
+
+****
+import data.xml +
+
+Expected: +
+The contacts list will be imported from the file “data.xml”.
+****
+
+=== `theme`
+
+****
+theme +
+
+Expected: +
+Error: Invalid command format! +
+****
+
+****
+theme -123 +
+
+Expected: +
+Error: Invalid command format! +
+****
+
+****
+theme -night +
+
+Expected: +
+KayPoh’s user interface changes to a dark color scheme. +
+****
+
+****
+theme -day +
+
+Expected: +
+KayPoh’s user interface changes to a light color scheme. +
+****
+
+=== `help`
+
+****
+help +
+
+Expected: +
+Window opened with user guide displayed +
+****
+
+=== `clear`
+
+****
+`clear`
+
+Expected:
+
+Contacts list will become empty
+****
+
+
+=== `exit`
+
+****
+exit +
+
+Expected: +
+KayPoh application closes successfully. +
+****
+
