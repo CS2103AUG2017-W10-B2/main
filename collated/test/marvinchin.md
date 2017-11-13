@@ -1,6 +1,9 @@
 # marvinchin
 ###### /java/systemtests/SortCommandSystemTest.java
 ``` java
+/**
+ * Contains system tests for {@code SortCommand}.
+ */
 public class SortCommandSystemTest extends AddressBookSystemTest {
 
     @Test
@@ -88,7 +91,7 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Utility method to get the person at the given index in the model's filtered person list
+     * Utility method to get the {@code Person} at the given index in the model's filtered person list.
      */
     private ReadOnlyPerson getPersonAtIndex(Index index) {
         Model model = getModel();
@@ -96,8 +99,8 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Verifies that the add command succeeds and that the ordering of persons in the model's filtered person list
-     * set by the last sort function still holds true
+     * Verifies that the {@code AddCommand} succeeds and that the ordering of {@code Person}s
+     * in the model's filtered person list set by the last {@code SortCommand} still holds true
      */
     private void assertAddCommandRetainsSortOrder(String command, ReadOnlyPerson toAdd,
             Comparator<ReadOnlyPerson> expectedComparator) throws DuplicatePersonException {
@@ -110,8 +113,8 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Verifies that the edit command succeeds and that the ordering of persons in the model's filtered person list
-     * set by the last sort function still holds true
+     * Verifies that the {@code EditCommand} succeeds and that the ordering of {@code Person}s
+     * in the model's filtered person list set by the last {@code SortCommand} still holds true
      */
     private void assertEditCommandRetainsSortOrder(String command, ReadOnlyPerson target, ReadOnlyPerson editedPerson,
             Comparator<ReadOnlyPerson> expectedComparator) throws DuplicatePersonException, PersonNotFoundException {
@@ -124,8 +127,8 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Verifies that the favorite command succeeds and that the ordering of persons in the model's filtered person list
-     * set by the last sort function still holds true
+     * Verifies that the {@code FavoriteCommand} succeeds and that the ordering of {@code Person}s
+     * in the model's filtered person list set by the last {@code SortCommand} still holds true
      */
     private void assertFavoriteCommandRetainsSortOrder(String command, ReadOnlyPerson toFav,
             Comparator<ReadOnlyPerson> expectedComparator) throws DuplicatePersonException, PersonNotFoundException {
@@ -141,8 +144,8 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Verifies that the sort command succeeds and that the ordering of persons in the model's filtered person list is
-     * correctly set by the sort function
+     * Verifies that the {@code SortCommand} succeeds and that the ordering of {@code Person}s
+     * in the model's filtered person list is correctly set.
      */
     private void assertSortCommandSuccess(String command, String expectedResultMessage,
             Comparator<ReadOnlyPerson> expectedComparator) {
@@ -214,6 +217,10 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
 ```
 ###### /java/seedu/address/logic/parser/ImportCommandParserTest.java
 ``` java
+
+/**
+ * Contains unit tests for {@code ImportCommandParser}.
+ */
 public class ImportCommandParserTest {
 
     private ImportCommandParser parser = new ImportCommandParser();
@@ -298,13 +305,25 @@ public class SortCommandParserTest {
 ###### /java/seedu/address/logic/parser/FindCommandParserTest.java
 ``` java
     @Test
-    public void parse_emptyTagArgs_throwsParseException() {
-        assertParseFailure(parser, "-tag     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    public void parse_moreThanOneOption_throwsParseException() {
+        String input = "-tag -fav";
+        assertParseFailure(parser, input, FindCommandParser.INVALID_FIND_COMMAND_FORMAT_MESSAGE);
     }
 
     @Test
-    public void parse_validTagArgs_returnsFindCommand() {
+    public void parse_invalidOption_throwsParseException() {
+        String input = "-someinvalidoption123";
+        assertParseFailure(parser, input, FindCommandParser.INVALID_FIND_COMMAND_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_tagOptionNoArgs_throwsParseException() {
+        String input = "-tag     ";
+        assertParseFailure(parser, input, FindCommandParser.INVALID_FIND_COMMAND_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_tagOptionValidArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindByTagsCommand(new TagsContainKeywordsPredicate(Arrays.asList("colleagues", "friends")));
@@ -316,6 +335,9 @@ public class SortCommandParserTest {
 ```
 ###### /java/seedu/address/logic/parser/ExportCommandParserTest.java
 ``` java
+/**
+ * Contains unit tests for {@code ExportCommandParser}.
+ */
 public class ExportCommandParserTest {
 
     private ExportCommandParser parser = new ExportCommandParser();
@@ -336,21 +358,38 @@ public class ExportCommandParserTest {
 ###### /java/seedu/address/logic/parser/DeleteCommandParserTest.java
 ``` java
     @Test
-    public void parse_emptyTagArgs_throwsParseException() {
-        assertParseFailure(parser, "-tag    ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_moreThanOneOption_throwsParseException() {
+        String input = "-tag -hello";
+        assertParseFailure(parser, input, DeleteCommandParser.INVALID_DELETE_COMMAND_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_invalidOption_throwsParseException() {
+        String input = "-someinvalidoption123";
+        assertParseFailure(parser, input, DeleteCommandParser.INVALID_DELETE_COMMAND_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_tagOptionNoArgs_throwsParseException() {
+        String input = "-tag    ";
+        assertParseFailure(parser, input, DeleteCommandParser.INVALID_DELETE_COMMAND_FORMAT_MESSAGE);
     }
 
     @Test
     public void parse_validTagArgs_returnsDeleteCommand() {
         HashSet<String> keys = new HashSet<>(Arrays.asList("friends", "colleagues"));
         DeleteCommand expectedDeleteCommand = new DeleteByTagCommand(keys);
-        assertParseSuccess(parser, "-tag colleagues friends", expectedDeleteCommand);
-        assertParseSuccess(parser, "-tag   \t friends \t\t\n colleagues", expectedDeleteCommand);
+        String input = "-tag colleagues friends";
+        String inputWithWhitespace = "-tag   \t friends \t\t\n colleagues";
+        assertParseSuccess(parser, input, expectedDeleteCommand);
+        assertParseSuccess(parser, inputWithWhitespace, expectedDeleteCommand);
     }
 ```
 ###### /java/seedu/address/logic/parser/OptionBearingArgumentTest.java
 ``` java
+/**
+ * Contains unit tests for {@code OptionBearingArgument}.
+ */
 public class OptionBearingArgumentTest {
 
     @Test
@@ -402,6 +441,9 @@ public class OptionBearingArgumentTest {
 ```
 ###### /java/seedu/address/logic/commands/ImportCommandTest.java
 ``` java
+/**
+ * Contains integration and unit tests for {@code ImportCommand}.
+ */
 public class ImportCommandTest {
     private static final String TEST_DATA_FOLDER = Paths.get("src/test/data/ImportCommandTest")
             .toAbsolutePath().toString() + File.separator;
@@ -409,7 +451,6 @@ public class ImportCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    // we can use null as a file path as we will not be using the instance file path
     private AddressBookStorage addressBookStorage = new XmlAddressBookStorage(null);
     private Storage storage = new StorageManager(addressBookStorage, null);
 
@@ -528,11 +569,11 @@ public class SortByNameCommandTest {
     }
 
     /**
-     * Returns a {@code DeleteCommand} with the parameter {@code index}.
+     * Returns a {@code SortByNameCommand}.
      */
     private SortByNameCommand prepareCommand() {
         SortByNameCommand sortCommand = new SortByNameCommand();
-        sortCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
+        sortCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
         return sortCommand;
     }
 }
@@ -540,7 +581,7 @@ public class SortByNameCommandTest {
 ###### /java/seedu/address/logic/commands/DeleteByTagCommandTest.java
 ``` java
 /**
- * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteByTagCommand}.
  */
 public class DeleteByTagCommandTest {
 
@@ -557,9 +598,9 @@ public class DeleteByTagCommandTest {
             deletedPersons.append("\n" + person.toString());
         }
 
-        DeleteCommand deleteCommand = prepareCommand(tagsToDelete);
+        DeleteByTagCommand deleteCommand = prepareCommand(tagsToDelete);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons);
+        String expectedMessage = String.format(DeleteByTagCommand.MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (ReadOnlyPerson person : personsToDelete) {
@@ -585,9 +626,9 @@ public class DeleteByTagCommandTest {
             deletedPersons.append("\n" + person.toString());
         }
 
-        DeleteCommand deleteCommand = prepareCommand(tagsToDelete);
+        DeleteByTagCommand deleteCommand = prepareCommand(tagsToDelete);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons);
+        String expectedMessage = String.format(DeleteByTagCommand.MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (ReadOnlyPerson person : personsToDelete) {
             expectedModel.deletePerson(person);
@@ -600,14 +641,14 @@ public class DeleteByTagCommandTest {
     public void equals() {
         Set<String> firstDeleteTagSet = new HashSet<>(Arrays.asList("friends"));
         Set<String> secondDeleteTagSet = new HashSet<>(Arrays.asList("family"));
-        DeleteCommand deleteFirstCommand = new DeleteByTagCommand(firstDeleteTagSet);
-        DeleteCommand deleteSecondCommand = new DeleteByTagCommand(secondDeleteTagSet);
+        DeleteByTagCommand deleteFirstCommand = new DeleteByTagCommand(firstDeleteTagSet);
+        DeleteByTagCommand deleteSecondCommand = new DeleteByTagCommand(secondDeleteTagSet);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteByTagCommand(firstDeleteTagSet);
+        DeleteByTagCommand deleteFirstCommandCopy = new DeleteByTagCommand(firstDeleteTagSet);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -621,12 +662,12 @@ public class DeleteByTagCommandTest {
     }
 
     /**
-     * Returns a {@code DeleteCommand} with the parameter {@code index}.
+     * Returns a {@code DeleteByTagCommand} with the parameter {@code index}.
      */
-    private DeleteCommand prepareCommand(List<String> tags) {
+    private DeleteByTagCommand prepareCommand(List<String> tags) {
         HashSet<String> tagSet = new HashSet<>(tags);
-        DeleteCommand deleteCommand = new DeleteByTagCommand(tagSet);
-        deleteCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
+        DeleteByTagCommand deleteCommand = new DeleteByTagCommand(tagSet);
+        deleteCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
         return deleteCommand;
     }
 }
@@ -675,16 +716,13 @@ public class SortByRecentCommandTest {
     }
 
     /**
-     * Returns a {@code DeleteCommand} with the parameter {@code index}.
+     * Returns a {@code SortByRecentCommand}.
      */
     private SortByRecentCommand prepareCommand() {
         SortByRecentCommand sortCommand = new SortByRecentCommand();
-        sortCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
+        sortCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
         return sortCommand;
     }
-
-    // TODO(Marvin): Move this to a util file, update to take variable number of persons
-
 }
 ```
 ###### /java/seedu/address/logic/commands/SortByDefaultCommandTest.java
@@ -731,24 +769,26 @@ public class SortByDefaultCommandTest {
     }
 
     /**
-     * Returns a {@code DeleteCommand} with the parameter {@code index}.
+     * Returns a {@code SortByDefaultCommand}.
      */
     private SortByDefaultCommand prepareCommand() {
         SortByDefaultCommand sortCommand = new SortByDefaultCommand();
-        sortCommand.setData(model, getNullStorage(), new CommandHistory(), new UndoRedoStack());
+        sortCommand.setData(model, getDummyStorage(), new CommandHistory(), new UndoRedoStack());
         return sortCommand;
     }
 }
 ```
 ###### /java/seedu/address/logic/commands/ExportCommandTest.java
 ``` java
+/**
+ * Contains integration and unit tests for {@code ExportCommand}.
+ */
 public class ExportCommandTest {
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     private AddressBook addressBook = getTypicalAddressBook();
     private Model model = new ModelManager(addressBook, new UserPrefs());
-    // we can use null as a file path as we will not be using the instance file path
     private AddressBookStorage addressBookStorage = new XmlAddressBookStorage(null);
     private Storage storage = new StorageManager(addressBookStorage, null);
 
@@ -801,9 +841,12 @@ public class ExportCommandTest {
     }
 }
 ```
-###### /java/seedu/address/model/comparator/ComparatorUtilTest.java
+###### /java/seedu/address/model/comparator/PersonComparatorUtilTest.java
 ``` java
-public class ComparatorUtilTest {
+/**
+ * Contains unit tests for {@code PersonComparatorUtil}.
+ */
+public class PersonComparatorUtilTest {
 
     @Test
     public void compareFavorite_sameFavorite_returnZero() {
@@ -906,6 +949,9 @@ public class ComparatorUtilTest {
 ```
 ###### /java/seedu/address/model/person/TagsContainKeywordsPredicateTest.java
 ``` java
+/**
+ * Contains unit tests for {@code TagsContainKeywordsPredicate}.
+ */
 public class TagsContainKeywordsPredicateTest {
 
     @Test
@@ -966,6 +1012,9 @@ public class TagsContainKeywordsPredicateTest {
 ```
 ###### /java/seedu/address/model/person/LastAccessDateTest.java
 ``` java
+/**
+ * Contains unit tests for {@code LastAccessDate}.
+ */
 public class LastAccessDateTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -1027,83 +1076,86 @@ public class LastAccessDateTest {
 ```
 ###### /java/seedu/address/model/social/UniqueSocialInfoListTest.java
 ``` java
+/**
+ * Contains unit tests for {@code UniqueSocialInfoList}.
+ */
 public class UniqueSocialInfoListTest {
-    private static SocialInfo aliceFacebook = new SocialInfo("facebook", "alice", "facebook.com/alice");
-    private static SocialInfo aliceTwitter = new SocialInfo("twitter", "alice", "instagram.com/alice");
-    private static SocialInfo bobFacebook = new SocialInfo("facebook", "bob", "facebook.com/bob");
-    private static SocialInfo bobTwitter = new SocialInfo("twitter", "bob", "instagram.com/bob");
+    private static final SocialInfo ALICE_FACEBOOK = new SocialInfo("facebook", "alice", "facebook.com/alice");
+    private static final SocialInfo ALICE_TWITTER = new SocialInfo("twitter", "alice", "instagram.com/alice");
+    private static final SocialInfo BOB_FACEBOOK = new SocialInfo("facebook", "bob", "facebook.com/bob");
+    private static final SocialInfo BOB_TWITTER = new SocialInfo("twitter", "bob", "instagram.com/bob");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void uniqueSocialInfoList_toSet_success() {
-        UniqueSocialInfoList uniqueSocialInfoList = prepareUniqueSocialInfoList(aliceFacebook, aliceTwitter);
-        HashSet<SocialInfo> expectedSet = new HashSet<>(Arrays.asList(aliceFacebook, aliceTwitter));
+        UniqueSocialInfoList uniqueSocialInfoList = prepareUniqueSocialInfoList(ALICE_FACEBOOK, ALICE_TWITTER);
+        HashSet<SocialInfo> expectedSet = new HashSet<>(Arrays.asList(ALICE_FACEBOOK, ALICE_TWITTER));
         assertEquals(expectedSet, uniqueSocialInfoList.toSet());
     }
 
     @Test
     public void uniqueSocialInfoList_addUnique_success() throws UniqueSocialInfoList.DuplicateSocialTypeException {
-        UniqueSocialInfoList uniqueSocialInfoList = prepareUniqueSocialInfoList(aliceFacebook);
-        uniqueSocialInfoList.add(aliceTwitter);
-        HashSet<SocialInfo> expectedSet = new HashSet<>(Arrays.asList(aliceFacebook, aliceTwitter));
+        UniqueSocialInfoList uniqueSocialInfoList = prepareUniqueSocialInfoList(ALICE_FACEBOOK);
+        uniqueSocialInfoList.add(ALICE_TWITTER);
+        HashSet<SocialInfo> expectedSet = new HashSet<>(Arrays.asList(ALICE_FACEBOOK, ALICE_TWITTER));
         assertEquals(expectedSet, uniqueSocialInfoList.toSet());
     }
 
     @Test
     public void uniqueSocialInfoList_addDuplicateSocialType_throwsDuplicateSocialTypeException()
             throws UniqueSocialInfoList.DuplicateSocialTypeException {
-        UniqueSocialInfoList uniqueSocialInfoList = prepareUniqueSocialInfoList(aliceFacebook);
+        UniqueSocialInfoList uniqueSocialInfoList = prepareUniqueSocialInfoList(ALICE_FACEBOOK);
         thrown.expect(UniqueSocialInfoList.DuplicateSocialTypeException.class);
-        uniqueSocialInfoList.add(bobFacebook);
+        uniqueSocialInfoList.add(BOB_FACEBOOK);
     }
 
     @Test
     public void uniqueSocialInfoList_setSocialInfos_success() {
         // Should work for an empty list
         UniqueSocialInfoList uniqueSocialInfoList = new UniqueSocialInfoList();
-        HashSet<SocialInfo> toSet = new HashSet<>(Arrays.asList(bobFacebook, bobTwitter));
+        HashSet<SocialInfo> toSet = new HashSet<>(Arrays.asList(BOB_FACEBOOK, BOB_TWITTER));
         uniqueSocialInfoList.setSocialInfos(toSet);
         assertEquals(toSet, uniqueSocialInfoList.toSet());
         // Should work for list with existing social infos
-        HashSet<SocialInfo> nextToSet = new HashSet<>(Arrays.asList(aliceFacebook, aliceTwitter));
+        HashSet<SocialInfo> nextToSet = new HashSet<>(Arrays.asList(ALICE_FACEBOOK, ALICE_TWITTER));
         uniqueSocialInfoList.setSocialInfos(nextToSet);
         assertEquals(nextToSet, uniqueSocialInfoList.toSet());
     }
 
     @Test
     public void uniqueSocialInfoList_equals_success() throws UniqueSocialInfoList.DuplicateSocialTypeException {
-        UniqueSocialInfoList aliceList = prepareUniqueSocialInfoList(aliceFacebook, aliceTwitter);
-        UniqueSocialInfoList bobList = prepareUniqueSocialInfoList(bobFacebook, bobTwitter);
+        UniqueSocialInfoList aliceList = prepareUniqueSocialInfoList(ALICE_FACEBOOK, ALICE_TWITTER);
+        UniqueSocialInfoList bobList = prepareUniqueSocialInfoList(BOB_FACEBOOK, BOB_TWITTER);
         assertFalse(aliceList.equals(bobList));
-        UniqueSocialInfoList aliceListCopy = prepareUniqueSocialInfoList(aliceFacebook, aliceTwitter);
+        UniqueSocialInfoList aliceListCopy = prepareUniqueSocialInfoList(ALICE_FACEBOOK, ALICE_TWITTER);
         assertTrue(aliceList.equals(aliceListCopy));
 
         UniqueSocialInfoList aliceListOrdered = new UniqueSocialInfoList();
-        aliceListOrdered.add(aliceFacebook);
-        aliceListOrdered.add(aliceTwitter);
+        aliceListOrdered.add(ALICE_FACEBOOK);
+        aliceListOrdered.add(ALICE_TWITTER);
         UniqueSocialInfoList aliceListReversed = new UniqueSocialInfoList();
-        aliceListReversed.add(aliceTwitter);
-        aliceListReversed.add(aliceFacebook);
+        aliceListReversed.add(ALICE_TWITTER);
+        aliceListReversed.add(ALICE_FACEBOOK);
         assertFalse(aliceListOrdered.equals(aliceListReversed));
     }
 
     @Test
     public void uniqueSocialInfoList_equalsOrderInsensitive_success()
             throws UniqueSocialInfoList.DuplicateSocialTypeException {
-        UniqueSocialInfoList aliceList = prepareUniqueSocialInfoList(aliceFacebook, aliceTwitter);
-        UniqueSocialInfoList bobList = prepareUniqueSocialInfoList(bobFacebook, bobTwitter);
+        UniqueSocialInfoList aliceList = prepareUniqueSocialInfoList(ALICE_FACEBOOK, ALICE_TWITTER);
+        UniqueSocialInfoList bobList = prepareUniqueSocialInfoList(BOB_FACEBOOK, BOB_TWITTER);
         assertFalse(aliceList.equalsOrderInsensitive(bobList));
-        UniqueSocialInfoList aliceListCopy = prepareUniqueSocialInfoList(aliceFacebook, aliceTwitter);
+        UniqueSocialInfoList aliceListCopy = prepareUniqueSocialInfoList(ALICE_FACEBOOK, ALICE_TWITTER);
         assertTrue(aliceList.equalsOrderInsensitive(aliceListCopy));
 
         UniqueSocialInfoList aliceListOrdered = new UniqueSocialInfoList();
-        aliceListOrdered.add(aliceFacebook);
-        aliceListOrdered.add(aliceTwitter);
+        aliceListOrdered.add(ALICE_FACEBOOK);
+        aliceListOrdered.add(ALICE_TWITTER);
         UniqueSocialInfoList aliceListReversed = new UniqueSocialInfoList();
-        aliceListReversed.add(aliceTwitter);
-        aliceListReversed.add(aliceFacebook);
+        aliceListReversed.add(ALICE_TWITTER);
+        aliceListReversed.add(ALICE_FACEBOOK);
         assertTrue(aliceListOrdered.equalsOrderInsensitive(aliceListReversed));
     }
 
@@ -1153,14 +1205,14 @@ public class UniqueSocialInfoListTest {
 ###### /java/seedu/address/testutil/StorageUtil.java
 ``` java
 /**
- * Utility class for storage utilities
+ * Utility class for tests involving {@code Storage}.
  */
 public class StorageUtil {
 
     /**
-     * Returns a null storage for tests where storage does not need to be used
+     * Returns a dummy storage for tests where a real storage does not need to be used
      */
-    public static Storage getNullStorage() {
+    public static Storage getDummyStorage() {
         return new StorageManager(null, null);
     }
 }
@@ -1200,7 +1252,7 @@ public class StorageUtil {
 ###### /java/seedu/address/testutil/modelstubs/ModelStubThrowingDuplicatePersonException.java
 ``` java
 /**
- * A Model stub that always throw a DuplicatePersonException when trying to add a person.
+ * A {@code Model} stub that always throw a {@code DuplicatePersonException} when trying to add a {@code Person}.
  */
 public class ModelStubThrowingDuplicatePersonException extends ModelStub {
     @Override
@@ -1217,7 +1269,7 @@ public class ModelStubThrowingDuplicatePersonException extends ModelStub {
 ###### /java/seedu/address/testutil/modelstubs/ModelStubAcceptingPersonAdded.java
 ``` java
 /**
- * A Model stub that always accept the person being added.
+ * A {@code Model} stub that always accept the {@code Person} being added.
  */
 public class ModelStubAcceptingPersonAdded extends ModelStub {
     public final ArrayList<Person> personsAdded = new ArrayList<>();
@@ -1243,7 +1295,7 @@ public class ModelStubAcceptingPersonAdded extends ModelStub {
 ###### /java/seedu/address/testutil/modelstubs/ModelStub.java
 ``` java
 /**
- * A default model stub that have all of the methods failing.
+ * A default {@code Model} stub that have all of the methods failing.
  */
 public class ModelStub implements Model {
     @Override
@@ -1286,6 +1338,12 @@ public class ModelStub implements Model {
     @Override
     public void selectPerson(ReadOnlyPerson target) throws PersonNotFoundException {
         fail("This method should not be called.");
+    }
+
+    @Override
+    public Index getPersonIndex(ReadOnlyPerson target) throws PersonNotFoundException {
+        fail("This method should not be called.");
+        return null;
     }
 
 ```

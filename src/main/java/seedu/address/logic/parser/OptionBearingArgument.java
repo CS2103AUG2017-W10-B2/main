@@ -20,7 +20,7 @@ public class OptionBearingArgument {
     private String filteredArgs;
 
     /**
-     * Constructs an OptionBearingArgument for the input argument string.
+     * Constructs an OptionBearingArgument for the input {@code String}.
      */
     public OptionBearingArgument(String args) {
         requireNonNull(args);
@@ -30,7 +30,7 @@ public class OptionBearingArgument {
     }
 
     /**
-     * Parses the string to get the list of options, and a filtered argument string with the options removed.
+     * Parses the {@code String} to get the list of options, and a filtered argument string with the options removed.
      */
     private void parse(String args) {
         String[] splitArgs = args.split("\\s+");

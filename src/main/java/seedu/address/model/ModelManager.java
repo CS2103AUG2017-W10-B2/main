@@ -97,8 +97,9 @@ public class ModelManager extends ComponentManager implements Model {
         for (ReadOnlyPerson person : persons) {
             try {
                 addressBook.addPerson(person);
+                logger.info("Added person: " + person);
             } catch (DuplicatePersonException e) {
-                logger.info("Person already in address book: " + person.toString());
+                logger.info("Person already in address book: " + person);
                 continue;
             }
         }
@@ -151,6 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void sortPersons(Comparator<ReadOnlyPerson> comparator) {
+        logger.info("Sorting persons based using: " + comparator.getClass());
         sortedPersons.setComparator(comparator);
         lastSortComparator = comparator;
     }
@@ -164,6 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void indicatePersonAccessed(ReadOnlyPerson target) throws PersonNotFoundException {
+        logger.info("Indicated that " + target + "has been accessed.");
         addressBook.indicatePersonAccessed(target);
     }
 

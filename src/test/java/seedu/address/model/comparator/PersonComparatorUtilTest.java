@@ -19,7 +19,7 @@ import seedu.address.testutil.PersonBuilder;
 
 //@@author marvinchin
 /**
- * Contains unit tests for {@code PersonComparatorUtil}
+ * Contains unit tests for {@code PersonComparatorUtil}.
  */
 public class PersonComparatorUtilTest {
 

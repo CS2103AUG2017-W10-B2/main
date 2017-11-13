@@ -20,7 +20,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     public static final String INVALID_FIND_COMMAND_FORMAT_MESSAGE =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
     /**
-     * Checks that the input {@String} is not empty.
+     * Checks that the input {@code String} is not empty.
      * @throws ParseException if it is empty.
      */
     private void checkArgsNotEmpty(String args) throws ParseException {

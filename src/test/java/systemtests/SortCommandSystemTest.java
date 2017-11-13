@@ -34,7 +34,7 @@ import seedu.address.testutil.PersonBuilder;
 
 //@@author marvinchin
 /**
- * Contains system tests for {@code SortCommand}
+ * Contains system tests for {@code SortCommand}.
  */
 public class SortCommandSystemTest extends AddressBookSystemTest {
 
@@ -123,7 +123,7 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Utility method to get the person at the given index in the model's filtered person list
+     * Utility method to get the {@code Person} at the given index in the model's filtered person list.
      */
     private ReadOnlyPerson getPersonAtIndex(Index index) {
         Model model = getModel();
@@ -131,8 +131,8 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Verifies that the add command succeeds and that the ordering of persons in the model's filtered person list
-     * set by the last sort function still holds true
+     * Verifies that the {@code AddCommand} succeeds and that the ordering of {@code Person}s
+     * in the model's filtered person list set by the last {@code SortCommand} still holds true
      */
     private void assertAddCommandRetainsSortOrder(String command, ReadOnlyPerson toAdd,
             Comparator<ReadOnlyPerson> expectedComparator) throws DuplicatePersonException {
@@ -145,8 +145,8 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Verifies that the edit command succeeds and that the ordering of persons in the model's filtered person list
-     * set by the last sort function still holds true
+     * Verifies that the {@code EditCommand} succeeds and that the ordering of {@code Person}s
+     * in the model's filtered person list set by the last {@code SortCommand} still holds true
      */
     private void assertEditCommandRetainsSortOrder(String command, ReadOnlyPerson target, ReadOnlyPerson editedPerson,
             Comparator<ReadOnlyPerson> expectedComparator) throws DuplicatePersonException, PersonNotFoundException {
@@ -159,8 +159,8 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Verifies that the favorite command succeeds and that the ordering of persons in the model's filtered person list
-     * set by the last sort function still holds true
+     * Verifies that the {@code FavoriteCommand} succeeds and that the ordering of {@code Person}s
+     * in the model's filtered person list set by the last {@code SortCommand} still holds true
      */
     private void assertFavoriteCommandRetainsSortOrder(String command, ReadOnlyPerson toFav,
             Comparator<ReadOnlyPerson> expectedComparator) throws DuplicatePersonException, PersonNotFoundException {
@@ -176,8 +176,8 @@ public class SortCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Verifies that the sort command succeeds and that the ordering of persons in the model's filtered person list is
-     * correctly set by the sort function
+     * Verifies that the {@code SortCommand} succeeds and that the ordering of {@code Person}s
+     * in the model's filtered person list is correctly set.
      */
     private void assertSortCommandSuccess(String command, String expectedResultMessage,
             Comparator<ReadOnlyPerson> expectedComparator) {

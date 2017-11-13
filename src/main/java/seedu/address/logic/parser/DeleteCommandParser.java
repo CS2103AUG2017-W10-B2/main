@@ -22,7 +22,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
 
     /**
-     * Checks that the input {@String} is not empty.
+     * Checks that the input {@code String} is not empty.
      * @throws ParseException if it is empty.
      */
     private void checkArgsNotEmpty(String args) throws ParseException {

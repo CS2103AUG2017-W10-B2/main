@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
 
 //@@author marvinchin
 /**
- * A default model stub that have all of the methods failing.
+ * A default {@code Model} stub that have all of the methods failing.
  */
 public class ModelStub implements Model {
     @Override

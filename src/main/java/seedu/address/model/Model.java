@@ -53,7 +53,7 @@ public interface Model {
     void selectPerson(ReadOnlyPerson target) throws PersonNotFoundException;
 
     /**
-     * Gets the {@code Index} of the {@code target} in the filtered person list.
+     * Returns the {@code Index} of the {@code target} in the filtered person list.
      * @throws PersonNotFoundException if {@code target} could not be found in the list.
      */
     Index getPersonIndex(ReadOnlyPerson target) throws PersonNotFoundException;

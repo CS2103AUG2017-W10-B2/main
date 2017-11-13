@@ -1,5 +1,8 @@
 package seedu.address.logic.parser;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.social.SocialInfo;
 
@@ -8,7 +11,6 @@ import seedu.address.model.social.SocialInfo;
  * Handles mappings of social related identifiers when parsing {@code SocialInfo}.
  */
 public class SocialInfoMapping {
-
     public static final String FACEBOOK_IDENTIFIER = "facebook";
     public static final String INSTAGRAM_IDENTIFIER = "instagram";
     public static final String FACEBOOK_IDENTIFIER_ALIAS = "fb";
@@ -23,6 +25,7 @@ public class SocialInfoMapping {
         + FACEBOOK_IDENTIFIER + "(aliases: " + FACEBOOK_IDENTIFIER_ALIAS + "), "
         + INSTAGRAM_IDENTIFIER + "(aliases: " + INSTAGRAM_IDENTIFIER_ALIAS + ")\n";
 
+    private static final Logger logger = LogsCenter.getLogger(SocialInfoMapping.class);
 
     /**
      * Returns the SocialInfo object represented by the input {@code String}.
@@ -32,6 +35,7 @@ public class SocialInfoMapping {
     public static SocialInfo parseSocialInfo(String rawSocialInfo) throws IllegalValueException {
         String[] splitRawSocialInfo = rawSocialInfo.split(" ", 2);
         if (splitRawSocialInfo.length != 2) {
+            logger.warning("Incorrect number of parts: " + rawSocialInfo);
             throw new IllegalValueException(INVALID_SYNTAX_EXCEPTION_MESSAGE);
         }
 
@@ -40,6 +44,7 @@ public class SocialInfoMapping {
         } else if (isInstagramInfo(splitRawSocialInfo)) {
             return buildInstagramInfo(splitRawSocialInfo);
         } else {
+            logger.warning("Unrecognised social type: " + rawSocialInfo);
             throw new IllegalValueException(UNRECOGNIZED_SOCIAL_TYPE_MESSAGE);
         }
 

@@ -7,7 +7,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 //@@author marvinchin
 /**
- * Parses input arguments and creates a new ExportCommand object.
+ * Parses input arguments and creates a new {@code ExportCommand}.
  */
 public class ExportCommandParser implements Parser {
 

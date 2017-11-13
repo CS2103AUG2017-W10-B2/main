@@ -184,7 +184,7 @@ Example:
 ==== Adding a person: `add`
 
 Adds a person to the address book. +
-Format: `add n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]... e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]... [s/SOCIAL_PLATFORM USERNAME]...` +
+Command format: `add n/NAME p/PHONE_NUMBER [p/ADDITIONAL_PHONE_NUMBERS]... e/EMAIL a/ADDRESS [f/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]... [s/SOCIAL_PLATFORM USERNAME]...` +
 Alias: `a`
 
 ****
@@ -212,7 +212,7 @@ address `Kent Ridge Drive 23`, tag `husband`, a `Facebook` account with the user
 ==== Editing a person: `edit`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE]... [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]... [s/SOCIAL_PLATFORM USERNAME]...` +
+Command format: `edit INDEX [n/NAME] [p/PHONE]... [e/EMAIL] [a/ADDRESS] [f/ OR uf/] [dp/DISPLAY_PHOTO_FILE_PATH] [t/TAG]... [s/SOCIAL_PLATFORM USERNAME]...` +
 Alias: `e`
 
 ****
@@ -243,7 +243,7 @@ Edits the name of the 3rd person to be `Betsy Crower`, removes existing display 
 ==== Favoriting a person [Since v1.2]: `fav`
 
 Labels the specified person(s) as a favorite contact. +
-Format: `fav INDEX [ADDITIONAL INDEXES]`
+Command format: `fav INDEX [ADDITIONAL INDEXES]`
 
 ****
 * Adds the person(s) as a favorite contact at the specified `INDEX` or `INDEXES`.
@@ -262,7 +262,7 @@ Favorites the first person in the list of contacts with the name `Betsy`.
 ==== Unfavoriting a person [Since v1.2]: `unfav`
 
 Removes the the `favorite` label from the specified person(s). +
-Format: `unfav INDEX [ADDITIONAL INDEXES]`
+Command format: `unfav INDEX [ADDITIONAL INDEXES]`
 
 ****
 * Removes the person(s) from the list of favorite contacts at the specified `INDEX` or `INDEXES`.
@@ -282,7 +282,7 @@ Unfavorites the first person in the list of contacts with the name `Betsy`.
 ==== Deleting a person: `delete`
 
 Deletes the specified person(s) from the address book. +
-Format: `delete [OPTION] KEYWORD [MORE_KEYWORDS]...` +
+Command format: `delete [OPTION] KEYWORD [MORE_KEYWORDS]...` +
 Alias: `d`
 
 [NOTE]
@@ -298,7 +298,7 @@ Deletes persons that have the input tags.
 // tag::deletebyindex[]
 ===== Deleting persons by index (default):
 Deletes person(s) specified by their indexes in the last displayed list.
-Format: `delete INDEX [ADDITIONAL_INDEXES]...`
+Command format: `delete INDEX [ADDITIONAL_INDEXES]...`
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -317,10 +317,13 @@ Deletes the 2nd and 3rd persons in the address book.
 Deletes the 1st person in the results of the `find` command.
 // end::deletebyindex[]
 
+.Deleted person at first index i.e. Alex Yeoh
+image::delete-by-index-command-result.png[width="800"]
+
 ===== Deleting persons by tag [Since v1.4]:
 
 Deletes person(s) that have a the input tags. +
-Format: `delete -tag TAG [ADDITIONAL_TAGS]...`
+Command format: `delete -tag TAG [ADDITIONAL_TAGS]...`
 
 [NOTE]
 All contacts with the input tag will be deleted.
@@ -336,8 +339,10 @@ Deletes all persons with the tags `school` or `work`
 ==== Clearing all entries: `clear`
 
 Clears all entries from the address book. +
-Format: `clear`
+Command format: `clear`
 
+.Cleared all entries
+image::clear-command-result.png[width="350"]
 
 === Navigating KayPoh!
 

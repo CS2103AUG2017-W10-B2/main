@@ -7,7 +7,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 //@@author marvinchin
 /**
- * A Model stub that always throw a DuplicatePersonException when trying to add a person.
+ * A {@code Model} stub that always throw a {@code DuplicatePersonException} when trying to add a {@code Person}.
  */
 public class ModelStubThrowingDuplicatePersonException extends ModelStub {
     @Override

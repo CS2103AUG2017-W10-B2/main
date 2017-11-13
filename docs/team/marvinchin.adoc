@@ -39,6 +39,14 @@ include::../DeveloperGuide.adoc[tag=sort]
 
 ---
 
+==== Testing
+
+* System tests for `sort` commands
+* Unit and integration tests for `SortByDefaultCommand`, `SortByNameCommand`, and `SortByRecentCommand`
+* Unit tests for `PersonDefaultComparator`, `PersonNameComparator` and `PersonRecentComparator`
+
+---
+
 === Enhancement Added: Introducing Options to Command Syntax
 
 ==== External behavior
@@ -68,6 +76,12 @@ include::../DeveloperGuide.adoc[tag=command-syntax]
 
 ---
 
+==== Testing
+
+* Unit tests for `OptionBearingArgument`
+
+---
+
 === Enhancement Added: Adding Social Media Info to Person Model
 
 ==== External behavior
@@ -88,8 +102,8 @@ include::../UserGuide.adoc[tag=representing-social-media-accounts]
 
 ==== Justification
 
-Updated command syntax allows multiple similar commands to share a single `COMMAND_WORD` while providing
-a consistent and intuitive way for the user to specify which functionality of the `COMMAND` is to be executed.
+Storing information of contacts' social media accounts are core to the stalking functionality of KayPoh!. This enhancement
+paves the way for other enhancements which makes use of information about contacts' social media accounts.
 
 ==== Implementation
 
@@ -99,6 +113,13 @@ a consistent and intuitive way for the user to specify which functionality of th
 include::../DeveloperGuide.adoc[tag=social-media-accounts]
 
 #End of Extract#
+
+---
+
+==== Testing
+
+* Unit tests for `UniqueSocialInfoList`
+* Updated existing `AddCommandTest` and `EditCommandTest` to handle changes to the `Person` model.
 
 ---
 
@@ -119,6 +140,11 @@ include::../UserGuide.adoc[tag=find-by-tag]
 
 Allowing the user to search for contacts by tag allows the user to easily find related contacts.
 
+==== Testing
+
+* Unit tests for `TagsContainKeywordsPredicate`
+
+---
 
 === Enhancement Added: Deleting by Tags
 
@@ -139,8 +165,14 @@ Deleting by tags make it easy for the user to delete contacts that were added fo
 
 ---
 
+==== Testing
+
+* Unit and integration tests for `DeleteByTagCommand` and `DeleteByIndexCommand`
+
+---
+
 === Other contributions
 
 * Set up Travis and Codacy for the project
 * Reported bugs in other group's projects [https://github.com/CS2103AUG2017-W09-B1/main/issues?utf8=✓&q=is%3Aissue%20involves%3Amarvinchin[Issues reported in W09-B1's UniFy]]
-* Helped resolve issues faced by other classmates [https://github.com/nus-cs2103-AY1718S1/forum/issues?utf8=✓&q=is%3Aissue%20involves%3Amarvinchin[Contributions to forum]][https://nus-cs2103.slack.com/archives/C6JMW6SSZ/p1508508497000291?thread_ts=1508476015.000144&cid=C6JMW6SSZ[Contributions to queries on Slack]]
+* Helped resolve issues faced by other classmates [https://github.com/nus-cs2103-AY1718S1/forum/issues?utf8=✓&q=is%3Aissue%20involves%3Amarvinchin[Contributions to forum]][https://nus-cs2103.slack.com/archives/C6JMW6SSZ/p1508508497000291?thread_ts=1508476015.000144&cid=C6JMW6SSZ[Contributions on Slack]]

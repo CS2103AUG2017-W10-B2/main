@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
@@ -32,6 +34,8 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_EXPORT_CONTACTS_SUCCESS = "Contacts exported to: %1$s";
     public static final String MESSAGE_EXPORT_CONTACTS_FAILURE = "Unable to export contacts to: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(ExportCommand.class);
+
     private final Path exportFilePath;
 
     public ExportCommand(String filePath) {
@@ -46,6 +50,7 @@ public class ExportCommand extends Command {
         try {
             storage.saveAddressBook(exportAddressBook, absoluteExportFilePathString);
         } catch (IOException ioe) {
+            logger.warning("Error writing to file at: " + absoluteExportFilePathString);
             throw new CommandException(String.format(MESSAGE_EXPORT_CONTACTS_FAILURE, absoluteExportFilePathString));
         }
         return new CommandResult(String.format(MESSAGE_EXPORT_CONTACTS_SUCCESS, absoluteExportFilePathString));

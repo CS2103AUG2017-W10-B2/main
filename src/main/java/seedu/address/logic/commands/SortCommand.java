@@ -6,7 +6,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 
 //@@author marvinchin
 /**
- * Sorts the displayed person list
+ * Sorts the displayed person list.
  */
 public abstract class SortCommand extends Command {
 
@@ -32,7 +32,7 @@ public abstract class SortCommand extends Command {
     }
 
     /**
-     * Gets the comparator that defines the ordering in the person list
+     * Gets the comparator that defines the ordering in the person list.
      */
     protected abstract Comparator<ReadOnlyPerson> getComparator();
 }

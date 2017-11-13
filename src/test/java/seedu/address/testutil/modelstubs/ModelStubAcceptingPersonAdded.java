@@ -11,7 +11,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 //@@author marvinchin
 /**
- * A Model stub that always accept the person being added.
+ * A {@code Model} stub that always accept the {@code Person} being added.
  */
 public class ModelStubAcceptingPersonAdded extends ModelStub {
     public final ArrayList<Person> personsAdded = new ArrayList<>();

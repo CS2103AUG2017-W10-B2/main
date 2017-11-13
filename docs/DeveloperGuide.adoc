@@ -492,7 +492,7 @@ image::facebook_post_sequence_diagram.png[width="800"]
 // tag::social-media-accounts[]
 === Social Media Accounts
 
-Information about contact's social media accounts are encapsulated by the `SocialInfo` class. The list of `SocialInfo` associated
+Information about contact's social media accounts are encapsulated by the `SocialInfo` class. The list of `SocialInfos` associated
 with a `Person` is handled by the `UniqueSocialInfoList`, which guarantees that at most one of each type of social media type is
 associated with the contact.
 
@@ -503,10 +503,11 @@ image::SocialInfoClassDiagram.png[width="800"]
 
 ==== Parsing inputs representing social media accounts
 
-The form `SOCIAL_TYPE_IDENTIFIER USERNAME` is used to represent a `SocialInfo` as a CLI parametr for a command,
-A Collection of these raw social info parameters can then be passed to the `parseSocialInfo` method in the `SocialInfoMapping` class for parsing.
+The form `SOCIAL_TYPE_IDENTIFIER USERNAME` is used to represent a `SocialInfo` as a parameter in a CLI command.
+The `SocialInfoMapping` class handles the mapping between the input `SOCIAL_TYPE_IDENTIFER` and the url format of the associated social media platform.
+A `Collection` of these raw social info parameters can be passed to the `parseSocialInfo` method in the `SocialInfoMapping` class for parsing.
 
-The following sequence diagram shows how the `parseSocialInfo` method handles the parsing of the raw social info parameters:
+The following sequence diagram shows how input `rawSocialInfos` are parsed to obtain the appropriate `SocialInfos`:
 
 .Sequence diagram detailing how inputs are parsed to form SocialInfos
 image::ParseSocialInfoSequenceDiagram.png[width="800"]
@@ -573,7 +574,8 @@ which classes designed for each social platform will extend. +
 **Cons:** Difficult to handle marshalling/unmarshalling to XML format using the JAXB library.
 Adds significant complexity to the codebase when number of supported platforms grow. +
 **Additional Info:** An assessment of the major social media platforms shows that the username is sufficient to identify
-users on all the major platforms at present.
+users on all the major platforms at present. The first alternative was thus selected to ensure complexity of the codebase
+remains manageable as support for more social media platforms is added.
 
 ---
 
@@ -594,6 +596,7 @@ alternative was selected to provide a more pleasant user experience.
 // end::social-media-accounts[]
 
 // tag::command-syntax[]
+[[command-options]]
 === Command Options
 
 As some functionalities have similar behaviours, we group them under a single `COMMAND_WORD` and allow the user to include
@@ -650,7 +653,7 @@ There are several ways to toggle this `boolean` to change the favorite status of
 For user's convenience, we are allowing just the input of prefixes i.e. `f/` in `add` command and either `f/` or `uf/` in `edit` command to make a change to a contact's favorite status.
 
 As such, at `Parser` level in both `AddCommandParser` and `EditCommandParser`, we simply need to know whether the prefixes are present in the user input. Prefixes in user input can be found in `ArgumentMultimap argMultimap`. Hence, we can utilise the following helper-method by passing in `PREFIX_FAV` or `PREFIX_UNFAV` to return true if the prefix is contained within the user input, false otherwise:
-[usage,java]
+[source,java]
 ----
 public boolean isPrefixPresent(Prefix prefix) {
     return argMultimap.containsKey(prefix);
@@ -658,7 +661,7 @@ public boolean isPrefixPresent(Prefix prefix) {
 ----
 
 The helper-method above is called within a common method `parseFavorite` (shown below), used by both `AddCommandParser` and `EditCommandParser` classes. The difference in utilisation of the following method by both classes is in the parameters that are passed in. As `AddCommandParser` only needs to check whether `PREFIX_FAV` exists, it will pass in `parseFavorite(argMultimap, PREFIX_FAV, null)` while `EditCommandParser` will pass in `parseFavorite(argMultimap, PREFIX_FAV, PREFIX_UNFAV)` to check for both prefixes.
-[usage,java]
+[source,java]
 ----
 public static Optional<Favorite> parseFavorite(ArgumentMultimap argMultimap,
                                      Prefix prefixFav,
@@ -668,7 +671,7 @@ public static Optional<Favorite> parseFavorite(ArgumentMultimap argMultimap,
 ----
 
 For editing person, after obtaining the presence of prefix in user input, we need to perform some input validation by disallowing both `f/` and `uf/` prefixes to be present at the same time. We can check this by using the he:
-[usage,java]
+[source,java]
 ----
     // Disallow both f/ and uf/ to be present in the same instance of user input when editing
     if (argMultimap.isPrefixPresent(prefixFav) && argMultimap.isPrefixPresent(prefixUnFav)) {
@@ -678,7 +681,7 @@ For editing person, after obtaining the presence of prefix in user input, we nee
 ----
 
 For both adding and editing person, there is a similar validation for disallowing text after prefix e.g. `f/this is a text`. This is achieved by checking whether the any additional `String` exists after prefix.
-[usage,java]
+[source,java]
 ----
     if (argMultimap.isPrefixPresent(prefixFav)) {
         if (!argMultimap.getValue(prefixFav).get().isEmpty()) { // Disallow text after prefix
@@ -694,7 +697,7 @@ For both adding and editing person, there is a similar validation for disallowin
 To enhance contact management, we implemented these commands to perform batch favoriting or unfavoriting of multiple contacts. They are also capable of performing the operations on a single contact. The implementation involves two major steps.
 
 The first step to doing so is to allow parsing of multiple indexes so that a user could specify which contacts they would like to favorite or unfavorite i.e. `fav 1 2 3`. In this case, we use `List` to parse and store every index.
-[usage,java]
+[source,java]
 ----
 public static List<Index> parseMultipleIndexes(String args) throws IllegalValueException {
     List<String> argsList = Arrays.asList(args.trim().split("\\s+"));
@@ -708,7 +711,7 @@ public static List<Index> parseMultipleIndexes(String args) throws IllegalValueE
 Note that trimming `args.trim()` is required since the args passed will usually contain a leading whitespace. The regex `args.trim().split("\\s+")` is used as a form of validation to ignore multiple trailing whitespaces and still allowing such user input to be parsed, preventing an `exception`.
 
 The last step is to create a copy of the person we are favoriting or unfavoriting and change its favorite status via the aforementioned `boolean`. Since the `Person` class takes two constructors, the following constructor allows creating a copy of a given `ReadOnlyPerson`.
-[usage,java]
+[source,java]
 ----
 public Person(ReadOnlyPerson source) {
     // ... create copy of all fields ...
@@ -750,16 +753,40 @@ The above relationship is represented by the following class diagram:
 .Class diagram representing the Observer pattern used to keep contacts in sorted order
 image::SortObserverClassDiagram.png[width="800"]
 
+KayPoh! allows the user to sort the person list in several ways. To prevent the user from having to remember a separate
+`COMMAND_WORD` for each of these sort commands, we allow these sort commands to share a single `COMMAND_WORD` by having them
+inherit from an abstract `SortCommand` class, and introducing <<command-options, Command Options>> to allow the user to specify the sorting order
+to be used instead.
+
+.Class diagram representing how the `sort` commands are implemented
+image::SortCommandClassDiagram.png[width="800"]
+
+Each class that inherits from the `SortCommand` would then implement the `getComparator` method, which returns a
+`Comparator<ReadOnlyPerson>` to be used by the parent `SortCommand` to define the ordering for the `SortedList`.
+
 ==== Design Considerations
 **Aspect:** Where sorting should be handled +
 **Alternative 1 (current choice):** Handle sorts at the `ModelManager` level using the Observer pattern +
-**Pros:** Sorting does not require IO operations, which are computationally more expensive compared to in-memory operations. +
+**Pros:** Sorting is performed on an in-memory list decoupled from the data file, and hence does not require IO operations which are
+computationally more expensive compared to in-memory operations. +
 **Cons:** Slightly longer startup time might be observed as the data file is not sorted and hence has to be sorted upon every startup. +
 **Alternative 2:** Handle sorts at the `AddressBook` level by sorting the `personList` directly +
 **Pros:** Startup might be faster as the data file should have already been sorted. Also reduces complexity of the `Model`
 as there is no need to maintain any additional data structures. +
-**Cons:** Every sort operation will require writing to the data file, which requires IO operations that are slower compared
+**Cons:** As the `personList` is supposed to mirror the data file, every sort operation will involve updating the data file
+in order to keep it in sync with the `personList`. This requires IO operations that are slower compared
 to in-memory operations.
+
+---
+
+**Aspect:** How to implement different `sort` commands +
+**Alternative 1 (current choice):** Have an abstract `SortCommand` class with an abstract `getComparator` function to
+allow the inheriting classes to define the `Comparator<ReadOnlyPerson>` to be used to sort the displayed person list. +
+**Pros:** Significantly reduces code duplication, and makes introducing new `sort` commands easy. +
+**Cons:** Assumes that all `sort` commands will have similar behavior, differing only in the `Comparator` used for sorting. +
+**Alternative 2:**  Have separate commands for each `sort` command. +
+**Pros:** More flexibility in how each `sort` command is implemented should requirements change in the future. +
+**Cons:** If `sort` commands have similar behavior, then there will be significant amounts of code duplication. +
 // end::sort[]
 
 === Logging

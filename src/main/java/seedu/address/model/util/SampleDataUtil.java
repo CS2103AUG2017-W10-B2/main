@@ -29,7 +29,7 @@ public class SampleDataUtil {
                     new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
                     new Favorite(true),
-                    new DisplayPhoto(DisplayPhoto.SAMPLE_PHOTO_ALEX),
+                    new DisplayPhoto(DisplayPhoto.SAMPLE_PHOTO),
                     getTagSet("friends"),
                     getSocialInfoSet(
                             new SocialInfo("facebook", "alex", "https://facebook.com/alex")));

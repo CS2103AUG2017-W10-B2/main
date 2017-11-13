@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
@@ -30,6 +32,8 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_IMPORT_CONTACTS_IO_FAILURE = "Unable to import contacts from: %1$s";
     public static final String MESSAGE_IMPORT_CONTACTS_FNF_FAILURE = "File at %1$s not found";
 
+    private static final Logger logger = LogsCenter.getLogger(ImportCommand.class);
+
     private final Path importFilePath;
 
     public ImportCommand(String filePath) {
@@ -44,9 +48,11 @@ public class ImportCommand extends Command {
         try {
             optionalImportedAddressBook = storage.readAddressBook(absoluteImportFilePathString);
         } catch (DataConversionException dce) {
+            logger.warning("Error converting file at: " + absoluteImportFilePathString);
             throw new CommandException(
                     String.format(MESSAGE_IMPORT_CONTACTS_DCE_FAILURE, absoluteImportFilePathString));
         } catch (IOException ioe) {
+            logger.warning("Error reading file at: " + absoluteImportFilePathString);
             throw new CommandException(
                     String.format(MESSAGE_IMPORT_CONTACTS_IO_FAILURE, absoluteImportFilePathString));
         }
