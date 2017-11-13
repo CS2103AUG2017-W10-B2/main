@@ -36,9 +36,9 @@ It is written in Java and has about 14k LoC.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sorting-the-displayed-list-since-v1-4-code-sort-code"><a class="link" href="#sorting-the-displayed-list-since-v1-4-code-sort-code">Sorting the displayed list [Since v1.4]: <code>sort</code></a></h4>
+<h4 id="sorting-the-contacts-list-since-v1-4-code-sort-code"><a class="link" href="#sorting-the-contacts-list-since-v1-4-code-sort-code">Sorting the Contacts List [Since v1.4]: <code>sort</code></a></h4>
 <div class="paragraph">
-<p>To sort the person list, use the <code>sort</code> command.</p>
+<p>To sort your contacts list, use the <code>sort</code> command.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -72,27 +72,27 @@ It is written in Java and has about 14k LoC.</p>
 <p>The default sort orders contacts first by their <code>favorite</code> status, then by their <code>name</code> in lexicographic order.</p>
 </li>
 <li>
-<p>Sorting with the <code class="blue">name</code> option orders contacts by their <code>name</code> in lexicographic order.</p>
+<p>Sorting with the <code>name</code> option orders contacts by their <code>name</code> in lexicographic order.</p>
 </li>
 <li>
-<p>Sorting with the <code class="blue">recent</code> option orders contacts by when they were last added, updated, or stalked.</p>
+<p>Sorting with the <code>recent</code> option orders contacts by when they were last added, updated, or selected.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The person list should be sorted based on the specified option after executing the command.</p>
+<p>The contacts list should be sorted based on the specified option after executing the command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/sort-command-default-result.png" alt="sort command default result" width="300">
 </div>
-<div class="title">Figure 1. Person list after executing a default sort</div>
+<div class="title">Figure 1. contacts list after executing a default sort</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/sort-command-name-result.png" alt="sort command name result" width="300">
 </div>
-<div class="title">Figure 2. Person list after executing a sort by <code>name</code></div>
+<div class="title">Figure 2. contacts list after executing a sort by <code>name</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Examples</strong>:</p>
@@ -230,7 +230,7 @@ allow the inheriting classes to define the <code>Comparator&lt;ReadOnlyPerson&gt
 </div>
 </div>
 <div class="sect2">
-<h3 id="breaking-down-the-command-syntax"><a class="link" href="#breaking-down-the-command-syntax">Breaking down the command syntax</a></h3>
+<h3 id="breaking-down-the-command-syntax"><a class="link" href="#breaking-down-the-command-syntax">Breaking Down the Command Syntax</a></h3>
 <div class="paragraph">
 <p>Commands have the following format: <code><span class="red">COMMAND_WORD</span> <span class="blue">-OPTION</span> <span class="green">PARAMETERS</span></code><br></p>
 </div>
@@ -604,9 +604,9 @@ alternative was selected to provide a more pleasant user experience.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="find-by-tag"><a class="link" href="#find-by-tag">Finding persons: <code>find</code></a></h4>
+<h4 id="find-by-tag"><a class="link" href="#find-by-tag">Finding Persons: <code>find</code></a></h4>
 <div class="paragraph">
-<p>To find contacts by some criteria, use the <code>find</code> command.</p>
+<p>Finding the person you&#8217;re looking for doesn&#8217;t have to be slow and tedious. With KayPoh, you can simply use the <code>find</code> command!</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -633,13 +633,13 @@ alternative was selected to provide a more pleasant user experience.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Contacts that match <strong>any</strong> of the provided <code class="green">KEYWORDS</code> will be displayed in the person list.</p>
+<p>Contacts that match <strong>any</strong> of the provided <code>KEYWORDS</code> will be displayed in the contacts list.</p>
 </li>
 <li>
 <p>The search is case insensitive. e.g <code>john</code> will match <code>John</code>.</p>
 </li>
 <li>
-<p>The order of the <code class="green">KEYWORDS</code> does not matter. e.g. <code>John Doe</code> will match <code>Doe John</code>.</p>
+<p>The order of the <code>KEYWORDS</code> does not matter. e.g. <code>John Doe</code> will match <code>Doe John</code>.</p>
 </li>
 <li>
 <p>Only full words will be matched e.g. <code>Jo</code> will not match <code>John</code>.</p>
@@ -647,13 +647,13 @@ alternative was selected to provide a more pleasant user experience.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>You should see the persons that meet the provided criteria displayed in the person list after executing the command.</p>
+<p>You should see the persons that meet the provided criteria displayed in the contacts list after executing the command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/find-command-result.png" alt="find command result" width="300">
 </div>
-<div class="title">Figure 7. Person list after finding contacts with the tag <code>friends</code></div>
+<div class="title">Figure 7. Contacts list after finding contacts with the tag <code>friends</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Examples</strong>:</p>
@@ -662,15 +662,15 @@ alternative was selected to provide a more pleasant user experience.</p>
 <ul>
 <li>
 <p><code><span class="red">find</span> <span class="green">John</span></code><br>
-Displays persons with the names <code>john</code> and <code>John Doe</code> in the person list.</p>
+Displays persons with the names <code>john</code> and <code>John Doe</code> in the contacts list.</p>
 </li>
 <li>
 <p><code><span class="red">find</span> <span class="green">Betsy Tim John</span></code><br>
-Displays persons with names <code>Betsy</code>, <code>Tim</code>, or <code>John</code> in the person list.</p>
+Displays persons with names <code>Betsy</code>, <code>Tim</code>, or <code>John</code> in the contacts list.</p>
 </li>
 <li>
 <p><code><span class="red">find</span> <span class="blue">-tag</span> <span class="green">friends colleagues</span></code><br>
-Displays persons with tags <code>friends</code> or <code>colleagues</code> in the person list.</p>
+Displays persons with tags <code>friends</code> or <code>colleagues</code> in the contacts list.</p>
 </li>
 </ul>
 </div>
@@ -750,7 +750,7 @@ Displays persons with tags <code>friends</code> or <code>colleagues</code> in th
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:51:21 +00:00
+Last updated 2017-11-13 12:15:27 +00:00
 </div>
 </div>
 </body>

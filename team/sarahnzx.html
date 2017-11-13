@@ -34,9 +34,9 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">Deleting a person: <code>delete</code></a></h4>
+<h4 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">Deleting a Person: <code>delete</code></a></h4>
 <div class="paragraph">
-<p>To delete person(s) from KayPoh, use the <code>delete</code> command.</p>
+<p>Not interested in a contact anymore? Remove him from KayPoh using the <code>delete</code> command!</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -46,31 +46,20 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Deleting persons by <code><span class="green">INDEX</span></code> (default): <code><span class="red">delete</span> <span class="green">INDEX [ADDITIONAL_INDEXES]&#8230;&#8203;</span></code></p>
+<p>Deleting persons by index: <code><span class="red">delete</span> <span class="green">INDEX [ADDITIONAL_INDEXES]&#8230;&#8203;</span></code></p>
 </li>
 <li>
-<p>Deleting persons by <code><span class="blue">tag</span></code> [Since v1.4]: <code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">TAG [ADDITIONAL_TAGS]&#8230;&#8203;</span></code></p>
+<p>Deleting persons by tag [Since v1.4]: <code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">TAG [ADDITIONAL_TAGS]&#8230;&#8203;</span></code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Alias</strong>: <code>d</code></p>
+<p><strong>Alias</strong>: <code><span class="red">d</span></code></p>
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-All contacts with the input tag will be deleted.
-Make sure that none of the contacts that you do not intend to delete have the input tag.
-You can use the <a href="#find-by-tag">find command</a> to view all contacts that have the tag.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Persons in the contacts list identified by the keyword will be deleted from KayPoh.</p>
 </div>
 <div class="paragraph">
 <p><strong>Examples</strong>:</p>
@@ -80,7 +69,7 @@ You can use the <a href="#find-by-tag">find command</a> to view all contacts tha
 <li>
 <p><code><span class="red">list</span></code><br>
 <code><span class="red">delete</span> <span class="green">3 4</span></code><br>
-Deletes the third and fourth persons in KayPoh.</p>
+Deletes the third and fourth persons in the contacts list containing all contacts in KayPoh.</p>
 </li>
 </ul>
 </div>
@@ -88,14 +77,14 @@ Deletes the third and fourth persons in KayPoh.</p>
 <div class="content">
 <img src="../images/delete-multiple-command-result.png" alt="delete multiple command result" width="1000">
 </div>
-<div class="title">Figure 1. Deleted persons at third and fourth index</div>
+<div class="title">Figure 1. Third and fourth person in the contacts deleted</div>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code><span class="red">find</span> <span class="green">Bernice</span></code><br>
 <code><span class="red">delete</span> <span class="green">1</span></code><br>
-Deletes the 1st person in the list of contacts with the name <code>Bernice</code>.</p>
+Deletes the first person in the contacts list containing all contacts with the name <code>Bernice</code>.</p>
 </li>
 </ul>
 </div>
@@ -103,27 +92,13 @@ Deletes the 1st person in the list of contacts with the name <code>Bernice</code
 <div class="content">
 <img src="../images/delete-after-find-command-result.png" alt="delete after find command result" width="1000">
 </div>
-<div class="title">Figure 2. Deleted person at first index i.e. Bernice Yu</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">friends</span></code><br>
-Deletes all persons with the tag <code>friends</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete-by-tag-command-result.png" alt="delete by tag command result" width="700">
-</div>
-<div class="title">Figure 3. Deleted all persons with the "friends" tag</div>
+<div class="title">Figure 2. First person with the name Bernice deleted</div>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code><span class="red">delete</span> <span class="blue">-tag</span> <span class="green">colleagues neighbours</span></code><br>
-Deletes all persons with the tags <code>colleagues</code> or <code>neighbours</code></p>
+Deletes all persons in the contacts list with the tags <code>colleagues</code> or <code>neighbours</code></p>
 </li>
 </ul>
 </div>
@@ -131,7 +106,7 @@ Deletes all persons with the tags <code>colleagues</code> or <code>neighbours</c
 <div class="content">
 <img src="../images/delete-by-multiple-tags-command-result.png" alt="delete by multiple tags command result" width="700">
 </div>
-<div class="title">Figure 4. Deleted all persons with the "colleagues" and "neighbours" tags</div>
+<div class="title">Figure 3. Persons in the contacts list with the "colleagues" and "neighbours" tags</div>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 1. Common Mistakes</caption>
@@ -149,7 +124,7 @@ Deletes all persons with the tags <code>colleagues</code> or <code>neighbours</c
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
 e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the person list</strong>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the contacts list</strong>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -183,9 +158,9 @@ e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a person: <code>add</code></a></h4>
+<h4 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a Person: <code>add</code></a></h4>
 <div class="paragraph">
-<p>To add a person to KayPoh, use the <code>add</code> command.</p>
+<p>Met a new friend? Add him to KayPoh using the the <code>add</code> command!</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -197,6 +172,9 @@ e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
 <p><strong>Alias</strong>: <code><span class="red">a</span></code></p>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>You should see the person represented by the parameters added to the contacts list after executing the command.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -211,7 +189,7 @@ e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
 <div class="ulist">
 <ul>
 <li>
-<p>Have at least one phone number, but possibly more phone numbers [Since v1.2]</p>
+<p>Have mulitple phone numbers, but must have at least one [Since v1.2]</p>
 </li>
 <li>
 <p>Have any number (including zero) of tags</p>
@@ -239,9 +217,6 @@ e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
 </table>
 </div>
 <div class="paragraph">
-<p>You should see the person represented by the parameters added to the contacts list after executing the command.</p>
-</div>
-<div class="paragraph">
 <p><strong>Examples</strong>:</p>
 </div>
 <div class="ulist">
@@ -259,7 +234,7 @@ address <code>a/497 Jacob Mare Street, #01-01</code>.</p>
 <div class="content">
 <img src="../images/add-example-1-command-result.png" alt="add example 1 command result" width="700">
 </div>
-<div class="title">Figure 5. Added a contact with name, phone number, email address and address specified</div>
+<div class="title">Figure 4. Added a contact with name, phone number, email address and address specified</div>
 </div>
 <div class="ulist">
 <ul>
@@ -276,7 +251,7 @@ address <code>William Hill Drive 180</code>, tag <code>husband</code>, a <code>F
 <div class="content">
 <img src="../images/add-example-2-command-result.png" alt="add example 2 command result" width="700">
 </div>
-<div class="title">Figure 6. Added a contact with name, two phone numbers, email address, address, tag, social media account (Facebook) and display photo specified</div>
+<div class="title">Figure 5. Added a contact with name, two phone numbers, email address, address, tag, social media account (Facebook) and display photo specified</div>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 2. Common Mistakes</caption>
@@ -292,19 +267,19 @@ address <code>William Hill Drive 180</code>, tag <code>husband</code>, a <code>F
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exclude required parameters in the command<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command excludes required parameters.<br>
 e.g. <code>add n/Michael Van Gerwen</code> is missing the required <code>PHONE_NUMBER</code>, <code>ADDRESS</code> and <code>EMAIL</code> parameters.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that all required parameters as specified in the command format have been added.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Input invalid parameters in the command<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input invalid parameters in the command.<br></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that all required parameters are valid as specified in the <a href="#representing-persons">Representing Persons</a> section.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">Editing a person: <code>edit</code></a></h4>
+<h4 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">Editing a Person: <code>edit</code></a></h4>
 <div class="paragraph">
 <p>To edit an existing person in KayPoh, use the <code>edit</code> command.</p>
 </div>
@@ -319,6 +294,16 @@ e.g. <code>add n/Michael Van Gerwen</code> is missing the required <code>PHONE_N
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>You should see the attributes of the person at the specified <code>INDEX</code> in the contacts list updated according to the input parameters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -358,6 +343,10 @@ e.g. <code>add n/Michael Van Gerwen</code> is missing the required <code>PHONE_N
 </li>
 </ul>
 </div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p><strong>Examples</strong>:</p>
 </div>
@@ -375,7 +364,7 @@ e.g. <code>add n/Michael Van Gerwen</code> is missing the required <code>PHONE_N
 <div class="content">
 <img src="../images/edit-example-1-command-result.png" alt="edit example 1 command result" width="700">
 </div>
-<div class="title">Figure 7. Edited the phone number and email address of the first person in the contacts list</div>
+<div class="title">Figure 6. Edited the phone number and email address of the first person in the contacts list</div>
 </div>
 <div class="ulist">
 <ul>
@@ -393,7 +382,7 @@ and an Instagram account with the username <code>clarkent</code>.</p>
 <div class="content">
 <img src="../images/edit-example-2-command-result.png" alt="edit example 2 command result" width="700">
 </div>
-<div class="title">Figure 8. Edited the favorite status, display photo, and social media accounts (facebook and instagram) of the third person in the contacts list</div>
+<div class="title">Figure 7. Edited the favorite status, display photo, and social media accounts (facebook and instagram) of the third person in the contacts list</div>
 </div>
 <div class="ulist">
 <ul>
@@ -409,7 +398,7 @@ and an Instagram account with the username <code>clarkent</code>.</p>
 <div class="content">
 <img src="../images/edit-example-3-command-result.png" alt="edit example 3 command result" width="700">
 </div>
-<div class="title">Figure 9. Edited the name, and removed display photo and tags from the second person in the contacts list</div>
+<div class="title">Figure 8. Edited the name, and removed display photo and tags from the second person in the contacts list</div>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 3. Common Mistakes</caption>
@@ -427,7 +416,7 @@ and an Instagram account with the username <code>clarkent</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
 e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the person list</strong>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the contacts list</strong>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input invalid parameters in the command<br></p></td>
@@ -522,9 +511,9 @@ e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">Selecting a person: <code>select</code></a></h4>
+<h4 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">Selecting a Person: <code>select</code></a></h4>
 <div class="paragraph">
-<p>To view the social media feed of a contact, use the <code>select</code> command.</p>
+<p>Want to stalk someone&#8217;s social media feed? Use the <code>select</code> command!</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -537,13 +526,13 @@ e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
 <div class="ulist">
 <ul>
 <li>
-<p>The <code class="green">INDEX</code> refers to the index number of the person to be stalked in the person list.</p>
+<p>The <code>INDEX</code> refers to the index number of the person to be stalked in the contacts list.</p>
 </li>
 <li>
-<p>The <code class="green">SOCIAL_MEDIA_PLATFORM</code> identifies which social media account belonging to the person you wish to view.</p>
+<p>The <code>SOCIAL_MEDIA_PLATFORM</code> identifies which social media account belonging to the person you wish to view.</p>
 </li>
 <li>
-<p>If no <code class="green">SOCIAL_MEDIA_PLATFORM</code> is specified, the feed of a random social media account associated
+<p>If no <code>SOCIAL_MEDIA_PLATFORM</code> is specified, the feed of a random social media account associated
 with the person will be displayed in the browser window. If there is no social media account associated with
 the person, a Google search of the person&#8217;s name will be displayed instead.</p>
 </li>
@@ -556,7 +545,7 @@ the person, a Google search of the person&#8217;s name will be displayed instead
 <div class="content">
 <img src="../images/stalk-command-result.png" alt="stalk command result" width="800">
 </div>
-<div class="title">Figure 10. Social media feed displayed in browser window</div>
+<div class="title">Figure 9. Social media feed displayed in browser window</div>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong>:</p>
@@ -565,7 +554,7 @@ the person, a Google search of the person&#8217;s name will be displayed instead
 <ul>
 <li>
 <p><code><span class="red">select</span> <span class="green">1 facebook</span></code><br>
-Displays the Facebook account of the first person in the current person list</p>
+Displays the Facebook account of the first person in the current contacts list</p>
 </li>
 </ul>
 </div>
@@ -585,13 +574,13 @@ Displays the Facebook account of the first person in the current person list</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input an <code>INDEX</code> that is invalid.<br>
 e.g. <code>-1</code>, <code>0.1</code>, <code>abc</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the person list</strong>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the specified <code>INDEX</code> is a <strong>positive integer</strong> that is <strong>smaller or equal to the total number of contacts in the contacts list</strong>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input a <code>SOCIAL_MEDIA_PLATFORM</code> that the user does not have an associated account for.<br>
-e.g. If the first user in the person list does not have an instagram account, and the command <code>stalk 1 instagram</code> is entered.</p></td>
+e.g. If the first user in the contacts list does not have an instagram account, and the command <code>stalk 1 instagram</code> is entered.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that the selected user has an associated account for the <code>SOCIAL_MEDIA_PLATFORM</code> specified. The social media accounts associated with
-a user can be found in the person list.
+a user can be found in the contacts list.
 </p><p class="tableblock"><span class="image"><img src="../images/stalk-command-social-info.png" alt="stalk command social info" width="350"></span></p></td>
 </tr>
 </tbody>
@@ -633,7 +622,7 @@ a user can be found in the person list.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:51:21 +00:00
+Last updated 2017-11-13 12:15:27 +00:00
 </div>
 </div>
 </body>
