@@ -52,13 +52,12 @@ public class Phone {
             }
         }
 
-        if (phones.isEmpty() && invalid) {
+        if (phones.isEmpty() || invalid) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
 
-        if (!phoneStr.isEmpty()) {
-            phoneStr = phoneStr.substring(0, phoneStr.length() - 1);
-        }
+        // remove the last newline
+        phoneStr = phoneStr.substring(0, phoneStr.length() - 1);
 
         this.phonelist = phones;
         this.value = phoneStr;
